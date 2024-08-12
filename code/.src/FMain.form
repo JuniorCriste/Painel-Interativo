@@ -1,18 +1,46 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,72,61)
+  MoveScaled(0,0,83,75)
   { panel2 Panel
-    MoveScaled(3,18,59,33)
+    MoveScaled(3,19,73,54)
+    { option1 ToolButton
+      MoveScaled(1,1,22,18)
+    }
+    { option2 ToolButton
+      MoveScaled(26,2,22,18)
+    }
+    { option3 ToolButton
+      MoveScaled(48,0,22,18)
+    }
+    { option4 ToolButton
+      MoveScaled(2,21,22,18)
+    }
+    { option5 ToolButton
+      MoveScaled(27,22,22,18)
+    }
+    { option6 ToolButton
+      MoveScaled(49,22,22,18)
+    }
+    { option7 ToolButton
+      MoveScaled(3,43,22,18)
+    }
+    { option8 ToolButton
+      MoveScaled(29,43,22,18)
+    }
+    { option9 ToolButton
+      MoveScaled(51,43,22,18)
+    }
   }
   { Panel1 Panel
     MoveScaled(-1,0,52,15)
     Background = Color.DarkRed
     AutoResize = True
-    { ImageView1 ImageView
+    { Image1 ImageView
       MoveScaled(2,2,14,9)
+      Alignment = Align.Bottom
     }
-    { Label1 Label
+    { text1 Label
       MoveScaled(18,2,23,9)
     }
     { Button1 Button
