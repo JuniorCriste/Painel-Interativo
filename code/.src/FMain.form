@@ -1,5 +1,19 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,95,66)
+  MoveScaled(0,0,72,61)
+  { Panel1 Panel
+    MoveScaled(3,18,59,33)
+  }
+  { Panel2 Panel
+    MoveScaled(6,2,52,15)
+    Background = Color.DarkRed
+    AutoResize = True
+    { ImageView1 ImageView
+      MoveScaled(2,2,14,9)
+    }
+    { Label1 Label
+      MoveScaled(18,2,23,9)
+    }
+  }
 }
