@@ -17,6 +17,7 @@
     }
     { Button1 Button
       MoveScaled(40,5,7,7)
+      Text = ("Try")
     }
   }
 }
