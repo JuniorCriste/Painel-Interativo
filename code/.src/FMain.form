@@ -2,11 +2,11 @@
 
 { Form Form
   MoveScaled(0,0,72,61)
-  { Panel1 Panel
+  { panel2 Panel
     MoveScaled(3,18,59,33)
   }
-  { Panel2 Panel
-    MoveScaled(6,2,52,15)
+  { Panel1 Panel
+    MoveScaled(-1,0,52,15)
     Background = Color.DarkRed
     AutoResize = True
     { ImageView1 ImageView
@@ -14,6 +14,9 @@
     }
     { Label1 Label
       MoveScaled(18,2,23,9)
+    }
+    { Button1 Button
+      MoveScaled(40,5,7,7)
     }
   }
 }
