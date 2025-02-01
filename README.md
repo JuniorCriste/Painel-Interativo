@@ -1,4 +1,2 @@
 # Painel-Interativo
-INICIO DE TUDO
-Gambas -> Python Flet
-
+## Painel Interativo para apresentações especificas em computadores com sistema Linux.
