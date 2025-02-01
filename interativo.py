@@ -9,4 +9,6 @@ class PainelInterativo:
         self.page.title = "Painel Interativo - 100% Capixabas!"
 
         self.page.update()
-        
+
+
+ft.app(target=PainelInterativo)        
