@@ -1,4 +1,5 @@
 import flet as ft
+import asyncio
 
 def PainelInterativo(page: ft.Page):
     page.bgcolor = ft.colors.BLUE_500
@@ -6,15 +7,15 @@ def PainelInterativo(page: ft.Page):
     page.window_aways_on_top = True
     page.title = "Painel Interativo - 100% Capixabas!"
 
-    def on_click(e):
+    async def on_click(e):
         e.control.scale = 1.1
         page.update()
 
-        def reset_scale():
-            e.control.scale = 1.0  # Retorna ao tamanho original
-            page.update()
+        await asyncio.sleep(0.1)
+
+        e.control.scale = 1.0
+        e.control.update()
         
-        page.run_task(reset_scale, delay=0.2)  # Retorna ao normal após 200ms
     
     # Botão 
     btn1 = ft.Container(
