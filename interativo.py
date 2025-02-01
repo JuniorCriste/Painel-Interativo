@@ -17,9 +17,10 @@ def PainelInterativo(page: ft.Page):
         e.control.update()
         
     button_container = ft.Row(
-        spacing = 10,
+        spacing = 5,
         alignment = ft.MainAxisAlignment.CENTER,
-        wrap= True
+        wrap= True,
+        width= 1000
     )    
 
 
