@@ -16,22 +16,30 @@ def PainelInterativo(page: ft.Page):
         e.control.scale = 1.0
         e.control.update()
         
+    button_container = ft.Row(
+        spacing = 10,
+        alignment = ft.MainAxisAlignment.CENTER,
+        wrap= True
+    )    
+
+
+
+    # Botões 
+    btn1 = ft.Container(content=ft.Image(src="img/element1.png", width=300, height=300), on_click=on_click, border_radius=10)
+    btn2 = ft.Container(content=ft.Image(src="img/element2.png", width=300, height=300), on_click=on_click, border_radius=10)
+    btn3 = ft.Container(content=ft.Image(src="img/element3.png", width=300, height=300), on_click=on_click, border_radius=10)
+    btn4 = ft.Container(content=ft.Image(src="img/element4.png", width=300, height=300), on_click=on_click, border_radius=10)
+    btn5 = ft.Container(content=ft.Image(src="img/element5.png", width=300, height=300), on_click=on_click, border_radius=10)
+    btn6 = ft.Container(content=ft.Image(src="img/element6.png", width=300, height=300), on_click=on_click, border_radius=10)
+    btn7 = ft.Container(content=ft.Image(src="img/element7.png", width=300, height=300), on_click=on_click, border_radius=10)
+    btn8 = ft.Container(content=ft.Image(src="img/element8.png", width=300, height=300), on_click=on_click, border_radius=10)
+    btn9 = ft.Container(content=ft.Image(src="img/element9.png", width=300, height=300), on_click=on_click, border_radius=10)
+
     
-    # Botão 
-    btn1 = ft.Container(
-        content=ft.Image(src="img/element1.png", width=100, height=100),
-        on_click=on_click,
-        border_radius=10
-    )
     
-    # Botão com imagem local
-    btn2 = ft.Container(
-        content=ft.Image(src="img/element2.png", width=100, height=100),
-        on_click=on_click,
-        border_radius=10
-    )
-    
-    page.add(btn1, btn2)
+    #page.add(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9)
+    button_container.controls.extend([btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9])
+    page.add(button_container)
 
 
     page.update()
