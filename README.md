@@ -1,2 +1,2 @@
 # Painel-Interativo
-## Painel Interativo para apresentações especificas em computadores com sistema Linux.
+## Painel Interativo para apresentações especificas em computadores com sistema Linux...
