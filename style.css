@@ -96,7 +96,7 @@ body {
 }
 
 /* Grid de Botões */
-.grid-window { flex: 1; min-width: 350px; }
+.grid-window { flex: 1; min-width: 350px; margin-top: -40px; margin-left: 40px; margin-bottom: 20px;}
 
 .grid-botoes {
     display: grid;
@@ -156,13 +156,6 @@ body {
     opacity: 0.6;
     animation: aeroBlink 7s infinite ease-in-out;
     animation-delay: var(--delay);
-}
-
-footerfinal {
-    font-size: 13px;
-    color: #535353;
-    text-align: center;
-    opacity: 0.6;
 }
 
 @keyframes aeroBlink {
