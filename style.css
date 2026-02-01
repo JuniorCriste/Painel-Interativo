@@ -1,126 +1,129 @@
 :root {
-    --aero-blue: #0078d7;
-    --aero-green: #28ae4b;
-    --glass: rgba(255, 255, 255, 0.25);
+    --xp-blue: #0058e7;
+    --xp-header: linear-gradient(to bottom, #0058e7 0%, #3a93ff 10%, #0058e7 100%);
+    --aero-glass: rgba(255, 255, 255, 0.2);
 }
 
 body {
     margin: 0;
     height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #005193 0%, #00a2ed 50%, #45b74c 100%);
-    font-family: 'Segoe UI', 'Ubuntu', sans-serif;
+    align-items: center;
     overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-/* Bolhas Decorativas */
-.bubble {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    filter: blur(40px);
+/* Fundo com Wallpaper */
+.wallpaper-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('img/wallpaper.png') no-repeat center center;
+    background-size: cover;
     z-index: -1;
 }
-.b1 { width: 400px; height: 400px; top: -100px; left: -100px; }
-.b2 { width: 300px; height: 300px; bottom: -50px; right: 10%; background: rgba(0, 255, 127, 0.15); }
 
+/* Escala Reduzida */
 .master-wrapper {
-    width: 90vw;
-    height: 85vh;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 25px;
-    padding: 30px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    transform: scale(0.85); /* Reduzindo a escala geral */
+    width: 95vw;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
-
-header h1 {
-    color: white;
-    text-align: center;
-    font-size: 2.2rem;
-    margin-bottom: 25px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-header h1 span { color: #d4ffea; }
 
 .container {
     display: flex;
-    flex: 1;
-    gap: 25px;
-    min-height: 0;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
 }
 
-/* Lado Esquerdo - Slide Glass */
-.div-1 {
-    flex: 1.5;
+/* Janela Estilo XP */
+.window-xp {
+    background: #ece9d8; /* Cor clássica do fundo das janelas XP */
+    border: 3px solid var(--xp-blue);
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.title-bar {
+    background: var(--xp-header);
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.window-controls span {
+    background: #e04343;
+    border: 1px solid white;
+    padding: 0 5px;
+    margin-left: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.window-content {
     position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 4px solid white;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 10px;
+    background: var(--aero-glass);
+    backdrop-filter: blur(10px);
+    flex: 1;
 }
 
+/* Div do Slide */
+.div-1 { flex: 1.5; }
 .div-1 img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s;
+    border-radius: 4px;
+    display: block;
 }
 
-/* Efeito de brilho sobre o slide */
-.glass-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 50%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
-    z-index: 2;
-    pointer-events: none;
-}
-
-/* Grid de Botões Estilo Vista/XP */
+/* Grid de Botões */
+.grid-window { flex: 1; }
 .grid-botoes {
-    flex: 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 15px;
+    gap: 10px;
 }
 
-.btn {
-    background: linear-gradient(to bottom, #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%);
-    border-radius: 12px;
-    border: 1px solid #707070;
-    text-decoration: none;
+/* Botões com Efeito Vidro Frutiger Aero */
+.btn-aero {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    transition: all 0.3s;
-    box-shadow: inset 0 1px 0 white, 0 4px 6px rgba(0,0,0,0.1);
+    padding: 5px;
 }
 
-.btn:hover {
-    transform: translateY(-3px);
+.btn-aero img {
+    width: 80%;
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* Efeito de Reflexo (Reflective Shine) */
+.glass-shine, .glass-reflection {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.btn-aero:hover {
+    transform: scale(1.05) translateY(-2px);
+    background: rgba(255, 255, 255, 0.4);
     box-shadow: 0 0 15px rgba(255,255,255,0.8);
-    border-color: #0078d7;
-}
-
-.btn span {
-    color: #1a1a1a;
-    font-weight: bold;
-    font-size: 0.85rem;
-    text-align: center;
-}
-
-.btn small {
-    margin-top: 5px;
-    color: #0078d7;
-    font-size: 0.65rem;
-    font-weight: bold;
 }
