@@ -1,91 +1,125 @@
+:root {
+    --bg-color: #000b1a; /* Azul marinho profundo */
+    --neon-green: #00ff9d; /* Verde azulado suave */
+    --dark-accent: #001f3f;
+    --text-color: #e0ffff;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Press Start 2P', cursive;
 }
 
 body {
-    width: 100vw;
+    background-color: #000; /* Fundo externo negro */
     height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-}
-
-header {
-    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+}
+
+/* Moldura do Painel (Escala Menor) */
+.master-wrapper {
+    width: 94vw;
+    height: 92vh;
+    background-color: var(--bg-color);
+    border: 4px solid var(--neon-green);
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 header h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    letter-spacing: 2px;
+    color: var(--neon-green);
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px var(--neon-green);
 }
 
 .container {
     display: flex;
-    height: 90vh; /* Ocupa o restante da tela */
-    width: 100%;
+    flex: 1;
+    gap: 20px;
+    min-height: 0; /* Importante para o flex child não transbordar */
 }
 
-/* Lado Esquerdo - Slide */
+/* Lado Esquerdo - Slideshow */
 .div-1 {
-    flex: 1.2; /* Um pouco maior que o grid */
-    background-color: #d3d3cd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #000;
-    margin: 10px;
+    flex: 1.4;
+    position: relative;
+    border: 2px solid var(--neon-green);
+    background: #000;
+    overflow: hidden;
+    border-radius: 8px;
 }
 
-.div-1 img {
+#slide-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que a imagem preencha o espaço */
+    object-fit: cover;
+    opacity: 1;
+    transition: opacity 0.8s ease-in-out;
 }
 
-/* Lado Direito - Grid */
+/* Efeito de transição via classe JS */
+.fade-out { opacity: 0 !important; }
+
+/* Efeito Retrô de Linhas de TV */
+.scanline {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+}
+
+/* Lado Direito - Botões */
 .grid-botoes {
     flex: 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 0; /* Ajuste conforme o desenho (bordas coladas) */
-    border: 1px solid #000;
-    margin: 10px 10px 10px 0;
+    gap: 10px;
 }
 
 .btn {
+    background: var(--dark-accent);
+    border: 1px solid var(--neon-green);
+    color: var(--text-color);
+    text-decoration: none;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    padding: 5px;
+    transition: all 0.2s;
     text-align: center;
-    text-decoration: none;
-    color: #000;
-    background-color: #e6e6e6;
-    border: 0.5px solid #000;
-    padding: 10px;
-    transition: background 0.3s;
 }
 
 .btn:hover {
-    background-color: #ccc;
+    background: var(--neon-green);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-green);
+    transform: scale(1.02);
 }
 
 .btn span {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 5px;
+    font-size: 0.6rem;
+    line-height: 1.4;
+    margin-bottom: 8px;
 }
 
 .btn small {
-    font-size: 0.8rem;
-    text-transform: uppercase;
+    font-size: 0.45rem;
+    opacity: 0.7;
 }

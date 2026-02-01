@@ -1,41 +1,41 @@
-// --- CONFIGURAÇÃO DO SLIDESHOW ---
+const totalSlides = 5; // Ajuste conforme necessário
 let currentSlide = 1;
-const totalSlides = 5; // Mude para a quantidade de imagens que você tem
 const slideImg = document.getElementById('slide-display');
 
-function nextSlide() {
-    currentSlide++;
-    if (currentSlide > totalSlides) {
-        currentSlide = 1;
-    }
-    // Caminho da imagem conforme sua estrutura: img/slides/slideX.png
-    slideImg.src = `img/slides/slide${currentSlide}.png`;
+// Função de Troca com Animação Simple Fade
+function changeSlide() {
+    // Adiciona classe de sumiço
+    slideImg.classList.add('fade-out');
+
+    setTimeout(() => {
+        currentSlide++;
+        if (currentSlide > totalSlides) currentSlide = 1;
+        
+        slideImg.src = `img/slides/slide${currentSlide}.png`;
+        
+        // Remove classe para reaparecer
+        slideImg.classList.remove('fade-out');
+    }, 800); // Tempo deve casar com o transition do CSS
 }
 
-// Troca de slide a cada 5 segundos
-setInterval(nextSlide, 5000);
+// Inicia o loop
+setInterval(changeSlide, 6000);
 
-
-// --- CONFIGURAÇÃO DOS ATALHOS DE TECLADO ---
-document.addEventListener('keydown', (event) => {
-    const key = event.key;
-    
-    // Mapeamento de teclas para os links
-    // Nota: Para o "17", o usuário teria que apertar rápido ou mudar para uma tecla única.
-    // Aqui estou mapeando as teclas simples de 1 a 9.
-    const keyMap = {
+// Atalhos de Teclado
+document.addEventListener('keydown', (e) => {
+    const keyLinks = {
         "1": "https://juniorcriste.github.io/QuizCapixaba/",
         "2": "https://juniorcriste.github.io/QuizCapixaba/",
         "3": "https://juniorcriste.github.io/QuizCapixaba/",
         "4": "https://juniorcriste.github.io/QuizCapixaba/",
         "5": "https://juniorcriste.github.io/QuizCapixaba/",
         "6": "https://juniorcriste.github.io/QuizCapixaba/",
-        "7": "https://juniorcriste.github.io/QuizCapixaba/", // Caso queira usar o 7 para o Quiz Capixaba
+        "7": "https://juniorcriste.github.io/QuizCapixaba/",
         "8": "https://juniorcriste.github.io/QuizCapixaba/",
         "9": "https://juniorcriste.github.io/QuizCapixaba/"
     };
 
-    if (keyMap[key]) {
-        window.location.href = keyMap[key];
+    if (keyLinks[e.key]) {
+        window.location.href = keyLinks[e.key];
     }
 });

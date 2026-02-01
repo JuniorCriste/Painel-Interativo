@@ -3,50 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Interativo Fialho</title>
+    <title>Painel Interativo Fialho - Arcade Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>PAINEL INTERATIVO FIALHO</h1>
-    </header>
+    <div class="master-wrapper">
+        <header>
+            <h1>PAINEL INTERATIVO FIALHO</h1>
+        </header>
 
-    <main class="container">
-        <section id="slideshow-container" class="div-1">
-            <img id="slide-display" src="img/slides/slide1.png" alt="Slideshow">
-        </section>
+        <main class="container">
+            <section class="div-1">
+                <div id="slide-wrapper">
+                    <img id="slide-display" src="img/slides/slide1.png" alt="Slideshow">
+                </div>
+                <div class="scanline"></div>
+            </section>
 
-        <section class="grid-botoes">
-            <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="1">
-                <span>SUPER QUIZ CAPIXABA</span> <small>PRESSIONE 1</small>
-            </a>
-            <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="2">
-                <span>MATÉRIA DE CAPA</span> <small>PRESSIONE 2</small>
-            </a>
-            <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="3">
-                <span>GÊNIO DA MATEMÁTICA</span> <small>PRESSIONE 3</small>
-            </a>
-            <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="4">
-                <span>CHARADA DO DIA</span> <small>PRESSIONE 4</small>
-            </a>
-            <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="5">
-                <span>JOGO DA VELHA</span> <small>PRESSIONE 5</small>
-            </a>
-            <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="6">
-                <span>BOA NOVA DIÁRIA</span> <small>PRESSIONE 6</small>
-            </a>
-            <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="17">
-                <span>QUIZ CAPIXABA</span> <small>PRESSIONE 17</small>
-            </a>
-            <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="8">
-                <span>QUIZ DA CONSCIÊNCIA NEGRA</span> <small>PRESSIONE 8</small>
-            </a>
-            <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="9">
-                <span>CARDÁPIO DO DIA</span> <small>PRESSIONE 9</small>
-            </a>
-        </section>
-    </main>
+            <section class="grid-botoes">
+                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="1">
+                    <span>SUPER QUIZ CAPIXABA</span> <small>KEY [1]</small>
+                </a>
+                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="2">
+                    <span>MATÉRIA DE CAPA</span> <small>KEY [2]</small>
+                </a>
+                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="3">
+                    <span>GÊNIO DA MATEMÁTICA</span> <small>KEY [3]</small>
+                </a>
+                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="4">
+                    <span>CHARADA DO DIA</span> <small>KEY [4]</small>
+                </a>
+                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="5">
+                    <span>JOGO DA VELHA</span> <small>KEY [5]</small>
+                </a>
+                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="6">
+                    <span>BOA NOVA DIÁRIA</span> <small>KEY [6]</small>
+                </a>
+                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="17">
+                    <span>QUIZ CAPIXABA</span> <small>KEY [17]</small>
+                </a>
+                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="8">
+                    <span>QUIZ DA CONSCIÊNCIA NEGRA</span> <small>KEY [8]</small>
+                </a>
+                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="btn" data-key="9">
+                    <span>CARDÁPIO DO DIA</span> <small>KEY [9]</small>
+                </a>
+            </section>
+        </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
