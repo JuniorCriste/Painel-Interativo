@@ -23,7 +23,7 @@ body {
 }
 
 .master-wrapper {
-    transform: scale(0.85);
+    transform: scale(0.60);
     width: 95vw;
     display: flex;
     justify-content: center;
@@ -53,6 +53,7 @@ body {
     align-items: center;
     color: white;
     font-weight: bold;
+    font-size: 25px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
@@ -72,11 +73,11 @@ body {
 }
 
 /* Slide 1280x1080 */
-.div-1 { flex: 0 0 700px; } /* Largura fixa para manter escala */
+.div-1 { flex: 0 0 1080px; } /* Largura fixa para manter escala */
 
 .slide-viewport {
-    width: 100%;
-    aspect-ratio: 1280 / 1080;
+    width: 99%;
+    aspect-ratio: 1280 / 1000;
     overflow: hidden;
     position: relative;
 }
@@ -155,6 +156,13 @@ body {
     opacity: 0.6;
     animation: aeroBlink 7s infinite ease-in-out;
     animation-delay: var(--delay);
+}
+
+footerfinal {
+    font-size: 13px;
+    color: #535353;
+    text-align: center;
+    opacity: 0.6;
 }
 
 @keyframes aeroBlink {
