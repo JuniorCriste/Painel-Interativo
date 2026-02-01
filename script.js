@@ -1,27 +1,25 @@
-const totalSlides = 5; // Ajuste conforme necessário
 let currentSlide = 1;
+const totalSlides = 5; 
 const slideImg = document.getElementById('slide-display');
 
-// Função de Troca com Animação Simple Fade
 function changeSlide() {
-    // Adiciona classe de sumiço
-    slideImg.classList.add('fade-out');
+    // Efeito de transição: leve zoom e fade
+    slideImg.style.opacity = '0';
+    slideImg.style.transform = 'scale(1.1)';
 
     setTimeout(() => {
         currentSlide++;
         if (currentSlide > totalSlides) currentSlide = 1;
         
         slideImg.src = `img/slides/slide${currentSlide}.png`;
-        
-        // Remove classe para reaparecer
-        slideImg.classList.remove('fade-out');
-    }, 800); // Tempo deve casar com o transition do CSS
+        slideImg.style.opacity = '1';
+        slideImg.style.transform = 'scale(1)';
+    }, 800);
 }
 
-// Inicia o loop
-setInterval(changeSlide, 6000);
+setInterval(changeSlide, 7000);
 
-// Atalhos de Teclado
+// Atalhos de teclado (Mantido)
 document.addEventListener('keydown', (e) => {
     const keyLinks = {
         "1": "https://juniorcriste.github.io/QuizCapixaba/",
