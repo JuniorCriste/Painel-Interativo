@@ -18,8 +18,8 @@ setInterval(autoSlide, 5000);
 document.addEventListener('keydown', (e) => {
     const keyLinks = {
         "1": "https://juniorcriste.github.io/QuizCapixaba/",
-        "2": "#", "3": "#", "4": "#", "5": "pages/opentictactoe/play.html",
-        "6": "#", "7": "#", "8": "#", "9": "pages/geniomatematico/play.html"
+        "2": "#", "3": "#", "4": "#", "5": "apps/opentictactoe/play.html",
+        "6": "#", "7": "#", "8": "#", "9": "apps/geniomatematico/play.html"
     };
 
     if (keyLinks[e.key]) {
