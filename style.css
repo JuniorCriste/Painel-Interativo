@@ -73,7 +73,8 @@ body {
 }
 
 /* Slide 1280x1080 */
-.div-1 { flex: 0 0 1080px; } /* Largura fixa para manter escala */
+.div-1 { flex: 0 0 1080px; 
+height: 880px;} /* Largura fixa para manter escala */
 
 .slide-viewport {
     width: 99%;
@@ -102,8 +103,9 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 4px;
-    height: 100%;
+    gap: 0px;
+    height: 1000px;
+    width: 1000px;
 }
 
 .btn-aero {
@@ -130,7 +132,7 @@ body {
 }
 
 .btn-aero:active {
-    transform: scale(0.95);
+    transform: scale(1.3);
     filter: brightness(1.2);
 }
 
