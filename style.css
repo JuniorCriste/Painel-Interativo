@@ -20,31 +20,56 @@ body {
     color: var(--text-dark);
 }
 
+/* Container do Fundo Animado */
 .background-pattern {
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: 
-        linear-gradient(135deg, 
-            transparent 60%, 
-            var(--retro-red) 60%, var(--retro-red) 65%, 
-            var(--retro-yellow) 65%, var(--retro-yellow) 70%, 
-            var(--retro-green) 70%, var(--retro-green) 75%, 
-            var(--retro-blue) 75%);
-    background-size: 200% 200%;
-    opacity: 0.15;
-    animation: animateBackground 20s linear infinite;
+    display: flex;
+    align-items: flex-end; /* Ondas ficam na base ou podem cobrir tudo */
+    background: var(--bg-creme);
 }
 
-@keyframes animateBackground {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
+.waves {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Faz as ondas ocuparem a tela toda */
+    margin-bottom: -7px; 
+    min-height: 100px;
+    max-height: 100vh;
 }
 
+/* Animação Parallax das Linhas */
+.parallax > use {
+    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s; /* Mais rápida */
+}
+.parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s; /* Mais lenta, quase parada */
+}
+
+@keyframes move-forever {
+    0% { transform: translate3d(-90px,0,0); }
+    100% { transform: translate3d(85px,0,0); }
+}
+
+/* Layout Principal */
 .main-wrapper {
     width: 95%;
-    max-width: 1300px; /* Aumentado para permitir botões maiores */
-    max-height: 92vh;   /* Ocupa mais espaço vertical (diminuindo margem topo/fim) */
+    max-width: 1300px;
+    max-height: 92vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,11 +78,11 @@ body {
 .dashboard {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Reduzido o espaço entre o slider e os botões */
+    gap: 15px;
 }
 
 .news-section {
-    height: 280px; /* Leve redução para dar mais foco aos botões */
+    height: 280px;
     position: relative;
     border: 5px solid var(--text-dark);
     border-radius: 20px;
@@ -80,7 +105,7 @@ body {
 .grid-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 12px; /* Espaço entre botões bem menor para eles crescerem */
+    gap: 12px;
 }
 
 .app-button {
@@ -93,7 +118,7 @@ body {
 
 .app-button img {
     width: 100%;
-    max-width: 180px; /* Aumentado significativamente o tamanho máximo */
+    max-width: 180px;
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 22px;
