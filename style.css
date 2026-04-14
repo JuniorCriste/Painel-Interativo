@@ -64,7 +64,8 @@ body {
 
 .news-section {
     flex: 1;
-    height: 380px;
+    height: 330px;
+    width: 80%;
     position: relative;
     border: 5px solid var(--text-dark);
     border-radius: 20px;
