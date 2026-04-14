@@ -18,7 +18,7 @@ document.addEventListener('keydown', (e) => {
         "1": "https://juniorcriste.github.io/QuizCapixaba/",
         "2": "#", "3": "#", "4": "#", 
         "5": "apps/opentictactoe/play.html",
-        "6": "#", "7": "#", "8": "#"
+        "6": "apps/geniomatematico/play.html", "7": "apps/geniomatematico/dua/play.html", "8": "#"
     };
 
     if (keyLinks[e.key]) {
