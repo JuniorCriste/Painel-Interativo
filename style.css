@@ -52,12 +52,12 @@ body {
 }
 
 .side-branding {
-    flex: 0 0 320px;
+    flex: 0 0 420px;
 }
 
 .side-logo {
     width: 100%;
-    max-height: 380px;
+    max-height: 420px;
     object-fit: contain; /* Garante que a logo apareça inteira sem cortes */
     /* Removido border, background e border-radius conforme solicitado */
 }
