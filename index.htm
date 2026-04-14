@@ -10,7 +10,9 @@
 <body>
     <div class="background-pattern">
         <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
-            <defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" /></defs>
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
             <g class="parallax">
                 <use href="#gentle-wave" x="48" y="0" fill="rgba(231, 111, 81, 0.2)" />
                 <use href="#gentle-wave" x="48" y="3" fill="rgba(233, 196, 106, 0.2)" />
@@ -22,65 +24,79 @@
 
     <div class="main-wrapper">
         <main class="dashboard">
-            <img src="img/Painel Fialho.png">
+
+            <!-- 🔥 NEWS SECTION MODIFICADA -->
             <section class="news-section">
-                <div id="slide-track" class="slide-track">
-                    <div class="slide">
-                        <img src="img/slides/slide1.png" alt="Slide 1">
-                        <div class="slide-caption">LEGENDA DA NOTÍCIA 1</div>
+                <div class="news-content">
+
+                    <!-- IMAGEM FIXA -->
+                    <div class="news-image">
+                        <img src="img/Painel Fialho.png" alt="Painel Fialho">
                     </div>
-                    <div class="slide">
-                        <img src="img/slides/slide2.png" alt="Slide 2">
-                        <div class="slide-caption">LEGENDA DA NOTÍCIA 2</div>
+
+                    <!-- SLIDER -->
+                    <div class="news-slider">
+                        <div id="slide-track" class="slide-track">
+                            <div class="slide">
+                                <img src="img/slides/slide1.png">
+                                <div class="slide-caption">LEGENDA DA NOTÍCIA 1</div>
+                            </div>
+                            <div class="slide">
+                                <img src="img/slides/slide2.png">
+                                <div class="slide-caption">LEGENDA DA NOTÍCIA 2</div>
+                            </div>
+                            <div class="slide">
+                                <img src="img/slides/slide3.png">
+                                <div class="slide-caption">LEGENDA DA NOTÍCIA 3</div>
+                            </div>
+                            <div class="slide">
+                                <img src="img/slides/slide4.png">
+                                <div class="slide-caption">LEGENDA DA NOTÍCIA 4</div>
+                            </div>
+                            <div class="slide">
+                                <img src="img/slides/slide5.png">
+                                <div class="slide-caption">LEGENDA DA NOTÍCIA 5</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="slide">
-                        <img src="img/slides/slide3.png" alt="Slide 3">
-                        <div class="slide-caption">LEGENDA DA NOTÍCIA 3</div>
-                    </div>
-                    <div class="slide">
-                        <img src="img/slides/slide4.png" alt="Slide 4">
-                        <div class="slide-caption">LEGENDA DA NOTÍCIA 4</div>
-                    </div>
-                    <div class="slide">
-                        <img src="img/slides/slide5.png" alt="Slide 5">
-                        <div class="slide-caption">LEGENDA DA NOTÍCIA 5</div>
-                    </div>
+
                 </div>
             </section>
 
             <div class="grid-container">
-                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="app-button" data-key="1" data-label="1 - QUIZ CAPIXABA">
+                <a href="https://juniorcriste.github.io/QuizCapixaba/" class="app-button" data-label="1 - QUIZ CAPIXABA">
                     <img src="img/btn/quizcapixaba.png">
                 </a>
-                <a href="#" class="app-button" data-key="2" data-label="2 - MATÉRIA DE CAPA">
+                <a href="#" class="app-button" data-label="2 - MATÉRIA DE CAPA">
                     <img src="img/btn/materiadecapa.png">
                 </a>
-                <a href="#" class="app-button" data-key="3" data-label="3 - CHARADA DO DIA">
+                <a href="#" class="app-button" data-label="3 - CHARADA DO DIA">
                     <img src="img/btn/charadadodia.png">
                 </a>
-                <a href="#" class="app-button" data-key="4" data-label="4 - QUIZ PROERER">
+                <a href="#" class="app-button" data-label="4 - QUIZ PROERER">
                     <img src="img/btn/erer.png">
                 </a>
-                <a href="#" class="app-button" data-key="5" data-label="5 - TIC TAC TOE">
+                <a href="#" class="app-button" data-label="5 - TIC TAC TOE">
                     <img src="img/btn/opentictactoe.png">
                 </a>
-                <a href="#" class="app-button" data-key="6" data-label="6 - GÊNIO MATEMÁTICO">
+                <a href="#" class="app-button" data-label="6 - GÊNIO MATEMÁTICO">
                     <img src="img/btn/geniomatematico.png">
                 </a>
-                <a href="#" class="app-button" data-key="7" data-label="7 - GÊNIO MATEMÁTICO DUA">
+                <a href="#" class="app-button" data-label="7 - GÊNIO MATEMÁTICO DUA">
                     <img src="img/btn/geniomatemeticodua.png">
                 </a>
-                <a href="#" class="app-button" data-key="8" data-label="8 - CARDÁPIO">
+                <a href="#" class="app-button" data-label="8 - CARDÁPIO">
                     <img src="img/btn/cardapio.png">
                 </a>
             </div>
+
         </main>
     </div> 
 
     <footer class="modern-footer">
-        <div class="footer-left">⌨ ATALHOS: 1-8</div>
-        <div class="footer-center">EEEFM JOSÉ TEIXEIRA FIALHO</div>
-        <div class="footer-right">18:50 📶</div>
+        <div>⌨ ATALHOS: 1-8</div>
+        <div>EEEFM JOSÉ TEIXEIRA FIALHO</div>
+        <div>18:50 📶</div>
     </footer>
 
     <script src="script.js"></script>
