@@ -72,9 +72,9 @@ body {
 }
 /* ------------------------------- */
 
-.slide-track { display: flex; height: 100%; transition: transform 0.8s ease-in-out; }
-.slide { min-width: 80%; height: 100%; position: relative; }
-.slide img { width: 80%; height: 100%; object-fit: cover; }
+.slide-track { display: flex; height: 100%; width: 80%; transition: transform 0.8s ease-in-out; }
+.slide { min-width: 100%; height: 100%; position: relative; }
+.slide img { width: 100%; height: 100%; object-fit: cover; }
 
 .slide-caption {
     position: absolute;
