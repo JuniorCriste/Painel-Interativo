@@ -125,45 +125,35 @@ body {
     box-sizing: border-box;
 }
 
-/* 🔥 NOVO LAYOUT LADO A LADO */
-.news-content {
+/* Novo container para alinhar imagem e slides */
+.top-content {
     display: flex;
+    gap: 20px;
+    align-items: stretch; /* Garante que ambos tenham a mesma altura */
+    width: 100%;
+}
+
+.side-branding {
+    flex: 0 0 30%; /* A imagem ocupará 30% da largura total */
+    max-height: 380px;
+}
+
+.side-logo {
     width: 100%;
     height: 100%;
+    object-fit: contain; /* Ajusta a imagem sem cortar */
+    border: 5px solid var(--text-dark);
+    border-radius: 20px;
+    background: white; /* Fundo caso a imagem tenha transparência */
+    box-sizing: border-box;
 }
 
-/* IMAGEM ESQUERDA */
-.news-image {
-    width: 50%;
-    height: 100%;
-    border-right: 5px solid var(--text-dark);
-}
-
-.news-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* SLIDER DIREITA */
-.news-slider {
-    width: 50%;
-    height: 100%;
+.news-section {
+    flex: 1; /* O carrossel ocupa o restante do espaço (70%) */
+    height: 380px; 
+    position: relative;
+    border: 5px solid var(--text-dark);
+    border-radius: 20px;
     overflow: hidden;
-}
-
-.news-slider .slide-track {
-    display: flex;
-    height: 100%;
-}
-
-.news-slider .slide {
-    min-width: 100%;
-    height: 100%;
-}
-
-.news-slider .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    background: #000;
 }
