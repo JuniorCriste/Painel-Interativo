@@ -11,6 +11,7 @@ function autoSlide() {
     slideTrack.style.transform = `translateX(${offset}%)`;
 }
 
+// Troca o slide a cada 5 segundos
 setInterval(autoSlide, 5000);
 
 // Atalhos de Teclado (Lógica original preservada)
@@ -30,11 +31,11 @@ document.addEventListener('keydown', (e) => {
     if (keyLinks[e.key]) {
         const btn = document.querySelector(`[data-key="${e.key}"]`);
         if (btn) {
-            // Efeito visual de clique
-            btn.style.transform = "scale(0.9)";
+            // Efeito visual de clique suave
+            btn.style.transform = "scale(0.95)";
             setTimeout(() => {
                 window.location.href = keyLinks[e.key];
-            }, 150);
+            }, 100);
         }
     }
 });

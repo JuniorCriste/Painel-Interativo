@@ -14,31 +14,48 @@ body {
     background-color: var(--bg-creme);
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centraliza verticalmente */
-    align-items: center;     /* Centraliza horizontalmente */
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
     color: var(--text-dark);
 }
 
+/* O fundo animado */
 .background-pattern {
     position: fixed;
     inset: 0;
     z-index: -1;
+    /* 1. Definimos o gradiente (agora com um ângulo mais dinâmico) */
     background: 
-        linear-gradient(150deg, 
+        linear-gradient(135deg, 
             transparent 60%, 
             var(--retro-red) 60%, var(--retro-red) 65%, 
             var(--retro-yellow) 65%, var(--retro-yellow) 70%, 
             var(--retro-green) 70%, var(--retro-green) 75%, 
             var(--retro-blue) 75%);
-    opacity: 0.2;
+    /* 2. Aumentamos o tamanho do fundo para a animação ter "espaço" */
+    background-size: 200% 200%;
+    /* 3. Reduzimos a opacidade para não brigar com o conteúdo */
+    opacity: 0.15;
+    /* 4. Chamamos a animação: nome, duração, suavidade, loop infinito */
+    animation: animateBackground 15s linear infinite;
 }
 
-/* O "Coração" do Layout Centralizado */
+/* 5. Definimos como o fundo se move */
+@keyframes animateBackground {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        /* Movemos o fundo até o final, criando a ilusão de loop continuo */
+        background-position: 100% 100%;
+    }
+}
+
 .main-wrapper {
-    width: 90%;            /* Ocupa 90% da largura em telas pequenas */
-    max-width: 1100px;     /* Não deixa o conteúdo espalhar demais em telas grandes */
-    max-height: 85vh;      /* Garante que não corte no topo/baixo */
+    width: 90%;
+    max-width: 1100px;
+    max-height: 85vh;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -50,9 +67,8 @@ body {
     gap: 25px;
 }
 
-/* Slider ajustado para escala */
 .news-section {
-    height: 300px; /* Altura fixa menor para caber em tudo */
+    height: 300px;
     position: relative;
     border: 5px solid var(--text-dark);
     border-radius: 20px;
@@ -72,7 +88,18 @@ body {
     object-fit: cover;
 }
 
-/* Grid responsiva */
+.slide-overlay {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: var(--retro-red);
+    color: white;
+    padding: 3px 10px;
+    font-weight: 900;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -89,7 +116,7 @@ body {
 
 .app-button img {
     width: 100%;
-    max-width: 120px; /* Limita o tamanho dos ícones */
+    max-width: 120px;
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 18px;
@@ -104,12 +131,12 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.75rem;
+    color: var(--text-dark);
     text-align: center;
 }
 
 .app-button:hover { transform: translateY(-5px); }
 
-/* Footer fixo na base */
 .modern-footer {
     position: fixed;
     bottom: 0;
@@ -122,4 +149,5 @@ body {
     font-size: 0.8rem;
     border-top: 3px solid var(--text-dark);
     box-sizing: border-box;
+    text-transform: uppercase;
 }
