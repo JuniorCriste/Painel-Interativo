@@ -66,7 +66,7 @@ body {
 }
 
 .news-section {
-    flex: 0 1 750px; /* O slide não passará de 750px */
+    flex: 0 1 850px; /* O slide não passará de 750px */
     height: 320px;
     position: relative;
     border: 5px solid var(--text-dark);
