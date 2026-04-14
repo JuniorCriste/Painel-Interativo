@@ -70,7 +70,7 @@ body {
 .news-section {
     height: 300px;
     position: relative;
-    border: 5px solid var(--text-dark);
+    border: 0px solid var(--text-dark);
     border-radius: 20px;
     overflow: hidden;
     background: #000;
