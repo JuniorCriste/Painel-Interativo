@@ -29,8 +29,8 @@ body {
 @keyframes move-forever { 0% { transform: translate3d(-90px,0,0); } 100% { transform: translate3d(85px,0,0); } }
 
 .main-wrapper {
-    width: 98%; /* Ocupa quase a largura total da tela */
-    max-width: 1400px; /* Aumentado para expandir horizontalmente */
+    width: 98%;
+    max-width: 1400px;
     max-height: 95vh;
     display: flex;
     flex-direction: column;
@@ -42,14 +42,35 @@ body {
     gap: 20px;
 }
 
+/* --- LAYOUT LADO A LADO --- */
+.top-content {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    align-items: center; /* Centraliza a imagem verticalmente com o slide */
+}
+
+.side-branding {
+    flex: 0 0 320px;
+}
+
+.side-logo {
+    width: 100%;
+    max-height: 380px;
+    object-fit: contain; /* Garante que a logo apareça inteira sem cortes */
+    /* Removido border, background e border-radius conforme solicitado */
+}
+
 .news-section {
-    height: 380px; /* Aumentado conforme solicitado */
+    flex: 1;
+    height: 380px;
     position: relative;
     border: 5px solid var(--text-dark);
     border-radius: 20px;
     overflow: hidden;
     background: #000;
 }
+/* ------------------------------- */
 
 .slide-track { display: flex; height: 100%; transition: transform 0.8s ease-in-out; }
 .slide { min-width: 100%; height: 100%; position: relative; }
@@ -70,11 +91,10 @@ body {
     letter-spacing: 1px;
 }
 
-/* Grid Ajustada para preencher a largura */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colunas fixas */
-    gap: 25px; /* Espaço entre botões para não ficarem grudados */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
     padding: 0 20px;
 }
 
@@ -88,7 +108,7 @@ body {
 
 .app-button img {
     width: 100%;
-    max-width: 240px; /* Aumentado para ocupar melhor o espaço */
+    max-width: 240px;
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 25px;
@@ -105,7 +125,6 @@ body {
     text-transform: uppercase;
     text-align: center;
     color: var(--text-dark);
-    text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
 }
 
 .app-button:hover { transform: scale(1.05); }
@@ -114,7 +133,7 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.4); /* Mais transparente */
+    background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(8px);
     padding: 12px 50px;
     display: flex;
@@ -123,37 +142,4 @@ body {
     font-size: 0.85rem;
     border-top: 3px solid var(--text-dark);
     box-sizing: border-box;
-}
-
-/* Novo container para alinhar imagem e slides */
-.top-content {
-    display: flex;
-    gap: 20px;
-    align-items: stretch; /* Garante que ambos tenham a mesma altura */
-    width: 100%;
-}
-
-.side-branding {
-    flex: 0 0 30%; /* A imagem ocupará 30% da largura total */
-    max-height: 380px;
-}
-
-.side-logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Ajusta a imagem sem cortar */
-    border: 5px solid var(--text-dark);
-    border-radius: 20px;
-    background: white; /* Fundo caso a imagem tenha transparência */
-    box-sizing: border-box;
-}
-
-.news-section {
-    flex: 1; /* O carrossel ocupa o restante do espaço (70%) */
-    height: 380px; 
-    position: relative;
-    border: 5px solid var(--text-dark);
-    border-radius: 20px;
-    overflow: hidden;
-    background: #000;
 }
