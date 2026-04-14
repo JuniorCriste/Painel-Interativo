@@ -7,12 +7,10 @@ function autoSlide() {
     if (currentSlide >= totalSlides) {
         currentSlide = 0;
     }
-    // Agora o deslocamento é de 100% por slide
     const offset = currentSlide * -100;
     slideTrack.style.transform = `translateX(${offset}%)`;
 }
 
-// Troca o slide a cada 5 segundos
 setInterval(autoSlide, 5000);
 
 // Atalhos de Teclado (Lógica original preservada)
