@@ -2,13 +2,12 @@
     --bg-creme: #f5f2e9;
     --retro-red: #e76f51;
     --text-dark: #2d2d2d;
-    --footer-bg: rgba(255, 255, 255, 0.7); /* Transparência no rodapé */
 }
 
 body {
     margin: 0;
     height: 100vh;
-    font-family: 'Montserrat', sans-serif; /* Fonte Montserrat aplicada */
+    font-family: 'Montserrat', sans-serif;
     background-color: var(--bg-creme);
     display: flex;
     flex-direction: column;
@@ -18,7 +17,6 @@ body {
     color: var(--text-dark);
 }
 
-/* Fundo Animado (Ondas) */
 .background-pattern {
     position: fixed;
     inset: 0;
@@ -31,63 +29,53 @@ body {
 @keyframes move-forever { 0% { transform: translate3d(-90px,0,0); } 100% { transform: translate3d(85px,0,0); } }
 
 .main-wrapper {
-    width: 95%;
-    max-width: 1200px;
-    max-height: 94vh;
+    width: 98%; /* Ocupa quase a largura total da tela */
+    max-width: 1400px; /* Aumentado para expandir horizontalmente */
+    max-height: 95vh;
     display: flex;
     flex-direction: column;
 }
 
-/* Aumento do Banner de Notícias */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .news-section {
-    height: 350px; /* Altura aumentada */
+    height: 380px; /* Aumentado conforme solicitado */
     position: relative;
     border: 5px solid var(--text-dark);
     border-radius: 20px;
     overflow: hidden;
     background: #000;
-    margin-bottom: 20px;
 }
 
-.slide-track {
-    display: flex;
-    height: 100%;
-    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-}
+.slide-track { display: flex; height: 100%; transition: transform 0.8s ease-in-out; }
+.slide { min-width: 100%; height: 100%; position: relative; }
+.slide img { width: 100%; height: 100%; object-fit: cover; }
 
-.slide {
-    min-width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Legenda Inferior com Opacidade */
 .slide-caption {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Fundo com opacidade mediana */
+    background: rgba(0, 0, 0, 0.65);
     color: white;
-    padding: 15px 25px;
+    padding: 15px 30px;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     box-sizing: border-box;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Grade de Botões 4x4 */
+/* Grid Ajustada para preencher a largura */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 botões por linha */
-    gap: 15px;
-    justify-items: center;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas fixas */
+    gap: 25px; /* Espaço entre botões para não ficarem grudados */
+    padding: 0 20px;
 }
 
 .app-button {
@@ -96,43 +84,43 @@ body {
     align-items: center;
     text-decoration: none;
     transition: transform 0.2s;
-    width: 100%;
 }
 
 .app-button img {
     width: 100%;
-    max-width: 160px; /* Botões maiores */
+    max-width: 240px; /* Aumentado para ocupar melhor o espaço */
     aspect-ratio: 1/1;
     object-fit: cover;
-    border-radius: 20px;
-    border: 4px solid var(--text-dark);
+    border-radius: 25px;
+    border: 5px solid var(--text-dark);
     background: #fff;
-    box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
 }
 
 .app-button::after {
     content: attr(data-label);
-    margin-top: 8px;
-    font-weight: 700;
-    font-size: 0.85rem;
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 0.95rem;
     text-transform: uppercase;
     text-align: center;
+    color: var(--text-dark);
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
 }
 
-.app-button:hover { transform: translateY(-5px) scale(1.05); }
+.app-button:hover { transform: scale(1.05); }
 
-/* Rodapé com Transparência */
 .modern-footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: var(--footer-bg);
-    backdrop-filter: blur(5px); /* Efeito de vidro opcional */
-    padding: 10px 40px;
+    background: rgba(255, 255, 255, 0.4); /* Mais transparente */
+    backdrop-filter: blur(8px);
+    padding: 12px 50px;
     display: flex;
     justify-content: space-between;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     border-top: 3px solid var(--text-dark);
     box-sizing: border-box;
 }
