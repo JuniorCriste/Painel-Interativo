@@ -22,14 +22,16 @@ const playlist = [
     { title: "Não Creio em Mais Nada", artist: "Paulo Sérgio", src: "audio/paulosergio/naocreioemmaisnada.mp3", cover: "img/paulosergio.png" },
     { title: "Pro Diabo os Conselhos de Vocês", artist: "Paulo Sérgio", src: "audio/paulosergio/paraodiaboosconselhos.mp3", cover: "img/paulosergio.png" },
 
-    // DALLAS COMPANY
-    { title: "Clima de Rodeio", artist: "Dallas Company", src: "audio/dallascompany/climaderodeio.mp3", cover: "img/casaca1.png" },
-    { title: "O Menino Que Sobe a Ladeira (Part. Rapadura)", artist: "Casaca", src: "audio/casaca/meninoladeira.mp3", cover: "img/casaca3.png" },
+    // RASTACLONE
+    { title: "Selvageria", artist: "Rastaclone", src: "audio/rastaclone/selvageria.mp3", cover: "img/rastaclone.png" },
+    { title: "Perfume de Flor", artist: "Rastaclone", src: "audio/rastaclone/perfumedeflor.mp3", cover: "img/rastaclone.png" },
        
-    // DALLAS COMPANY
-    { title: "Clima de Rodeio", artist: "Dallas Company", src: "audio/dallascompany/climaderodeio.mp3", cover: "img/casaca1.png" },
-    { title: "O Menino Que Sobe a Ladeira (Part. Rapadura)", artist: "Casaca", src: "audio/casaca/meninoladeira.mp3", cover: "img/casaca3.png" },
-       
+    // ROBERTO CARLOS
+    { title: "--", artist: "Roberto Carlos", src: "audio/robertocarlos/--.mp3", cover: "img/rc1.png" },
+    { title: "--", artist: "Roberto Carlos", src: "audio/robertocarlos/--.mp3", cover: "img/rc1.png" },
+    { title: "--", artist: "Roberto Carlos", src: "audio/robertocarlos/--.mp3", cover: "img/rc1.png" },
+    { title: "--", artist: "Roberto Carlos", src: "audio/robertocarlos/--.mp3", cover: "img/rc1.png" },
+
     // DALLAS COMPANY
     { title: "Clima de Rodeio", artist: "Dallas Company", src: "audio/dallascompany/climaderodeio.mp3", cover: "img/casaca1.png" },
     { title: "O Menino Que Sobe a Ladeira (Part. Rapadura)", artist: "Casaca", src: "audio/casaca/meninoladeira.mp3", cover: "img/casaca3.png" },
