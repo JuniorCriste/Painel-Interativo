@@ -15,10 +15,10 @@ setInterval(autoSlide, 5000);
 
 document.addEventListener('keydown', (e) => {
     const keyLinks = {
-        "1": "https://juniorcriste.github.io/QuizCapixaba/",
-        "2": "#", "3": "#", "4": "#", 
+        "1": "apps/quizcapixaba/play.html",
+        "2": "apps/goodnews/play.html", "3": "apps/charada/play.html", "4": "apps/erer/play.html", 
         "5": "apps/opentictactoe/play.html",
-        "6": "apps/geniomatematico/play.html", "7": "apps/geniomatematico/dua/play.html", "8": "#"
+        "6": "apps/geniomatematico/play.html", "7": "apps/geniomatematico/play-dua.html", "8": "apps/info/cardapiododia.html"
     };
 
     if (keyLinks[e.key]) {
