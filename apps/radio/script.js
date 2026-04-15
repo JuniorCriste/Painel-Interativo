@@ -1,7 +1,7 @@
 const playlist = [
-    { title: "Música 1", artist: "Artista 1", src: "audio/musica1.mp3", cover: "img/capa1.jpg" },
-    { title: "Música 2", artist: "Artista 2", src: "audio/musica2.mp3", cover: "img/capa2.jpg" },
-    { title: "Música 3", artist: "Artista 3", src: "audio/musica3.mp3", cover: "img/capa3.jpg" },
+    { title: "Música 1", artist: "Artista 1", src: "audio/Casaca-Camarada.mp3", cover: "img/casaca.jpg" },
+    { title: "Música 2", artist: "Artista 2", src: "audio/Casaca-Camarada", cover: "img/casaca.jpg" },
+    { title: "Música 3", artist: "Artista 3", src: "audio/Casaca-Camarada", cover: "img/casaca.jpg" },
     // Continue adicionando até a 20...
 ];
 
