@@ -27,20 +27,21 @@ const playlist = [
     { title: "Perfume de Flor", artist: "Rastaclone", src: "audio/rastaclone/perfumedeflor.mp3", cover: "img/rastaclone.png" },
        
     // ROBERTO CARLOS
-    { title: "--", artist: "Roberto Carlos", src: "audio/robertocarlos/--.mp3", cover: "img/rc1.png" },
-    { title: "--", artist: "Roberto Carlos", src: "audio/robertocarlos/--.mp3", cover: "img/rc1.png" },
-    { title: "--", artist: "Roberto Carlos", src: "audio/robertocarlos/--.mp3", cover: "img/rc1.png" },
-    { title: "--", artist: "Roberto Carlos", src: "audio/robertocarlos/--.mp3", cover: "img/rc1.png" },
+    { title: "Além do Horizonte", artist: "Roberto Carlos", src: "audio/robertocarlos/alemdohorizonte.mp3", cover: "img/rc1.png" },
+    { title: "Parei na Contra Mão", artist: "Roberto Carlos", src: "audio/robertocarlos/contramao.mp3", cover: "img/rc2.png" },
+    { title: "Splish Splash", artist: "Roberto Carlos", src: "audio/robertocarlos/splishsplash.mp3", cover: "img/rc2.png" },
+    { title: "A Namoradinha do Amigo Meu", artist: "Roberto Carlos", src: "audio/robertocarlos/namoradinha.mp3", cover: "img/rc3.png" },
 
-    // DALLAS COMPANY
-    { title: "Clima de Rodeio", artist: "Dallas Company", src: "audio/dallascompany/climaderodeio.mp3", cover: "img/casaca1.png" },
-    { title: "O Menino Que Sobe a Ladeira (Part. Rapadura)", artist: "Casaca", src: "audio/casaca/meninoladeira.mp3", cover: "img/casaca3.png" },
+    // SERGIO SAMPAIO
+    { title: "Bloco na Rua", artist: "Sérgio Sampaio", src: "audio/sergiosampaio/bloconarua.mp3", cover: "img/sergiosampaio.png" },
        
-    // DALLAS COMPANY
-    { title: "Clima de Rodeio", artist: "Dallas Company", src: "audio/dallascompany/climaderodeio.mp3", cover: "img/casaca1.png" },
-    { title: "O Menino Que Sobe a Ladeira (Part. Rapadura)", artist: "Casaca", src: "audio/casaca/meninoladeira.mp3", cover: "img/casaca3.png" },
+    // SILVA
+    { title: "A Cor É Rosa", artist: "Silva", src: "audio/silva/acorerosa.mp3", cover: "img/silva.png" },
    
-    // Continue adicionando até a 20...
+    // SUPERCOMBO
+    { title: "Amianto", artist: "Supercombo", src: "audio/supercombo/amianto.mp3", cover: "img/supercombo1.png" },
+    { title: "Piloto Automático", artist: "Supercombo", src: "audio/supercombo/pilotoautomatico.mp3", cover: "img/supercombo1.png" },
+     
 ];
 
 let currentIndex = 0;
