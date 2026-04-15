@@ -1,7 +1,9 @@
 const playlist = [
-    { title: "Música 1", artist: "Artista 1", src: "audio/Casaca-Camarada.mp3", cover: "img/casaca.jpg" },
-    { title: "Música 2", artist: "Artista 2", src: "audio/Casaca-Camarada", cover: "img/casaca.jpg" },
-    { title: "Música 3", artist: "Artista 3", src: "audio/Casaca-Camarada", cover: "img/casaca.jpg" },
+    { title: "Camarada", artist: "Casaca", src: "audio/casaca/camarada.mp3", cover: "img/casaca1.png" },
+    { title: "O Menino Que Sobe a Ladeira (Part. Rapadura)", artist: "Casaca", src: "audio/casaca/meninoladeira.mp3", cover: "img/casaca3.png" },
+    { title: "Anjo Samile", artist: "Casaca", src: "audio/casaca/anjosamile.mp3", cover: "img/casaca2.png" },
+    { title: "Noite Fria", artist: "Casaca", src: "audio/casaca/noitefria.mp3", cover: "img/casaca2.png" },
+    { title: "Garças de Jacarenema", artist: "Casaca", src: "audio/casaca/garcas.mp3", cover: "img/casaca1.png" },
     // Continue adicionando até a 20...
 ];
 
