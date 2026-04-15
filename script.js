@@ -18,7 +18,7 @@ document.addEventListener('keydown', (e) => {
         "1": "apps/quizcapixaba/play.html",
         "2": "apps/goodnews/play.html", "3": "apps/charada/play.html", "4": "apps/erer/play.html", 
         "5": "apps/opentictactoe/play.html",
-        "6": "apps/geniomatematico/play.html", "7": "apps/geniomatematico/play-dua.html", "8": "apps/info/cardapiododia.html"
+        "6": "apps/geniomatematico/play-dua.html", "7": "apps/radio/play.html", "8": "apps/info/cardapiododia.html"
     };
 
     if (keyLinks[e.key]) {

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Radio - Dark Mode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="bg-overlay"></div>
+
+    <div class="player-container">
+        <img src="placeholder.jpg" id="album-cover" class="album-art" alt="Capa do Álbum">
+        <h1 id="track-title">Sintonizando...</h1>
+        <p id="track-artist">Aguarde</p>
+        
+        <button class="btn-play" id="main-button" onclick="toggleRadio()">INICIAR RÁDIO</button>
+        <span class="status-badge" id="radio-status">OFFLINE</span>
+        
+        <audio id="audio-element" preload="none"></audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
