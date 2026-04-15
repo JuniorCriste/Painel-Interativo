@@ -37,6 +37,8 @@ const curiosidades = {
     "Silva": "Silva é um renomado cantor e multi-instrumentista nascido em Vitória em 1988, destaque da nova MPB que mistura indie pop e samba."
 };
 
+// ... (mantenha a lista 'playlist' e 'curiosidades' igual ao código anterior)
+
 let queue = [];
 const audio = document.getElementById('audio-element');
 const title = document.getElementById('track-title');
@@ -45,27 +47,24 @@ const info = document.getElementById('artist-info');
 const cover = document.getElementById('album-cover');
 const bgOverlay = document.getElementById('bg-overlay');
 
+// --- LÓGICA DA RÁDIO ---
+
 function shufflePlaylist() {
     queue = [...playlist].sort(() => Math.random() - 0.5);
 }
 
 function loadNextTrack() {
     if (queue.length === 0) shufflePlaylist();
-    
-    const track = queue.shift(); // Pega a primeira da fila embaralhada
+    const track = queue.shift();
     
     title.innerText = track.title;
     artist.innerText = track.artist;
     cover.src = track.cover;
     bgOverlay.style.backgroundImage = `url('${track.cover}')`;
     audio.src = track.src;
+    info.innerText = curiosidades[track.artist] || "Informação não disponível.";
     
-    // Atualiza curiosidade
-    info.innerText = curiosidades[track.artist] || "Informação não disponível para este artista.";
-    
-    audio.play().catch(() => {
-        console.log("Autoplay bloqueado pelo navegador. Aguardando clique.");
-    });
+    audio.play().catch(() => console.log("Aguardando interação..."));
 }
 
 function toggleRadio() {
@@ -74,13 +73,28 @@ function toggleRadio() {
         document.getElementById('main-button').innerText = "OUVINDO AGORA";
     } else {
         audio.pause();
-        document.getElementById('main-button').innerText = "REOMAR RÁDIO";
+        document.getElementById('main-button').innerText = "RETOMAR RÁDIO";
     }
 }
 
 audio.onended = loadNextTrack;
 
-// Início automático
+// --- LÓGICA DE ATALHO (1 + 2 + 3) ---
+
+const pressedKeys = new Set();
+
+window.addEventListener('keydown', (e) => {
+    pressedKeys.add(e.key);
+    if (pressedKeys.has('1') && pressedKeys.has('2') && pressedKeys.has('3')) {
+        window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
+    }
+});
+
+window.addEventListener('keyup', (e) => {
+    pressedKeys.delete(e.key);
+});
+
+// Inicialização
 window.onload = () => {
     shufflePlaylist();
     loadNextTrack();
