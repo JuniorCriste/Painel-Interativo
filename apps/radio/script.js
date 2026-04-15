@@ -1,85 +1,87 @@
 const playlist = [
-    // CASACA
     { title: "Camarada", artist: "Casaca", src: "audio/casaca/camarada.mp3", cover: "img/casaca1.png" },
     { title: "O Menino Que Sobe a Ladeira (Part. Rapadura)", artist: "Casaca", src: "audio/casaca/meninoladeira.mp3", cover: "img/casaca3.png" },
     { title: "Anjo Samile", artist: "Casaca", src: "audio/casaca/anjosamile.mp3", cover: "img/casaca2.png" },
     { title: "Noite Fria", artist: "Casaca", src: "audio/casaca/noitefria.mp3", cover: "img/casaca2.png" },
     { title: "Garças de Jacarenema", artist: "Casaca", src: "audio/casaca/garcas.mp3", cover: "img/casaca1.png" },
-    
-    // DALLAS COMPANY
     { title: "Clima de Rodeio", artist: "Dallas Company", src: "audio/dallascompany/climaderodeio.mp3", cover: "img/dallas.png" },
-    
-    // MACUCOS
     { title: "Além do Mar", artist: "Macucos", src: "audio/macucos/alemdomar.mp3", cover: "img/macucos.png" },
     { title: "Haverá", artist: "Macucos", src: "audio/macucos/havera.mp3", cover: "img/macucos.png" },
-       
-    // MOXUARA
     { title: "Depende de Nós", artist: "Moxuara", src: "audio/moxuara/dependedenos.mp3", cover: "img/moxuara.png" },
     { title: "Os Meninos da Baía de Vitória", artist: "Moxuara", src: "audio/moxuara/dependedenos.mp3", cover: "img/moxuara.png" },
-       
-    // PAULO SÉRGIO
     { title: "Quero Ver Você Feliz", artist: "Paulo Sérgio", src: "audio/paulosergio/querovervcfeliz.mp3", cover: "img/paulosergio.png" },
     { title: "Não Creio em Mais Nada", artist: "Paulo Sérgio", src: "audio/paulosergio/naocreioemmaisnada.mp3", cover: "img/paulosergio.png" },
     { title: "Pro Diabo os Conselhos de Vocês", artist: "Paulo Sérgio", src: "audio/paulosergio/paraodiaboosconselhos.mp3", cover: "img/paulosergio.png" },
-
-    // RASTACLONE
     { title: "Selvageria", artist: "Rastaclone", src: "audio/rastaclone/selvageria.mp3", cover: "img/rastaclone.png" },
     { title: "Perfume de Flor", artist: "Rastaclone", src: "audio/rastaclone/perfumedeflor.mp3", cover: "img/rastaclone.png" },
-       
-    // ROBERTO CARLOS
     { title: "Além do Horizonte", artist: "Roberto Carlos", src: "audio/robertocarlos/alemdohorizonte.mp3", cover: "img/rc1.png" },
     { title: "Parei na Contra Mão", artist: "Roberto Carlos", src: "audio/robertocarlos/contramao.mp3", cover: "img/rc2.png" },
     { title: "Splish Splash", artist: "Roberto Carlos", src: "audio/robertocarlos/splishsplash.mp3", cover: "img/rc2.png" },
     { title: "A Namoradinha do Amigo Meu", artist: "Roberto Carlos", src: "audio/robertocarlos/namoradinha.mp3", cover: "img/rc3.png" },
-
-    // SERGIO SAMPAIO
     { title: "Bloco na Rua", artist: "Sérgio Sampaio", src: "audio/sergiosampaio/bloconarua.mp3", cover: "img/sergiosampaio.png" },
-       
-    // SILVA
     { title: "A Cor É Rosa", artist: "Silva", src: "audio/silva/acorerosa.mp3", cover: "img/silva.png" },
-   
-    // SUPERCOMBO
     { title: "Amianto", artist: "Supercombo", src: "audio/supercombo/amianto.mp3", cover: "img/supercombo1.png" },
-    { title: "Piloto Automático", artist: "Supercombo", src: "audio/supercombo/pilotoautomatico.mp3", cover: "img/supercombo1.png" },
-     
+    { title: "Piloto Automático", artist: "Supercombo", src: "audio/supercombo/pilotoautomatico.mp3", cover: "img/supercombo1.png" }
 ];
 
-let currentIndex = 0;
+const curiosidades = {
+    "Roberto Carlos": "Roberto Carlos Braga (Cachoeiro de Itapemirim, 19 de abril de 1941) é um cantor e compositor brasileiro. Figura-chave da Jovem Guarda, é o artista de maior êxito comercial da história da música brasileira, sendo chamado de 'Rei'.",
+    "Supercombo": "A Supercombo é uma banda de rock alternativo formada em 2007 em Vitória (ES), radicada em São Paulo, conhecida por letras que abordam dilemas cotidianos e dramas da juventude.",
+    "Casaca": "A Banda Casaca é um grupo capixaba de pop-rock e reggae formado em 1999 em Vila Velha, reconhecido por fundir ritmos locais como o congo com influências pop.",
+    "Sérgio Sampaio": "Sérgio Sampaio (1947–1994) foi um ícone da MPB conhecido pelo famoso 'Eu Quero é Botar Meu Bloco na Rua'. Misturava samba, rock e crônicas sociais.",
+    "Dallas Company": "A banda Dallas Company é um grupo de country e sertanejo formado em 1994, em Colatina, conhecido nacionalmente pelo hit 'Clima de Rodeio'.",
+    "Macucos": "A Macucos é uma banda de reggae formada em 1999 em Vila Velha, reconhecida como um dos maiores nomes do gênero no Brasil, misturando reggae com ritmos brasileiros.",
+    "Moxuara": "O Grupo Moxuara (Cariacica, 1991) mistura MPB, congo e influências folclóricas, com foco na preservação ambiental e cultura capixaba.",
+    "Paulo Sérgio": "Paulo Sérgio (1944–1980), nascido em Alegre (ES), foi um influente cantor romântico, precursor do estilo brega-romântico e dono do sucesso 'Última Canção'.",
+    "Rastaclone": "A Rastaclone é uma banda de rock e reggae formada em 1997 em Vila Velha, consolidada como um dos grandes nomes da música independente capixaba.",
+    "Silva": "Silva é um renomado cantor e multi-instrumentista nascido em Vitória em 1988, destaque da nova MPB que mistura indie pop e samba."
+};
+
+let queue = [];
 const audio = document.getElementById('audio-element');
 const title = document.getElementById('track-title');
 const artist = document.getElementById('track-artist');
+const info = document.getElementById('artist-info');
 const cover = document.getElementById('album-cover');
 const bgOverlay = document.getElementById('bg-overlay');
-const status = document.getElementById('radio-status');
-const btn = document.getElementById('main-button');
 
-function loadTrack(index) {
-    const track = playlist[index];
+function shufflePlaylist() {
+    queue = [...playlist].sort(() => Math.random() - 0.5);
+}
+
+function loadNextTrack() {
+    if (queue.length === 0) shufflePlaylist();
+    
+    const track = queue.shift(); // Pega a primeira da fila embaralhada
+    
     title.innerText = track.title;
     artist.innerText = track.artist;
     cover.src = track.cover;
-    
-    // Atualiza o fundo desfocado
     bgOverlay.style.backgroundImage = `url('${track.cover}')`;
-    
-    // Atualiza o arquivo de áudio
     audio.src = track.src;
+    
+    // Atualiza curiosidade
+    info.innerText = curiosidades[track.artist] || "Informação não disponível para este artista.";
+    
+    audio.play().catch(() => {
+        console.log("Autoplay bloqueado pelo navegador. Aguardando clique.");
+    });
 }
 
 function toggleRadio() {
     if (audio.paused) {
-        audio.play().catch(e => console.log("Erro ao reproduzir: ", e));
-        btn.innerText = "OUVINDO AGORA";
-        status.innerText = "● AO VIVO";
+        audio.play();
+        document.getElementById('main-button').innerText = "OUVINDO AGORA";
+    } else {
+        audio.pause();
+        document.getElementById('main-button').innerText = "REOMAR RÁDIO";
     }
 }
 
-// Quando a música termina, carrega a próxima e toca automaticamente
-audio.onended = function() {
-    currentIndex = (currentIndex + 1) % playlist.length;
-    loadTrack(currentIndex);
-    audio.play();
-};
+audio.onended = loadNextTrack;
 
-// Inicia com a primeira música da lista preparada
-loadTrack(currentIndex);
+// Início automático
+window.onload = () => {
+    shufflePlaylist();
+    loadNextTrack();
+};

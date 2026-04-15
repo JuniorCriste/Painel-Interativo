@@ -11,14 +11,19 @@
     <div id="bg-overlay"></div>
 
     <div class="player-container">
+        <span class="status-badge" id="radio-status">● AO VIVO</span>
         <img src="placeholder.jpg" id="album-cover" class="album-art" alt="Capa do Álbum">
         <h1 id="track-title">Sintonizando...</h1>
         <p id="track-artist">Aguarde</p>
         
-        <button class="btn-play" id="main-button" onclick="toggleRadio()">INICIAR RÁDIO</button>
-        <span class="status-badge" id="radio-status">OFFLINE</span>
+        <div id="info-container">
+            <h3>Sobre o Artista</h3>
+            <p id="artist-info">Carregando curiosidades...</p>
+        </div>
+
+        <button class="btn-play" id="main-button" onclick="toggleRadio()">OUVINDO AGORA</button>
         
-        <audio id="audio-element" preload="none"></audio>
+        <audio id="audio-element" preload="auto"></audio>
     </div>
 
     <script src="script.js"></script>
