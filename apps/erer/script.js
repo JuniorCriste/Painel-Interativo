@@ -215,7 +215,7 @@ let lives = 3; // Variável de controle das vidas
 let shuffledQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
-let topScores = JSON.parse(localStorage.getItem('topScores')) || [];
+let topScores = JSON.parse(localStorage.getItem('topScores_erer')) || [];
 const topRankingSize = 5;
 
 // ATENÇÃO: SUBSTITUA ESTA LISTA COM OS NOMES REAIS DOS SEUS ARQUIVOS JPG!
@@ -444,7 +444,7 @@ async function endGame(lost = false) {
     }
 
     // Apenas verifica se o jogador entra no ranking
-    const isTopPlayer = score > 0 && (topScores.length < topRankingSize || score > (topScores.length > 0 ? topScores[topScores.length - 1].score : -1));
+    const isTopPlayer = score > 0 && (topScores_erer.length < topRankingSize || score > (topScores_erer.length > 0 ? topScores[topScores_erer.length - 1].score : -1));
 
     if (isTopPlayer) {
         rankingMessageElement.textContent = 'Você entrou para o ranking! Pose pra foto!';
@@ -553,18 +553,18 @@ function takePhoto(stream) {
 
 // ... (addToRanking permanece igual)
 function addToRanking(photoDataUrl) {
-    topScores.push({ score, photo: photoDataUrl });
-    topScores.sort((a, b) => b.score - a.score);
-    if (topScores.length > topRankingSize) {
-        topScores.pop();
+    topScores_erer.push({ score, photo: photoDataUrl });
+    topScores_erer.sort((a, b) => b.score - a.score);
+    if (topScores_erer.length > topRankingSize) {
+        topScores_erer.pop();
     }
-    localStorage.setItem('topScores', JSON.stringify(topScores));
+    localStorage.setItem('topScores_erer', JSON.stringify(topScores_erer));
 }
 
 function showRanking() {
     rankingContainer.innerHTML = '';
     
-    topScores.forEach((item, index) => {
+    topScores_erer.forEach((item, index) => {
         if (index < 5) {
             const rankingItem = document.createElement('div');
             rankingItem.classList.add('ranking-item');
