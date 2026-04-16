@@ -314,6 +314,7 @@ body {
     color: #0e0202;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 @keyframes flash-animation {
