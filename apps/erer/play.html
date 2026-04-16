@@ -1,0 +1,99 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz da Consciência Negra</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonte mais estilosa -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <img src="img/carregando.gif" alt="Carregando...">
+        <b>Carregando o Quiz Afro... 🌍</b>
+    </div>
+
+    <div id="conteudo" style="display: none;">
+        <div id="background-image"></div>
+
+        <main>
+
+        <!-- TELA INICIAL -->
+        <div id="start-screen" class="screen">
+            <h1>✊🏿 Quiz da Consciência Negra</h1>
+
+            <p>
+            Um jogo sobre história, resistência e cultura afro-brasileira.<br>
+            Inspirado na força de <b>Zumbi dos Palmares</b> e das comunidades quilombolas.
+            </p>
+
+            <button id="start-button"><b>5</b> Iniciar Jogo</button>
+        </div>
+
+        <!-- TELA DO JOGO -->
+        <div id="game-screen" class="screen hidden">
+
+            <h2 id="question-text"></h2>
+
+            <!-- VIDAS -->
+            <div id="life-container">
+                <img id="life-1" src="img/sprites/vida-azul.png" class="life-icon">
+                <img id="life-2" src="img/sprites/vida-branca.png" class="life-icon">
+                <img id="life-3" src="img/sprites/vida-rosa.png" class="life-icon">
+            </div>
+
+            <div id="score-display">Pontos: <span id="current-score">0</span></div>
+
+            <!-- OPÇÕES -->
+            <div id="options-container">
+                <button id="option-a" class="option-button blue-button"><span>4</span></button>
+                <button id="option-b" class="option-button yellow-button"><span>8</span></button>
+                <button id="option-c" class="option-button purple-button"><span>6</span></button>
+                <button id="option-d" class="option-button pink-button"><span>2</span></button>
+            </div>
+        </div>
+
+        <!-- FINAL -->
+        <div id="end-game-screen" class="screen hidden">
+            <h2 id="end-game-message"></h2>
+            <p>Sua pontuação: <span id="final-score"></span></p>
+
+            <p id="ranking-message"></p>
+
+            <div id="photo-countdown" class="hidden"></div>
+
+            <div id="moldura">
+                <video id="webcam" autoplay playsinline class="hidden"></video>
+            </div>
+
+            <canvas id="canvas" class="hidden"></canvas>
+
+            <div id="ranking-container"></div>
+            <p id="countdown" class="hidden"></p>
+
+            <button id="restart-button">Jogar Novamente</button>
+        </div>
+
+        <!-- CRÉDITOS -->
+        <div id="credits">
+            Desenvolvido por Junior Criste
+        </div>
+
+        <div id="glitch-overlay" class="hidden"></div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
+

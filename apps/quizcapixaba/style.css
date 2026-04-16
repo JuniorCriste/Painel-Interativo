@@ -1,0 +1,314 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Tela de carregamento */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff; /* Fundo claro */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+/* GIF centralizado */
+#preloader img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+/* Efeito de desaparecimento suave */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* NOVO: Estilo para a imagem de fundo */
+#background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover; /* Garante que cubra a área */
+    background-position: center; /* Centraliza a imagem */
+    z-index: -1; /* Coloca a imagem atrás de todo o conteúdo */
+    opacity: 0.8; /* Adiciona uma leve transparência para melhorar a leitura */
+    /* ATUALIZADO: Transição suave para os efeitos de blur e zoom */
+    transition: filter 1.0s ease-in-out, transform 1.0s ease-in-out;
+    filter: blur(0); /* Estado inicial sem blur */
+    transform: scale(1.0); /* Estado inicial sem zoom (100%) */
+}
+
+/* NOVO: Classe para o estado de desfoque e zoom durante o jogo */
+#background-image.blurred {
+    filter: blur(15px); /* Desfoque de 15 pixels */
+    transform: scale(1.2); /* Zoom de 120% */
+}
+
+.screen {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra mais forte para destacar */
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente para o conteúdo */
+    width: 90%;
+    max-width: 600px;
+}
+
+#credits {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 5px black;
+    font-size: 11px;
+    font-family: montserrat;
+    bottom: 0; 
+    padding-bottom: 50px;    
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    position: relative; /* Ajuste para melhor posicionamento sobre o fundo */
+}
+
+.hidden {
+    display: none;
+}
+
+#options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.option-button {
+    color: white;
+    font-size: 1.2em;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: left;
+    position: relative;
+    padding-left: 50px;
+}
+
+.option-button span {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+}
+
+.blue-button {
+    background-color: #007bff;
+}
+
+.yellow-button {
+    background-color: #ffc107;
+}
+
+.purple-button {
+    background-color: #6f42c1;
+}
+
+.pink-button {
+    background-color: #e83e8c;
+}
+
+.option-button:hover {
+    opacity: 0.8;
+}
+
+#ranking-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.ranking-item {
+    text-align: center;
+}
+
+.ranking-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+}
+
+#webcam {
+    width: 300px;
+    height: 300px; 
+    margin: 20px auto; 
+    display: block !important; 
+    object-fit: cover; 
+    border-radius: 10px; 
+    border: 5px solid white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* O elemento canvas, que é quem realmente tira a foto, deve continuar invisível */
+#canvas {
+    display: none;
+}
+
+#start-button, #restart-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    margin-top: 20px;
+}
+
+#score-display {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    text-shadow:
+    1px 1px 0 #333,   /* Canto inferior-direito */
+    -1px -1px 0 #333, /* Canto superior-esquerdo */
+    1px -1px 0 #333,  /* Canto superior-direito */
+    -1px 1px 0 #333;  /* Canto inferior-direito */
+}
+
+/* ------------------------------------------- */
+/* ESTILOS DE VIDAS (NOVO) */
+/* ------------------------------------------- */
+
+#life-container {
+    /* Posiciona as vidas ao lado do score */
+    position: absolute; 
+    top: 20px; 
+    right: 150px; /* Ajuste para não colidir com o score */
+    display: flex;
+    gap: 5px;
+    z-index: 10; 
+}
+
+.life-icon {
+    width: 25px; /* Tamanho dos corações */
+    height: auto;
+    transition: opacity 0.2s; /* Para suavizar a perda de vida */
+}
+
+/* ------------------------------------------- */
+/* EFEITO GLITCH (NOVO) */
+/* ------------------------------------------- */
+
+/* Overlay de tela cheia para o efeito de erro */
+#glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Não impede cliques */
+    background-color: transparent;
+    z-index: 99999; /* Acima de tudo */
+    opacity: 0;
+}
+
+/* Classe para ativar o efeito de glitch */
+.glitch-active {
+    opacity: 1 !important;
+    /* Animação ultra-rápida (0.2s) com steps para simular falha de vídeo */
+    animation: glitch-anim 0.2s steps(4, start) forwards; 
+}
+
+/* Animação Rápida de Glitch com deslocamento e cor vermelha */
+@keyframes glitch-anim {
+    0% {
+        transform: translate(0);
+        filter: hue-rotate(0deg) saturate(1.5); 
+    }
+    25% {
+        transform: translate(2px, -2px) skew(5deg); 
+        filter: hue-rotate(10deg) saturate(3);
+        background-color: rgba(255, 0, 0, 0.4); /* Overlay vermelho */
+    }
+    50% {
+        transform: translate(-3px, 3px) skew(-3deg);
+        background-color: rgba(0, 0, 0, 0.3); /* Flicker escuro */
+    }
+    75% {
+        transform: translate(4px, -4px) skew(2deg);
+        filter: hue-rotate(-10deg) saturate(2.5);
+        background-color: rgba(255, 0, 0, 0.5);
+    }
+    100% {
+        opacity: 0; 
+        transform: translate(0);
+        filter: hue-rotate(0deg) saturate(1);
+    }
+}
+
+#photo-countdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10em; /* Contagem bem grande */
+    color: white; /* Texto em branco */
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    background-color: transparent;
+    z-index: 10000; /* Acima de tudo */
+    pointer-events: none; /* Não bloqueia cliques */
+}
+
+.flash-screen {
+
+
+
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+
+
+    opacity: 0;
+    z-index: 10001; /* Acima do contador */
+    pointer-events: none;
+    animation: flash-animation 0.3s ease-out; /* Duração do flash */
+}
+
+@keyframes flash-animation {
+    0% { opacity: 1; } /* Começa totalmente opaco (branco) */
+    100% { opacity: 0; } /* Desaparece rapidamente */
+}

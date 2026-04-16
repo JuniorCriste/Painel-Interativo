@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Capixaba</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="preloader">
+    <img src="img/carregando.gif" alt="Carregando...">
+    <br/><b>Carregando Quiz Capixaba...</b>
+    </div>
+    <div id="conteudo" style="display: none;">
+    <div id="background-image"></div> <main>
+        <div id="start-screen" class="screen">
+            <h1>Quiz Capixaba <br/></h1> <h5>
+                🌴 Será que você é capixaba de verdade? Teste seus conhecimentos e viaje pelo Espírito Santo sem sair do lugar! Mostre que manda bem e tente zerar o jogo! 🕹️
+            </h5>
+            <button id="start-button"><b>5</b>&nbsp; &nbsp;Iniciar Jogo</button>    
+        </div>
+        
+    
+        <div id="game-screen" class="screen hidden">
+            <h2 id="question-text"></h2>
+            <div id="life-container">
+                <img id="life-1" src="img/sprites/vida-azul.png" alt="Vida 1" class="life-icon">
+                <img id="life-2" src="img/sprites/vida-branca.png" alt="Vida 2" class="life-icon">
+                <img id="life-3" src="img/sprites/vida-rosa.png" alt="Vida 3" class="life-icon">
+            </div>
+            <br/>
+            <div id="score-display">Pontos: <span id="current-score">0</span></div>
+            
+            <div id="options-container">
+                <button id="option-a" class="option-button blue-button"><span>4</span></button>
+                <button id="option-b" class="option-button yellow-button"><span>8</span></button>
+                <button id="option-c" class="option-button purple-button"><span>6</span></button>
+                <button id="option-d" class="option-button pink-button"><span>2</span></button>
+            </div>
+        </div>
+
+   <div id="end-game-screen" class="screen hidden">
+            <h2 id="end-game-message"></h2>
+            <p>Sua pontuação: <span id="final-score"></span></p>
+            <p id="ranking-message"></p>
+            
+            <div id="photo-countdown" class="hidden"></div> <div id="moldura"><video id="webcam" autoplay playsinline class="hidden"></video></div>
+            <canvas id="canvas" class="hidden"></canvas>
+            <div id="ranking-container"></div>
+            <p id="countdown" class="hidden"></p>
+            <button id="restart-button">Jogar Novamente</button>
+        </div>
+
+           <div id="credits"><br/><br/>
+          Desenvolvido por Junior Criste - github.com/JuniorCriste (versão 2.0)
+        </div>
+        
+        <div id="glitch-overlay" class="hidden"></div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    
+    
+</body>
+</html>

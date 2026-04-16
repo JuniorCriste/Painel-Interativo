@@ -1,0 +1,7 @@
+Áudios extraídos da biblioteca de áudios do Linux:
+●acerto.ogg - Original: /usr/share/sounds/freedesktop/stereo/trash-empty.oga
+●erro.ogg - Original: /usr/share/sounds/sound-icons/gummy-cat-2.wav
+●campeao.ogg - Original: /usr/share/sounds/sound-icons/trumpet-12.wav
+
+Outros áudios:
+●trilha.ogg - Original: https://youtu.be/tpjl8ybe2aQ
