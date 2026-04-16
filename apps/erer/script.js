@@ -202,24 +202,26 @@ const moldura = document.getElementById('moldura');
 const conteudo = document.getElementById('conteudo'); 
 const photoCountdownElement = document.getElementById('photo-countdown'); 
 
-// Seletores para Vidas e Glitch
+// NOVO: Seletores e Variáveis para Vidas e Glitch
 const glitchOverlay = document.getElementById('glitch-overlay');
 const lifeIcons = [
     document.getElementById('life-1'),
     document.getElementById('life-2'),
     document.getElementById('life-3')
 ];
-let lives = 3; 
+let lives = 3; // Variável de controle das vidas
+// FIM NOVO
 
 let shuffledQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
-
-// ALTERAÇÃO: Nome do registro no navegador alterado para "topScoresERER"
-let topScores = JSON.parse(localStorage.getItem('topScoresERER')) || [];
+let topScores = JSON.parse(localStorage.getItem('topScores')) || [];
 const topRankingSize = 5;
 
-const bgImages = ['background1.jpg', 'background2.jpg', 'background3.jpg'];
+// ATENÇÃO: SUBSTITUA ESTA LISTA COM OS NOMES REAIS DOS SEUS ARQUIVOS JPG!
+const bgImages = [
+    'background1.jpg', 'background2.jpg', 'background3.jpg'
+];
 
 // Configuração dos Sons
 const audioFundo = new Audio('audio/trilha.ogg');
@@ -227,6 +229,7 @@ audioFundo.loop = true;
 const audioAcerto = new Audio('audio/acerto.ogg');
 const audioErro = new Audio('audio/erro.ogg');
 const audioVitoria = new Audio('audio/campeao.ogg');
+// NOVO: Áudio para o início da contagem da foto
 const audioCaptura = new Audio('audio/captura.ogg'); 
 
 const keyboardMap = {
@@ -240,19 +243,26 @@ const keyboardMap = {
 // FUNÇÕES DE PRELOAD, TELA CHEIA E RESTAURAÇÃO
 // ----------------------------------------------------------------------
 
+/**
+ * Tenta colocar o navegador em modo tela cheia.
+ */
 function enterFullscreen() {
-    const element = document.documentElement;
+    const element = document.documentElement; // Pega o elemento <html>
+    
     if (element.requestFullscreen) {
         element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) {
+    } else if (element.mozRequestFullScreen) { // Firefox
         element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
+    } else if (element.webkitRequestFullscreen) { // Chrome, Safari e Opera
         element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
+    } else if (element.msRequestFullscreen) { // IE/Edge
         element.msRequestFullscreen();
     }
 }
 
+/**
+ * Verifica se a página está atualmente em tela cheia.
+ */
 function isCurrentlyFullscreen() {
     return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
 }
@@ -270,21 +280,29 @@ function loadInitialBackground() {
         hidePreloader(); 
         return;
     }
+    
     const randomIndex = Math.floor(Math.random() * bgImages.length);
     const selectedImage = bgImages[randomIndex];
     const imageUrlPath = `img/background/${selectedImage}`;
+
     const img = new Image();
+
     img.onload = () => {
         backgroundElement.style.backgroundImage = `url('${imageUrlPath}')`;
         hidePreloader();
     };
+
     img.onerror = () => {
         console.error("Erro ao carregar a imagem de fundo: " + imageUrlPath);
         hidePreloader();
     };
+
     img.src = imageUrlPath;
 }
 
+/**
+ * Tenta restaurar a tela cheia após um reload.
+ */
 function restoreFullscreen() {
     if (localStorage.getItem('fullscreen_on_reload') === 'true') {
         enterFullscreen();
@@ -299,6 +317,7 @@ function restoreFullscreen() {
 document.addEventListener('DOMContentLoaded', loadInitialBackground);
 document.addEventListener('DOMContentLoaded', restoreFullscreen);
 
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -308,8 +327,11 @@ function shuffleArray(array) {
 
 function startGame() {
     enterFullscreen(); 
-    audioFundo.play().catch(e => console.log("Música de fundo bloqueada."));
+    
+    audioFundo.play().catch(e => console.log("Música de fundo bloqueada. O jogo continuará sem som de fundo."));
+    
     backgroundElement.classList.add('blurred');
+    
     startScreen.classList.add('hidden');
     endGameScreen.classList.add('hidden');
     gameScreen.classList.remove('hidden');
@@ -318,38 +340,56 @@ function startGame() {
     currentQuestionIndex = 0;
     score = 0;
     currentScoreElement.textContent = score;
+
+    // NOVO: Inicializa as vidas
     lives = 3;
     updateLifeDisplay();
+
     displayQuestion();
 }
 
+/**
+ * NOVO: Atualiza a exibição dos corações (vidas) na tela.
+ */
 function updateLifeDisplay() {
+    // Ordem: Vida 1 (azul), Vida 2 (branca), Vida 3 (rosa)
     if (lifeIcons[0]) lifeIcons[0].style.opacity = lives >= 1 ? 1 : 0.2;
     if (lifeIcons[1]) lifeIcons[1].style.opacity = lives >= 2 ? 1 : 0.2;
     if (lifeIcons[2]) lifeIcons[2].style.opacity = lives >= 3 ? 1 : 0.2;
 }
 
+/**
+ * NOVO: Aplica e remove rapidamente o efeito glitch na tela e toca um som de erro.
+ */
 function triggerGlitchEffect() {
     if (!glitchOverlay) return;
+    
+    // 1. Ativa o efeito e o som
     glitchOverlay.classList.remove('hidden');
     glitchOverlay.classList.add('glitch-active');
+    
     if (typeof audioErro !== 'undefined' && audioErro) { 
         audioErro.currentTime = 0; 
-        audioErro.play().catch(e => console.log("Erro de áudio."));
+        audioErro.play().catch(e => console.log("Som de erro não pôde ser reproduzido."));
     }
+    
+    // 2. Remove o efeito após a duração da animação (0.2s)
     setTimeout(() => {
         glitchOverlay.classList.remove('glitch-active');
         glitchOverlay.classList.add('hidden');
     }, 200); 
 }
 
+
 function displayQuestion() {
     if (currentQuestionIndex >= shuffledQuestions.length) {
-        endGame(false);
+        endGame(false); // Ganhou
         return;
     }
+
     const currentQuestion = shuffledQuestions[currentQuestionIndex];
     questionText.textContent = currentQuestion.question;
+
     const options = currentQuestion.options;
     options.forEach((option, index) => {
         const button = optionButtons[index];
@@ -369,129 +409,180 @@ function checkAnswer(selectedAnswer) {
         currentQuestionIndex++;
         displayQuestion();
     } else {
+        // NOVO: Lógica de Vidas
         triggerGlitchEffect(); 
         lives--;              
         updateLifeDisplay();  
+
         if (lives <= 0) {
-            endGame(true);
+            endGame(true); // Perdeu todas as vidas
         } 
+        // Se lives > 0, o jogador permanece na questão atual (currentQuestionIndex não é incrementado).
     }
 }
 
 // ----------------------------------------------------------------------
-// END GAME E LÓGICA DE WEBCAM
+// END GAME E LÓGICA DE WEBCAM (AJUSTADA)
 // ----------------------------------------------------------------------
 
 async function endGame(lost = false) {
+    // Pausa a música de fundo
     audioFundo.pause();
     audioFundo.currentTime = 0;
+
     gameScreen.classList.add('hidden');
     endGameScreen.classList.remove('hidden');
     finalScoreElement.textContent = score;
     restartButton.classList.add('hidden');
 
     if (lost) {
+        // MENSAGEM ATUALIZADA PARA PERDA DE VIDAS
         endGameMessageElement.textContent = `Vidas esgotadas!`;
     } else {
         endGameMessageElement.textContent = 'Parabéns, você completou o quiz! 💥';
         audioVitoria.play();
     }
 
+    // Apenas verifica se o jogador entra no ranking
     const isTopPlayer = score > 0 && (topScores.length < topRankingSize || score > (topScores.length > 0 ? topScores[topScores.length - 1].score : -1));
 
     if (isTopPlayer) {
         rankingMessageElement.textContent = 'Você entrou para o ranking! Pose pra foto!';
         rankingMessageElement.style.fontWeight = 'bold';
+        
+        // TENTA ACESSAR A CÂMERA E INICIA O CONTAGEM
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             webcamElement.srcObject = stream;
+            // A webcam AGORA SÓ É MOSTRADA se o acesso for bem-sucedido
             webcamElement.classList.remove('hidden'); 
+
             webcamElement.onloadedmetadata = () => {
+                // INICIA O CONTAGEM REGRESSIVA VISUAL APÓS A CÂMERA CARREGAR
                 startPhotoCountdown(stream);
             };
         } catch (err) {
-            console.error("Erro na webcam: ", err);
+            // Se der erro, não mostra webcam e usa a foto placeholder
+            console.error("Erro ao acessar a webcam: ", err);
             addToRanking('placeholdererer.png');
             rankingMessageElement.textContent = 'Erro na câmera. Seu ranking:';
             showRanking();
         }
     } else {
+        // SE NÃO ENTROU NO RANKING: NADA DE WEBCAM/CANVAS
         rankingMessageElement.textContent = 'Você não entrou no ranking. Tente novamente! 😔';
         moldura.style.display = 'none';
         showRanking();
     }
 }
 
+
+/**
+ * Gerencia o contador visual (5, 4, 3, 2, 1) e o flash.
+ */
 function startPhotoCountdown(stream) {
-    audioCaptura.play().catch(e => console.log("Erro áudio captura."));
+    // NOVO: Reproduz o áudio de captura ao iniciar o contador
+    audioCaptura.play().catch(e => console.log("Erro ao reproduzir áudio de captura."));
+    
     let photoTimer = 5;
     photoCountdownElement.classList.remove('hidden');
     photoCountdownElement.textContent = photoTimer;
+
     const interval = setInterval(() => {
         photoTimer--;
+
         if (photoTimer > 0) {
             photoCountdownElement.textContent = photoTimer;
         } else if (photoTimer === 0) {
-            photoCountdownElement.textContent = ''; 
+            photoCountdownElement.textContent = ''; // Limpa o número
             clearInterval(interval);
+
+            // PISCAR (FLASH)
             flashScreen();
+
+            // TIRA A FOTO APÓS O FLASH INICIAR (0.3s)
             setTimeout(() => {
                 takePhoto(stream);
             }, 300); 
+
         } 
     }, 1000);
 }
 
+
+/**
+ * Cria e aplica a animação de flash na tela.
+ */
 function flashScreen() {
     const flashDiv = document.createElement('div');
     flashDiv.classList.add('flash-screen');
     document.body.appendChild(flashDiv);
+
+    // Remove o flash da DOM após o término da animação
     setTimeout(() => {
         flashDiv.remove();
+        // Esconde o elemento do contador de foto após o flash
         photoCountdownElement.classList.add('hidden');
     }, 300); 
 }
 
+
+/**
+ * Lógica de tirar a foto e finalizar o ranking.
+ */
 function takePhoto(stream) {
+    // 1. Tira a foto na resolução nativa
     canvasElement.width = webcamElement.videoWidth;
     canvasElement.height = webcamElement.videoHeight;
     canvasElement.getContext('2d').drawImage(webcamElement, 0, 0, canvasElement.width, canvasElement.height);
+
     const photoDataUrl = canvasElement.toDataURL('image/jpeg');
+    
+    // 2. DESLIGA A CÂMERA
     stream.getTracks().forEach(track => track.stop());
+
+    // 3. ESCONDE A WEBCAM/CANVAS (AJUSTE SOLICITADO)
     webcamElement.classList.add('hidden');
     moldura.style.display = 'none';
+    const el = document.getElementById('minhaDiv');
+    // 4. Finaliza
     addToRanking(photoDataUrl);
     rankingMessageElement.textContent = 'Foto capturada! Seu ranking:';
     showRanking();
 }
 
+// ... (addToRanking permanece igual)
 function addToRanking(photoDataUrl) {
     topScores.push({ score, photo: photoDataUrl });
     topScores.sort((a, b) => b.score - a.score);
     if (topScores.length > topRankingSize) {
         topScores.pop();
     }
-    // ALTERAÇÃO: Salvamento com a nova chave "topScoresERER"
-    localStorage.setItem('topScoresERER', JSON.stringify(topScores));
+    localStorage.setItem('topScores', JSON.stringify(topScores));
 }
 
 function showRanking() {
     rankingContainer.innerHTML = '';
+    
     topScores.forEach((item, index) => {
         if (index < 5) {
             const rankingItem = document.createElement('div');
             rankingItem.classList.add('ranking-item');
+            
             const photo = document.createElement('img');
             photo.classList.add('ranking-photo');
             photo.src = item.photo || 'placeholder.png';
+            
             const scoreText = document.createElement('span');
             scoreText.classList.add('ranking-score');
             scoreText.textContent = `${item.score}`;
+            
             rankingItem.appendChild(photo);
             rankingItem.appendChild(scoreText);
             rankingContainer.appendChild(rankingItem);
         }
     });
+    
     countdownElement.classList.remove('hidden');
     let countdown = 6; 
     countdownElement.textContent = `Reiniciando em ${countdown}...`;
@@ -500,12 +591,17 @@ function showRanking() {
         countdownElement.textContent = `Reiniciando em ${countdown}...`;
         if (countdown <= 0) {
             clearInterval(interval);
+            
+            // ANTES DO RELOAD: Salva o estado de tela cheia se estiver ativo
             if (isCurrentlyFullscreen()) {
                  localStorage.setItem('fullscreen_on_reload', 'true');
             } else {
                  localStorage.removeItem('fullscreen_on_reload');
             }
+            
+            // Recarrega a página inteira, simulando o "F5".
             window.location.reload(); 
+            
         }
     }, 1000);
 }
@@ -515,12 +611,17 @@ startButton.addEventListener('click', startGame);
 restartButton.addEventListener('click', startGame);
 
 document.addEventListener('keydown', (e) => {
-    if (gameScreen.classList.contains('hidden')) return;
+    if (gameScreen.classList.contains('hidden')) {
+        return;
+    }
     const key = e.key;
     const optionLetter = keyboardMap[key];
+
     if (optionLetter) {
         const button = document.getElementById(`option-${optionLetter}`);
-        if (button) checkAnswer(button.dataset.answer);
+        if (button) {
+            checkAnswer(button.dataset.answer);
+        }
     }
 });
 
@@ -530,7 +631,6 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-
 let keysPressed = {};
 
 document.addEventListener('keydown', (event) => {
@@ -539,8 +639,4 @@ document.addEventListener('keydown', (event) => {
     if (keysPressed['1'] && keysPressed['2'] && keysPressed['3']) {
         window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
     }
-});
-
-document.addEventListener('keyup', (event) => {
-    delete keysPressed[event.key];
 });
