@@ -529,3 +529,18 @@ document.addEventListener('keydown', (event) => {
         startButton.click();
     }
 });
+
+
+let keysPressed = {};
+
+document.addEventListener('keydown', (event) => {
+    keysPressed[event.key] = true;
+
+    if (keysPressed['1'] && keysPressed['2'] && keysPressed['3']) {
+        window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
+    }
+});
+
+document.addEventListener('keyup', (event) => {
+    delete keysPressed[event.key];
+});
