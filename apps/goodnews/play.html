@@ -1,1 +1,176 @@
-zerado
+zerado<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Boas Notícias</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f9ff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+            border-top: 8px solid #2ecc71;
+        }
+        h1 { color: #27ae60; margin-bottom: 20px; }
+        #noticia {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            white-space: pre-line;
+        }
+        button {
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #27ae60; }
+        .footer { margin-top: 15px; font-size: 0.8rem; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>✨ Notícia do Dia</h1>
+    <div id="noticia">
+        </div>
+    <button onclick="gerarNoticia()">Ler outra notícia positiva</button>
+    <div class="footer">Doses diárias de esperança baseadas em fatos reais.</div>
+</div>
+
+<script>
+    const noticias = [
+        "Cientistas anunciaram que a camada de ozônio está em plena recuperação.\nGraças ao Protocolo de Montreal, os buracos estão fechando.\nA expectativa é que ela se recupere totalmente até 2066.\nIsso prova que a cooperação global funciona para o clima.\nMilhares de casos de câncer de pele serão evitados anualmente.\nA fauna e a flora também se beneficiam com menos radiação.\nO esforço das últimas décadas finalmente mostrou resultados claros.\nPaíses reduziram drasticamente o uso de gases CFC nocivos.\nEste é um marco histórico para a ciência ambiental moderna.\nUm lembrete de que podemos consertar o planeta se agirmos.",
+
+        "Uma nova vacina contra a malária mostrou eficácia sem precedentes.\nO imunizante R21/Matrix-M foi aprovado pela OMS recentemente.\nEla promete reduzir a mortalidade infantil drasticamente na África.\nMilhares de vidas de crianças serão salvas todos os anos.\nA produção em massa já começou para atender regiões críticas.\nO custo da vacina é acessível para programas de saúde pública.\nÉ a primeira vez que chegamos tão perto de erradicar a doença.\nCientistas trabalharam décadas para alcançar essa formulação.\nO impacto socioeconômico nas comunidades será imenso e positivo.\nA saúde global celebra este avanço tecnológico extraordinário.",
+
+        "A população de tigres selvagens na Índia cresceu significativamente.\nCensos recentes mostram um aumento de mais de 30% na espécie.\nIsso é fruto de leis rigorosas contra a caça e preservação.\nReservas naturais foram expandidas para garantir o habitat.\nComunidades locais agora atuam como guardiãs dos animais.\nO sucesso do projeto serve de modelo para outros países.\nO tigre é um animal fundamental para o equilíbrio do ecossistema.\nTurismo sustentável tem ajudado a financiar a conservação.\nVer um predador de topo prosperar é sinal de florestas saudáveis.\nA biodiversidade indiana respira com mais alívio agora.",
+
+        "A Finlândia foi eleita o país mais feliz do mundo pela sétima vez.\nO ranking leva em conta apoio social, renda e liberdade.\nA educação gratuita e de alta qualidade é um pilar fundamental.\nO sistema de saúde universal garante bem-estar a todos.\nBaixos índices de corrupção geram confiança nas instituições.\nA conexão com a natureza é incentivada desde a infância.\nA igualdade de gênero é uma das maiores do planeta hoje.\nO equilíbrio entre vida profissional e pessoal é prioridade.\nEles provam que o sucesso de uma nação vai além do PIB.\nUm exemplo de sociedade acolhedora e funcional para o mundo.",
+
+        "O Brasil registrou uma queda histórica no desmatamento da Amazônia.\nDados de satélite confirmam a eficácia de novas fiscalizações.\nÁreas protegidas estão sendo monitoradas com mais rigor.\nO compromisso com o desmatamento zero ganha força total.\nIsso atrai investimentos internacionais para o Fundo Amazônia.\nA floresta em pé vale mais para a economia e o clima.\nComunidades indígenas recebem mais apoio para proteger terras.\nA biodiversidade local agradece a redução da destruição física.\nÉ um passo crucial para as metas do Acordo de Paris.\nO pulmão do mundo está recebendo o cuidado que merece.",
+
+        "Pela primeira vez, um paciente foi curado do HIV com células-mães.\nO caso conhecido como 'Paciente de Genebra' traz nova esperança.\nA ciência médica avança para tratamentos menos invasivos.\nEmbora raro, o sucesso abre portas para novas pesquisas.\nO sistema imunológico do paciente agora combate o vírus só.\nInvestimentos em biotecnologia estão acelerando esses processos.\nMédicos em todo o mundo celebram essa vitória clínica.\nA luta contra o estigma do HIV também ganha uma nova luz.\nCada cura registrada é um degrau para a erradicação final.\nA medicina genética promete revolucionar as próximas décadas.",
+
+        "A Islândia baniu oficialmente a caça de baleias por tempo indefinido.\nA decisão prioriza a conservação marinha sobre a tradição comercial.\nO país foca agora no turismo de observação de cetáceos.\nEssa mudança gera mais receita e protege a vida animal.\nBaleias são essenciais para o ciclo de nutrientes no oceano.\nA pressão internacional e a consciência local venceram a luta.\nAs populações de baleias-comuns poderão se recuperar em paz.\nÉ uma vitória ética para os defensores dos direitos animais.\nO oceano Ártico se torna um lugar mais seguro para elas.\nUm grande exemplo de evolução cultural e respeito ambiental.",
+
+        "A energia solar e eólica já superam o carvão na Europa.\nA transição energética está acontecendo mais rápido que o previsto.\nInvestimentos em baterias gigantes estão estabilizando a rede.\nO custo da energia limpa caiu drasticamente nos últimos anos.\nCidades inteiras já funcionam com 100% de fontes renováveis.\nIsso reduz a poluição do ar e melhora a saúde respiratória.\nA dependência de combustíveis fósseis estrangeiros está caindo.\nNovos empregos verdes estão sendo criados em todo o continente.\nO planeta agradece a menor emissão de gases estufa agora.\nO futuro da eletricidade é brilhante, limpo e sustentável.",
+
+        "Um jovem holandês criou um sistema que limpa plásticos dos rios.\nO projeto 'The Ocean Cleanup' já removeu toneladas de lixo.\nA ideia é impedir que o plástico chegue aos oceanos.\nSistemas autônomos interceptam resíduos de forma inteligente.\nA tecnologia está sendo instalada nos rios mais poluídos do mundo.\nO plástico coletado é reciclado para criar novos produtos.\nIsso protege a vida marinha de ingestão de microplásticos.\nA iniciativa começou pequena e hoje tem escala global.\nMostra que a inovação jovem pode resolver problemas antigos.\nNossos mares estão ficando mais limpos graças a essa visão.",
+
+        "A educação para meninas cresceu em níveis recordes globalmente.\nMais países implementaram leis que proíbem o casamento infantil.\nCom educação, a economia local se desenvolve muito mais rápido.\nO acesso à internet permitiu o aprendizado remoto em aldeias.\nOrganizações oferecem bolsas de estudo para áreas de tecnologia.\nMulheres instruídas geram comunidades mais saudáveis e fortes.\nA disparidade de gênero nas escolas primárias está diminuindo.\nLíderes mundiais priorizam o ensino feminino em fóruns globais.\nÉ o maior motor de transformação social que existe hoje.\nO futuro das próximas gerações está sendo escrito agora.",
+
+        "Cientistas criaram um plástico que se decompõe em apenas 4 semanas.\nFeito de algas marinhas, ele é totalmente compostável em casa.\nNão deixa resíduos tóxicos nem microplásticos no solo.\nA indústria de embalagens já demonstra interesse na troca.\nO material é resistente e pode substituir garrafas pet comuns.\nProduzir esse bioplástico consome menos água que o papel.\nA solução veio da observação de processos naturais do mar.\nPodemos finalmente acabar com a poluição plástica eterna.\nUma inovação que une química verde e sustentabilidade pura.\nO consumo consciente agora tem um aliado tecnológico real.",
+
+        "A população de tartarugas marinhas na Flórida bateu recordes.\nO número de ninhos identificados foi o maior em décadas.\nEsforços de limpeza de praias e luzes baixas ajudaram muito.\nA conscientização dos turistas salvou milhares de filhotes.\nO projeto Tamar e similares servem de inspiração global.\nAs tartarugas verdes e cabeçudas estão fora de perigo crítico.\nA recuperação da espécie indica oceanos mais equilibrados.\nProteger os locais de desova foi a chave para o sucesso.\nA vida selvagem retoma seu espaço quando oferecemos segurança.\nUma celebração da resiliência da natureza em nossas costas.",
+
+        "Uma biblioteca em Boston agora empresta ferramentas e sementes.\nA iniciativa promove a economia circular e o compartilhamento.\nMoradores podem reformar casas sem comprar equipamentos caros.\nO banco de sementes incentiva hortas comunitárias urbanas.\nA ideia reduziu o desperdício e aumentou o senso de união.\nOutras cidades no mundo começaram a copiar o modelo.\nBibliotecas se tornam centros de recursos para a comunidade.\nIsso democratiza o acesso a materiais de alto custo.\nO foco é na utilidade e não na posse individual de bens.\nUm pequeno passo para um estilo de vida mais sustentável.",
+
+        "Médicos realizaram a primeira cirurgia robótica à distância no Brasil.\nO especialista estava em outra cidade usando tecnologia 5G.\nA precisão do robô superou a mão humana em detalhes minuciosos.\nIsso permite que pacientes em locais remotos tenham cirurgiões de elite.\nA telemedicina evoluiu para procedimentos complexos e seguros.\nA recuperação do paciente foi mais rápida devido aos cortes menores.\nO futuro da saúde quebra as barreiras da distância física.\nNovos centros de treinamento estão sendo abertos para médicos.\nA tecnologia servindo à vida de forma direta e eficiente.\nUma conquista monumental para a engenharia e medicina nacional.",
+
+        "A Grande Muralha Verde da África está restaurando milhões de hectares.\nO projeto planta árvores em toda a largura do continente.\nIsso impede o avanço do deserto e recupera o solo fértil.\nMilhares de empregos agrícolas foram criados para os locais.\nA segurança alimentar nas regiões áridas melhorou bastante.\nO clima local está ficando mais fresco com o retorno do verde.\nÉ um dos maiores projetos ambientais da história da humanidade.\nAs árvores ajudam a sequestrar carbono e atrair chuvas.\nPaíses vizinhos estão cooperando em prol da sobrevivência.\nA natureza africana está renascendo com força e esperança.",
+
+        "Abelhas ganharam proteção especial em novas leis na Europa.\nO uso de pesticidas nocivos foi banido em diversas regiões.\nFlores silvestres estão sendo plantadas em canteiros de cidades.\nAs populações de polinizadores voltaram a crescer após anos.\nSem abelhas, a produção global de alimentos estaria em risco.\nHotéis de insetos foram instalados em parques públicos urbanos.\nCidadãos comuns estão criando jardins amigáveis para elas.\nA biodiversidade urbana é a nova tendência do planejamento.\nUma vitória minúscula no tamanho, mas gigante para o mundo.\nA natureza em miniatura está sendo finalmente respeitada.",
+
+        "O Reino Unido fechou sua última usina de carvão recentemente.\nO país que iniciou a Revolução Industrial agora lidera o fim do carvão.\nA transição para energia eólica offshore foi a chave do sucesso.\nAs emissões de CO2 caíram para níveis de meados do século 19.\nO ar das cidades está muito mais limpo e saudável agora.\nO governo investe pesado em hidrogênio verde para o futuro.\nÉ um exemplo para nações ricas abandonarem combustíveis fósseis.\nA economia britânica continuou crescendo durante a transição.\nA prova de que sustentabilidade e lucro podem caminhar juntos.\nO carvão ficou no passado, o futuro é vento e sol.",
+
+        "A vacina contra o câncer de colo do útero reduziu casos em 90%.\nO Reino Unido reportou que a geração vacinada está quase livre da doença.\nO vírus HPV está sendo combatido de forma eficaz nas escolas.\nIsso evitará milhares de mortes prematuras de mulheres.\nA campanha de vacinação gratuita é o segredo do sucesso absoluto.\nOutros países estão seguindo o exemplo com ótimos resultados.\nA ciência está vencendo um dos cânceres mais comuns do mundo.\nA prevenção através da vacina é a melhor estratégia de saúde.\nUma notícia maravilhosa para a saúde das mulheres em todo lugar.\nO fim desta doença específica parece ser possível em breve.",
+
+        "Cientistas descobriram uma bactéria que come plástico no oceano.\nEla foi encontrada naturalmente perto de locais de descarte.\nA enzima produzida pela bactéria dissolve o PET em dias.\nPesquisadores estão trabalhando para replicar isso em escala.\nIsso pode revolucionar as usinas de reciclagem do futuro.\nA natureza está encontrando formas de se adaptar aos nossos erros.\nPodemos usar esses seres vivos para limpar aterros sanitários.\nA biotecnologia foca agora em segurança para o ecossistema.\nÉ uma ferramenta biológica poderosa contra a poluição.\nUm raio de esperança vindo do mundo microscópico marinho.",
+
+        "Drones estão sendo usados para plantar mil árvores por dia.\nA tecnologia alcança áreas de difícil acesso para humanos.\nEles disparam sementes encapsuladas com nutrientes no solo.\nO reflorestamento ficou dez vezes mais rápido e barato.\nProjetos na Austrália e Brasil já usam essa frota voadora.\nA taxa de sobrevivência das sementes é surpreendentemente alta.\nMonitoramento via satélite acompanha o crescimento das mudas.\nÉ a união perfeita entre tecnologia de ponta e natureza.\nFlorestas inteiras podem ser reconstruídas em poucos anos.\nA inovação aérea ajudando a combater o aquecimento global.",
+
+        "A jornada de trabalho de 4 dias aumentou a produtividade.\nTestes em larga escala na Europa mostraram resultados incríveis.\nTrabalhadores estão menos estressados e muito mais motivados.\nO nível de burnout caiu drasticamente nas empresas participantes.\nA receita das empresas não diminuiu, em muitos casos cresceu.\nAs pessoas têm mais tempo para família, saúde e lazer pessoal.\nA retenção de talentos ficou muito mais fácil para os RHs.\nO planeta também ganha com menos deslocamentos e emissões.\nO equilíbrio entre vida e trabalho é o novo padrão de sucesso.\nUma mudança cultural que valoriza o ser humano de verdade.",
+
+        "O Japão desenvolveu um método para reciclar eletrônicos antigos.\nMetais preciosos de celulares velhos viraram medalhas olímpicas.\nA mineração urbana evita a destruição de novas áreas naturais.\nOuro, prata e bronze foram extraídos de toneladas de lixo.\nA população participou ativamente doando aparelhos quebrados.\nO processo é mais limpo que a mineração tradicional em minas.\nIsso mostra que o que chamamos de lixo é na verdade recurso.\nA economia circular eletrônica é vital para o século 21.\nTransformar resíduo em prestígio é uma lição de criatividade.\nO mundo precisa seguir o exemplo do ciclo fechado de materiais.",
+
+        "Uma vila na Itália está sendo salva por nômades digitais.\nCasas abandonadas foram reformadas para receber trabalhadores.\nA internet de alta velocidade trouxe vida nova ao local remoto.\nO comércio local voltou a lucrar com os novos moradores.\nEscolas que iam fechar agora recebem crianças do mundo todo.\nA cultura local é preservada e compartilhada com estrangeiros.\nO trabalho remoto está revitalizando o interior dos países.\nÉ uma troca justa de tranquilidade por desenvolvimento local.\nA tradição e a modernidade convivem em perfeita harmonia.\nO campo está voltando a ser um lugar de oportunidades reais.",
+
+        "O número de pessoas vivendo em extrema pobreza caiu no mundo.\nDados do Banco Mundial mostram avanços em países em desenvolvimento.\nProgramas de transferência de renda provaram ser muito eficazes.\nAcesso a saneamento básico melhorou a saúde das comunidades.\nA eletrificação rural permitiu o estudo noturno e pequenos negócios.\nMais crianças estão completando o ensino fundamental agora.\nO progresso é constante, apesar dos desafios globais recentes.\nA cooperação internacional tem focado em metas de dignidade.\nA pobreza está deixando de ser uma sentença inevitável.\nCada família que sai da miséria é uma vitória para todos.",
+
+        "O buraco na camada de ozônio sobre a Antártida diminuiu.\nCientistas confirmam que a tendência de cura é sustentada.\nAs substâncias químicas proibidas estão sumindo da atmosfera.\nIsso protege o plâncton marinho e toda a cadeia alimentar.\nA recuperação total deve ocorrer nas próximas décadas com certeza.\nO sucesso do Protocolo de Montreal é citado em livros escolares.\nServe como prova de que a humanidade pode agir coletivamente.\nO meio ambiente responde positivamente quando paramos de agredir.\nMonitoramento constante garante que o progresso continue firme.\nUma das maiores vitórias da ciência e diplomacia ambiental.",
+
+        "Cães de abrigo estão sendo treinados para detectar doenças.\nO olfato canino consegue identificar câncer e diabetes cedo.\nEles trabalham em hospitais trazendo alegria e diagnósticos.\nA precisão dos cães é comparável a exames laboratoriais caros.\nAnimais que seriam sacrificados agora salvam vidas humanas.\nO vínculo entre humanos e cães ganha um novo propósito nobre.\nEles detectam crises de hipoglicemia antes mesmo do paciente.\nO treinamento é baseado em reforço positivo e muito carinho.\nUma solução biológica e amorosa para a medicina preventiva.\nO melhor amigo do homem agora é também seu melhor médico.",
+
+        "A Dinamarca inaugurou a primeira ilha de energia limpa do mundo.\nEla centraliza a produção de parques eólicos ao redor no mar.\nA ilha fornece eletricidade para milhões de lares europeus.\nO projeto é um marco na engenharia de energias renováveis.\nAjuda a reduzir a queima de gás natural em todo o continente.\nO excesso de energia é usado para produzir hidrogênio verde.\nÉ uma usina gigante no meio do oceano sem poluição sonora.\nInovações assim aceleram a descarbonização da nossa matriz.\nO mar está se tornando a maior fonte de energia do futuro.\nLiderança climática demonstrada com tecnologia e coragem.",
+
+        "Um novo tratamento para Alzheimer mostrou resultados promissores.\nMedicamentos de nova geração retardam a perda de memória.\nEles focam na limpeza de proteínas que danificam o cérebro.\nPacientes em estágio inicial mantêm autonomia por mais tempo.\nA ciência está mais perto de transformar a doença em crônica.\nInvestimentos bilionários em pesquisa estão dando frutos.\nFamílias recebem um sopro de esperança e mais tempo juntos.\nA medicina regenerativa e genética são os próximos passos.\nA luta contra a demência ganhou aliados poderosos nos laboratórios.\nEnvelhecer com saúde mental está se tornando mais possível.",
+
+        "O uso de sacolas plásticas caiu 80% em países que as proibiram.\nA proibição em supermercados mudou o hábito dos consumidores.\nSacolas reutilizáveis tornaram-se o novo padrão de consumo.\nToneladas de lixo deixaram de ir para bueiros e oceanos.\nA vida marinha está menos exposta ao sufocamento por plástico.\nEmpresas criaram alternativas de papel e pano muito estilosas.\nA mudança foi rápida e a adaptação da sociedade foi tranquila.\nMostra que pequenas leis mudam grandes comportamentos sociais.\nO meio ambiente agradece cada sacola a menos descartada.\nSimplicidade e consciência andando juntas pelo planeta.",
+
+        "A taxa de alfabetização mundial atingiu seu ponto mais alto.\nQuase 90% da população mundial agora sabe ler e escrever.\nO foco na educação de base em países pobres foi decisivo.\nTecnologias móveis ajudam adultos a aprender em casa.\nA educação abre portas para melhores empregos e saúde.\nMulheres adultas são as que mais avançaram nos últimos anos.\nSaber ler é o primeiro passo para a cidadania plena e ativa.\nLivros e informações estão mais acessíveis do que nunca.\nO conhecimento está se espalhando pelos cantos mais remotos.\nUm mundo que lê é um mundo que pode evoluir sempre.",
+
+        "Corais impressos em 3D estão ajudando a salvar recifes.\nEstruturas de cerâmica atraem larvas de corais naturais.\nO design imita as cavernas e fendas dos corais verdadeiros.\nEm poucos meses, a vida marinha volta a ocupar o local.\nIsso combate o branqueamento causado pelo aquecimento.\nPeixes e crustáceos encontram abrigo nessas novas casas.\nCientistas monitoram o crescimento e a saúde das colônias.\nA tecnologia restaurando o que a poluição tentou destruir.\nOs recifes são as florestas tropicais dos nossos oceanos.\nA engenharia biomimética é a nova aliada da biologia marinha.",
+
+        "A Noruega atingiu 90% de vendas de carros elétricos novos.\nO país é líder mundial na transição para o transporte limpo.\nPostos de recarga estão espalhados por todo o território.\nO ruído nas cidades diminuiu e a qualidade do ar melhorou.\nIncentivos fiscais tornaram os elétricos mais acessíveis.\nA matriz energética do país é quase toda hidrelétrica e limpa.\nIsso serve de laboratório real para o resto do mundo.\nO fim dos motores a combustão está mais próximo do que parece.\nMenos petróleo sendo queimado significa um ar mais puro.\nO futuro da mobilidade é silencioso, ágil e ecológico.",
+
+        "Um projeto em Curitiba troca lixo reciclável por alimentos.\nO 'Câmbio Verde' ajuda famílias carentes e limpa a cidade.\nToneladas de plásticos e metais são desviados dos aterros.\nO lixo coletado vira matéria-prima para novas indústrias.\nAs frutas e verduras vêm de produtores locais da região.\nIsso fortalece a agricultura familiar e a alimentação saudável.\nA cidade fica mais limpa e a população mais consciente.\nÉ um ciclo perfeito de sustentabilidade social e ambiental.\nO modelo foi premiado internacionalmente por sua eficácia.\nUma ideia simples que resolve dois problemas de uma só vez.",
+
+        "Panda-gigante não está mais na lista de espécies em extinção.\nO governo chinês criou reservas vastas para proteger o bambu.\nA população selvagem cresceu o suficiente para mudar o status.\nA reprodução em cativeiro também teve sucessos incríveis.\nO urso panda é o símbolo mundial da conservação da fauna.\nSua saída da lista crítica é uma vitória para todos os biólogos.\nMostra que investimentos pesados em natureza dão certo.\nA proteção do panda ajudou a salvar outras espécies menores.\nA biodiversidade das montanhas chinesas está mais protegida.\nUm ícone da natureza que agora tem um futuro garantido.",
+
+        "Cidades ao redor do mundo estão criando 'florestas de bolso'.\nO método Miyawaki planta árvores densas em pequenos terrenos.\nElas crescem dez vezes mais rápido que florestas comuns.\nEssas áreas reduzem o calor urbano em até cinco graus.\nAtraem pássaros e insetos polinizadores de volta ao centro.\nO ar fica mais úmido e agradável para os pedestres locais.\nSão oásis de biodiversidade no meio do concreto e asfalto.\nAjudam a absorver a água das chuvas e evitar enchentes.\nQualquer terreno baldio pode virar um pulmão verde denso.\nA natureza voltando a morar perto de quem vive na cidade.",
+
+        "O primeiro avião movido a hidrogênio completou seu voo.\nEle emite apenas vapor de água puro durante todo o trajeto.\nA aviação comercial é um dos setores mais difíceis de limpar.\nEssa tecnologia prova que voar sem poluir é possível hoje.\nEmpresas aéreas já encomendaram frotas para curtas distâncias.\nO hidrogênio verde é produzido com energia solar e eólica.\nO barulho dos motores também é significativamente menor.\nEstamos no início de uma era de viagens aéreas ecológicas.\nO céu será mais limpo para as próximas gerações de viajantes.\nA engenharia aeroespacial focada no planeta é fascinante.",
+
+        "O voluntariado mundial cresceu após os desafios globais.\nMais pessoas estão dedicando tempo para ajudar o próximo.\nCozinhas comunitárias alimentam milhares de pessoas por dia.\nJovens ensinam tecnologia para idosos em centros sociais.\nA solidariedade se tornou uma ferramenta de coesão social.\nAções locais geram impacto imediato na vida das comunidades.\nDoar tempo é tão valioso quanto doar recursos financeiros.\nO senso de pertencimento e propósito aumenta nos voluntários.\nA bondade humana brilha mais forte em tempos de mudança.\nUm movimento invisível que mantém o mundo mais gentil.",
+
+        "A Escócia foi o primeiro país a oferecer produtos de higiene gratuitos.\nLei garante acesso a absorventes em prédios públicos e escolas.\nIsso combate a pobreza menstrual de forma digna e direta.\nMilhares de estudantes não perdem mais aulas por esse motivo.\nA medida foi aplaudida por organizações de direitos humanos.\nOutros países começaram a discutir leis semelhantes agora.\nA saúde e dignidade feminina foram colocadas como prioridade.\nÉ um avanço civilizatório que remove tabus antigos da sociedade.\nJustiça social se faz com leis que entendem a realidade.\nUm exemplo de empatia transformado em política pública real.",
+
+        "Um novo tipo de asfalto absorve água da chuva instantaneamente.\nEle evita poças e aquaplanagem em rodovias e ruas urbanas.\nA água passa pelo pavimento e volta para o lençol freático.\nIsso reduz drasticamente o risco de enchentes em cidades.\nO material é feito com borracha de pneus reciclados também.\nÉ mais durável e exige menos manutenção que o asfalto comum.\nAs cidades se tornam mais resilientes às mudanças climáticas.\nA engenharia civil está ficando mais inteligente e ecológica.\nSegurança no trânsito e proteção ambiental em um só produto.\nNossas estradas estão evoluindo para ajudar o ecossistema.",
+
+        "A cirurgia de catarata tornou-se acessível em áreas remotas.\nMutirões oftalmológicos devolvem a visão a milhares de idosos.\nO procedimento é rápido e muda a vida do paciente na hora.\nPessoas voltam a trabalhar e cuidar de suas próprias casas.\nA tecnologia de lentes intraoculares ficou muito mais barata.\nOrganizações viajam com barcos-hospital pela Amazônia e África.\nVer o sorriso de quem volta a enxergar é a maior recompensa.\nA cegueira evitável está sendo combatida com vigor total.\nA medicina humanitária alcança onde o estado muitas vezes falha.\nA luz da visão voltando para quem achava que estava no escuro.",
+
+        "Cientistas criaram uma 'super-enzima' que recicla garrafas PET.\nEla quebra o plástico em seus componentes originais em horas.\nIsso permite que o plástico seja reciclado infinitamente.\nHoje, o plástico comum perde qualidade a cada reciclagem.\nCom a enzima, podemos parar de produzir plástico virgem do zero.\nA descoberta foi inspirada em organismos que vivem em lixões.\nA biologia sintética acelerou a eficácia da enzima natural.\nA economia do plástico está prestes a se tornar circular.\nA poluição por garrafas pode finalmente se tornar algo do passado.\nA ciência aplicada resolvendo o maior problema de resíduos.",
+
+        "O Butão é o único país do mundo com pegada de carbono negativa.\nEles absorvem muito mais CO2 do que emitem anualmente.\nA constituição exige que 60% do território seja floresta.\nA eletricidade é gerada quase totalmente por hidrelétricas.\nO país prioriza a Felicidade Interna Bruta sobre o PIB comum.\nA preservação da cultura e natureza é o centro das decisões.\nEles provam que o desenvolvimento não precisa destruir tudo.\nO turismo é controlado para não impactar o meio ambiente local.\nUm exemplo vivo de que outro modelo de civilização é viável.\nUm reino verde que serve de inspiração para todo o planeta.",
+
+        "Satélites agora detectam vazamentos de metano em tempo real.\nIsso permite que empresas fechem vazamentos de gás rapidamente.\nO metano é muito mais potente que o CO2 no efeito estufa.\nA transparência de dados obriga indústrias a serem limpas.\nCientistas monitoram o planeta inteiro a partir do espaço.\nGovernos usam essas informações para aplicar multas e leis.\nA tecnologia espacial virou a maior vigia do nosso clima.\nO que antes era invisível agora está sob controle rigoroso.\nMenos gases sendo perdidos significa um aquecimento menor.\nO céu nos ajuda a proteger o que está aqui na terra.",
+
+        "Uma escola na Índia aceita plástico como pagamento de mensalidade.\nAlunos trazem resíduos de casa e da rua para a instituição.\nO plástico é processado e vira material de construção local.\nA escola ensina sustentabilidade e remove o lixo da natureza.\nCrianças que não podiam pagar agora têm educação de elite.\nO projeto transformou a mentalidade de toda a comunidade vizinha.\nA poluição diminuiu drasticamente desde o início do programa.\nEducação e ecologia unidas para transformar vidas reais.\nO lixo virou uma moeda de troca por um futuro melhor e digno.\nUm modelo brilhante de empreendedorismo social educativo.",
+
+        "O número de baleias-jubarte aumentou de 400 para 25 mil.\nApós a proibição da caça, a espécie se recuperou bravamente.\nElas voltaram a frequentar áreas onde estavam desaparecidas.\nO canto das baleias é ouvido novamente em todos os oceanos.\nSua recuperação é considerada um sucesso absoluto da biologia.\nElas ajudam a fertilizar o oceano, aumentando a vida marinha.\nO turismo de observação gera renda para cidades litorâneas.\nVer esses gigantes saltando no mar é uma experiência única.\nA natureza tem um poder de regeneração incrível se deixarmos.\nUma notícia gigante para celebrar a vida nos nossos mares.",
+
+        "A inteligência artificial está ajudando a traduzir línguas antigas.\nTextos perdidos há milênios agora podem ser lidos facilmente.\nIsso resgata culturas e conhecimentos que achávamos esquecidos.\nA história da humanidade está sendo reescrita com novos fatos.\nO processo que levava décadas agora leva apenas alguns dias.\nPesquisadores do mundo todo colaboram em plataformas abertas.\nA tecnologia unindo o passado remoto com o futuro digital.\nEntender nossos ancestrais nos ajuda a compreender o presente.\nA sabedoria de povos antigos volta a ser acessível a todos.\nO patrimônio cultural da humanidade está mais vivo que nunca.",
+
+        "Cientistas desenvolveram um arroz que cresce em água salgada.\nIsso permite o plantio em áreas antes consideradas inférteis.\nA segurança alimentar de milhões de pessoas pode ser garantida.\nO arroz marinho é rico em nutrientes e resiste a pragas.\nPaíses com pouca água doce agora têm uma alternativa real.\nO solo salino, comum em costas, vira área de produção ativa.\nA fome pode ser combatida com sementes mais inteligentes.\nA agricultura está se adaptando às mudanças do nosso planeta.\nUma inovação que traz comida para a mesa de quem mais precisa.\nA biotecnologia servindo ao propósito mais nobre de todos.",
+
+        "O uso de energia geotérmica está crescendo em áreas vulcânicas.\nCalor da terra gera eletricidade limpa 24 horas por dia.\nAo contrário do sol e vento, ela não depende do clima externo.\nA Islândia e Quênia são líderes nesse tipo de energia renovável.\nA pegada de carbono dessas usinas é praticamente inexistente.\nO custo de operação é baixo após a construção inicial.\nÉ uma fonte inesgotável de energia que vem debaixo dos pés.\nCidades inteiras são aquecidas por águas termais naturais.\nA geologia do planeta ajudando a salvar a atmosfera superior.\nO poder do centro da terra sendo usado para o bem comum.",
+
+        "A Costa Rica funciona quase 300 dias por ano só com renováveis.\nA matriz deles é uma mistura de hídrica, eólica e solar.\nO país aboliu o exército e investe o dinheiro em educação.\nA preservação das florestas é levada muito a sério por todos.\nEles recebem o título de um dos países mais verdes do mundo.\nA biodiversidade local é protegida por parques nacionais vastos.\nO ecoturismo é a base da economia e respeita a vida selvagem.\nÉ um laboratório de como uma nação pode ser próspera e limpa.\nO lema 'Pura Vida' é sentido em cada canto do território.\nUm exemplo de paz, natureza e progresso sustentável real.",
+
+        "Um novo filtro de grafeno transforma água do mar em potável.\nEle retira o sal com gasto de energia muito menor que o comum.\nIsso pode resolver a crise de água em regiões desérticas.\nO filtro é fino, resistente e fácil de produzir em larga escala.\nAcesso a água limpa é um direito humano básico fundamental.\nMilhões de pessoas terão saúde melhor com água tratada.\nA ciência dos materiais está criando soluções mágicas hoje.\nO oceano se torna nossa maior reserva de água para beber.\nTecnologia barata e eficiente para salvar vidas no mundo todo.\nA sede do planeta encontrando uma solução tecnológica final."
+    ];
+
+    function gerarNoticia() {
+        const index = Math.floor(Math.random() * noticias.length);
+        document.getElementById('noticia').innerText = noticias[index];
+    }
+
+    // Carrega uma notícia aleatória ao iniciar a página
+    window.onload = gerarNoticia;
+</script>
+
+</body>
+</html>
