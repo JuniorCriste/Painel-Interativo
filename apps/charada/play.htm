@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio de Charadas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 80%;
+            width: 500px;
+        }
+
+        h1 { color: #2c3e50; }
+
+        #charada-texto {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            min-height: 80px;
+        }
+
+        #resposta-texto {
+            font-size: 1.3rem;
+            color: #27ae60;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px dashed #27ae60;
+            border-radius: 10px;
+            display: none; /* Escondido por padrão */
+        }
+
+        footer {
+            position: fixed;
+            bottom: 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .btn-novo {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>O que é, o que é?</h1>
+        <div id="charada-texto">Carregando charada...</div>
+        <div id="resposta-texto"></div>
+        <button class="btn-novo" onclick="gerarCharada()">Próxima Charada</button>
+    </div>
+
+    <footer>
+        Pressione as teclas 1 + 2 + 3 juntas para retornar ao Painel José Teixeira Fialho
+    </footer>
+
+    <script>
+        const listaCharadas = [
+            { q: "O que é que nasce grande e morre pequeno?", a: "O lápis." },
+            { q: "O que é que tem dentes mas nunca come?", a: "O pente." },
+            { q: "O que é que cai em pé e corre deitado?", a: "A chuva." },
+            { q: "O que é que passa a vida inteira no topo, mas não tem cérebro?", a: "A montanha." },
+            { q: "O que é que quanto mais se tira, maior fica?", a: "O buraco." },
+            { q: "O que é que tem chaves, mas não abre portas?", a: "O piano." },
+            { q: "O que é que voa sem ter asas e chora sem ter olhos?", a: "A nuvem." },
+            { q: "O que é que está sempre no meio do ovo?", a: "A letra V." },
+            { q: "O que é que corre o campo inteiro sem se mexer?", a: "A cerca." },
+            { q: "O que é que fica cheio de buracos e ainda assim retém água?", a: "A esponja." },
+            // ... Adicione as outras 90 aqui seguindo este padrão
+        ];
+
+        let charadaAtual = {};
+        const teclasPressionadas = new Set();
+
+        function gerarCharada() {
+            const indice = Math.floor(Math.random() * listaCharadas.length);
+            charadaAtual = listaCharadas[indice];
+            document.getElementById('charada-texto').innerText = charadaAtual.q;
+            document.getElementById('resposta-texto').innerText = charadaAtual.a;
+            document.getElementById('resposta-texto').style.display = 'none';
+        }
+
+        window.addEventListener('keydown', (e) => {
+            teclasPressionadas.add(e.key);
+
+            // Atalho 1+5+9: Mostrar Resposta
+            if (teclasPressionadas.has('1') && teclasPressionadas.has('5') && teclasPressionadas.has('9')) {
+                document.getElementById('resposta-texto').style.display = 'block';
+            }
+
+            // Atalho 1+2+3: Redirecionar
+            if (teclasPressionadas.has('1') && teclasPressionadas.has('2') && teclasPressionadas.has('3')) {
+                window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            teclasPressionadas.delete(e.key);
+        });
+
+        // Iniciar com uma charada
+        gerarCharada();
+    </script>
+</body>
+</html>
