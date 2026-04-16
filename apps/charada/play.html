@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio de Charadas Divertidas</title>
+    <style>
+        /* Paleta de Cores:
+           Roxo Vibrante: #6c5ce7
+           Azul Elétrico: #0984e3
+           Amarelo Sol: #fdcb6e
+           Rosa Choque: #e84393
+           Branco Neve: #fab1a0 (como fundo mais suave para texto)
+        */
+
+        :root {
+            --cor-fundo: #f0f2f5;
+            --cor-cartao: #ffffff;
+            --cor-roxo: #6c5ce7;
+            --cor-azul: #0984e3;
+            --cor-amarelo: #fdcb6e;
+            --cor-rosa: #e84393;
+            --cor-texto: #2d3436;
+            --cor-resposta: #00b894; /* Um verde vibrante para contraste */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Uma fonte mais moderna e amigável */
+            background-color: var(--cor-fundo);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: var(--cor-texto);
+            text-align: center;
+            /* Um leve gradiente de fundo para dar mais profundidade */
+            background-image: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            overflow: hidden; /* Evita barras de rolagem estranhas com o efeito de flutuação */
+        }
+
+        .container {
+            background: var(--cor-cartao);
+            padding: 4rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            max-width: 90%;
+            width: 800px;
+            border: 8px solid var(--cor-roxo); /* Borda colorida */
+            position: relative; /* Para os elementos decorativos */
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px); /* Pequeno efeito de elevação no hover */
+        }
+
+        /* Elementos Decorativos - Bolhas Flutuantes */
+        .decoracao {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: flutuar 6s infinite ease-in-out;
+        }
+
+        @keyframes flutuar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .decoracao-1 { width: 50px; height: 50px; background-color: var(--cor-rosa); top: -25px; left: -25px; }
+        .decoracao-2 { width: 80px; height: 80px; background-color: var(--cor-amarelo); bottom: -40px; right: 30px; animation-delay: 1s; }
+        .decoracao-3 { width: 40px; height: 40px; background-color: var(--cor-azul); top: 50px; right: -20px; animation-delay: 2s; }
+        .decoracao-4 { width: 60px; height: 60px; background-color: var(--cor-roxo); bottom: 100px; left: -30px; animation-delay: 3s; }
+
+        h1 {
+            color: var(--cor-roxo);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        #charada-texto {
+            font-size: 2.5rem; /* Fonte BEM maior */
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 40px 0;
+            color: var(--cor-azul);
+            min-height: 150px; /* Mais espaço vertical */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #resposta-texto {
+            font-size: 2rem;
+            color: var(--cor-resposta);
+            font-weight: bold;
+            margin-top: 40px;
+            padding: 20px;
+            border: 4px dashed var(--cor-resposta);
+            border-radius: 15px;
+            display: none; /* Escondido por padrão */
+            background-color: rgba(0, 184, 148, 0.1); /* Fundo leve para a resposta */
+            animation: aparecerResposta 0.5s ease-out;
+        }
+
+        @keyframes aparecerResposta {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        footer {
+            position: fixed;
+            bottom: 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: var(--cor-rosa); /* Fundo colorido para o rodapé */
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <div class="decoracao decoracao-1"></div>
+        <div class="decoracao decoracao-2"></div>
+        <div class="decoracao decoracao-3"></div>
+        <div class="decoracao decoracao-4"></div>
+
+        <h1>O que é, o que é?</h1>
+        <div id="charada-texto">Carregando charada...</div>
+        <div id="resposta-texto"></div>
+    </div>
+
+    <footer>
+        Pressione as teclas 1 + 2 + 3 juntas para retornar ao Painel José Teixeira Fialho
+    </footer>
+
+    <script>
+        const listaCharadas = [
+            { q: "O que é que nasce grande e morre pequeno?", a: "O lápis." },
+            { q: "O que é que tem dentes mas nunca come?", a: "O pente." },
+            { q: "O que é que cai em pé e corre deitado?", a: "A chuva." },
+            { q: "O que é que passa a vida inteira no topo, mas não tem cérebro?", a: "A montanha." },
+            { q: "O que é que quanto mais se tira, maior fica?", a: "O buraco." },
+            { q: "O que é que tem chaves, mas não abre portas?", a: "O piano." },
+            { q: "O que é que voa sem ter asas e chora sem ter olhos?", a: "A nuvem." },
+            { q: "O que é que está sempre no meio do ovo?", a: "A letra V." },
+            { q: "O que é que corre o campo inteiro sem se mexer?", a: "A cerca." },
+            { q: "O que é que fica cheio de buracos e ainda assim retém água?", a: "A esponja." },
+            { q: "O que é que se quebra quando se diz o nome dele?", a: "O silêncio." },
+            { q: "O que é que tem pescoço mas não tem cabeça?", a: "A garrafa." },
+            { q: "O que é que quanto mais seco, mais molhado fica?", a: "A toalha." },
+            { q: "O que é que tem costas mas não tem peito?", a: "A cadeira." },
+            { q: "O que é que entra na água e não se molha?", a: "A sombra." },
+            { q: "O que é que corre mas não tem pernas?", a: "O rio." },
+            { q: "O que é que tem cidade, mas não tem casas; tem montanha, mas não tem árvores?", a: "O mapa." },
+            { q: "O que é que anda com os pés na cabeça?", a: "O piolho." },
+            { q: "O que é que tem muitos olhos mas não vê nada?", a: "A batata." },
+            { q: "O que é que sobe quando a chuva desce?", a: "O guarda-chuva." },
+            // ... Adicione as outras 80 aqui seguindo este padrão
+        ];
+
+        let charadaAtual = {};
+        const teclasPressionadas = new Set();
+        let respostaVisivel = false; // Controle para evitar múltiplos gatilhos
+
+        function gerarCharada() {
+            const indice = Math.floor(Math.random() * listaCharadas.length);
+            charadaAtual = listaCharadas[indice];
+            document.getElementById('charada-texto').innerText = charadaAtual.q;
+            document.getElementById('resposta-texto').innerText = charadaAtual.a;
+            document.getElementById('resposta-texto').style.display = 'none';
+            respostaVisivel = false;
+        }
+
+        window.addEventListener('keydown', (e) => {
+            teclasPressionadas.add(e.key);
+
+            // Atalho 1+5+9: Mostrar Resposta
+            if (teclasPressionadas.has('1') && teclasPressionadas.has('5') && teclasPressionadas.has('9') && !respostaVisivel) {
+                document.getElementById('resposta-texto').style.display = 'block';
+                respostaVisivel = true;
+            }
+
+            // Atalho 1+2+3: Redirecionar
+            if (teclasPressionadas.has('1') && teclasPressionadas.has('2') && teclasPressionadas.has('3')) {
+                window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            teclasPressionadas.delete(e.key);
+        });
+
+        // Como removemos o botão, precisamos de uma forma de ir para a próxima.
+        // Vamos usar o clique na própria charada para gerar uma nova.
+        document.getElementById('charada-texto').addEventListener('click', gerarCharada);
+
+        // Iniciar com uma charada
+        gerarCharada();
+    </script>
+</body>
+</html>
