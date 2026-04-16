@@ -1,4 +1,5 @@
-const quizData = [
+// Prefixos 'erer' aplicados aos dados e armazenamento
+const erer_quizData = [
     {
         question: "O Dia da Consciência Negra é comemorado em qual data?",
         options: ["13 de maio", "20 de novembro", "07 de setembro", "15 de outubro"],
@@ -36,7 +37,7 @@ const quizData = [
     },
     {
         question: "Racismo estrutural significa:",
-        options: ["Um tipo de arquitetura africana", "O racismo reproduzido na estrutura da sociedade", "Um insulto direto", "Uma lei contra racismo"],
+        options: ["Um tipo de arquitetura africana", "O racismo reproduzido na estrutura da sociedade", "Um instruo direto", "Uma lei contra racismo"],
         answer: "O racismo reproduzido na estrutura da sociedade"
     },
     {
@@ -176,457 +177,254 @@ const quizData = [
     }
 ];
 
-// ----------------------------------------------------------------------
-// Variáveis e Seletores do DOM
-// ----------------------------------------------------------------------
+// Seletores do DOM com prefixo erer
+const erer_startScreen = document.getElementById('erer_start_screen');
+const erer_gameScreen = document.getElementById('erer_game_screen');
+const erer_endGameScreen = document.getElementById('erer_end_game_screen');
+const erer_startButton = document.getElementById('erer_start_button');
+const erer_restartButton = document.getElementById('erer_restart_button');
+const erer_questionText = document.getElementById('erer_question_text');
+const erer_optionsContainer = document.getElementById('erer_options_container');
+const erer_optionButtons = erer_optionsContainer.querySelectorAll('.option-button');
+const erer_finalScoreElement = document.getElementById('erer_final_score');
+const erer_endGameMessageElement = document.getElementById('erer_end_game_message');
+const erer_rankingMessageElement = document.getElementById('erer_ranking_message');
+const erer_rankingContainer = document.getElementById('erer_ranking_container');
+const erer_webcamElement = document.getElementById('erer_webcam');
+const erer_canvasElement = document.getElementById('erer_canvas');
+const erer_countdownElement = document.getElementById('erer_countdown');
+const erer_currentScoreElement = document.getElementById('erer_current_score');
+const erer_backgroundElement = document.getElementById('erer_background_image');
+const erer_preloader = document.getElementById('erer_preloader');
+const erer_moldura = document.getElementById('erer_moldura');
+const erer_conteudo = document.getElementById('erer_conteudo'); 
+const erer_photoCountdownElement = document.getElementById('erer_photo_countdown'); 
+const erer_glitchOverlay = document.getElementById('erer_glitch_overlay');
 
-const startScreen = document.getElementById('start-screen');
-const gameScreen = document.getElementById('game-screen');
-const endGameScreen = document.getElementById('end-game-screen');
-const startButton = document.getElementById('start-button');
-const restartButton = document.getElementById('restart-button');
-const questionText = document.getElementById('question-text');
-const optionsContainer = document.getElementById('options-container');
-const optionButtons = optionsContainer.querySelectorAll('.option-button');
-const finalScoreElement = document.getElementById('final-score');
-const endGameMessageElement = document.getElementById('end-game-message');
-const rankingMessageElement = document.getElementById('ranking-message');
-const rankingContainer = document.getElementById('ranking-container');
-const webcamElement = document.getElementById('webcam');
-const canvasElement = document.getElementById('canvas');
-const countdownElement = document.getElementById('countdown');
-const currentScoreElement = document.getElementById('current-score');
-const backgroundElement = document.getElementById('background-image');
-const preloader = document.getElementById('preloader');
-const moldura = document.getElementById('moldura');
-const conteudo = document.getElementById('conteudo'); 
-const photoCountdownElement = document.getElementById('photo-countdown'); 
-
-// NOVO: Seletores e Variáveis para Vidas e Glitch
-const glitchOverlay = document.getElementById('glitch-overlay');
-const lifeIcons = [
-    document.getElementById('life-1'),
-    document.getElementById('life-2'),
-    document.getElementById('life-3')
-];
-let lives = 3; // Variável de controle das vidas
-// FIM NOVO
-
-let shuffledQuestions = [];
-let currentQuestionIndex = 0;
-let score = 0;
-let topScores = JSON.parse(localStorage.getItem('topScores')) || [];
-const topRankingSize = 5;
-
-// ATENÇÃO: SUBSTITUA ESTA LISTA COM OS NOMES REAIS DOS SEUS ARQUIVOS JPG!
-const bgImages = [
-    'background1.jpg', 'background2.jpg', 'background3.jpg'
+const erer_lifeIcons = [
+    document.getElementById('erer_life_1'),
+    document.getElementById('erer_life_2'),
+    document.getElementById('erer_life_3')
 ];
 
-// Configuração dos Sons
-const audioFundo = new Audio('audio/trilha.ogg');
-audioFundo.loop = true;
-const audioAcerto = new Audio('audio/acerto.ogg');
-const audioErro = new Audio('audio/erro.ogg');
-const audioVitoria = new Audio('audio/campeao.ogg');
-// NOVO: Áudio para o início da contagem da foto
-const audioCaptura = new Audio('audio/captura.ogg'); 
+let erer_lives = 3;
+let erer_shuffledQuestions = [];
+let erer_currentQuestionIndex = 0;
+let erer_score = 0;
+let erer_topScores = JSON.parse(localStorage.getItem('erer_topScores')) || [];
+const erer_topRankingSize = 5;
 
-const keyboardMap = {
-    '2': 'd',
-    '4': 'a',
-    '6': 'c',
-    '8': 'b'
-};
+// Mapeamento de teclas
+const erer_keyboardMap = { '2': 'd', '4': 'a', '6': 'c', '8': 'b' };
+const erer_keysPressed = {};
 
-// ----------------------------------------------------------------------
-// FUNÇÕES DE PRELOAD, TELA CHEIA E RESTAURAÇÃO
-// ----------------------------------------------------------------------
+// Sons
+const erer_audioFundo = new Audio('audio/erer_trilha.ogg');
+erer_audioFundo.loop = true;
+const erer_audioAcerto = new Audio('audio/erer_acerto.ogg');
+const erer_audioErro = new Audio('audio/erer_erro.ogg');
+const erer_audioVitoria = new Audio('audio/erer_campeao.ogg');
+const erer_audioCaptura = new Audio('audio/erer_captura.ogg'); 
 
-/**
- * Tenta colocar o navegador em modo tela cheia.
- */
-function enterFullscreen() {
-    const element = document.documentElement; // Pega o elemento <html>
-    
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) { // Firefox
-        element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) { // Chrome, Safari e Opera
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) { // IE/Edge
-        element.msRequestFullscreen();
+// --- FUNÇÃO DE RETORNO AO PAINEL (1+2+3) ---
+document.addEventListener('keydown', (e) => {
+    erer_keysPressed[e.key] = true;
+    if (erer_keysPressed['1'] && erer_keysPressed['2'] && erer_keysPressed['3']) {
+        window.location.href = "index.html"; // Ajuste para o link do seu painel
     }
+});
+document.addEventListener('keyup', (e) => { delete erer_keysPressed[e.key]; });
+
+function erer_enterFullscreen() {
+    const el = document.documentElement;
+    if (el.requestFullscreen) el.requestFullscreen();
 }
 
-/**
- * Verifica se a página está atualmente em tela cheia.
- */
-function isCurrentlyFullscreen() {
-    return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-}
-
-function hidePreloader() {
-    preloader.classList.add('fade-out');
+function erer_hidePreloader() {
+    erer_preloader.classList.add('fade-out');
     setTimeout(() => {
-        preloader.style.display = 'none';
-        conteudo.style.display = 'block';
+        erer_preloader.style.display = 'none';
+        erer_conteudo.style.display = 'block';
     }, 600); 
 }
 
-function loadInitialBackground() {
-    if (bgImages.length === 0) {
-        hidePreloader(); 
-        return;
-    }
-    
-    const randomIndex = Math.floor(Math.random() * bgImages.length);
-    const selectedImage = bgImages[randomIndex];
-    const imageUrlPath = `img/background/${selectedImage}`;
-
+function erer_loadInitialBackground() {
+    const bgImages = ['erer_bg1.jpg', 'erer_bg2.jpg']; // Nomes ajustados
+    const selectedImage = bgImages[Math.floor(Math.random() * bgImages.length)];
     const img = new Image();
-
     img.onload = () => {
-        backgroundElement.style.backgroundImage = `url('${imageUrlPath}')`;
-        hidePreloader();
+        erer_backgroundElement.style.backgroundImage = `url('img/background/${selectedImage}')`;
+        erer_hidePreloader();
     };
-
-    img.onerror = () => {
-        console.error("Erro ao carregar a imagem de fundo: " + imageUrlPath);
-        hidePreloader();
-    };
-
-    img.src = imageUrlPath;
+    img.src = `img/background/${selectedImage}`;
 }
 
-/**
- * Tenta restaurar a tela cheia após um reload.
- */
-function restoreFullscreen() {
-    if (localStorage.getItem('fullscreen_on_reload') === 'true') {
-        enterFullscreen();
-        localStorage.removeItem('fullscreen_on_reload');
-    }
+function erer_startGame() {
+    erer_enterFullscreen(); 
+    erer_audioFundo.play().catch(e => console.log("Audio bloqueado"));
+    erer_backgroundElement.classList.add('blurred');
+    erer_startScreen.classList.add('hidden');
+    erer_endGameScreen.classList.add('hidden');
+    erer_gameScreen.classList.remove('hidden');
+    erer_shuffledQuestions = [...erer_quizData].sort(() => Math.random() - 0.5);
+    erer_currentQuestionIndex = 0;
+    erer_score = 0;
+    erer_lives = 3;
+    erer_currentScoreElement.textContent = erer_score;
+    erer_updateLifeDisplay();
+    erer_displayQuestion();
 }
 
-// ----------------------------------------------------------------------
-// FLUXO DE INICIALIZAÇÃO E JOGO
-// ----------------------------------------------------------------------
-
-document.addEventListener('DOMContentLoaded', loadInitialBackground);
-document.addEventListener('DOMContentLoaded', restoreFullscreen);
-
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
+function erer_updateLifeDisplay() {
+    erer_lifeIcons.forEach((icon, idx) => {
+        if (icon) icon.style.opacity = erer_lives >= idx + 1 ? 1 : 0.2;
+    });
 }
 
-function startGame() {
-    enterFullscreen(); 
-    
-    audioFundo.play().catch(e => console.log("Música de fundo bloqueada. O jogo continuará sem som de fundo."));
-    
-    backgroundElement.classList.add('blurred');
-    
-    startScreen.classList.add('hidden');
-    endGameScreen.classList.add('hidden');
-    gameScreen.classList.remove('hidden');
-    shuffledQuestions = [...quizData];
-    shuffleArray(shuffledQuestions);
-    currentQuestionIndex = 0;
-    score = 0;
-    currentScoreElement.textContent = score;
-
-    // NOVO: Inicializa as vidas
-    lives = 3;
-    updateLifeDisplay();
-
-    displayQuestion();
-}
-
-/**
- * NOVO: Atualiza a exibição dos corações (vidas) na tela.
- */
-function updateLifeDisplay() {
-    // Ordem: Vida 1 (azul), Vida 2 (branca), Vida 3 (rosa)
-    if (lifeIcons[0]) lifeIcons[0].style.opacity = lives >= 1 ? 1 : 0.2;
-    if (lifeIcons[1]) lifeIcons[1].style.opacity = lives >= 2 ? 1 : 0.2;
-    if (lifeIcons[2]) lifeIcons[2].style.opacity = lives >= 3 ? 1 : 0.2;
-}
-
-/**
- * NOVO: Aplica e remove rapidamente o efeito glitch na tela e toca um som de erro.
- */
-function triggerGlitchEffect() {
-    if (!glitchOverlay) return;
-    
-    // 1. Ativa o efeito e o som
-    glitchOverlay.classList.remove('hidden');
-    glitchOverlay.classList.add('glitch-active');
-    
-    if (typeof audioErro !== 'undefined' && audioErro) { 
-        audioErro.currentTime = 0; 
-        audioErro.play().catch(e => console.log("Som de erro não pôde ser reproduzido."));
-    }
-    
-    // 2. Remove o efeito após a duração da animação (0.2s)
+function erer_triggerGlitchEffect() {
+    if (!erer_glitchOverlay) return;
+    erer_glitchOverlay.classList.remove('hidden');
+    erer_glitchOverlay.classList.add('glitch-active');
+    erer_audioErro.currentTime = 0; 
+    erer_audioErro.play();
     setTimeout(() => {
-        glitchOverlay.classList.remove('glitch-active');
-        glitchOverlay.classList.add('hidden');
+        erer_glitchOverlay.classList.remove('glitch-active');
+        erer_glitchOverlay.classList.add('hidden');
     }, 200); 
 }
 
-
-function displayQuestion() {
-    if (currentQuestionIndex >= shuffledQuestions.length) {
-        endGame(false); // Ganhou
+function erer_displayQuestion() {
+    if (erer_currentQuestionIndex >= erer_shuffledQuestions.length) {
+        erer_endGame(false);
         return;
     }
-
-    const currentQuestion = shuffledQuestions[currentQuestionIndex];
-    questionText.textContent = currentQuestion.question;
-
-    const options = currentQuestion.options;
-    options.forEach((option, index) => {
-        const button = optionButtons[index];
-        const shortcutKey = Object.keys(keyboardMap).find(key => keyboardMap[key] === button.id.slice(-1));
-        button.innerHTML = `<span>${shortcutKey}</span>${option}`;
-        button.dataset.answer = option;
-        button.onclick = () => checkAnswer(button.dataset.answer);
+    const current = erer_shuffledQuestions[erer_currentQuestionIndex];
+    erer_questionText.textContent = current.question;
+    erer_optionButtons.forEach((btn, idx) => {
+        const option = current.options[idx];
+        const shortcut = Object.keys(erer_keyboardMap).find(k => erer_keyboardMap[k] === btn.id.split('-').pop());
+        btn.innerHTML = `<span>${shortcut}</span>${option}`;
+        btn.dataset.answer = option;
+        btn.onclick = () => erer_checkAnswer(option);
     });
 }
 
-function checkAnswer(selectedAnswer) {
-    const currentQuestion = shuffledQuestions[currentQuestionIndex];
-    if (selectedAnswer === currentQuestion.answer) {
-        score++;
-        currentScoreElement.textContent = score;
-        audioAcerto.play();
-        currentQuestionIndex++;
-        displayQuestion();
+function erer_checkAnswer(selected) {
+    const correct = erer_shuffledQuestions[erer_currentQuestionIndex].answer;
+    if (selected === correct) {
+        erer_score++;
+        erer_currentScoreElement.textContent = erer_score;
+        erer_audioAcerto.play();
+        erer_currentQuestionIndex++;
+        erer_displayQuestion();
     } else {
-        // NOVO: Lógica de Vidas
-        triggerGlitchEffect(); 
-        lives--;              
-        updateLifeDisplay();  
-
-        if (lives <= 0) {
-            endGame(true); // Perdeu todas as vidas
-        } 
-        // Se lives > 0, o jogador permanece na questão atual (currentQuestionIndex não é incrementado).
+        erer_triggerGlitchEffect(); 
+        erer_lives--;              
+        erer_updateLifeDisplay();  
+        if (erer_lives <= 0) erer_endGame(true);
     }
 }
 
-// ----------------------------------------------------------------------
-// END GAME E LÓGICA DE WEBCAM (AJUSTADA)
-// ----------------------------------------------------------------------
-
-async function endGame(lost = false) {
-    // Pausa a música de fundo
-    audioFundo.pause();
-    audioFundo.currentTime = 0;
-
-    gameScreen.classList.add('hidden');
-    endGameScreen.classList.remove('hidden');
-    finalScoreElement.textContent = score;
-    restartButton.classList.add('hidden');
+async function erer_endGame(lost = false) {
+    erer_audioFundo.pause();
+    erer_gameScreen.classList.add('hidden');
+    erer_endGameScreen.classList.remove('hidden');
+    erer_finalScoreElement.textContent = erer_score;
+    erer_restartButton.classList.add('hidden');
 
     if (lost) {
-        // MENSAGEM ATUALIZADA PARA PERDA DE VIDAS
-        endGameMessageElement.textContent = `Vidas esgotadas!`;
+        erer_endGameMessageElement.textContent = `Vidas esgotadas!`;
     } else {
-        endGameMessageElement.textContent = 'Parabéns, você completou o quiz! 💥';
-        audioVitoria.play();
+        erer_endGameMessageElement.textContent = 'Parabéns, você completou o quiz! 💥';
+        erer_audioVitoria.play();
     }
 
-    // Apenas verifica se o jogador entra no ranking
-    const isTopPlayer = score > 0 && (topScores.length < topRankingSize || score > (topScores.length > 0 ? topScores[topScores.length - 1].score : -1));
+    const isTop = erer_score > 0 && (erer_topScores.length < erer_topRankingSize || erer_score > (erer_topScores[erer_topScores.length - 1]?.score || -1));
 
-    if (isTopPlayer) {
-        rankingMessageElement.textContent = 'Você entrou para o ranking! Pose pra foto!';
-        rankingMessageElement.style.fontWeight = 'bold';
-        
-        // TENTA ACESSAR A CÂMERA E INICIA O CONTAGEM
+    if (isTop) {
+        erer_rankingMessageElement.textContent = 'Você entrou para o ranking! Pose pra foto!';
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            webcamElement.srcObject = stream;
-            // A webcam AGORA SÓ É MOSTRADA se o acesso for bem-sucedido
-            webcamElement.classList.remove('hidden'); 
-
-            webcamElement.onloadedmetadata = () => {
-                // INICIA O CONTAGEM REGRESSIVA VISUAL APÓS A CÂMERA CARREGAR
-                startPhotoCountdown(stream);
-            };
+            erer_webcamElement.srcObject = stream;
+            erer_webcamElement.classList.remove('hidden'); 
+            erer_webcamElement.onloadedmetadata = () => erer_startPhotoCountdown(stream);
         } catch (err) {
-            // Se der erro, não mostra webcam e usa a foto placeholder
-            console.error("Erro ao acessar a webcam: ", err);
-            addToRanking('placeholder.png');
-            rankingMessageElement.textContent = 'Erro na câmera. Seu ranking:';
-            showRanking();
+            erer_addToRanking('placeholder.png');
+            erer_showRanking();
         }
     } else {
-        // SE NÃO ENTROU NO RANKING: NADA DE WEBCAM/CANVAS
-        rankingMessageElement.textContent = 'Você não entrou no ranking. Tente novamente! 😔';
-        moldura.style.display = 'none';
-        showRanking();
+        erer_rankingMessageElement.textContent = 'Você não entrou no ranking. Tente novamente! 😔';
+        erer_moldura.style.display = 'none';
+        erer_showRanking();
     }
 }
 
-
-/**
- * Gerencia o contador visual (5, 4, 3, 2, 1) e o flash.
- */
-function startPhotoCountdown(stream) {
-    // NOVO: Reproduz o áudio de captura ao iniciar o contador
-    audioCaptura.play().catch(e => console.log("Erro ao reproduzir áudio de captura."));
-    
-    let photoTimer = 5;
-    photoCountdownElement.classList.remove('hidden');
-    photoCountdownElement.textContent = photoTimer;
-
+function erer_startPhotoCountdown(stream) {
+    erer_audioCaptura.play();
+    let timer = 5;
+    erer_photoCountdownElement.classList.remove('hidden');
+    erer_photoCountdownElement.textContent = timer;
     const interval = setInterval(() => {
-        photoTimer--;
-
-        if (photoTimer > 0) {
-            photoCountdownElement.textContent = photoTimer;
-        } else if (photoTimer === 0) {
-            photoCountdownElement.textContent = ''; // Limpa o número
+        timer--;
+        if (timer > 0) erer_photoCountdownElement.textContent = timer;
+        else {
+            erer_photoCountdownElement.textContent = '';
             clearInterval(interval);
-
-            // PISCAR (FLASH)
-            flashScreen();
-
-            // TIRA A FOTO APÓS O FLASH INICIAR (0.3s)
-            setTimeout(() => {
-                takePhoto(stream);
-            }, 300); 
-
+            erer_flashScreen();
+            setTimeout(() => erer_takePhoto(stream), 300); 
         } 
     }, 1000);
 }
 
-
-/**
- * Cria e aplica a animação de flash na tela.
- */
-function flashScreen() {
-    const flashDiv = document.createElement('div');
-    flashDiv.classList.add('flash-screen');
-    document.body.appendChild(flashDiv);
-
-    // Remove o flash da DOM após o término da animação
+function erer_flashScreen() {
+    const flash = document.createElement('div');
+    flash.classList.add('flash-screen');
+    document.body.appendChild(flash);
     setTimeout(() => {
-        flashDiv.remove();
-        // Esconde o elemento do contador de foto após o flash
-        photoCountdownElement.classList.add('hidden');
+        flash.remove();
+        erer_photoCountdownElement.classList.add('hidden');
     }, 300); 
 }
 
-
-/**
- * Lógica de tirar a foto e finalizar o ranking.
- */
-function takePhoto(stream) {
-    // 1. Tira a foto na resolução nativa
-    canvasElement.width = webcamElement.videoWidth;
-    canvasElement.height = webcamElement.videoHeight;
-    canvasElement.getContext('2d').drawImage(webcamElement, 0, 0, canvasElement.width, canvasElement.height);
-
-    const photoDataUrl = canvasElement.toDataURL('image/jpeg');
-    
-    // 2. DESLIGA A CÂMERA
-    stream.getTracks().forEach(track => track.stop());
-
-    // 3. ESCONDE A WEBCAM/CANVAS (AJUSTE SOLICITADO)
-    webcamElement.classList.add('hidden');
-    moldura.style.display = 'none';
-    const el = document.getElementById('minhaDiv');
-    // 4. Finaliza
-    addToRanking(photoDataUrl);
-    rankingMessageElement.textContent = 'Foto capturada! Seu ranking:';
-    showRanking();
+function erer_takePhoto(stream) {
+    erer_canvasElement.width = erer_webcamElement.videoWidth;
+    erer_canvasElement.height = erer_webcamElement.videoHeight;
+    erer_canvasElement.getContext('2d').drawImage(erer_webcamElement, 0, 0);
+    const data = erer_canvasElement.toDataURL('image/jpeg');
+    stream.getTracks().forEach(t => t.stop());
+    erer_webcamElement.classList.add('hidden');
+    erer_moldura.style.display = 'none';
+    erer_addToRanking(data);
+    erer_showRanking();
 }
 
-// ... (addToRanking permanece igual)
-function addToRanking(photoDataUrl) {
-    topScores.push({ score, photo: photoDataUrl });
-    topScores.sort((a, b) => b.score - a.score);
-    if (topScores.length > topRankingSize) {
-        topScores.pop();
-    }
-    localStorage.setItem('topScores', JSON.stringify(topScores));
+function erer_addToRanking(photo) {
+    erer_topScores.push({ score: erer_score, photo });
+    erer_topScores.sort((a, b) => b.score - a.score);
+    if (erer_topScores.length > erer_topRankingSize) erer_topScores.pop();
+    localStorage.setItem('erer_topScores', JSON.stringify(erer_topScores));
 }
 
-function showRanking() {
-    rankingContainer.innerHTML = '';
-    
-    topScores.forEach((item, index) => {
-        if (index < 5) {
-            const rankingItem = document.createElement('div');
-            rankingItem.classList.add('ranking-item');
-            
-            const photo = document.createElement('img');
-            photo.classList.add('ranking-photo');
-            photo.src = item.photo || 'placeholder.png';
-            
-            const scoreText = document.createElement('span');
-            scoreText.classList.add('ranking-score');
-            scoreText.textContent = `${item.score}`;
-            
-            rankingItem.appendChild(photo);
-            rankingItem.appendChild(scoreText);
-            rankingContainer.appendChild(rankingItem);
-        }
+function erer_showRanking() {
+    erer_rankingContainer.innerHTML = '';
+    erer_topScores.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'ranking-item';
+        div.innerHTML = `<img class="ranking-photo" src="${item.photo}"><span class="ranking-score">${item.score}</span>`;
+        erer_rankingContainer.appendChild(div);
     });
-    
-    countdownElement.classList.remove('hidden');
-    let countdown = 6; 
-    countdownElement.textContent = `Reiniciando em ${countdown}...`;
+    erer_countdownElement.classList.remove('hidden');
+    let count = 6;
     const interval = setInterval(() => {
-        countdown--;
-        countdownElement.textContent = `Reiniciando em ${countdown}...`;
-        if (countdown <= 0) {
+        count--;
+        erer_countdownElement.textContent = `Reiniciando em ${count}...`;
+        if (count <= 0) {
             clearInterval(interval);
-            
-            // ANTES DO RELOAD: Salva o estado de tela cheia se estiver ativo
-            if (isCurrentlyFullscreen()) {
-                 localStorage.setItem('fullscreen_on_reload', 'true');
-            } else {
-                 localStorage.removeItem('fullscreen_on_reload');
-            }
-            
-            // Recarrega a página inteira, simulando o "F5".
             window.location.reload(); 
-            
         }
     }, 1000);
 }
 
-// Event Listeners
-startButton.addEventListener('click', startGame);
-restartButton.addEventListener('click', startGame);
-
-document.addEventListener('keydown', (e) => {
-    if (gameScreen.classList.contains('hidden')) {
-        return;
-    }
-    const key = e.key;
-    const optionLetter = keyboardMap[key];
-
-    if (optionLetter) {
-        const button = document.getElementById(`option-${optionLetter}`);
-        if (button) {
-            checkAnswer(button.dataset.answer);
-        }
-    }
-});
-
-document.addEventListener('keydown', (event) => {
-    if (!startScreen.classList.contains('hidden') && (event.key === '5' || event.key === ' ' || event.key === 'Enter')) {
-        startButton.click();
-    }
-});
+document.addEventListener('DOMContentLoaded', erer_loadInitialBackground);
+erer_startButton.addEventListener('click', erer_startGame);
+erer_restartButton.addEventListener('click', erer_startGame);
