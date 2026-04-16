@@ -1,5 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Interativo</title>
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --dark: #2f2f2f;
+            --glass: rgba(255, 255, 255, 0.15);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
 
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #3d3d3d 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Detalhe visual de brilho */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .date-info {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .menu-display {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 4px solid var(--secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-display:hover {
+            transform: scale(1.02);
+        }
+
+        .day-number {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .food-description {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            font-weight: 300;
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        /* Esconde todos os itens por padrão */
+        .menu-item {
+            display: none;
+        }
+
+        /* Estilo para quando não houver nada preenchido */
+        .empty-msg {
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="icon">🍽️</div>
+        <h1>CARDÁPIO DE HOJE</h1>
+        <span id="current-date-label" class="date-info">Carregando data...</span>
+
+        <div class="menu-display">
+            <div id="day-1" class="menu-item"><span class="day-number">Dia 01</span><br><span class="food-description">Feijoada Completa com Couve e Farofa</span></div>
+            <div id="day-2" class="menu-item"><span class="day-number">Dia 02</span><br><span class="food-description">Lasanha à Bolonhesa com Queijo Gratinado</span></div>
+            <div id="day-3" class="menu-item"><span class="day-number">Dia 03</span><br><span class="food-description">Frango Xadrez com Arroz Colorido</span></div>
+            <div id="day-4" class="menu-item"><span class="day-number">Dia 04</span><br><span class="food-description">Espaguete ao Molho Pesto e Tomatinhos</span></div>
+            <div id="day-5" class="menu-item"><span class="day-number">Dia 05</span><br><span class="food-description">Strogonoff de Carne com Batata Palha</span></div>
+            <div id="day-6" class="menu-item"><span class="day-number">Dia 06</span><br><span class="food-description">Peixe Grelhado com Purê de Mandioquinha</span></div>
+            <div id="day-7" class="menu-item"><span class="day-number">Dia 07</span><br><span class="food-description">Risoto de Alho Poró e Bacon</span></div>
+            <div id="day-8" class="menu-item"><span class="day-number">Dia 08</span><br><span class="food-description">Nhoque ao Molho Quatro Queijos</span></div>
+            <div id="day-9" class="menu-item"><span class="day-number">Dia 09</span><br><span class="food-description">Hambúrguer Artesanal com Fritas</span></div>
+            <div id="day-10" class="menu-item"><span class="day-number">Dia 10</span><br><span class="food-description">Panqueca de Frango com Catupiry</span></div>
+            <div id="day-11" class="menu-item"><span class="day-number">Dia 11</span><br><span class="food-description">Carne Assada com Batatas Coradas</span></div>
+            <div id="day-12" class="menu-item"><span class="day-number">Dia 12</span><br><span class="food-description">Arroz Carreteiro com Ovo Frito</span></div>
+            <div id="day-13" class="menu-item"><span class="day-number">Dia 13</span><br><span class="food-description">Salmão ao Molho de Maracujá</span></div>
+            <div id="day-14" class="menu-item"><span class="day-number">Dia 14</span><br><span class="food-description">Yakissoba de Legumes e Carne</span></div>
+            <div id="day-15" class="menu-item"><span class="day-number">Dia 15</span><br><span class="food-description">Escondidinho de Carne Seca</span></div>
+            <div id="day-16" class="menu-item"><span class="day-number">Dia 16</span><br><span class="food-description">Torta de Palmito com Salada Verde</span></div>
+            <div id="day-17" class="menu-item"><span class="day-number">Dia 17</span><br><span class="food-description">Bife Acebolado com Feijão Tropeiro</span></div>
+            <div id="day-18" class="menu-item"><span class="day-number">Dia 18</span><br><span class="food-description">Canelone de Presunto e Queijo</span></div>
+            <div id="day-19" class="menu-item"><span class="day-number">Dia 19</span><br><span class="food-description">Coxa de Frango Assada com Ervas</span></div>
+            <div id="day-20" class="menu-item"><span class="day-number">Dia 20</span><br><span class="food-description">Moqueca de Peixe com Pirão</span></div>
+            <div id="day-21" class="menu-item"><span class="day-number">Dia 21</span><br><span class="food-description">Ravióli de Carne ao Molho Sugo</span></div>
+            <div id="day-22" class="menu-item"><span class="day-number">Dia 22</span><br><span class="food-description">Costelinha Suína com Molho Barbecue</span></div>
+            <div id="day-23" class="menu-item"><span class="day-number">Dia 23</span><br><span class="food-description">Virado à Paulista Completo</span></div>
+            <div id="day-24" class="menu-item"><span class="day-number">Dia 24</span><br><span class="food-description">Omelete Recheado com Mix de Vegetais</span></div>
+            <div id="day-25" class="menu-item"><span class="day-number">Dia 25</span><br><span class="food-description">Quiche de Alho Poró e Ricota</span></div>
+            <div id="day-26" class="menu-item"><span class="day-number">Dia 26</span><br><span class="food-description">Filé de Frango à Milanesa com Arroz à Grega</span></div>
+            <div id="day-27" class="menu-item"><span class="day-number">Dia 27</span><br><span class="food-description">Penne ao Molho Alfredo e Brócolis</span></div>
+            <div id="day-28" class="menu-item"><span class="day-number">Dia 28</span><br><span class="food-description">Bobó de Camarão Cremoso</span></div>
+            <div id="day-29" class="menu-item"><span class="day-number">Dia 29</span><br><span class="food-description">Gnocchi da Fortuna (Molho de Tomate Rústico)</span></div>
+            <div id="day-30" class="menu-item"><span class="day-number">Dia 30</span><br><span class="food-description">Filé Mignon ao Molho Madeira</span></div>
+            <div id="day-31" class="menu-item"><span class="day-number">Dia 31</span><br><span class="food-description">Pizza Caseira Diversos Sabores</span></div>
+
+            <div id="no-menu" class="menu-item empty-msg">O cardápio para hoje ainda não foi definido.</div>
+        </div>
+    </div>
+
+    <script>
+        function atualizarCardapio() {
+            const agora = new Date();
+            const diaHoje = agora.getDate(); // Pega o dia (1 a 31)
+            
+            // Atualiza o texto da data no topo
+            const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date-label').innerText = agora.toLocaleDateString('pt-BR', opcoes);
+
+            // Tenta encontrar o elemento com ID correspondente ao dia
+            const itemHoje = document.getElementById('day-' + diaHoje);
+
+            if (itemHoje) {
+                itemHoje.style.display = 'block';
+            } else {
+                document.getElementById('no-menu').style.display = 'block';
+            }
+        }
+
+        // Executa ao carregar a página
+        window.onload = atualizarCardapio;
+    </script>
+</body>
 
  <div class="shortcut">
             Pressione as teclas <strong>1 + 2 + 3</strong> juntas para retornar ao
@@ -47,3 +235,5 @@
         teclasPressionadas.delete(e.key);
     });
 </script>
+
+</html>
