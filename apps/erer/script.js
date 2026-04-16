@@ -180,453 +180,210 @@ const quizData = [
 // Variáveis e Seletores do DOM
 // ----------------------------------------------------------------------
 
-const startScreen = document.getElementById('start-screen');
-const gameScreen = document.getElementById('game-screen');
-const endGameScreen = document.getElementById('end-game-screen');
-const startButton = document.getElementById('start-button');
-const restartButton = document.getElementById('restart-button');
-const questionText = document.getElementById('question-text');
-const optionsContainer = document.getElementById('options-container');
-const optionButtons = optionsContainer.querySelectorAll('.option-button');
-const finalScoreElement = document.getElementById('final-score');
-const endGameMessageElement = document.getElementById('end-game-message');
-const rankingMessageElement = document.getElementById('ranking-message');
-const rankingContainer = document.getElementById('ranking-container');
-const webcamElement = document.getElementById('webcam');
-const canvasElement = document.getElementById('canvas');
-const countdownElement = document.getElementById('countdown');
-const currentScoreElement = document.getElementById('current-score');
-const backgroundElement = document.getElementById('background-image');
-const preloader = document.getElementById('preloader');
-const moldura = document.getElementById('moldura');
-const conteudo = document.getElementById('conteudo'); 
-const photoCountdownElement = document.getElementById('photo-countdown'); 
-
-// NOVO: Seletores e Variáveis para Vidas e Glitch
-const glitchOverlay = document.getElementById('glitch-overlay');
-const lifeIcons = [
-    document.getElementById('life-1'),
-    document.getElementById('life-2'),
-    document.getElementById('life-3')
-];
-let lives = 3; // Variável de controle das vidas
-// FIM NOVO
-
-let shuffledQuestions = [];
-let currentQuestionIndex = 0;
-let score = 0;
-let topScores = JSON.parse(localStorage.getItem('topScores')) || [];
-const topRankingSize = 5;
-
-// ATENÇÃO: SUBSTITUA ESTA LISTA COM OS NOMES REAIS DOS SEUS ARQUIVOS JPG!
-const bgImages = [
-    'background1.jpg', 'background2.jpg', 'background3.jpg'
+const erer_startScreen = document.getElementById('erer-start-screen');
+const erer_gameScreen = document.getElementById('erer-game-screen');
+const erer_endGameScreen = document.getElementById('erer-end-game-screen');
+const erer_startButton = document.getElementById('erer-start-button');
+const erer_restartButton = document.getElementById('erer-restart-button');
+const erer_questionText = document.getElementById('erer-question-text');
+const erer_optionsContainer = document.getElementById('erer-options-container');
+const erer_optionButtons = document.querySelectorAll('.erer-option-button');
+const erer_finalScoreElement = document.getElementById('erer-final-score');
+const erer_endGameMessageElement = document.getElementById('erer-end-game-message');
+const erer_rankingMessageElement = document.getElementById('erer-ranking-message');
+const erer_rankingContainer = document.getElementById('erer-ranking-container');
+const erer_webcamElement = document.getElementById('erer-webcam');
+const erer_canvasElement = document.getElementById('erer-canvas');
+const erer_countdownElement = document.getElementById('erer-countdown');
+const erer_currentScoreElement = document.getElementById('erer-current-score');
+const erer_backgroundElement = document.getElementById('erer-background-image');
+const erer_preloader = document.getElementById('erer-preloader');
+const erer_conteudo = document.getElementById('erer-conteudo');
+const erer_photoCountdownElement = document.getElementById('erer-photo-countdown');
+const erer_glitchOverlay = document.getElementById('erer-glitch-overlay');
+const erer_lifeIcons = [
+    document.getElementById('erer-life-1'),
+    document.getElementById('erer-life-2'),
+    document.getElementById('erer-life-3')
 ];
 
-// Configuração dos Sons
-const audioFundo = new Audio('audio/trilha.ogg');
-audioFundo.loop = true;
-const audioAcerto = new Audio('audio/acerto.ogg');
-const audioErro = new Audio('audio/erro.ogg');
-const audioVitoria = new Audio('audio/campeao.ogg');
-// NOVO: Áudio para o início da contagem da foto
-const audioCaptura = new Audio('audio/captura.ogg'); 
+// Variáveis de Estado
+let erer_lives = 3;
+let erer_shuffledQuestions = [];
+let erer_currentQuestionIndex = 0;
+let erer_score = 0;
+let erer_topScores = JSON.parse(localStorage.getItem('erer-topScores')) || [];
 
-const keyboardMap = {
-    '2': 'd',
-    '4': 'a',
-    '6': 'c',
-    '8': 'b'
-};
+// Sons e Mapas
+const erer_audioFundo = new Audio('audio/trilha.ogg');
+erer_audioFundo.loop = true;
+const erer_keyboardMap = { '2': 'd', '4': 'a', '6': 'c', '8': 'b' };
 
-// ----------------------------------------------------------------------
-// FUNÇÕES DE PRELOAD, TELA CHEIA E RESTAURAÇÃO
-// ----------------------------------------------------------------------
+// --- FUNÇÕES DE CONTROLE ---
 
-/**
- * Tenta colocar o navegador em modo tela cheia.
- */
-function enterFullscreen() {
-    const element = document.documentElement; // Pega o elemento <html>
+function erer_hidePreloader() {
+    erer_preloader.style.display = 'none';
+    erer_conteudo.style.display = 'block';
+}
+
+function erer_startGame() {
+    // Tela Cheia
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
     
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) { // Firefox
-        element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) { // Chrome, Safari e Opera
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) { // IE/Edge
-        element.msRequestFullscreen();
-    }
-}
-
-/**
- * Verifica se a página está atualmente em tela cheia.
- */
-function isCurrentlyFullscreen() {
-    return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-}
-
-function hidePreloader() {
-    preloader.classList.add('fade-out');
-    setTimeout(() => {
-        preloader.style.display = 'none';
-        conteudo.style.display = 'block';
-    }, 600); 
-}
-
-function loadInitialBackground() {
-    if (bgImages.length === 0) {
-        hidePreloader(); 
-        return;
-    }
+    erer_audioFundo.play().catch(() => {});
+    erer_backgroundElement.classList.add('erer-blurred');
     
-    const randomIndex = Math.floor(Math.random() * bgImages.length);
-    const selectedImage = bgImages[randomIndex];
-    const imageUrlPath = `img/background/${selectedImage}`;
-
-    const img = new Image();
-
-    img.onload = () => {
-        backgroundElement.style.backgroundImage = `url('${imageUrlPath}')`;
-        hidePreloader();
-    };
-
-    img.onerror = () => {
-        console.error("Erro ao carregar a imagem de fundo: " + imageUrlPath);
-        hidePreloader();
-    };
-
-    img.src = imageUrlPath;
+    erer_startScreen.classList.add('erer-hidden');
+    erer_endGameScreen.classList.add('erer-hidden');
+    erer_gameScreen.classList.remove('erer-hidden');
+    
+    erer_shuffledQuestions = [...erer_quizData].sort(() => Math.random() - 0.5);
+    erer_currentQuestionIndex = 0;
+    erer_score = 0;
+    erer_lives = 3;
+    
+    erer_updateScore();
+    erer_updateLives();
+    erer_displayQuestion();
 }
 
-/**
- * Tenta restaurar a tela cheia após um reload.
- */
-function restoreFullscreen() {
-    if (localStorage.getItem('fullscreen_on_reload') === 'true') {
-        enterFullscreen();
-        localStorage.removeItem('fullscreen_on_reload');
-    }
+function erer_updateScore() {
+    erer_currentScoreElement.textContent = erer_score;
 }
 
-// ----------------------------------------------------------------------
-// FLUXO DE INICIALIZAÇÃO E JOGO
-// ----------------------------------------------------------------------
-
-document.addEventListener('DOMContentLoaded', loadInitialBackground);
-document.addEventListener('DOMContentLoaded', restoreFullscreen);
-
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-function startGame() {
-    enterFullscreen(); 
-    
-    audioFundo.play().catch(e => console.log("Música de fundo bloqueada. O jogo continuará sem som de fundo."));
-    
-    backgroundElement.classList.add('blurred');
-    
-    startScreen.classList.add('hidden');
-    endGameScreen.classList.add('hidden');
-    gameScreen.classList.remove('hidden');
-    shuffledQuestions = [...quizData];
-    shuffleArray(shuffledQuestions);
-    currentQuestionIndex = 0;
-    score = 0;
-    currentScoreElement.textContent = score;
-
-    // NOVO: Inicializa as vidas
-    lives = 3;
-    updateLifeDisplay();
-
-    displayQuestion();
-}
-
-/**
- * NOVO: Atualiza a exibição dos corações (vidas) na tela.
- */
-function updateLifeDisplay() {
-    // Ordem: Vida 1 (azul), Vida 2 (branca), Vida 3 (rosa)
-    if (lifeIcons[0]) lifeIcons[0].style.opacity = lives >= 1 ? 1 : 0.2;
-    if (lifeIcons[1]) lifeIcons[1].style.opacity = lives >= 2 ? 1 : 0.2;
-    if (lifeIcons[2]) lifeIcons[2].style.opacity = lives >= 3 ? 1 : 0.2;
-}
-
-/**
- * NOVO: Aplica e remove rapidamente o efeito glitch na tela e toca um som de erro.
- */
-function triggerGlitchEffect() {
-    if (!glitchOverlay) return;
-    
-    // 1. Ativa o efeito e o som
-    glitchOverlay.classList.remove('hidden');
-    glitchOverlay.classList.add('glitch-active');
-    
-    if (typeof audioErro !== 'undefined' && audioErro) { 
-        audioErro.currentTime = 0; 
-        audioErro.play().catch(e => console.log("Som de erro não pôde ser reproduzido."));
-    }
-    
-    // 2. Remove o efeito após a duração da animação (0.2s)
-    setTimeout(() => {
-        glitchOverlay.classList.remove('glitch-active');
-        glitchOverlay.classList.add('hidden');
-    }, 200); 
-}
-
-
-function displayQuestion() {
-    if (currentQuestionIndex >= shuffledQuestions.length) {
-        endGame(false); // Ganhou
-        return;
-    }
-
-    const currentQuestion = shuffledQuestions[currentQuestionIndex];
-    questionText.textContent = currentQuestion.question;
-
-    const options = currentQuestion.options;
-    options.forEach((option, index) => {
-        const button = optionButtons[index];
-        const shortcutKey = Object.keys(keyboardMap).find(key => keyboardMap[key] === button.id.slice(-1));
-        button.innerHTML = `<span>${shortcutKey}</span>${option}`;
-        button.dataset.answer = option;
-        button.onclick = () => checkAnswer(button.dataset.answer);
+function erer_updateLives() {
+    erer_lifeIcons.forEach((icon, index) => {
+        icon.style.opacity = index < erer_lives ? "1" : "0.2";
     });
 }
 
-function checkAnswer(selectedAnswer) {
-    const currentQuestion = shuffledQuestions[currentQuestionIndex];
-    if (selectedAnswer === currentQuestion.answer) {
-        score++;
-        currentScoreElement.textContent = score;
-        audioAcerto.play();
-        currentQuestionIndex++;
-        displayQuestion();
-    } else {
-        // NOVO: Lógica de Vidas
-        triggerGlitchEffect(); 
-        lives--;              
-        updateLifeDisplay();  
+function erer_displayQuestion() {
+    if (erer_currentQuestionIndex >= erer_shuffledQuestions.length) {
+        erer_endGame(false);
+        return;
+    }
+    const q = erer_shuffledQuestions[erer_currentQuestionIndex];
+    erer_questionText.textContent = q.question;
+    
+    erer_optionButtons.forEach((btn, idx) => {
+        const letter = btn.id.split('-').pop(); // a, b, c, d
+        const key = Object.keys(erer_keyboardMap).find(k => erer_keyboardMap[k] === letter);
+        btn.innerHTML = `<span>${key}</span> ${q.options[idx]}`;
+        btn.onclick = () => erer_checkAnswer(q.options[idx], q.answer);
+    });
+}
 
-        if (lives <= 0) {
-            endGame(true); // Perdeu todas as vidas
-        } 
-        // Se lives > 0, o jogador permanece na questão atual (currentQuestionIndex não é incrementado).
+function erer_checkAnswer(selected, correct) {
+    if (selected === correct) {
+        erer_score++;
+        erer_currentQuestionIndex++;
+        erer_updateScore();
+        new Audio('audio/acerto.ogg').play();
+        erer_displayQuestion();
+    } else {
+        erer_lives--;
+        erer_updateLives();
+        erer_triggerGlitch();
+        if (erer_lives <= 0) erer_endGame(true);
     }
 }
 
-// ----------------------------------------------------------------------
-// END GAME E LÓGICA DE WEBCAM (AJUSTADA)
-// ----------------------------------------------------------------------
+function erer_triggerGlitch() {
+    erer_glitchOverlay.classList.add('erer-glitch-active');
+    new Audio('audio/erro.ogg').play();
+    setTimeout(() => erer_glitchOverlay.classList.remove('erer-glitch-active'), 200);
+}
 
-async function endGame(lost = false) {
-    // Pausa a música de fundo
-    audioFundo.pause();
-    audioFundo.currentTime = 0;
-
-    gameScreen.classList.add('hidden');
-    endGameScreen.classList.remove('hidden');
-    finalScoreElement.textContent = score;
-    restartButton.classList.add('hidden');
+async function erer_endGame(lost) {
+    erer_gameScreen.classList.add('erer-hidden');
+    erer_endGameScreen.classList.remove('erer-hidden');
+    erer_finalScoreElement.textContent = erer_score;
 
     if (lost) {
-        // MENSAGEM ATUALIZADA PARA PERDA DE VIDAS
-        endGameMessageElement.textContent = `Vidas esgotadas!`;
+        erer_endGameMessageElement.textContent = "Vidas esgotadas!";
     } else {
-        endGameMessageElement.textContent = 'Parabéns, você completou o quiz! 💥';
-        audioVitoria.play();
+        erer_endGameMessageElement.textContent = "Parabéns! Você concluiu!";
+        new Audio('audio/campeao.ogg').play();
     }
 
-    // Apenas verifica se o jogador entra no ranking
-    const isTopPlayer = score > 0 && (topScores.length < topRankingSize || score > (topScores.length > 0 ? topScores[topScores.length - 1].score : -1));
+    // Lógica Simplificada de Ranking/Foto
+    const isTop = erer_score > 0 && (erer_topScores.length < 5 || erer_score > erer_topScores[erer_topScores.length-1].score);
+    
+    if (isTop) {
+        erer_rankingMessageElement.textContent = "Novo Recorde! Pose para a foto!";
+        erer_startCamera();
+    } else {
+        erer_showRanking();
+    }
+}
 
-    if (isTopPlayer) {
-        rankingMessageElement.textContent = 'Você entrou para o ranking! Pose pra foto!';
-        rankingMessageElement.style.fontWeight = 'bold';
+async function erer_startCamera() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        erer_webcamElement.srcObject = stream;
+        erer_webcamElement.classList.remove('erer-hidden');
         
-        // TENTA ACESSAR A CÂMERA E INICIA O CONTAGEM
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            webcamElement.srcObject = stream;
-            // A webcam AGORA SÓ É MOSTRADA se o acesso for bem-sucedido
-            webcamElement.classList.remove('hidden'); 
-
-            webcamElement.onloadedmetadata = () => {
-                // INICIA O CONTAGEM REGRESSIVA VISUAL APÓS A CÂMERA CARREGAR
-                startPhotoCountdown(stream);
-            };
-        } catch (err) {
-            // Se der erro, não mostra webcam e usa a foto placeholder
-            console.error("Erro ao acessar a webcam: ", err);
-            addToRanking('placeholder.png');
-            rankingMessageElement.textContent = 'Erro na câmera. Seu ranking:';
-            showRanking();
-        }
-    } else {
-        // SE NÃO ENTROU NO RANKING: NADA DE WEBCAM/CANVAS
-        rankingMessageElement.textContent = 'Você não entrou no ranking. Tente novamente! 😔';
-        moldura.style.display = 'none';
-        showRanking();
-    }
-}
-
-
-/**
- * Gerencia o contador visual (5, 4, 3, 2, 1) e o flash.
- */
-function startPhotoCountdown(stream) {
-    // NOVO: Reproduz o áudio de captura ao iniciar o contador
-    audioCaptura.play().catch(e => console.log("Erro ao reproduzir áudio de captura."));
-    
-    let photoTimer = 5;
-    photoCountdownElement.classList.remove('hidden');
-    photoCountdownElement.textContent = photoTimer;
-
-    const interval = setInterval(() => {
-        photoTimer--;
-
-        if (photoTimer > 0) {
-            photoCountdownElement.textContent = photoTimer;
-        } else if (photoTimer === 0) {
-            photoCountdownElement.textContent = ''; // Limpa o número
-            clearInterval(interval);
-
-            // PISCAR (FLASH)
-            flashScreen();
-
-            // TIRA A FOTO APÓS O FLASH INICIAR (0.3s)
-            setTimeout(() => {
-                takePhoto(stream);
-            }, 300); 
-
-        } 
-    }, 1000);
-}
-
-
-/**
- * Cria e aplica a animação de flash na tela.
- */
-function flashScreen() {
-    const flashDiv = document.createElement('div');
-    flashDiv.classList.add('flash-screen');
-    document.body.appendChild(flashDiv);
-
-    // Remove o flash da DOM após o término da animação
-    setTimeout(() => {
-        flashDiv.remove();
-        // Esconde o elemento do contador de foto após o flash
-        photoCountdownElement.classList.add('hidden');
-    }, 300); 
-}
-
-
-/**
- * Lógica de tirar a foto e finalizar o ranking.
- */
-function takePhoto(stream) {
-    // 1. Tira a foto na resolução nativa
-    canvasElement.width = webcamElement.videoWidth;
-    canvasElement.height = webcamElement.videoHeight;
-    canvasElement.getContext('2d').drawImage(webcamElement, 0, 0, canvasElement.width, canvasElement.height);
-
-    const photoDataUrl = canvasElement.toDataURL('image/jpeg');
-    
-    // 2. DESLIGA A CÂMERA
-    stream.getTracks().forEach(track => track.stop());
-
-    // 3. ESCONDE A WEBCAM/CANVAS (AJUSTE SOLICITADO)
-    webcamElement.classList.add('hidden');
-    moldura.style.display = 'none';
-    const el = document.getElementById('minhaDiv');
-    // 4. Finaliza
-    addToRanking(photoDataUrl);
-    rankingMessageElement.textContent = 'Foto capturada! Seu ranking:';
-    showRanking();
-}
-
-// ... (addToRanking permanece igual)
-function addToRanking(photoDataUrl) {
-    topScores.push({ score, photo: photoDataUrl });
-    topScores.sort((a, b) => b.score - a.score);
-    if (topScores.length > topRankingSize) {
-        topScores.pop();
-    }
-    localStorage.setItem('topScores', JSON.stringify(topScores));
-}
-
-function showRanking() {
-    rankingContainer.innerHTML = '';
-    
-    topScores.forEach((item, index) => {
-        if (index < 5) {
-            const rankingItem = document.createElement('div');
-            rankingItem.classList.add('ranking-item');
-            
-            const photo = document.createElement('img');
-            photo.classList.add('ranking-photo');
-            photo.src = item.photo || 'placeholder.png';
-            
-            const scoreText = document.createElement('span');
-            scoreText.classList.add('ranking-score');
-            scoreText.textContent = `${item.score}`;
-            
-            rankingItem.appendChild(photo);
-            rankingItem.appendChild(scoreText);
-            rankingContainer.appendChild(rankingItem);
-        }
-    });
-    
-    countdownElement.classList.remove('hidden');
-    let countdown = 6; 
-    countdownElement.textContent = `Reiniciando em ${countdown}...`;
-    const interval = setInterval(() => {
-        countdown--;
-        countdownElement.textContent = `Reiniciando em ${countdown}...`;
-        if (countdown <= 0) {
-            clearInterval(interval);
-            
-            // ANTES DO RELOAD: Salva o estado de tela cheia se estiver ativo
-            if (isCurrentlyFullscreen()) {
-                 localStorage.setItem('fullscreen_on_reload', 'true');
-            } else {
-                 localStorage.removeItem('fullscreen_on_reload');
+        let count = 3;
+        erer_photoCountdownElement.classList.remove('erer-hidden');
+        const timer = setInterval(() => {
+            erer_photoCountdownElement.textContent = count;
+            if (count <= 0) {
+                clearInterval(timer);
+                erer_takePhoto(stream);
             }
-            
-            // Recarrega a página inteira, simulando o "F5".
-            window.location.reload(); 
-            
-        }
-    }, 1000);
+            count--;
+        }, 1000);
+    } catch {
+        erer_showRanking();
+    }
 }
 
-// Event Listeners
-startButton.addEventListener('click', startGame);
-restartButton.addEventListener('click', startGame);
+function erer_takePhoto(stream) {
+    const ctx = erer_canvasElement.getContext('2d');
+    erer_canvasElement.width = erer_webcamElement.videoWidth;
+    erer_canvasElement.height = erer_webcamElement.videoHeight;
+    ctx.drawImage(erer_webcamElement, 0, 0);
+    
+    const data = erer_canvasElement.toDataURL('image/jpeg');
+    stream.getTracks().forEach(t => t.stop());
+    erer_webcamElement.classList.add('erer-hidden');
+    erer_photoCountdownElement.classList.add('erer-hidden');
+    
+    erer_saveScore(data);
+}
+
+function erer_saveScore(photo) {
+    erer_topScores.push({ score: erer_score, photo });
+    erer_topScores.sort((a, b) => b.score - a.score);
+    erer_topScores = erer_topScores.slice(0, 5);
+    localStorage.setItem('erer-topScores', JSON.stringify(erer_topScores));
+    erer_showRanking();
+}
+
+function erer_showRanking() {
+    erer_rankingContainer.innerHTML = erer_topScores.map(s => `
+        <div class="erer-ranking-item">
+            <img src="${s.photo}" class="erer-ranking-photo">
+            <span>${s.score} pts</span>
+        </div>
+    `).join('');
+    
+    setTimeout(() => window.location.reload(), 8000);
+}
+
+// Inicialização
+window.onload = () => {
+    setTimeout(erer_hidePreloader, 1500);
+};
+
+erer_startButton.onclick = erer_startGame;
+erer_restartButton.onclick = () => window.location.reload();
 
 document.addEventListener('keydown', (e) => {
-    if (gameScreen.classList.contains('hidden')) {
-        return;
-    }
-    const key = e.key;
-    const optionLetter = keyboardMap[key];
-
-    if (optionLetter) {
-        const button = document.getElementById(`option-${optionLetter}`);
-        if (button) {
-            checkAnswer(button.dataset.answer);
-        }
-    }
-});
-
-document.addEventListener('keydown', (event) => {
-    if (!startScreen.classList.contains('hidden') && (event.key === '5' || event.key === ' ' || event.key === 'Enter')) {
-        startButton.click();
+    if (!erer_gameScreen.classList.contains('erer-hidden')) {
+        const letter = erer_keyboardMap[e.key];
+        if (letter) document.getElementById(`erer-option-${letter}`).click();
+    } else if (!erer_startScreen.classList.contains('erer-hidden') && e.key === '5') {
+        erer_startGame();
     }
 });

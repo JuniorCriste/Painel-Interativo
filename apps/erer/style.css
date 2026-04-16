@@ -1,226 +1,102 @@
-```css
 body {
-    font-family: sans-serif;
+    font-family: 'Montserrat', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #1a120b; /* marrom escuro */
-    color: #f5e6c8; /* bege quente */
+    background-color: #1a120b;
+    color: #f5e6c8;
 }
 
-/* Preloader */
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #120c06;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  color: #e6c068;
-  font-size: 18px;
+/* Classe Crítica para o seu problema */
+.erer-hidden {
+    display: none !important;
 }
 
-#preloader img {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 20px;
-}
-
-.fade-out {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-/* Fundo */
-#background-image {
+#erer-preloader {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    opacity: 0.5;
-    transition: filter 1s ease, transform 1s ease;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #120c06;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 9999; color: #e6c068; font-size: 18px;
 }
 
-#background-image.blurred {
+#erer-background-image {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    z-index: -1; opacity: 0.5; transition: filter 1s ease, transform 1s ease;
+}
+
+#erer-background-image.erer-blurred {
     filter: blur(15px);
     transform: scale(1.2);
 }
 
-/* Caixa */
-.screen {
+.erer-screen {
     text-align: center;
     padding: 20px;
     border-radius: 14px;
     background: rgba(40, 25, 15, 0.9);
-    border: 2px solid #c19a49; /* dourado */
+    border: 2px solid #c19a49;
     box-shadow: 0 0 30px rgba(193, 154, 73, 0.3);
     width: 90%;
     max-width: 600px;
-}
-
-/* Créditos */
-#credits {
-    color: #e6c068;
-    text-shadow: 0 0 8px black;
-    font-size: 11px;
-    display: flex;
-    justify-content: center;
-}
-
-/* Opções */
-#options-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.option-button {
-    color: #fff;
-    font-size: 1.2em;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: left;
     position: relative;
-    padding-left: 50px;
-    transition: all 0.2s ease;
 }
 
-.option-button span {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: bold;
+#erer-options-container {
+    display: flex; flex-direction: column; gap: 10px; margin-top: 20px;
 }
 
-/* CORES AFRICANAS */
-.blue-button {
-    background-color: #2f5d50; /* verde africano */
+.erer-option-button {
+    color: #fff; font-size: 1.2em; padding: 15px; border: none;
+    border-radius: 8px; cursor: pointer; text-align: left;
+    position: relative; padding-left: 50px; transition: all 0.2s ease;
 }
 
-.yellow-button {
-    background-color: #d4a017; /* dourado */
-    color: #1a120b;
+.erer-option-button span {
+    position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-weight: bold;
 }
 
-.purple-button {
-    background-color: #7a1f1f; /* vermelho terra */
+.erer-blue-button { background-color: #2f5d50; }
+.erer-yellow-button { background-color: #d4a017; color: #1a120b; }
+.erer-purple-button { background-color: #7a1f1f; }
+.erer-pink-button { background-color: #8b5a2b; }
+
+#erer-score-display { position: absolute; top: 20px; right: 20px; font-weight: bold; }
+#erer-life-container { position: absolute; top: 20px; left: 20px; display: flex; gap: 5px; }
+.erer-life-icon { width: 25px; transition: opacity 0.3s; }
+
+#erer-webcam {
+    width: 300px; height: 300px; margin: 20px auto;
+    object-fit: cover; border-radius: 10px; border: 4px solid #c19a49;
 }
 
-.pink-button {
-    background-color: #8b5a2b; /* marrom quente */
+.erer-ranking-photo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #c19a49; }
+
+#erer-glitch-overlay {
+    position: fixed; width: 100%; height: 100%; top:0; left:0;
+    pointer-events: none; z-index: 99999; opacity: 0; background: rgba(255,0,0,0.1);
 }
 
-.option-button:hover {
-    transform: scale(1.03);
-    filter: brightness(1.2);
-}
-
-/* Ranking */
-.ranking-photo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 3px solid #c19a49;
-}
-
-/* Webcam */
-#webcam {
-    width: 300px;
-    height: 300px;
-    margin: 20px auto;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 4px solid #c19a49;
-    box-shadow: 0 0 25px rgba(0,0,0,0.8);
-}
-
-/* Botões */
-#start-button, #restart-button {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 6px;
-    background-color: #d4a017;
-    color: #1a120b;
-    font-weight: bold;
-}
-
-/* Score */
-#score-display {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #f5e6c8;
-    text-shadow: 0 0 10px black;
-}
-
-/* Vidas */
-#life-container {
-    position: absolute;
-    top: 20px;
-    right: 150px;
-    display: flex;
-    gap: 5px;
-}
-
-.life-icon {
-    width: 25px;
-}
-
-/* Glitch */
-#glitch-overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 99999;
-    opacity: 0;
-}
-
-.glitch-active {
+.erer-glitch-active {
     opacity: 1 !important;
-    animation: glitch-anim 0.2s steps(4, start) forwards;
+    animation: erer-glitch-anim 0.2s steps(2) forwards;
 }
 
-@keyframes glitch-anim {
+@keyframes erer-glitch-anim {
     0% { transform: translate(0); }
-    25% { transform: translate(2px, -2px); background: rgba(255,0,0,0.3); }
-    50% { transform: translate(-3px, 3px); }
-    75% { transform: translate(4px, -4px); background: rgba(0,0,0,0.4); }
-    100% { opacity: 0; }
+    50% { transform: translate(-5px, 5px); filter: hue-rotate(90deg); }
+    100% { transform: translate(0); opacity: 0; }
 }
 
-/* Flash */
-.flash-screen {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 215, 0, 0.2); /* flash dourado */
-    opacity: 0;
-    z-index: 10001;
-    animation: flash-animation 0.3s ease-out;
+.erer-flash-screen {
+    position: fixed; width: 100%; height: 100%; top:0; left:0;
+    background-color: white; z-index: 10001; animation: erer-flash-animation 0.3s ease-out forwards;
 }
 
-@keyframes flash-animation {
+@keyframes erer-flash-animation {
     0% { opacity: 1; }
     100% { opacity: 0; }
 }
-```
-
