@@ -230,7 +230,7 @@ const erer_audioCaptura = new Audio('audio/erer_captura.ogg');
 document.addEventListener('keydown', (e) => {
     erer_keysPressed[e.key] = true;
     if (erer_keysPressed['1'] && erer_keysPressed['2'] && erer_keysPressed['3']) {
-        window.location.href = "index.html"; // Ajuste para o link do seu painel
+        window.location.href = "https://juniorcriste.github.io/Painel-Interativo/"; // Ajuste para o link do seu painel
     }
 });
 document.addEventListener('keyup', (e) => { delete erer_keysPressed[e.key]; });
