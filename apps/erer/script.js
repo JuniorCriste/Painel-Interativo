@@ -198,8 +198,9 @@ const erer_countdownElement = document.getElementById('erer-countdown');
 const erer_currentScoreElement = document.getElementById('erer-current-score');
 const erer_backgroundElement = document.getElementById('erer-background-image');
 const erer_preloader = document.getElementById('erer-preloader');
-const erer_conteudo = document.getElementById('erer-conteudo');
-const erer_photoCountdownElement = document.getElementById('erer-photo-countdown');
+const erer_moldura = document.getElementById('erer-moldura');
+const erer_conteudo = document.getElementById('erer-conteudo'); 
+const erer_photoCountdownElement = document.getElementById('erer-photo-countdown'); 
 const erer_glitchOverlay = document.getElementById('erer-glitch-overlay');
 const erer_lifeIcons = [
     document.getElementById('erer-life-1'),
@@ -207,54 +208,88 @@ const erer_lifeIcons = [
     document.getElementById('erer-life-3')
 ];
 
-// Variáveis de Estado
 let erer_lives = 3;
 let erer_shuffledQuestions = [];
 let erer_currentQuestionIndex = 0;
 let erer_score = 0;
 let erer_topScores = JSON.parse(localStorage.getItem('erer-topScores')) || [];
+const erer_topRankingSize = 5;
 
-// Sons e Mapas
+const erer_bgImages = ['background1.jpg', 'background2.jpg', 'background3.jpg'];
+
+// SONS
 const erer_audioFundo = new Audio('audio/trilha.ogg');
 erer_audioFundo.loop = true;
+const erer_audioAcerto = new Audio('audio/acerto.ogg');
+const erer_audioErro = new Audio('audio/erro.ogg');
+const erer_audioVitoria = new Audio('audio/campeao.ogg');
+const erer_audioCaptura = new Audio('audio/captura.ogg'); 
+
 const erer_keyboardMap = { '2': 'd', '4': 'a', '6': 'c', '8': 'b' };
 
-// --- FUNÇÕES DE CONTROLE ---
-
-function erer_hidePreloader() {
-    erer_preloader.style.display = 'none';
-    erer_conteudo.style.display = 'block';
+// TELA CHEIA
+function erer_enterFullscreen() {
+    const el = document.documentElement;
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
 }
 
+function erer_hidePreloader() {
+    erer_preloader.classList.add('erer-fade-out');
+    setTimeout(() => {
+        erer_preloader.style.display = 'none';
+        erer_conteudo.style.display = 'block';
+    }, 600); 
+}
+
+function erer_loadInitialBackground() {
+    const randomImg = erer_bgImages[Math.floor(Math.random() * erer_bgImages.length)];
+    const path = `img/background/${randomImg}`;
+    const img = new Image();
+    img.onload = () => {
+        erer_backgroundElement.style.backgroundImage = `url('${path}')`;
+        erer_hidePreloader();
+    };
+    img.onerror = () => erer_hidePreloader();
+    img.src = path;
+}
+
+// INICIO JOGO
 function erer_startGame() {
-    // Tela Cheia
-    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+    erer_enterFullscreen();
+    erer_audioFundo.play().catch(e => console.log("Áudio bloqueado"));
     
-    erer_audioFundo.play().catch(() => {});
     erer_backgroundElement.classList.add('erer-blurred');
-    
     erer_startScreen.classList.add('erer-hidden');
     erer_endGameScreen.classList.add('erer-hidden');
     erer_gameScreen.classList.remove('erer-hidden');
-    
+
     erer_shuffledQuestions = [...erer_quizData].sort(() => Math.random() - 0.5);
     erer_currentQuestionIndex = 0;
     erer_score = 0;
     erer_lives = 3;
     
-    erer_updateScore();
-    erer_updateLives();
+    erer_currentScoreElement.textContent = erer_score;
+    erer_updateLifeDisplay();
     erer_displayQuestion();
 }
 
-function erer_updateScore() {
-    erer_currentScoreElement.textContent = erer_score;
+function erer_updateLifeDisplay() {
+    erer_lifeIcons.forEach((icon, idx) => {
+        icon.style.opacity = idx < erer_lives ? 1 : 0.2;
+    });
 }
 
-function erer_updateLives() {
-    erer_lifeIcons.forEach((icon, index) => {
-        icon.style.opacity = index < erer_lives ? "1" : "0.2";
-    });
+function erer_triggerGlitchEffect() {
+    erer_glitchOverlay.classList.remove('erer-hidden');
+    erer_glitchOverlay.classList.add('erer-glitch-active');
+    erer_audioErro.currentTime = 0; 
+    erer_audioErro.play();
+    setTimeout(() => {
+        erer_glitchOverlay.classList.remove('erer-glitch-active');
+        erer_glitchOverlay.classList.add('erer-hidden');
+    }, 200); 
 }
 
 function erer_displayQuestion() {
@@ -262,120 +297,138 @@ function erer_displayQuestion() {
         erer_endGame(false);
         return;
     }
+
     const q = erer_shuffledQuestions[erer_currentQuestionIndex];
     erer_questionText.textContent = q.question;
-    
+
     erer_optionButtons.forEach((btn, idx) => {
-        const letter = btn.id.split('-').pop(); // a, b, c, d
+        const letter = btn.id.split('-').pop(); // a, b, c ou d
         const key = Object.keys(erer_keyboardMap).find(k => erer_keyboardMap[k] === letter);
-        btn.innerHTML = `<span>${key}</span> ${q.options[idx]}`;
-        btn.onclick = () => erer_checkAnswer(q.options[idx], q.answer);
+        btn.innerHTML = `<span>${key}</span>${q.options[idx]}`;
+        btn.dataset.answer = q.options[idx];
+        btn.onclick = () => erer_checkAnswer(btn.dataset.answer);
     });
 }
 
-function erer_checkAnswer(selected, correct) {
+function erer_checkAnswer(selected) {
+    const correct = erer_shuffledQuestions[erer_currentQuestionIndex].answer;
     if (selected === correct) {
         erer_score++;
+        erer_currentScoreElement.textContent = erer_score;
+        erer_audioAcerto.play();
         erer_currentQuestionIndex++;
-        erer_updateScore();
-        new Audio('audio/acerto.ogg').play();
         erer_displayQuestion();
     } else {
-        erer_lives--;
-        erer_updateLives();
-        erer_triggerGlitch();
+        erer_triggerGlitchEffect(); 
+        erer_lives--;              
+        erer_updateLifeDisplay();  
         if (erer_lives <= 0) erer_endGame(true);
     }
 }
 
-function erer_triggerGlitch() {
-    erer_glitchOverlay.classList.add('erer-glitch-active');
-    new Audio('audio/erro.ogg').play();
-    setTimeout(() => erer_glitchOverlay.classList.remove('erer-glitch-active'), 200);
-}
-
+// FINAL E WEBCAM
 async function erer_endGame(lost) {
+    erer_audioFundo.pause();
+    erer_audioFundo.currentTime = 0;
     erer_gameScreen.classList.add('erer-hidden');
     erer_endGameScreen.classList.remove('erer-hidden');
     erer_finalScoreElement.textContent = erer_score;
 
-    if (lost) {
-        erer_endGameMessageElement.textContent = "Vidas esgotadas!";
-    } else {
-        erer_endGameMessageElement.textContent = "Parabéns! Você concluiu!";
-        new Audio('audio/campeao.ogg').play();
+    if (lost) erer_endGameMessageElement.textContent = `Vidas esgotadas!`;
+    else {
+        erer_endGameMessageElement.textContent = 'Parabéns! 💥';
+        erer_audioVitoria.play();
     }
 
-    // Lógica Simplificada de Ranking/Foto
-    const isTop = erer_score > 0 && (erer_topScores.length < 5 || erer_score > erer_topScores[erer_topScores.length-1].score);
-    
+    const isTop = erer_score > 0 && (erer_topScores.length < erer_topRankingSize || erer_score > (erer_topScores.length > 0 ? erer_topScores[erer_topScores.length - 1].score : -1));
+
     if (isTop) {
-        erer_rankingMessageElement.textContent = "Novo Recorde! Pose para a foto!";
-        erer_startCamera();
+        erer_rankingMessageElement.textContent = 'Novo recorde! Pose pra foto!';
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            erer_webcamElement.srcObject = stream;
+            erer_webcamElement.classList.remove('erer-hidden'); 
+            erer_webcamElement.onloadedmetadata = () => erer_startPhotoCountdown(stream);
+        } catch (err) {
+            erer_addToRanking('placeholder.png');
+            erer_showRanking();
+        }
     } else {
+        erer_rankingMessageElement.textContent = 'Tente novamente! 😔';
+        erer_moldura.style.display = 'none';
         erer_showRanking();
     }
 }
 
-async function erer_startCamera() {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        erer_webcamElement.srcObject = stream;
-        erer_webcamElement.classList.remove('erer-hidden');
-        
-        let count = 3;
-        erer_photoCountdownElement.classList.remove('erer-hidden');
-        const timer = setInterval(() => {
-            erer_photoCountdownElement.textContent = count;
-            if (count <= 0) {
-                clearInterval(timer);
-                erer_takePhoto(stream);
-            }
-            count--;
-        }, 1000);
-    } catch {
-        erer_showRanking();
-    }
+function erer_startPhotoCountdown(stream) {
+    erer_audioCaptura.play();
+    let timer = 5;
+    erer_photoCountdownElement.classList.remove('erer-hidden');
+    erer_photoCountdownElement.textContent = timer;
+
+    const interval = setInterval(() => {
+        timer--;
+        if (timer > 0) erer_photoCountdownElement.textContent = timer;
+        else {
+            erer_photoCountdownElement.textContent = '';
+            clearInterval(interval);
+            erer_flashScreen();
+            setTimeout(() => erer_takePhoto(stream), 300); 
+        } 
+    }, 1000);
+}
+
+function erer_flashScreen() {
+    const flash = document.createElement('div');
+    flash.classList.add('erer-flash-screen');
+    document.body.appendChild(flash);
+    setTimeout(() => {
+        flash.remove();
+        erer_photoCountdownElement.classList.add('erer-hidden');
+    }, 300); 
 }
 
 function erer_takePhoto(stream) {
-    const ctx = erer_canvasElement.getContext('2d');
     erer_canvasElement.width = erer_webcamElement.videoWidth;
     erer_canvasElement.height = erer_webcamElement.videoHeight;
-    ctx.drawImage(erer_webcamElement, 0, 0);
-    
+    erer_canvasElement.getContext('2d').drawImage(erer_webcamElement, 0, 0);
     const data = erer_canvasElement.toDataURL('image/jpeg');
     stream.getTracks().forEach(t => t.stop());
     erer_webcamElement.classList.add('erer-hidden');
-    erer_photoCountdownElement.classList.add('erer-hidden');
-    
-    erer_saveScore(data);
-}
-
-function erer_saveScore(photo) {
-    erer_topScores.push({ score: erer_score, photo });
-    erer_topScores.sort((a, b) => b.score - a.score);
-    erer_topScores = erer_topScores.slice(0, 5);
-    localStorage.setItem('erer-topScores', JSON.stringify(erer_topScores));
+    erer_moldura.style.display = 'none';
+    erer_addToRanking(data);
     erer_showRanking();
 }
 
-function erer_showRanking() {
-    erer_rankingContainer.innerHTML = erer_topScores.map(s => `
-        <div class="erer-ranking-item">
-            <img src="${s.photo}" class="erer-ranking-photo">
-            <span>${s.score} pts</span>
-        </div>
-    `).join('');
-    
-    setTimeout(() => window.location.reload(), 8000);
+function erer_addToRanking(photo) {
+    erer_topScores.push({ score: erer_score, photo });
+    erer_topScores.sort((a, b) => b.score - a.score);
+    if (erer_topScores.length > erer_topRankingSize) erer_topScores.pop();
+    localStorage.setItem('erer-topScores', JSON.stringify(erer_topScores));
 }
 
-// Inicialização
-window.onload = () => {
-    setTimeout(erer_hidePreloader, 1500);
-};
+function erer_showRanking() {
+    erer_rankingContainer.innerHTML = '';
+    erer_topScores.forEach(item => {
+        const div = document.createElement('div');
+        div.innerHTML = `<img src="${item.photo}" class="erer-ranking-photo"> <b>${item.score} pts</b>`;
+        erer_rankingContainer.appendChild(div);
+    });
+    
+    erer_countdownElement.classList.remove('erer-hidden');
+    let count = 6;
+    const interval = setInterval(() => {
+        count--;
+        erer_countdownElement.textContent = `Reiniciando em ${count}...`;
+        if (count <= 0) {
+            clearInterval(interval);
+            window.location.reload(); 
+        }
+    }, 1000);
+}
 
+// LISTENERS
+document.addEventListener('DOMContentLoaded', erer_loadInitialBackground);
 erer_startButton.onclick = erer_startGame;
 erer_restartButton.onclick = () => window.location.reload();
 
@@ -383,7 +436,7 @@ document.addEventListener('keydown', (e) => {
     if (!erer_gameScreen.classList.contains('erer-hidden')) {
         const letter = erer_keyboardMap[e.key];
         if (letter) document.getElementById(`erer-option-${letter}`).click();
-    } else if (!erer_startScreen.classList.contains('erer-hidden') && e.key === '5') {
+    } else if (!erer_startScreen.classList.contains('erer-hidden') && (e.key === '5' || e.key === 'Enter')) {
         erer_startGame();
     }
 });
