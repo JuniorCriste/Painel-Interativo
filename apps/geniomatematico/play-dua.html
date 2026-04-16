@@ -49,5 +49,53 @@
     </div>
 
     <script src="script-dua.js"></script>
+    
+     <div class="shortcut">
+            Pressione as teclas <strong>1 + 2 + 3</strong> juntas para retornar ao
+            <strong>Painel José Teixeira Fialho</strong>
+</div>
+
+<style>
+    .shortcut {
+    margin-top: 6px;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f1f1f1;
+}
+</style>
+
+<script>
+    // 1. Criamos o conjunto para armazenar as teclas ativas
+    const teclasPressionadas = new Set();
+    let respostaVisivel = false;
+
+    // 2. Adiciona a tecla ao Set quando pressionada
+    window.addEventListener('keydown', (e) => {
+        teclasPressionadas.add(e.key);
+
+        // Atalho 1+5+9: Mostrar Resposta
+        if (teclasPressionadas.has('1') && teclasPressionadas.has('5') && teclasPressionadas.has('9') && !respostaVisivel) {
+            const elementoResposta = document.getElementById('resposta-texto');
+            if (elementoResposta) {
+                elementoResposta.style.display = 'block';
+                respostaVisivel = true;
+            }
+        }
+
+        // Atalho 1+2+3: Redirecionar
+        if (teclasPressionadas.has('1') && teclasPressionadas.has('2') && teclasPressionadas.has('3')) {
+            window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
+        }
+    });
+
+    // 3. Remove a tecla do Set quando soltá-la
+    window.addEventListener('keyup', (e) => {
+        teclasPressionadas.delete(e.key);
+    });
+</script>
+    
 </body>
 </html>
