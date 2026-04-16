@@ -3,180 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardápio Interativo</title>
+    <title>Cardápio Escolar - José Teixeira Fialho</title>
     <style>
         :root {
-            --primary: #ff6b6b;
-            --secondary: #4ecdc4;
-            --dark: #2f2f2f;
-            --glass: rgba(255, 255, 255, 0.15);
+            --school-yellow: #ffce00;
+            --chalk-white: #f5f5f5;
+            --slate-green: #2d5a27; /* Cor de lousa escolar */
+            --wood-brown: #8b4513;
+            --accent: #ff6b6b;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #1a1a1a 0%, #3d3d3d 100%);
-            background-attachment: fixed;
+            background-color: #e0e0e0;
+            /* Fundo que lembra textura de papel ou parede de escola */
+            background-image: radial-gradient(#bcbcbc 1px, transparent 1px);
+            background-size: 20px 20px;
             min-height: 100vh;
             display: flex;
+            flex-direction: column; /* Alinha itens verticalmente */
             justify-content: center;
             align-items: center;
-            color: white;
             padding: 20px;
         }
 
         .container {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            padding: 40px;
+            background: var(--slate-green);
+            border: 12px solid var(--wood-brown);
+            border-radius: 15px;
+            padding: 30px;
             width: 100%;
-            max-width: 500px;
+            max-width: 550px;
             text-align: center;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 0px #5d2e0d, 0 30px 50px rgba(0,0,0,0.3);
             position: relative;
-            overflow: hidden;
         }
 
-        /* Detalhe visual de brilho */
-        .container::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
+        /* Título Estilo Giz */
         h1 {
-            font-size: 2.5rem;
-            letter-spacing: 2px;
+            font-size: 2.2rem;
+            color: var(--chalk-white);
             text-transform: uppercase;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            border-bottom: 2px dashed rgba(255,255,255,0.3);
+            padding-bottom: 10px;
         }
 
         .date-info {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: var(--school-yellow);
+            margin-bottom: 25px;
             display: block;
+            font-weight: bold;
         }
 
         .menu-display {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            padding: 30px;
-            min-height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            min-height: 180px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            border-bottom: 4px solid var(--secondary);
-            transition: transform 0.3s ease;
-        }
-
-        .menu-display:hover {
-            transform: scale(1.02);
+            color: var(--chalk-white);
         }
 
         .day-number {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-size: 1rem;
+            background: var(--school-yellow);
+            color: #333;
+            padding: 3px 12px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
 
         .food-description {
-            font-size: 1.5rem;
-            line-height: 1.4;
-            font-weight: 300;
+            font-size: 1.8rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
         }
 
         .icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 10px var(--primary));
+            font-size: 3.5rem;
+            margin-bottom: 10px;
         }
 
-        /* Esconde todos os itens por padrão */
-        .menu-item {
-            display: none;
+        /* Ocultar itens */
+        .menu-item { display: none; }
+
+        /* Estilização do Atalho (Shortcut) - Agora abaixo */
+        .shortcut {
+            margin-top: 30px; /* Espaço entre o card e o atalho */
+            padding: 15px 25px;
+            background: #333;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--school-yellow);
+            max-width: 500px;
+            text-align: center;
         }
 
-        /* Estilo para quando não houver nada preenchido */
+        .shortcut strong {
+            color: var(--school-yellow);
+        }
+
         .empty-msg {
-            color: #888;
+            color: var(--chalk-white);
+            opacity: 0.6;
             font-style: italic;
+        }
+
+        /* Decoração de "apagador" no canto da lousa */
+        .eraser {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 40px;
+            height: 20px;
+            background: #ddd;
+            border-radius: 3px;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="icon">🍽️</div>
-        <h1>CARDÁPIO DE HOJE</h1>
-        <span id="current-date-label" class="date-info">Carregando data...</span>
+        <div class="icon">🍎</div>
+        <h1>Lanche do Dia</h1>
+        <span id="current-date-label" class="date-info">Carregando...</span>
 
         <div class="menu-display">
-            <div id="day-1" class="menu-item"><span class="day-number">Dia 01</span><br><span class="food-description">Feijoada Completa com Couve e Farofa</span></div>
-            <div id="day-2" class="menu-item"><span class="day-number">Dia 02</span><br><span class="food-description">Lasanha à Bolonhesa com Queijo Gratinado</span></div>
-            <div id="day-3" class="menu-item"><span class="day-number">Dia 03</span><br><span class="food-description">Frango Xadrez com Arroz Colorido</span></div>
-            <div id="day-4" class="menu-item"><span class="day-number">Dia 04</span><br><span class="food-description">Espaguete ao Molho Pesto e Tomatinhos</span></div>
-            <div id="day-5" class="menu-item"><span class="day-number">Dia 05</span><br><span class="food-description">Strogonoff de Carne com Batata Palha</span></div>
-            <div id="day-6" class="menu-item"><span class="day-number">Dia 06</span><br><span class="food-description">Peixe Grelhado com Purê de Mandioquinha</span></div>
-            <div id="day-7" class="menu-item"><span class="day-number">Dia 07</span><br><span class="food-description">Risoto de Alho Poró e Bacon</span></div>
-            <div id="day-8" class="menu-item"><span class="day-number">Dia 08</span><br><span class="food-description">Nhoque ao Molho Quatro Queijos</span></div>
-            <div id="day-9" class="menu-item"><span class="day-number">Dia 09</span><br><span class="food-description">Hambúrguer Artesanal com Fritas</span></div>
-            <div id="day-10" class="menu-item"><span class="day-number">Dia 10</span><br><span class="food-description">Panqueca de Frango com Catupiry</span></div>
-            <div id="day-11" class="menu-item"><span class="day-number">Dia 11</span><br><span class="food-description">Carne Assada com Batatas Coradas</span></div>
-            <div id="day-12" class="menu-item"><span class="day-number">Dia 12</span><br><span class="food-description">Arroz Carreteiro com Ovo Frito</span></div>
-            <div id="day-13" class="menu-item"><span class="day-number">Dia 13</span><br><span class="food-description">Salmão ao Molho de Maracujá</span></div>
-            <div id="day-14" class="menu-item"><span class="day-number">Dia 14</span><br><span class="food-description">Yakissoba de Legumes e Carne</span></div>
+            <div id="day-1" class="menu-item"><span class="day-number">Dia 01</span><br><span class="food-description">Feijoada Completa com Couve</span></div>
+            <div id="day-2" class="menu-item"><span class="day-number">Dia 02</span><br><span class="food-description">Lasanha à Bolonhesa</span></div>
+            <div id="day-3" class="menu-item"><span class="day-number">Dia 03</span><br><span class="food-description">Frango Xadrez com Arroz</span></div>
+            <div id="day-4" class="menu-item"><span class="day-number">Dia 04</span><br><span class="food-description">Espaguete ao Molho Pesto</span></div>
+            <div id="day-5" class="menu-item"><span class="day-number">Dia 05</span><br><span class="food-description">Strogonoff de Carne</span></div>
+            <div id="day-6" class="menu-item"><span class="day-number">Dia 06</span><br><span class="food-description">Peixe Grelhado e Purê</span></div>
+            <div id="day-7" class="menu-item"><span class="day-number">Dia 07</span><br><span class="food-description">Risoto de Alho Poró</span></div>
+            <div id="day-8" class="menu-item"><span class="day-number">Dia 08</span><br><span class="food-description">Nhoque ao Molho 4 Queijos</span></div>
+            <div id="day-9" class="menu-item"><span class="day-number">Dia 09</span><br><span class="food-description">Hambúrguer e Fritas</span></div>
+            <div id="day-10" class="menu-item"><span class="day-number">Dia 10</span><br><span class="food-description">Panqueca de Frango</span></div>
+            <div id="day-11" class="menu-item"><span class="day-number">Dia 11</span><br><span class="food-description">Carne Assada com Batatas</span></div>
+            <div id="day-12" class="menu-item"><span class="day-number">Dia 12</span><br><span class="food-description">Arroz Carreteiro</span></div>
+            <div id="day-13" class="menu-item"><span class="day-number">Dia 13</span><br><span class="food-description">Salmão ao Maracujá</span></div>
+            <div id="day-14" class="menu-item"><span class="day-number">Dia 14</span><br><span class="food-description">Yakissoba de Legumes</span></div>
             <div id="day-15" class="menu-item"><span class="day-number">Dia 15</span><br><span class="food-description">Escondidinho de Carne Seca</span></div>
-            <div id="day-16" class="menu-item"><span class="day-number">Dia 16</span><br><span class="food-description">Torta de Palmito com Salada Verde</span></div>
-            <div id="day-17" class="menu-item"><span class="day-number">Dia 17</span><br><span class="food-description">Bife Acebolado com Feijão Tropeiro</span></div>
-            <div id="day-18" class="menu-item"><span class="day-number">Dia 18</span><br><span class="food-description">Canelone de Presunto e Queijo</span></div>
-            <div id="day-19" class="menu-item"><span class="day-number">Dia 19</span><br><span class="food-description">Coxa de Frango Assada com Ervas</span></div>
-            <div id="day-20" class="menu-item"><span class="day-number">Dia 20</span><br><span class="food-description">Moqueca de Peixe com Pirão</span></div>
-            <div id="day-21" class="menu-item"><span class="day-number">Dia 21</span><br><span class="food-description">Ravióli de Carne ao Molho Sugo</span></div>
-            <div id="day-22" class="menu-item"><span class="day-number">Dia 22</span><br><span class="food-description">Costelinha Suína com Molho Barbecue</span></div>
-            <div id="day-23" class="menu-item"><span class="day-number">Dia 23</span><br><span class="food-description">Virado à Paulista Completo</span></div>
-            <div id="day-24" class="menu-item"><span class="day-number">Dia 24</span><br><span class="food-description">Omelete Recheado com Mix de Vegetais</span></div>
-            <div id="day-25" class="menu-item"><span class="day-number">Dia 25</span><br><span class="food-description">Quiche de Alho Poró e Ricota</span></div>
-            <div id="day-26" class="menu-item"><span class="day-number">Dia 26</span><br><span class="food-description">Filé de Frango à Milanesa com Arroz à Grega</span></div>
-            <div id="day-27" class="menu-item"><span class="day-number">Dia 27</span><br><span class="food-description">Penne ao Molho Alfredo e Brócolis</span></div>
-            <div id="day-28" class="menu-item"><span class="day-number">Dia 28</span><br><span class="food-description">Bobó de Camarão Cremoso</span></div>
-            <div id="day-29" class="menu-item"><span class="day-number">Dia 29</span><br><span class="food-description">Gnocchi da Fortuna (Molho de Tomate Rústico)</span></div>
-            <div id="day-30" class="menu-item"><span class="day-number">Dia 30</span><br><span class="food-description">Filé Mignon ao Molho Madeira</span></div>
-            <div id="day-31" class="menu-item"><span class="day-number">Dia 31</span><br><span class="food-description">Pizza Caseira Diversos Sabores</span></div>
+            <div id="day-16" class="menu-item"><span class="day-number">Dia 16</span><br><span class="food-description">Torta de Palmito</span></div>
+            <div id="day-17" class="menu-item"><span class="day-number">Dia 17</span><br><span class="food-description">Bife Acebolado</span></div>
+            <div id="day-18" class="menu-item"><span class="day-number">Dia 18</span><br><span class="food-description">Canelone de Queijo</span></div>
+            <div id="day-19" class="menu-item"><span class="day-number">Dia 19</span><br><span class="food-description">Coxa de Frango Assada</span></div>
+            <div id="day-20" class="menu-item"><span class="day-number">Dia 20</span><br><span class="food-description">Moqueca de Peixe</span></div>
+            <div id="day-21" class="menu-item"><span class="day-number">Dia 21</span><br><span class="food-description">Ravióli ao Sugo</span></div>
+            <div id="day-22" class="menu-item"><span class="day-number">Dia 22</span><br><span class="food-description">Costelinha Barbecue</span></div>
+            <div id="day-23" class="menu-item"><span class="day-number">Dia 23</span><br><span class="food-description">Virado à Paulista</span></div>
+            <div id="day-24" class="menu-item"><span class="day-number">Dia 24</span><br><span class="food-description">Omelete de Vegetais</span></div>
+            <div id="day-25" class="menu-item"><span class="day-number">Dia 25</span><br><span class="food-description">Quiche de Alho Poró</span></div>
+            <div id="day-26" class="menu-item"><span class="day-number">Dia 26</span><br><span class="food-description">Frango à Milanesa</span></div>
+            <div id="day-27" class="menu-item"><span class="day-number">Dia 27</span><br><span class="food-description">Penne ao Alfredo</span></div>
+            <div id="day-28" class="menu-item"><span class="day-number">Dia 28</span><br><span class="food-description">Bobó de Camarão</span></div>
+            <div id="day-29" class="menu-item"><span class="day-number">Dia 29</span><br><span class="food-description">Gnocchi da Fortuna</span></div>
+            <div id="day-30" class="menu-item"><span class="day-number">Dia 30</span><br><span class="food-description">Filé ao Molho Madeira</span></div>
+            <div id="day-31" class="menu-item"><span class="day-number">Dia 31</span><br><span class="food-description">Pizza Caseira</span></div>
 
-            <div id="no-menu" class="menu-item empty-msg">O cardápio para hoje ainda não foi definido.</div>
+            <div id="no-menu" class="menu-item empty-msg">Fim de semana ou feriado.</div>
         </div>
+        <div class="eraser"></div>
+    </div>
+
+    <div class="shortcut">
+        Pressione as teclas <strong>1 + 2 + 3</strong> juntas para retornar ao 
+        <strong>Painel José Teixeira Fialho</strong>
     </div>
 
     <script>
+        // Função para atualizar o dia
         function atualizarCardapio() {
             const agora = new Date();
-            const diaHoje = agora.getDate(); // Pega o dia (1 a 31)
-            
-            // Atualiza o texto da data no topo
-            const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const diaHoje = agora.getDate();
+            const opcoes = { weekday: 'long', day: 'numeric', month: 'long' };
             document.getElementById('current-date-label').innerText = agora.toLocaleDateString('pt-BR', opcoes);
 
-            // Tenta encontrar o elemento com ID correspondente ao dia
             const itemHoje = document.getElementById('day-' + diaHoje);
-
             if (itemHoje) {
                 itemHoje.style.display = 'block';
             } else {
@@ -184,56 +203,23 @@
             }
         }
 
-        // Executa ao carregar a página
+        // Lógica dos Atalhos
+        const teclasPressionadas = new Set();
+
+        window.addEventListener('keydown', (e) => {
+            teclasPressionadas.add(e.key);
+
+            // Atalho 1+2+3: Redirecionar
+            if (teclasPressionadas.has('1') && teclasPressionadas.has('2') && teclasPressionadas.has('3')) {
+                window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            teclasPressionadas.delete(e.key);
+        });
+
         window.onload = atualizarCardapio;
     </script>
 </body>
-
- <div class="shortcut">
-            Pressione as teclas <strong>1 + 2 + 3</strong> juntas para retornar ao
-            <strong>Painel José Teixeira Fialho</strong>
-</div>
-
-<style>
-    .shortcut {
-    margin-top: 6px;
-    padding: 10px 16px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #f1f1f1;
-}
-</style>
-
-<script>
-    // 1. Criamos o conjunto para armazenar as teclas ativas
-    const teclasPressionadas = new Set();
-    let respostaVisivel = false;
-
-    // 2. Adiciona a tecla ao Set quando pressionada
-    window.addEventListener('keydown', (e) => {
-        teclasPressionadas.add(e.key);
-
-        // Atalho 1+5+9: Mostrar Resposta
-        if (teclasPressionadas.has('1') && teclasPressionadas.has('5') && teclasPressionadas.has('9') && !respostaVisivel) {
-            const elementoResposta = document.getElementById('resposta-texto');
-            if (elementoResposta) {
-                elementoResposta.style.display = 'block';
-                respostaVisivel = true;
-            }
-        }
-
-        // Atalho 1+2+3: Redirecionar
-        if (teclasPressionadas.has('1') && teclasPressionadas.has('2') && teclasPressionadas.has('3')) {
-            window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
-        }
-    });
-
-    // 3. Remove a tecla do Set quando soltá-la
-    window.addEventListener('keyup', (e) => {
-        teclasPressionadas.delete(e.key);
-    });
-</script>
-
 </html>
