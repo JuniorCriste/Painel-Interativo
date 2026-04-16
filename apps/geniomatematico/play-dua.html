@@ -40,7 +40,7 @@
         <div id="inputs-container"></div>
     </div>
 
-    <div id="game-over-screen" class="screen hidden">
+<div id="game-over-screen" class="screen hidden">
         <h2 class="game-title-mini">FIM DE JOGO</h2>
         <video id="webcam" autoplay playsinline class="hidden" style="width: 100%; border-radius: 10px; transform: scaleX(-1);"></video>
         <canvas id="photo-canvas" class="hidden" width="300" height="225"></canvas>
@@ -48,35 +48,51 @@
         <p style="text-align: center;">Pontuação Final: <span id="final-score">0</span></p>
     </div>
 
+    <div class="shortcut">
+        Pressione as teclas <strong>1 + 2 + 3</strong> juntas para retornar ao
+        <strong>Painel José Teixeira Fialho</strong>
+    </div>
+
     <script src="script-dua.js"></script>
-    
-     <div class="shortcut">
-            Pressione as teclas <strong>1 + 2 + 3</strong> juntas para retornar ao
-            <strong>Painel José Teixeira Fialho</strong>
-</div>
 
 <style>
+    /* Estilização do Atalho como Rodapé */
     .shortcut {
-    margin-top: 6px;
-    padding: 10px 16px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #f1f1f1;
-}
+        position: fixed;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #333; /* Fonte escura para contraste com o fundo e0e0e0 */
+        font-family: 'Poppins', sans-serif;
+        z-index: 100;
+    }
+
+    /* Garante que em telas pequenas ele não sobreponha o conteúdo principal */
+    @media (max-height: 700px) {
+        .shortcut {
+            position: relative;
+            margin-top: 20px;
+            bottom: 0;
+        }
+        body {
+            overflow-y: auto;
+            height: auto;
+            padding: 20px 0;
+        }
+    }
 </style>
 
 <script>
-    // 1. Criamos o conjunto para armazenar as teclas ativas
     const teclasPressionadas = new Set();
     let respostaVisivel = false;
 
-    // 2. Adiciona a tecla ao Set quando pressionada
     window.addEventListener('keydown', (e) => {
         teclasPressionadas.add(e.key);
 
-        // Atalho 1+5+9: Mostrar Resposta
         if (teclasPressionadas.has('1') && teclasPressionadas.has('5') && teclasPressionadas.has('9') && !respostaVisivel) {
             const elementoResposta = document.getElementById('resposta-texto');
             if (elementoResposta) {
@@ -85,13 +101,11 @@
             }
         }
 
-        // Atalho 1+2+3: Redirecionar
         if (teclasPressionadas.has('1') && teclasPressionadas.has('2') && teclasPressionadas.has('3')) {
             window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
         }
     });
 
-    // 3. Remove a tecla do Set quando soltá-la
     window.addEventListener('keyup', (e) => {
         teclasPressionadas.delete(e.key);
     });
