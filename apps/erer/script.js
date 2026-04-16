@@ -215,7 +215,7 @@ let lives = 3; // Variável de controle das vidas
 let shuffledQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
-let topScores = JSON.parse(localStorage.getItem('topScores_erer')) || [];
+let topScores_erer = JSON.parse(localStorage.getItem('topScores_erer')) || [];
 const topRankingSize = 5;
 
 // ATENÇÃO: SUBSTITUA ESTA LISTA COM OS NOMES REAIS DOS SEUS ARQUIVOS JPG!
