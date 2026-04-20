@@ -32,22 +32,27 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Criação dos objetos de áudio
 const soundLoaded = new Audio('sounds/loaded.mp3');
 const soundButton = new Audio('sounds/button.mp3');
 
-// 1. Reproduzir ao carregar a página
+// Garantir que o áudio esteja pré-carregado
+soundButton.load();
+
 window.addEventListener('load', () => {
-    // Nota: Muitos navegadores bloqueiam áudio automático sem interação prévia.
-    // O play() pode falhar se o usuário ainda não tiver clicado em nada na página.
-    soundLoaded.play().catch(error => {
-        console.log("O áudio de carregamento foi bloqueado pelo navegador até que haja uma interação do usuário.");
+    soundLoaded.play().catch(() => {
+        console.log("Autoplay bloqueado: aguardando interação.");
     });
 });
 
-// 2. Reproduzir ao pressionar qualquer tecla
-document.addEventListener('keydown', () => {
-    // Reinicia o áudio caso a tecla seja apertada rapidamente várias vezes
-    soundButton.currentTime = 0; 
-    soundButton.play();
+// Evento de tecla com reset forçado
+document.addEventListener('keydown', (event) => {
+    // Evita que o som se repita infinitamente se a tecla for mantida pressionada
+    if (event.repeat) return;
+
+    // Pausa e reseta para o início (essencial para repetir a mesma tecla)
+    soundButton.pause();
+    soundButton.currentTime = 0;
+    
+    // Toca o som
+    soundButton.play().catch(e => console.error("Erro ao reproduzir:", e));
 });
