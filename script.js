@@ -24,6 +24,7 @@ document.addEventListener('keydown', (e) => {
     if (keyLinks[e.key]) {
         const btn = document.querySelector(`[data-key="${e.key}"]`);
         if (btn) {
+            soundButton.play()
             btn.style.transform = "scale(0.95)";
             setTimeout(() => {
                 window.location.href = keyLinks[e.key];
