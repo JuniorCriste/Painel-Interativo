@@ -35,25 +35,56 @@ document.addEventListener('keydown', (e) => {
 
 const soundLoaded = new Audio('sounds/loaded.mp3');
 const soundButton = new Audio('sounds/button.mp3');
+const soundAlert = new Audio('sounds/alert.mp3');
+const soundClock = new Audio('sounds/clock.mp3');
 
-// Garantir que o áudio esteja pré-carregado
-soundButton.load();
+// Função para o narrador falar a hora
+function narrarHora() {
+    const agora = new Date();
+    const horas = agora.getHours();
+    
+    // Configura a frase (ex: "Agora são 14 horas")
+    const mensagem = new SpeechSynthesisUtterance(`Agora são ${horas} horas.`);
+    
+    // Define o idioma para Português do Brasil
+    mensagem.lang = 'pt-BR';
+    mensagem.rate = 1; // Velocidade da fala
+    
+    window.speechSynthesis.speak(mensagem);
+}
 
+// 1. Som ao carregar
 window.addEventListener('load', () => {
-    soundLoaded.play().catch(() => {
-        console.log("Autoplay bloqueado: aguardando interação.");
-    });
+    soundLoaded.play().catch(() => console.log("Aguardando interação."));
 });
 
-// Evento de tecla com reset forçado
+// 2. Som ao pressionar teclas
 document.addEventListener('keydown', (event) => {
-    // Evita que o som se repita infinitamente se a tecla for mantida pressionada
     if (event.repeat) return;
-
-    // Pausa e reseta para o início (essencial para repetir a mesma tecla)
     soundButton.pause();
     soundButton.currentTime = 0;
-    
-    // Toca o som
-    soundButton.play().catch(e => console.error("Erro ao reproduzir:", e));
+    soundButton.play().catch(e => {});
 });
+
+// 3. Alerta a cada 5 minutos
+setInterval(() => {
+    soundAlert.currentTime = 0;
+    soundAlert.play().catch(e => {});
+}, 300000);
+
+// 4. Verificação de Hora Cheia + Narração
+setInterval(() => {
+    const agora = new Date();
+    
+    if (agora.getMinutes() === 0 && agora.getSeconds() === 0) {
+        // Toca o som do relógio primeiro
+        soundClock.currentTime = 0;
+        soundClock.play().then(() => {
+            // Aguarda um pequeno delay para a narração não encavalar no som
+            setTimeout(narrarHora, 1500); 
+        }).catch(e => {
+            // Se o som falhar, tenta narrar mesmo assim
+            narrarHora();
+        });
+    }
+}, 1000);
