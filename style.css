@@ -17,7 +17,7 @@ body {
     overflow: hidden;
     color: var(--text-dark);
 }
-
+ 
 .background-pattern {
     position: fixed;
     inset: 0;
