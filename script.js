@@ -81,7 +81,7 @@ setInterval(() => {
         soundClock.currentTime = 0;
         soundClock.play().then(() => {
             // Aguarda um pequeno delay para a narração não encavalar no som
-            setTimeout(narrarHora, 2000); 
+            setTimeout(narrarHora, 1500); 
         }).catch(e => {
             // Se o som falhar, tenta narrar mesmo assim
             narrarHora();
