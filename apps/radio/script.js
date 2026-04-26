@@ -21,7 +21,12 @@ const playlist = [
     { title: "Bloco na Rua", artist: "Sérgio Sampaio", src: "audio/sergiosampaio/bloconarua.mp3", cover: "img/sergiosampaio.png" },
     { title: "A Cor É Rosa", artist: "Silva", src: "audio/silva/acorerosa.mp3", cover: "img/silva.png" },
     { title: "Amianto", artist: "Supercombo", src: "audio/supercombo/amianto.mp3", cover: "img/supercombo1.png" },
-    { title: "Piloto Automático", artist: "Supercombo", src: "audio/supercombo/pilotoautomatico.mp3", cover: "img/supercombo1.png" }
+    { title: "Piloto Automático", artist: "Supercombo", src: "audio/supercombo/pilotoautomatico.mp3", cover: "img/supercombo1.png" },
+    { title: "Beijo Matador", artist: "Forró Bemtivi", src: "audio/bemtivi/beijomatador.mp3", cover: "img/bemtivi1.png" },
+    { title: "Nosso Forró", artist: "Forró Bemtivi", src: "audio/bemtivi/nossoforro.mp3", cover: "img/bemtivi1.png" },
+    { title: "Forró de Itaúnas", artist: "Chama Chuva", src: "audio/chamachuva/forrodeitaunas.mp3", cover: "img/chamachuva1.png" },
+    { title: "Samarina", artist: "Chama Chuva", src: "audio/chamachuva/samarina.mp3", cover: "img/chamachuva1.png" },
+    { title: "Um Pouquinho de Você", artist: "Chama Chuva", src: "audio/chamachuva/umpouquinhodevc.mp3", cover: "img/chamachuva1.png" },
 ];
 
 const curiosidades = {
