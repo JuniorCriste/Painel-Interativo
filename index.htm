@@ -8,6 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="background-pattern">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+            <defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" /></defs>
+            <g class="parallax">
+                <use href="#gentle-wave" x="48" y="0" fill="rgba(231, 111, 81, 0.4)" />
+                <use href="#gentle-wave" x="48" y="3" fill="rgba(233, 196, 106, 0.4)" />
+                <use href="#gentle-wave" x="48" y="5" fill="rgba(42, 157, 143, 0.5)" />
+                <use href="#gentle-wave" x="48" y="7" fill="rgba(38, 70, 83, 0.5)" />
+            </g>
+        </svg>
+    </div>
 
     <div class="main-wrapper">
         <main class="dashboard">
@@ -79,92 +90,5 @@
     </footer>
 
     <script src="script.js"></script>
-
-<canvas id="canvas-bg"></canvas>
-
-<style>
-  body { margin: 0; overflow: hidden; background: #1a1a1a; }
-  canvas { position: fixed; inset: 0; z-index: -1; }
-</style>
-
-<script>
-const canvas = document.getElementById('canvas-bg');
-const ctx = canvas.getContext('2d');
-
-let width, height, particles = [];
-let mode = 'waves'; // Modos: waves, lines, geometric, intense
-let frame = 0;
-
-function init() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-}
-
-// Muda o "humor" da animação a cada 5 segundos
-setInterval(() => {
-    const modes = ['waves', 'lines', 'geometric', 'intense'];
-    mode = modes[Math.floor(Math.random() * modes.length)];
-    console.log("Modo atual:", mode);
-}, 5000);
-
-function draw() {
-    frame++;
-    // Fundo levemente transparente cria rastro (efeito motion blur)
-    ctx.fillStyle = 'rgba(26, 26, 26, 0.1)';
-    ctx.fillRect(0, 0, width, height);
-
-    ctx.lineWidth = 2;
-    
-    for (let i = 0; i < 5; i++) {
-        ctx.beginPath();
-        
-        // --- LÓGICA DE ESTILOS ---
-        if (mode === 'waves') {
-            ctx.strokeStyle = `hsla(180, 50%, 50%, 0.5)`;
-            drawWave(i, 0.005, 50); // Calmo
-        } 
-        else if (mode === 'intense') {
-            ctx.strokeStyle = `hsla(10, 80%, 50%, 0.8)`;
-            drawWave(i, 0.05, 150); // Rápido e alto
-        } 
-        else if (mode === 'lines') {
-            ctx.strokeStyle = `rgba(233, 196, 106, 0.6)`;
-            drawLines(i);
-        }
-        else if (mode === 'geometric') {
-            ctx.strokeStyle = `rgba(42, 157, 143, 0.7)`;
-            drawShapes(i);
-        }
-        
-        ctx.stroke();
-    }
-    requestAnimationFrame(draw);
-}
-
-function drawWave(index, speed, amplitude) {
-    for (let x = 0; x < width; x += 10) {
-        const y = height / 2 + Math.sin(x * 0.01 + frame * speed + index) * amplitude;
-        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    }
-}
-
-function drawLines(index) {
-    const spacing = 100;
-    const y = (frame + (index * spacing)) % height;
-    ctx.moveTo(0, y);
-    ctx.lineTo(width, y + Math.sin(frame * 0.02) * 100);
-}
-
-function drawShapes(index) {
-    const size = 50 + (index * 30);
-    const x = (frame * 2 + (index * 200)) % (width + size);
-    ctx.rect(x - size, height/2 - size/2, size, size);
-}
-
-window.addEventListener('resize', init);
-init();
-draw();
-</script>
-
 </body>
 </html>
