@@ -29,13 +29,13 @@ O painel serve como uma ponte entre a tecnologia e a sala de aula, integrando fe
 Aqui estão algumas capturas de tela do painel em funcionamento:
 
 ### Visão Geral do Painel
-![Menu do Painel Interativo](prints/fialho1.png)
+![Menu do Painel Interativo](img/prints/fialho1.png)
 
 ### Área de Jogos e Cultura
-![Quiz Capixaba, um dos jogos disponíveis](prints/fialho2.png)
+![Quiz Capixaba, um dos jogos disponíveis](img/prints/fialho2.png)
 
 ### Integração com o Blog Escolar
-![Rádio Capixaba com artistas locais](prints/fialho3.png)
+![Rádio Capixaba com artistas locais](img/prints/fialho3.png)
 
 ---
 
