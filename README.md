@@ -76,5 +76,5 @@ O projeto segue uma identidade visual limpa e organizada, com ícones personaliz
 
 Desenvolvido por **Junior Criste**.
 
-[![LinkedIn](http://br.linkedin.com/in/juniorcriste)
-[![Site](https://informaticode.com.br/)
+![LinkedIn](http://br.linkedin.com/in/juniorcriste)
+![Site](https://informaticode.com.br/)
