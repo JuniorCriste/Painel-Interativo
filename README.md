@@ -19,7 +19,7 @@ O painel serve como uma ponte entre a tecnologia e a sala de aula, integrando fe
 
 * **Gamificação Educativa:** Jogos como *Quiz Capixaba*, *Gênio Matemático* e *Tic Tac Toe* para reforçar o conhecimento de forma divertida.
 * **Cultura Regional:** Espaço dedicado à valorização da cultura do Espírito Santo, incluindo a *Rádio 100% Capixaba*.
-* **Divulgação de Serviços:** Slides divulgando ações escolares,do conselho de escola, agenda e mais coisas relevantes.
+* **Divulgação de Serviços:** Slides divulgando ações escolares, projetos, reuniões, agenda e mais coisas relevantes.
 * **Informativos Dinâmicos:** Seções de notícias positivas (*Good News!*), desafios diários (*Charada do Dia*) e o cardápio escolar.
 
 ---
@@ -77,6 +77,6 @@ O projeto segue uma identidade visual limpa e organizada, com ícones personaliz
 Desenvolvido por **Junior Criste**.  
 <br/>
 <a href="http://br.linkedin.com/in/juniorcriste">
-   <img src="img/linkedIn.png" alt="LinkedIn" width="20" vertical-align="middle"></a><a href="https://informaticode.com.br/">
+   <img src="img/linkedIn.png" alt="LinkedIn" width="20" vertical-align="middle"></a>&ensp;<a href="https://informaticode.com.br/">
    <img src="img/versao.gif" alt="LinkedIn" width="20" vertical-align="middle">
 </a>
