@@ -77,8 +77,6 @@ O projeto segue uma identidade visual limpa e organizada, com ícones personaliz
 Desenvolvido por **Junior Criste**.  
 <br/>
 <a href="http://br.linkedin.com/in/juniorcriste">
-   <img src="img/linkedIn.png" alt="LinkedIn" width="20" vertical-align="middle">
-<a href="http://br.linkedin.com/in/juniorcriste"> Perfil no LinkedIn</a>
-<br/>
+   <img src="img/linkedIn.png" alt="LinkedIn" width="20" vertical-align="middle"></a><a href="https://informaticode.com.br/">
    <img src="img/versao.gif" alt="LinkedIn" width="20" vertical-align="middle">
-<a href="https://informaticode.com.br/"> Site Pessoal</a>
+</a>
