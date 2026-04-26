@@ -54,7 +54,7 @@ const curiosidades = {
     "Rastaclone": "A Rastaclone é uma banda de rock e reggae formada em 1997 em Vila Velha, consolidada como um dos grandes nomes da música independente capixaba.",
     "Silva": "Silva é um renomado cantor e multi-instrumentista nascido em Vitória em 1988, destaque da nova MPB que mistura indie pop e samba.",
     "Forró Bemtivi": "Forró Bemtivi é uma banda de forró pé-de-serra fundada em Vitória, em outubro de 2000, surgindo inicialmente de uma gincana escolar para celebrar a cultura nordestina, especialmente Luiz Gonzaga.",
-    "Chama Chuva": "Inicialmente a banda ia se chamar Trio Remelexo, mas adotaram o nome de Chama Chuva em função das constantes chuvas ocorridas em Itaúnas, que coincidiram com suas apresentações, passando a ser chamados pelos moradores de 'Os Chama Chuva'.",
+    "Chama Chuva": "Inicialmente a banda ia se chamar Trio Remelexo, mas adotaram o nome de Chama Chuva em função das constantes chuvas ocorridas em Itaúnas, que coincidiram com suas apresentações, passando a ser chamados de 'Os Chama Chuva'.",
     "Trio Chapahall's": "A banda Trio Chapahalls foi fundada na cidade de São Mateus, no Norte do Espírito Santo. Surgiu no final dos anos 90, unindo o talento de músicos que já circulavam pela cena regional.",
     "Cidade do Reggae": "A Banda Cidade do Reggae, de Vila Velha, foi fundada em outubro de 2012 com objetivo de levar mensagens positivas através do reggae com composições marcantes e envolventes.",
     "Manimal": "Manimal é uma banda da cidade de Vitória. Formada em 1986, seu repertório musical é um misto de rock, congo, ticumbi, entre outros gêneros musicais, resultando assim em um ritmo musical conhecido por 'Movimento rockongo'.",
