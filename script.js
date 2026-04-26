@@ -88,15 +88,3 @@ setInterval(() => {
         });
     }
 }, 1000);
-
-const waves = document.querySelectorAll('.parallax > use');
-
-waves.forEach((wave) => {
-  // Gera uma duração entre 5s e 25s
-  const duration = Math.random() * (25 - 5) + 5;
-  // Gera um delay aleatório para as ondas não começarem juntas
-  const delay = Math.random() * -20;
-  
-  wave.style.animationDuration = `${duration}s`;
-  wave.style.animationDelay = `${delay}s`;
-});
