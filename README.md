@@ -29,13 +29,13 @@ O painel serve como uma ponte entre a tecnologia e a sala de aula, integrando fe
 Aqui estão algumas capturas de tela do painel em funcionamento:
 
 ### Visão Geral do Painel
-![Screenshot 1](ADICIONE_URL_DA_IMAGEM_1_AQUI)
+![Menu do Painel Interativo](prints/fialho1.png)
 
 ### Área de Jogos e Cultura
-![Screenshot 2](ADICIONE_URL_DA_IMAGEM_2_AQUI)
+![Quiz Capixaba, um dos jogos disponíveis](prints/fialho2.png)
 
 ### Integração com o Blog Escolar
-![Screenshot 3](ADICIONE_URL_DA_IMAGEM_3_AQUI)
+![Rádio Capixaba com artistas locais](prints/fialho3.png)
 
 ---
 
@@ -46,7 +46,9 @@ Para a construção deste painel, foram utilizadas tecnologias web modernas com 
 * **HTML5:** Estruturação semântica do conteúdo.
 * **CSS3:** Estilização avançada, utilizando conceitos de design moderno e interface intuitiva.
 * **JavaScript:** Lógica de interatividade e navegação do painel.
-* **GitHub Pages:** Hospedagem rápida e eficiente para o projeto.
+* **GitHub Pages:** Hospedagem padrão e eficiente para o projeto.
+* **IA:** Gemini para base do projeto.
+* **Repositórios:** Outros Repositórios próprios para integração dos aplicativos e jogos.
 
 ---
 
@@ -70,4 +72,5 @@ O projeto segue uma identidade visual limpa e organizada, com ícones personaliz
 
 Desenvolvido por **Junior Criste**.
 
-[![LinkedIn]()
+[![LinkedIn](http://br.linkedin.com/in/juniorcriste)
+[![Site](https://informaticode.com.br/)

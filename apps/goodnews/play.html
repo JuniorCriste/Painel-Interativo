@@ -337,6 +337,40 @@
     });
 
     window.onload = carregarPagina;
+
+    // Define o tempo de inatividade (5 minutos em milissegundos)
+const TEMPO_LIMITE = 5 * 60 * 1000; 
+let temporizador;
+
+/**
+ * Função que redireciona para a URL desejada
+ */
+function resetarPagina() {
+    window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
+}
+
+/**
+ * Reinicia a contagem do temporizador
+ */
+function reiniciarTemporizador() {
+    // Limpa o cronômetro anterior
+    clearTimeout(temporizador);
+    
+    // Inicia um novo cronômetro de 5 minutos
+    temporizador = setTimeout(resetarPagina, TEMPO_LIMITE);
+}
+
+// Monitora cliques em qualquer lugar do documento (incluindo botões)
+document.addEventListener("click", reiniciarTemporizador);
+
+// Monitora pressionamento de teclas (caso haja formulários ou navegação por teclado)
+document.addEventListener("keydown", reiniciarTemporizador);
+
+// Inicia o temporizador assim que a página carrega pela primeira vez
+reiniciarTemporizador();
+
+
+
 </script>
 
 </body>
