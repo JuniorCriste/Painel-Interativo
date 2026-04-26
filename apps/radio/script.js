@@ -52,7 +52,13 @@ const curiosidades = {
     "Moxuara": "O Grupo Moxuara (Cariacica, 1991) mistura MPB, congo e influências folclóricas, com foco na preservação ambiental e cultura capixaba.",
     "Paulo Sérgio": "Paulo Sérgio (1944–1980), nascido em Alegre (ES), foi um influente cantor romântico, precursor do estilo brega-romântico e dono do sucesso 'Última Canção'.",
     "Rastaclone": "A Rastaclone é uma banda de rock e reggae formada em 1997 em Vila Velha, consolidada como um dos grandes nomes da música independente capixaba.",
-    "Silva": "Silva é um renomado cantor e multi-instrumentista nascido em Vitória em 1988, destaque da nova MPB que mistura indie pop e samba."
+    "Silva": "Silva é um renomado cantor e multi-instrumentista nascido em Vitória em 1988, destaque da nova MPB que mistura indie pop e samba.",
+    "Forró Bemtivi": "Forró Bemtivi é uma banda de forró pé-de-serra fundada em Vitória, em outubro de 2000, surgindo inicialmente de uma gincana escolar para celebrar a cultura nordestina, especialmente Luiz Gonzaga.",
+    "Chama Chuva": "Inicialmente a banda ia se chamar Trio Remelexo, mas logo depois, adotaram o nome de Chama Chuva nome esse que foi escolhido em função das constantes chuvas ocorridas em Itaúnas – ES, que coincidiram com suas apresentações, passando a ser chamados pelos moradores locais de 'Os Chama Chuva'.",
+    "Trio Chapahall's": "A banda Trio Chapahalls foi fundada na cidade de São Mateus, no Norte do Espírito Santo. Surgiu no final dos anos 90, unindo o talento de músicos que já circulavam pela cena regional.",
+    "Cidade do Reggae": "A Banda Cidade do Reggae, de Vila Velha, foi fundada em outubro de 2012 com objetivo de levar mensagens positivas através do reggae com composições marcantes e envolventes.",
+    "Manimal": "Manimal é uma banda da cidade de Vitória. Formada em 1986, seu repertório musical é um misto de rock, congo, ticumbi, música eletrônica, samba e reggae, entre outros gêneros musicais, resultando assim em um ritmo musical conhecido por 'Movimento rockongo'.",
+    "Forró Raiz": "O Forró Raiz surgiu em outubro de 1999, na região de Vitória. Itaúnas, terra natal do vocalista Rafael Boca, é uma das inspirações do grupo. A banda desde que nasceu é presença confirmada na maioria das festas do Estado em que o forró está presente.",
 };
 
 // ... (mantenha a lista 'playlist' e 'curiosidades' igual ao código anterior)
