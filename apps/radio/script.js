@@ -27,6 +27,11 @@ const playlist = [
     { title: "Forró de Itaúnas", artist: "Chama Chuva", src: "audio/chamachuva/forrodeitaunas.mp3", cover: "img/chamachuva1.png" },
     { title: "Samarina", artist: "Chama Chuva", src: "audio/chamachuva/samarina.mp3", cover: "img/chamachuva1.png" },
     { title: "Um Pouquinho de Você", artist: "Chama Chuva", src: "audio/chamachuva/umpouquinhodevc.mp3", cover: "img/chamachuva1.png" },
+    { title: "Castigo (Versão)", artist: "Trio Chapahall's", src: "audio/chapahalls/castigoversao.mp3", cover: "img/chapahalls1.png" },
+    { title: "Sonhos (Versão)", artist: "Trio Chapahall's", src: "audio/chapahalls/sonhos.mp3", cover: "img/chapahalls2.png" },
+    { title: "Ritmo Quente", artist: "Trio Chapahall's", src: "audio/chapahalls/ritmoquente.mp3", cover: "img/chapahalls2.png" },
+    { title: "A Deriva", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/aderiva.mp3", cover: "img/cidadedoreggae1.png" },
+    { title: "A Deriva", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/aderiva.mp3", cover: "img/cidadedoreggae1.png" },
 ];
 
 const curiosidades = {
