@@ -31,7 +31,7 @@ const playlist = [
     { title: "Sonhos (Versão)", artist: "Trio Chapahall's", src: "audio/chapahalls/sonhos.mp3", cover: "img/chapahalls2.png" },
     { title: "Ritmo Quente", artist: "Trio Chapahall's", src: "audio/chapahalls/ritmoquente.mp3", cover: "img/chapahalls2.png" },
     { title: "A Deriva", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/aderiva.mp3", cover: "img/cidadedoreggae1.png" },
-    { title: "Te Vejo na Jamaíca", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/tevejonajamaica.mp3", cover: "img/cidadedoreggae1.png" },
+    { title: "Te Vejo na Jamaíca (Part. Janaína Pereira)", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/tevejonajamaica.mp3", cover: "img/cidadedoreggae1.png" },
     { title: "Na Puxada de Rede", artist: "Manimal", src: "audio/manimal/napuxadaderede.mp3", cover: "img/manimal1.png" },
     { title: "Promessa", artist: "Manimal", src: "audio/manimal/promessa.mp3", cover: "img/manimal1.png" },
     { title: "Valeu a Pena", artist: "Manimal", src: "audio/manimal/valeuapena.mp3", cover: "img/manimal1.png" },
