@@ -133,7 +133,7 @@ body::after {
     box-shadow: 10px 10px 0px rgba(0,0,0,0.05);
 }
 
-.slide-track { display: flex; height: 100%; transition: transform 0.8s ease-in-out; }
+.slide-track { display: flex; height: 100%; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);}
 .slide { min-width: 100%; height: 100%; position: relative; }
 .slide img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -150,6 +150,30 @@ body::after {
     box-sizing: border-box;
     text-transform: uppercase;
 }
+
+#slide-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Ajuste conforme necessário */
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Começam invisíveis */
+    transition: opacity 1.5s ease-in-out; /* Transição suave de 1.5s */
+    z-index: 0;
+}
+
+.slide.active {
+    opacity: 1; /* Apenas o ativo fica visível */
+    z-index: 1;
+}
+
 
 .grid-container {
     display: grid;

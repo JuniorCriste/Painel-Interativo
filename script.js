@@ -1,16 +1,20 @@
 let currentSlide = 0;
-const totalSlides = 5;
-const slideTrack = document.getElementById('slide-track');
+const slides = document.querySelectorAll('.slide'); // Seleciona todos os slides
+const totalSlides = slides.length;
 
 function autoSlide() {
-    currentSlide++;
-    if (currentSlide >= totalSlides) {
-        currentSlide = 0;
-    }
-    const offset = currentSlide * -100;
-    slideTrack.style.transform = `translateX(${offset}%)`;
+    // 1. Remove a classe 'active' do slide que está aparecendo agora
+    slides[currentSlide].classList.remove('active');
+
+    // 2. Avança para o próximo (com a lógica de reset que você já tinha)
+    currentSlide = (currentSlide + 1) % totalSlides;
+
+    // 3. Adiciona a classe 'active' ao novo slide
+    slides[currentSlide].classList.add('active');
 }
 
+// Inicia o intervalo
+setInterval(autoSlide, 5000);
 setInterval(autoSlide, 5000);
 
 document.addEventListener('keydown', (e) => {
