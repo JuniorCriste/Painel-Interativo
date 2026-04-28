@@ -340,8 +340,8 @@ window.addEventListener('keyup', (event) => {
 
 
 
-// Define o tempo de inatividade (6 minutos em milissegundos)
-const TEMPO_LIMITE = 6 * 60 * 1000; 
+// Define o tempo de inatividade (5 minutos em milissegundos)
+const TEMPO_LIMITE = 5 * 60 * 1000; 
 let temporizador;
 
 /**
@@ -358,7 +358,7 @@ function reiniciarTemporizador() {
     // Limpa o cronômetro anterior
     clearTimeout(temporizador);
     
-    // Inicia um novo cronômetro de 6 minutos
+    // Inicia um novo cronômetro de 5 minutos
     temporizador = setTimeout(resetarPagina, TEMPO_LIMITE);
 }
 
