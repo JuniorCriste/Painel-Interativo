@@ -34,7 +34,7 @@ body {
     fade-cycle 30s linear infinite; 
 }
 
-/* .parallax {filter: blur(0.8px); opacity: 0.5;} */
+.parallax {filter: blur(1.3px); zoom: 150%;}
 
 .parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
 .parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
@@ -322,6 +322,7 @@ body::after {
     text-align: center; /* Centraliza a data sobre o relógio */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     pointer-events: none;
+    width: 95px;
 }
 
 #txt-data {

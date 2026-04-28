@@ -340,7 +340,8 @@ window.addEventListener('keyup', (event) => {
 
 
 
-// Define o tempo de inatividade (5 minutos em milissegundos)
+
+        // Define o tempo de inatividade (5 minutos em milissegundos)
 const TEMPO_LIMITE = 5 * 60 * 1000; 
 let temporizador;
 
