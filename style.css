@@ -1,5 +1,5 @@
 :root {
-    --bg-creme: #cfdfcd;
+    --bg-creme: #d6e7d6;
     --retro-red: #e76f51;
     --text-dark: #2d2d2d;
 }
@@ -25,15 +25,17 @@ body {
     display: flex;
     align-items: flex-end;
 }
-.waves { width: 150%; height: 100%; }
-/* Animação base (horizontal + vertical) */
+.waves { width: 150%; height: 100%;}
+
 .parallax > use {
   animation: 
     move-forever 20s cubic-bezier(.55,.5,.45,.5) infinite,
-    swell 7s ease-in-out infinite; /* Nova animação vertical */
+    swell 7s ease-in-out infinite,
+    fade-cycle 30s linear infinite; 
 }
 
 /* .parallax {filter: blur(0.8px); opacity: 0.5;} */
+
 .parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
 .parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
 .parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
@@ -42,6 +44,50 @@ body {
 .parallax > use:nth-child(6) { animation-delay: -8s; animation-duration: 21s; }
 .parallax > use:nth-child(7) { animation-delay: -10s; animation-duration: 23s; }
 /* ... e assim por diante */
+
+@keyframes fade-cycle {
+  0%, 15% { opacity: 0; visibility: hidden; }     /* Invisível no começo */
+  25%, 75% { opacity: 0.5; visibility: visible; } /* Aparece e fica um tempo (ajuste 0.5 conforme desejar) */
+  85%, 100% { opacity: 0; visibility: hidden; }   /* Some no final */
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: -50%; left: -50%; /* Aumentamos a área para permitir o movimento */
+  width: 200%; height: 200%;
+  
+  /* Gradiente de scanlines + um gradiente de grão (noise) */
+  background: 
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 2px);
+  background-size: 100% 4px, 100% 3px;
+  
+  pointer-events: none;
+  z-index: 999;
+  /* Aplicamos a animação de chiado */
+  animation: noise-tv 10s infinite;
+  opacity: 0.9;
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.05); /* Quase transparente */
+    backdrop-filter: blur(15px) saturate(150%); /* O segredo do vidro */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borda fina para refletir luz */
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.2); /* Brilho neon suave */
+    color: #fff;
+    padding: 20px;
+}
+
+.grid-floor {
+    background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.3) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transform: perspective(500px) rotateX(60deg);
+}
+
 .main-wrapper {
     width: 95%;
     max-width: 1200px; 
@@ -148,7 +194,7 @@ body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(161, 235, 113, 0.5);
     backdrop-filter: blur(10px);
     padding: 10px 40px;
     display: flex;
@@ -167,3 +213,74 @@ body {
     transform: translateY(10px); /* Ajuste aqui para ondas mais altas ou baixas */
   }
 }
+
+
+.glitch {
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+  text-shadow: 0.05em 0 0 rgba(255, 0, 80, 0.75),
+               -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+               0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  animation: glitch 500ms infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0.8;
+}
+
+.glitch::before {
+  animation: glitch-anim 650ms infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(-0.025em, -0.0125em);
+  color: #ff00c1; /* Rosa Vaporwave */
+}
+
+.glitch::after {
+  animation: glitch-anim 375ms infinite;
+  clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
+  transform: translate(0.0125em, 0.025em);
+  color: #00fff9; /* Ciano Vaporwave */
+}
+
+@keyframes glitch-anim {
+  0% { clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%); }
+  20% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); }
+  40% { clip-path: polygon(0 45%, 100% 45%, 100% 50%, 0 50%); }
+  60% { clip-path: polygon(0 80%, 100% 80%, 100% 90%, 0 90%); }
+  100% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); }
+}
+
+.vapor-sun {
+    position: fixed;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(#ff71ce 20%, #fffb96 100%);
+    border-radius: 50%;
+    z-index: -2;
+    box-shadow: 0 0 50px rgba(255, 113, 206, 0.5);
+}
+
+@keyframes noise-tv {
+  0% { transform: translate(0,0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(1%, 1%); }
+  30% { transform: translate(-2%, 0); }
+  40% { transform: translate(1%, -2%); }
+  50% { transform: translate(-1%, 1%); }
+  60% { transform: translate(2%, 1%); }
+  70% { transform: translate(-1%, -1%); }
+  80% { transform: translate(1%, 2%); }
+  90% { transform: translate(-2%, -1%); }
+  100% { transform: translate(0,0); }
+}
+
