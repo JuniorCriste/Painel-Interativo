@@ -64,7 +64,7 @@ body::after {
   background-size: 100% 4px, 100% 3px;
   
   pointer-events: none;
-  z-index: 999;
+  z-index: -1;
   /* Aplicamos a animação de chiado */
   animation: noise-tv 10s infinite;
   opacity: 0.9;
