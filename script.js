@@ -53,14 +53,19 @@ function narrarHora() {
     const agora = new Date();
     const horas = agora.getHours();
     
-    // Configura a frase (ex: "Agora são 14 horas")
     const mensagem = new SpeechSynthesisUtterance(`Agora são ${horas} horas.`);
     
-    // Define o idioma para Português do Brasil
     mensagem.lang = 'pt-BR';
-    mensagem.rate = 1; // Velocidade da fala
-    
+    mensagem.rate = 1; 
+
+    // Define o volume (0.0 a 1.0)
+    // Se você quer que esta parte seja a mais alta possível, use 1
+    mensagem.volume = 1; 
+
     window.speechSynthesis.speak(mensagem);
+
+    // O "voltar ao 100%" acontece automaticamente para a próxima narração,
+    // a menos que você altere o 'volume' no próximo objeto SpeechSynthesisUtterance.
 }
 
 // 1. Som ao carregar
