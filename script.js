@@ -1,20 +1,26 @@
 let currentSlide = 0;
-const slides = document.querySelectorAll('.slide'); // Seleciona todos os slides
-const totalSlides = slides.length;
+// Em vez de um número fixo, pegamos a quantidade real de elementos
+const slides = document.querySelectorAll('.slide'); 
+const totalSlides = slides.length; 
 
 function autoSlide() {
-    // 1. Remove a classe 'active' do slide que está aparecendo agora
+    // 1. Remove a classe do slide atual
     slides[currentSlide].classList.remove('active');
 
-    // 2. Avança para o próximo (com a lógica de reset que você já tinha)
+    // 2. Cálculo do próximo slide
+    // O operador % (resto da divisão) garante que ao chegar no último, 
+    // o próximo seja o 0 automaticamente.
     currentSlide = (currentSlide + 1) % totalSlides;
 
-    // 3. Adiciona a classe 'active' ao novo slide
+    // 3. Adiciona a classe ao novo slide
     slides[currentSlide].classList.add('active');
 }
 
-// Inicia o intervalo
-setInterval(autoSlide, 5000);
+// Garante que o primeiro slide comece visível
+if (slides.length > 0) {
+    slides[0].classList.add('active');
+}
+
 setInterval(autoSlide, 5000);
 
 document.addEventListener('keydown', (e) => {
