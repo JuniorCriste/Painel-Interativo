@@ -1,5 +1,5 @@
 :root {
-    --bg-creme: #d6e7d6;
+    --bg-creme: #eeeab0;
     --retro-red: #e76f51;
     --text-dark: #2d2d2d;
 }
@@ -67,7 +67,7 @@ body::after {
   z-index: -1;
   /* Aplicamos a animação de chiado */
   animation: noise-tv 10s infinite;
-  opacity: 0.9;
+  opacity: 0.5;
 }
 
 .glass-panel {
