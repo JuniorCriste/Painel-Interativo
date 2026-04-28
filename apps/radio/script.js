@@ -81,12 +81,15 @@ function loadNextTrack() {
     if (queue.length === 0) shufflePlaylist();
     const track = queue.shift();
     
+    // Atualiza os elementos da página
     title.innerText = track.title;
     artist.innerText = track.artist;
     cover.src = track.cover;
     bgOverlay.style.backgroundImage = `url('${track.cover}')`;
     audio.src = track.src;
     info.innerText = curiosidades[track.artist] || "Informação não disponível.";
+
+    document.title = `Rádio 100% Capixaba: ${track.artist} - ${track.title}`;
     
     audio.play().catch(() => console.log("Aguardando interação..."));
 }
