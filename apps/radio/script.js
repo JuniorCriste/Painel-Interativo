@@ -89,7 +89,7 @@ function loadNextTrack() {
     audio.src = track.src;
     info.innerText = curiosidades[track.artist] || "Informação não disponível.";
 
-    document.title = `Rádio 100% Capixaba: ${track.artist} - ${track.title}`;
+    document.title = `Rádio 100% Capixaba! Ouvindo agora: ${track.artist} - ${track.title}`;
     
     audio.play().catch(() => console.log("Aguardando interação..."));
 }
