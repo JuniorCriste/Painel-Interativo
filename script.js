@@ -99,3 +99,30 @@ setInterval(() => {
     }
 }, 1000);
 
+function atualizarRelogio() {
+    const agora = new Date();
+    
+    // Formatação da Hora
+    const horas = String(agora.getHours()).padStart(2, '0');
+    const minutos = String(agora.getMinutes()).padStart(2, '0');
+    const segundos = String(agora.getSeconds()).padStart(2, '0');
+    
+    // Formatação da Data (Ex: 28/04/2026)
+    const dia = String(agora.getDate()).padStart(2, '0');
+    const mes = String(agora.getMonth() + 1).padStart(2, '0');
+    const ano = agora.getFullYear();
+    
+    const displayRelogio = document.getElementById('txt-relogio');
+    const displayData = document.getElementById('txt-data');
+    
+    if (displayRelogio) {
+        displayRelogio.textContent = `${horas}:${minutos}:${segundos}`;
+    }
+    if (displayData) {
+        displayData.textContent = `${dia}/${mes}/${ano}`;
+    }
+}
+
+// Inicia a atualização
+setInterval(atualizarRelogio, 1000);
+atualizarRelogio();
