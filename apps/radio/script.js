@@ -22,6 +22,7 @@ const playlist = [
     { title: "Splish Splash", artist: "Roberto Carlos", src: "audio/robertocarlos/splishsplash.mp3", cover: "img/rc2.png" },
     { title: "A Namoradinha do Amigo Meu", artist: "Roberto Carlos", src: "audio/robertocarlos/namoradinha.mp3", cover: "img/rc3.png" },
     { title: "Bloco na Rua", artist: "Sérgio Sampaio", src: "audio/sergiosampaio/bloconarua.mp3", cover: "img/sergiosampaio.png" },
+    { title: "Viajei de Trem", artist: "Sérgio Sampaio", src: "audio/sergiosampaio/viajeidetrem.mp3", cover: "img/sergiosampaio.png" },
     { title: "A Cor É Rosa", artist: "Silva", src: "audio/silva/acorerosa.mp3", cover: "img/silva.png" },
     { title: "Amianto", artist: "Supercombo", src: "audio/supercombo/amianto.mp3", cover: "img/supercombo1.png" },
     { title: "Piloto Automático", artist: "Supercombo", src: "audio/supercombo/pilotoautomatico.mp3", cover: "img/supercombo1.png" },
