@@ -16,11 +16,12 @@ let board = Array(9).fill('');
 let currentPlayer = 'X';
 let playing = true;
 let scoreX = 0, scoreO = 0, scoreDraw = 0;
+let winningLine = []; // Guarda os índices da linha que venceu
 
 const wins = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8],
-    [0, 3, 6], [1, 4, 7], [2, 5, 8],
-    [0, 4, 8], [2, 4, 6]
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontais
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Verticais
+    [0, 4, 8], [2, 4, 6]             // Diagonais
 ];
 
 /* CONFIGURAÇÃO DE ÁUDIO */
@@ -28,15 +29,14 @@ const soundMark = new Audio('assets/sounds/markttt.ogg');
 const soundDraw = new Audio('assets/sounds/voiceNobody.ogg');
 const soundWinP1 = new Audio('assets/sounds/voiceP1.ogg');
 const soundWinP2 = new Audio('assets/sounds/voiceP2.ogg');
+const bgMusic = new Audio('assets_Music_track1.ogg');
 
-// Música de Fundo (Loop)
-const bgMusic = new Audio('assets/sounds/assets_Music_track1.ogg');
 bgMusic.loop = true;
-bgMusic.volume = 0.2; // Volume mais baixo conforme solicitado
+bgMusic.volume = 0.2; // Volume reduzido para o fundo
 
-// Iniciar música ao primeiro clique (Navegadores exigem interação do usuário)
+// Iniciar música ao primeiro clique (exigência dos navegadores)
 document.addEventListener('click', () => {
-    bgMusic.play().catch(() => console.log("Música aguardando interação..."));
+    bgMusic.play().catch(() => {});
 }, { once: true });
 
 function playSound(audio) {
@@ -54,7 +54,20 @@ function updateTurn() {
 }
 
 function checkWin() {
-    return wins.some(w => w.every(i => board[i] === currentPlayer));
+    // Procura se alguma das combinações de vitória foi preenchida pelo jogador atual[cite: 1]
+    const winMatch = wins.find(w => w.every(i => board[i] === currentPlayer));
+    if (winMatch) {
+        winningLine = winMatch;
+        return true;
+    }
+    return false;
+}
+
+function highlightWinner() {
+    // Aplica a classe de destaque nas células vencedoras[cite: 1]
+    winningLine.forEach(index => {
+        cells[index].classList.add('winner-highlight');
+    });
 }
 
 function endGame(type) {
@@ -64,6 +77,7 @@ function endGame(type) {
         playSound(soundDraw);
         scoreDraw++;
     } else {
+        highlightWinner(); // Destaca a linha antes de exibir o resultado[cite: 1]
         if (currentPlayer === 'X') {
             playSound(soundWinP1);
             scoreX++;
@@ -73,6 +87,7 @@ function endGame(type) {
         }
     }
 
+    // Atualiza placar[cite: 1]
     scoreXEl.textContent = scoreX;
     scoreOEl.textContent = scoreO;
     scoreDrawEl.textContent = scoreDraw;
@@ -89,13 +104,20 @@ function endGame(type) {
         (currentPlayer === 'X' ? 'Jogador 1 venceu!' : 'Jogador 2 venceu!')}</h2>
     `;
 
+    // Exibe o overlay (ajuste o CSS para que ele não tampe o centro)[cite: 1]
     overlay.classList.add('show');
-    setTimeout(resetGame, 2500);
+    
+    // Aguarda 3 segundos para que os jogadores vejam a linha marcada[cite: 1]
+    setTimeout(resetGame, 3000);
 }
 
 function resetGame() {
     board.fill('');
-    cells.forEach(c => { c.textContent = ''; c.className = 'cell'; });
+    winningLine = [];
+    cells.forEach(c => { 
+        c.textContent = ''; 
+        c.className = 'cell'; 
+    });
     overlay.classList.remove('show');
     currentPlayer = 'X';
     playing = true;
@@ -110,8 +132,7 @@ function makeMove(i) {
     c.textContent = currentPlayer;
     c.classList.add(currentPlayer === 'X' ? 'x' : 'o');
     
-    // Som de marcação
-    playSound(soundMark);
+    playSound(soundMark); // Som de clique[cite: 1]
 
     if (checkWin()) return endGame('win');
     if (board.every(v => v)) return endGame('draw');
@@ -128,7 +149,7 @@ const map = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5, '7': 6, '8': 7, '9
 let combo = new Set();
 
 document.addEventListener('keydown', e => {
-    // Teclas de jogo (1-9)
+    // Jogada por teclado
     if (map[e.key] !== undefined) {
         const cell = document.querySelector(`.cell[data-index="${map[e.key]}"]`);
         if (cell) {
@@ -138,7 +159,7 @@ document.addEventListener('keydown', e => {
         }
     }
 
-    // Atalho secreto (1+2+3)
+    // Atalho especial (1+2+3)[cite: 1]
     if (['1', '2', '3'].includes(e.key)) {
         combo.add(e.key);
         if (combo.size === 3) {
@@ -151,7 +172,7 @@ document.addEventListener('keyup', e => {
     if (['1', '2', '3'].includes(e.key)) combo.delete(e.key);
 });
 
-/* SISTEMA DE INATIVIDADE */
+/* SISTEMA DE INATIVIDADE (5 MINUTOS)[cite: 1] */
 const TEMPO_LIMITE = 5 * 60 * 1000; 
 let temporizador;
 
@@ -167,5 +188,4 @@ function reiniciarTemporizador() {
 document.addEventListener("click", reiniciarTemporizador);
 document.addEventListener("keydown", reiniciarTemporizador);
 
-// Início do temporizador
 reiniciarTemporizador();
