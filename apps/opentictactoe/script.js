@@ -65,7 +65,10 @@ function checkWin(player) {
 
 function highlightWinner() {
     winningLine.forEach(index => {
-        cells[index].classList.add('winner-highlight'); // Aplica o CSS[cite: 6]
+        const cellToHighlight = document.querySelector(`.cell[data-index="${index}"]`);
+        if (cellToHighlight) {
+            cellToHighlight.classList.add('winner-highlight');
+        }
     });
 }
 
