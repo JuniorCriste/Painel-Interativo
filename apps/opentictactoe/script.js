@@ -17,9 +17,9 @@ let scoreX = 0, scoreO = 0, scoreDraw = 0;
 let winningLine = []; // Guarda os índices da vitória
 
 const wins = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontais
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Verticais
-    [0, 4, 8], [2, 4, 6]             // Diagonais
+    [6, 7, 8], [3, 4, 5], [0, 1, 2], // Horizontais (Superior, Meio, Inferior)
+    [6, 3, 0], [7, 4, 1], [8, 5, 2], // Verticais (Esquerda, Meio, Direita)
+    [6, 4, 2], [8, 4, 0]             // Diagonais
 ];
 
 /* CONFIGURAÇÃO DE ÁUDIO[cite: 6] */
