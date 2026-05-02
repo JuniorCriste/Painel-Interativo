@@ -96,26 +96,6 @@
             &nbsp;Versão  1.8</div>
     </footer>
 
-    <script src="script.js">
-        document.querySelectorAll('.app-button').forEach(button => {
-            // Pega o número e o texto original
-            const key = button.getAttribute('data-key');
-            const label = button.getAttribute('data-label');
-
-            // Limpa o texto: remove "1 - ", "2 - ", etc do início
-            const cleanText = label.replace(/^\d+\s*-\s*/, '');
-
-            // Cria o HTML da imagem da tecla
-            const keyImgTag = `<img src="img/key/${key}.png" class="key-icon" alt="Tecla ${key}">`;
-
-            // Cria um elemento container para o novo conteúdo
-            const container = document.createElement('div');
-            container.className = 'label-container';
-            container.innerHTML = `${keyImgTag} <span>${cleanText}</span>`;
-
-            // Adiciona o container dentro do link (abaixo da imagem do app que já existe)
-            button.appendChild(container);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
