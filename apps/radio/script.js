@@ -63,7 +63,8 @@ const curiosidades = {
     "Trio Chapahall's": "A banda Trio Chapahalls foi fundada na cidade de São Mateus, no Norte do Espírito Santo. Surgiu no final dos anos 90, unindo o talento de músicos que já circulavam pela cena regional.",
     "Cidade do Reggae": "A Banda Cidade do Reggae, de Vila Velha, foi fundada em outubro de 2012 com objetivo de levar mensagens positivas através do reggae com composições marcantes e envolventes.",
     "Manimal": "Manimal é uma banda da cidade de Vitória. Formada em 1986, seu repertório musical é um misto de rock, congo, ticumbi, entre outros gêneros musicais, resultando assim em um ritmo musical conhecido por 'Movimento rockongo'.",
-    "Forró Raiz": "O Forró Raiz surgiu em outubro de 1999, na região de Vitória. Itaúnas, terra natal do vocalista Rafael Boca, é uma das inspirações do grupo. "
+    "Forró Raiz": "O Forró Raiz surgiu em outubro de 1999, na região de Vitória. Itaúnas, terra natal do vocalista Rafael Boca, é uma das inspirações do grupo. ",
+    "Alemão do Forró": "Alemão do Forró é um cantor, compositor e instrumentista brasileiro nascido em Linhares, Espírito Santo, conhecido como o 'Rei do Forró Capixaba'. Com voz grave e marcante, consolidou carreira solo, acumulando sucessos nacionais."
 };
 
 // ... Fim do acervo

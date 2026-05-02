@@ -22,19 +22,25 @@ const wins = [
 ];
 
 /* SONS */
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-function sound(freq, dur) {
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    g.gain.value = 350;
-    o.frequency.value = freq;
-    o.connect(g);
-    g.connect(audioCtx.destination);
-    o.start();
-    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
-    o.stop(audioCtx.currentTime + dur);
-}
+const soundMark = new Audio('assets/sounds/markttt.ogg');
+const soundDraw = new Audio('assets/sounds/voiceNobody.ogg');
+const soundWinP1 = new Audio('assets/sounds/voiceP1.ogg');
+const soundWinP2 = new Audio('assets/sounds/voiceP2.ogg');
 
+// Música de Fundo
+const bgMusic = new Audio('assets_Music_track1.ogg');
+bgMusic.loop = true;
+bgMusic.volume = 0.3; // Volume mais baixo
+
+// Iniciar música ao primeiro clique (exigência dos navegadores)
+document.addEventListener('click', () => {
+    bgMusic.play().catch(e => console.log("Aguardando interação para áudio"));
+}, { once: true });
+
+function playSound(audio) {
+    audio.currentTime = 0; // Reinicia o som caso já esteja tocando
+    audio.play();
+}
 function updateTurn() {
     p1.classList.toggle('active', currentPlayer === 'X');
     p2.classList.toggle('active', currentPlayer === 'O');
@@ -49,12 +55,22 @@ function checkWin() {
 
 function endGame(type) {
     playing = false;
-    sound(type === 'draw' ? 380 : 900, .6);
 
-    if (type === 'draw') scoreDraw++;
-    else if (currentPlayer === 'X') scoreX++;
-    else scoreO++;
+    // Lógica de áudio para fim de jogo
+    if (type === 'draw') {
+        playSound(soundDraw);
+        scoreDraw++;
+    } else {
+        if (currentPlayer === 'X') {
+            playSound(soundWinP1);
+            scoreX++;
+        } else {
+            playSound(soundWinP2);
+            scoreO++;
+        }
+    }
 
+    // ... restante do código (atualização de placar e overlay) ...
     scoreXEl.textContent = scoreX;
     scoreOEl.textContent = scoreO;
     scoreDrawEl.textContent = scoreDraw;
@@ -86,10 +102,10 @@ function resetGame() {
 
 function makeMove(i) {
     if (!playing || board[i]) return;
-    board[i] = currentPlayer;
-    const c = document.querySelector(`.cell[data-index="${i}"]`);
-    c.textContent = currentPlayer;
-    c.classList.add(currentPlayer === 'X' ? 'x' : 'o');
+    
+    // ... código anterior ...
+    
+    playSound(soundMark); // Som ao marcar posição
 
     if (checkWin()) return endGame('win');
     if (board.every(v => v)) return endGame('draw');
