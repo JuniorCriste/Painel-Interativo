@@ -61,7 +61,7 @@ const curiosidades = {
     "Forró Raiz": "O Forró Raiz surgiu em outubro de 1999, na região de Vitória. Itaúnas, terra natal do vocalista Rafael Boca, é uma das inspirações do grupo. "
 };
 
-// ... (mantenha a lista 'playlist' e 'curiosidades' igual ao código anterior)
+// ... Fim do acervo
 
 let queue = [];
 const audio = document.getElementById('audio-element');
@@ -71,15 +71,44 @@ const info = document.getElementById('artist-info');
 const cover = document.getElementById('album-cover');
 const bgOverlay = document.getElementById('bg-overlay');
 
-// --- LÓGICA DA RÁDIO ---
+// --- LÓGICA DA RÁDIO COM CACHE ---
 
-function shufflePlaylist() {
-    queue = [...playlist].sort(() => Math.random() - 0.5);
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function saveQueue() {
+    localStorage.setItem('radio_queue', JSON.stringify(queue));
+}
+
+function loadQueue() {
+    const saved = localStorage.getItem('radio_queue');
+    if (saved) {
+        queue = JSON.parse(saved);
+    }
+    
+    // Se o cache estiver vazio ou corrompido, gera uma nova fila
+    if (!queue || queue.length === 0) {
+        queue = shuffleArray([...playlist]);
+        saveQueue();
+    }
 }
 
 function loadNextTrack() {
-    if (queue.length === 0) shufflePlaylist();
+    // Se acabou a fila, recria uma nova do zero
+    if (queue.length === 0) {
+        queue = shuffleArray([...playlist]);
+    }
+
+    // Remove a primeira música da fila (shift)
     const track = queue.shift();
+    
+    // Salva a fila atualizada (sem a música que vai tocar agora)
+    saveQueue();
     
     // Atualiza os elementos da página
     title.innerText = track.title;
@@ -91,7 +120,7 @@ function loadNextTrack() {
 
     document.title = `Rádio 100% Capixaba! Ouvindo agora: ${track.artist} - ${track.title}`;
     
-    audio.play().catch(() => console.log("Aguardando interação..."));
+    audio.play().catch(() => console.log("Aguardando interação do usuário..."));
 }
 
 function toggleRadio() {
@@ -121,8 +150,8 @@ window.addEventListener('keyup', (e) => {
     pressedKeys.delete(e.key);
 });
 
-// Inicialização
+// Inicialização corrigida
 window.onload = () => {
-    shufflePlaylist();
+    loadQueue();
     loadNextTrack();
 };
