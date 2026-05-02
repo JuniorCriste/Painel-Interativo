@@ -315,6 +315,19 @@ body::after {
     margin-right: 3.5px;
 }
 
+#mini-icon2 {
+    
+    width: auto;
+    height: 15px;
+    border: none;
+    border-radius: 0;
+    vertical-align: middle;
+    object-fit: contain;
+    background: none;
+    box-shadow: none;
+    margin-right: 3.5px;
+}
+
 .no-break {
     white-space: nowrap;
     display: inline-flex;
