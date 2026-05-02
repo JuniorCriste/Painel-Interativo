@@ -312,6 +312,7 @@ body::after {
     object-fit: contain;
     background: none;
     box-shadow: none;
+    margin-right: 3.5px;
 }
 
 .no-break {
