@@ -1,3 +1,4 @@
+/* SELETORES DE ELEMENTOS */
 const cells = document.querySelectorAll('.cell');
 const statusText = document.getElementById('status');
 const overlay = document.getElementById('overlay');
@@ -10,37 +11,40 @@ const scoreXEl = document.getElementById('scoreX');
 const scoreOEl = document.getElementById('scoreO');
 const scoreDrawEl = document.getElementById('scoreDraw');
 
+/* ESTADO DO JOGO */
 let board = Array(9).fill('');
 let currentPlayer = 'X';
 let playing = true;
 let scoreX = 0, scoreO = 0, scoreDraw = 0;
 
 const wins = [
-    [0,1,2],[3,4,5],[6,7,8],
-    [0,3,6],[1,4,7],[2,5,8],
-    [0,4,8],[2,4,6]
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
 ];
 
-/* SONS */
+/* CONFIGURAÇÃO DE ÁUDIO */
 const soundMark = new Audio('assets/sounds/markttt.ogg');
 const soundDraw = new Audio('assets/sounds/voiceNobody.ogg');
 const soundWinP1 = new Audio('assets/sounds/voiceP1.ogg');
 const soundWinP2 = new Audio('assets/sounds/voiceP2.ogg');
 
-// Música de Fundo
+// Música de Fundo (Loop)
 const bgMusic = new Audio('assets_Music_track1.ogg');
 bgMusic.loop = true;
-bgMusic.volume = 0.3; // Volume mais baixo
+bgMusic.volume = 0.2; // Volume mais baixo conforme solicitado
 
-// Iniciar música ao primeiro clique (exigência dos navegadores)
+// Iniciar música ao primeiro clique (Navegadores exigem interação do usuário)
 document.addEventListener('click', () => {
-    bgMusic.play().catch(e => console.log("Aguardando interação para áudio"));
+    bgMusic.play().catch(() => console.log("Música aguardando interação..."));
 }, { once: true });
 
 function playSound(audio) {
-    audio.currentTime = 0; // Reinicia o som caso já esteja tocando
+    audio.currentTime = 0;
     audio.play();
 }
+
+/* LÓGICA DO JOGO */
 function updateTurn() {
     p1.classList.toggle('active', currentPlayer === 'X');
     p2.classList.toggle('active', currentPlayer === 'O');
@@ -56,7 +60,6 @@ function checkWin() {
 function endGame(type) {
     playing = false;
 
-    // Lógica de áudio para fim de jogo
     if (type === 'draw') {
         playSound(soundDraw);
         scoreDraw++;
@@ -101,44 +104,42 @@ function resetGame() {
 
 function makeMove(i) {
     if (!playing || board[i]) return;
+    
     board[i] = currentPlayer;
     const c = document.querySelector(`.cell[data-index="${i}"]`);
     c.textContent = currentPlayer;
     c.classList.add(currentPlayer === 'X' ? 'x' : 'o');
+    
+    // Som de marcação
+    playSound(soundMark);
 
     if (checkWin()) return endGame('win');
     if (board.every(v => v)) return endGame('draw');
 
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     updateTurn();
-    playSound(soundMark); // Som ao marcar posição
-
-    if (checkWin()) return endGame('win');
-    if (board.every(v => v)) return endGame('draw');
-
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    updateTurn();
-
 }
 
-/* CLIQUE */
+/* EVENTOS DE CLIQUE */
 cells.forEach(c => c.addEventListener('click', () => makeMove(+c.dataset.index)));
 
-/* TECLADO */
-const map = {'1':0,'2':1,'3':2,'4':3,'5':4,'6':5,'7':6,'8':7,'9':8};
+/* TECLADO E ATALHOS */
+const map = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5, '7': 6, '8': 7, '9': 8 };
 let combo = new Set();
 
 document.addEventListener('keydown', e => {
+    // Teclas de jogo (1-9)
     if (map[e.key] !== undefined) {
         const cell = document.querySelector(`.cell[data-index="${map[e.key]}"]`);
-        if(cell) {
+        if (cell) {
             cell.classList.add('active');
             setTimeout(() => cell.classList.remove('active'), 120);
             makeMove(map[e.key]);
         }
     }
 
-    if (['1','2','3'].includes(e.key)) {
+    // Atalho secreto (1+2+3)
+    if (['1', '2', '3'].includes(e.key)) {
         combo.add(e.key);
         if (combo.size === 3) {
             window.location.href = 'https://juniorcriste.github.io/Painel-Interativo/';
@@ -147,38 +148,24 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('keyup', e => {
-    if (['1','2','3'].includes(e.key)) combo.delete(e.key);
+    if (['1', '2', '3'].includes(e.key)) combo.delete(e.key);
 });
 
-
-
-// Define o tempo de inatividade (5 minutos em milissegundos)
+/* SISTEMA DE INATIVIDADE */
 const TEMPO_LIMITE = 5 * 60 * 1000; 
 let temporizador;
 
-/**
- * Função que redireciona para a URL desejada
- */
 function resetarPagina() {
     window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
 }
 
-/**
- * Reinicia a contagem do temporizador
- */
 function reiniciarTemporizador() {
-    // Limpa o cronômetro anterior
     clearTimeout(temporizador);
-    
-    // Inicia um novo cronômetro de 5 minutos
     temporizador = setTimeout(resetarPagina, TEMPO_LIMITE);
 }
 
-// Monitora cliques em qualquer lugar do documento (incluindo botões)
 document.addEventListener("click", reiniciarTemporizador);
-
-// Monitora pressionamento de teclas (caso haja formulários ou navegação por teclado)
 document.addEventListener("keydown", reiniciarTemporizador);
 
-// Inicia o temporizador assim que a página carrega pela primeira vez
+// Início do temporizador
 reiniciarTemporizador();
