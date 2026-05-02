@@ -32,8 +32,9 @@ const soundWinP2 = new Audio('assets/sounds/voiceP2.ogg');
 const bgMusic = new Audio('assets/sounds/music.ogg');
 
 bgMusic.loop = true;
-bgMusic.volume = 0.2; // Volume reduzido para o fundo
-
+bgMusic.volume = 0.2;
+bgMusic.soundMark = 0.2;
+playSound(bgMusic);
 // Iniciar música ao primeiro clique (exigência dos navegadores)
 document.addEventListener('click', () => {
     bgMusic.play().catch(() => {});
