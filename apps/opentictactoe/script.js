@@ -70,7 +70,6 @@ function endGame(type) {
         }
     }
 
-    // ... restante do código (atualização de placar e overlay) ...
     scoreXEl.textContent = scoreX;
     scoreOEl.textContent = scoreO;
     scoreDrawEl.textContent = scoreDraw;
@@ -102,9 +101,16 @@ function resetGame() {
 
 function makeMove(i) {
     if (!playing || board[i]) return;
-    
-    // ... código anterior ...
-    
+    board[i] = currentPlayer;
+    const c = document.querySelector(`.cell[data-index="${i}"]`);
+    c.textContent = currentPlayer;
+    c.classList.add(currentPlayer === 'X' ? 'x' : 'o');
+
+    if (checkWin()) return endGame('win');
+    if (board.every(v => v)) return endGame('draw');
+
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    updateTurn();
     playSound(soundMark); // Som ao marcar posição
 
     if (checkWin()) return endGame('win');
@@ -112,6 +118,7 @@ function makeMove(i) {
 
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     updateTurn();
+
 }
 
 /* CLIQUE */
