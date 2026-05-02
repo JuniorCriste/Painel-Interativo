@@ -132,32 +132,3 @@ function atualizarRelogio() {
 setInterval(atualizarRelogio, 1000);
 atualizarRelogio();
 
-function trocarNumerosPorImagens() {
-  // Seleciona todos os elementos dentro do body
-  const elementos = document.querySelectorAll('body *:not(script):not(style)');
-
-  elementos.forEach(elemento => {
-    // Verificamos apenas nós que contêm texto direto para não quebrar o HTML
-    elemento.childNodes.forEach(no => {
-      if (no.nodeType === Node.TEXT_NODE) {
-        let texto = no.textContent;
-        
-        // Regex que busca números de 1 a 9
-        // O loop reconstrói o texto trocando o número pela tag <img>
-        const novoTexto = texto.replace(/[1-9]/g, (match) => {
-          return `<img src="img/key/${match}.png" alt="${match}" style="height: 1em; vertical-align: middle;">`;
-        });
-
-        // Se houve mudança, substituímos o texto por HTML
-        if (novoTexto !== texto) {
-          const span = document.createElement('span');
-          span.innerHTML = novoTexto;
-          no.replaceWith(span);
-        }
-      }
-    });
-  });
-}
-
-// Executa a função quando a página carregar
-window.onload = trocarNumerosPorImagens;
