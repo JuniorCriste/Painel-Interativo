@@ -1,22 +1,20 @@
-/* SELETORES DE ELEMENTOS */
+/* SELETORES[cite: 6] */
 const cells = document.querySelectorAll('.cell');
 const statusText = document.getElementById('status');
 const overlay = document.getElementById('overlay');
 const resultBox = document.getElementById('resultBox');
-
 const p1 = document.getElementById('p1');
 const p2 = document.getElementById('p2');
-
 const scoreXEl = document.getElementById('scoreX');
 const scoreOEl = document.getElementById('scoreO');
 const scoreDrawEl = document.getElementById('scoreDraw');
 
-/* ESTADO DO JOGO */
+/* ESTADO DO JOGO[cite: 6] */
 let board = Array(9).fill('');
 let currentPlayer = 'X';
 let playing = true;
 let scoreX = 0, scoreO = 0, scoreDraw = 0;
-let winningLine = []; // Guarda os índices da linha que venceu
+let winningLine = []; 
 
 const wins = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontais
@@ -24,7 +22,7 @@ const wins = [
     [0, 4, 8], [2, 4, 6]             // Diagonais
 ];
 
-/* CONFIGURAÇÃO DE ÁUDIO */
+/* SONS[cite: 6] */
 const soundMark = new Audio('assets/sounds/markttt.ogg');
 const soundDraw = new Audio('assets/sounds/voiceNobody.ogg');
 const soundWinP1 = new Audio('assets/sounds/voiceP1.ogg');
@@ -32,10 +30,10 @@ const soundWinP2 = new Audio('assets/sounds/voiceP2.ogg');
 const bgMusic = new Audio('assets/sounds/music.ogg');
 
 bgMusic.loop = true;
-bgMusic.volume = 0.2;
-bgMusic.soundMark = 0.2;
-playSound(bgMusic);
-// Iniciar música ao primeiro clique (exigência dos navegadores)
+bgMusic.volume = 0.4;
+soundMark.volume = 0.2;
+audio.play(bgMusic);
+
 document.addEventListener('click', () => {
     bgMusic.play().catch(() => {});
 }, { once: true });
@@ -45,29 +43,25 @@ function playSound(audio) {
     audio.play();
 }
 
-/* LÓGICA DO JOGO */
+/* LÓGICA PRINCIPAL[cite: 6] */
 function updateTurn() {
     p1.classList.toggle('active', currentPlayer === 'X');
     p2.classList.toggle('active', currentPlayer === 'O');
-    statusText.textContent = currentPlayer === 'X'
-        ? 'Vez do Jogador 1'
-        : 'Vez do Jogador 2';
+    statusText.textContent = currentPlayer === 'X' ? 'Vez do Jogador 1' : 'Vez do Jogador 2';
 }
 
 function checkWin() {
-    // Procura se alguma das combinações de vitória foi preenchida pelo jogador atual[cite: 1]
     const winMatch = wins.find(w => w.every(i => board[i] === currentPlayer));
     if (winMatch) {
-        winningLine = winMatch;
+        winningLine = winMatch; // Salva a linha que ganhou[cite: 6]
         return true;
     }
     return false;
 }
 
 function highlightWinner() {
-    // Aplica a classe de destaque nas células vencedoras[cite: 1]
     winningLine.forEach(index => {
-        cells[index].classList.add('winner-highlight');
+        cells[index].classList.add('winner-highlight'); // Aplica o amarelo[cite: 6]
     });
 }
 
@@ -78,7 +72,7 @@ function endGame(type) {
         playSound(soundDraw);
         scoreDraw++;
     } else {
-        highlightWinner(); // Destaca a linha antes de exibir o resultado[cite: 1]
+        highlightWinner(); // Destaca as casas no tabuleiro[cite: 6]
         if (currentPlayer === 'X') {
             playSound(soundWinP1);
             scoreX++;
@@ -88,28 +82,20 @@ function endGame(type) {
         }
     }
 
-    // Atualiza placar[cite: 1]
     scoreXEl.textContent = scoreX;
     scoreOEl.textContent = scoreO;
     scoreDrawEl.textContent = scoreDraw;
 
-    const img = type === 'draw'
-        ? 'assets/Players/pc.png'
-        : currentPlayer === 'X'
-            ? 'assets/Players/people1.png'
-            : 'assets/Players/people2.png';
+    const img = type === 'draw' ? 'assets/Players/pc.png' : 
+                (currentPlayer === 'X' ? 'assets/Players/people1.png' : 'assets/Players/people2.png');
 
     resultBox.innerHTML = `
         <img src="${img}">
-        <h2>${type === 'draw' ? 'Deu Velha!' :
-        (currentPlayer === 'X' ? 'Jogador 1 venceu!' : 'Jogador 2 venceu!')}</h2>
+        <h2>${type === 'draw' ? 'Deu Velha!' : (currentPlayer === 'X' ? 'Jogador 1 venceu!' : 'Jogador 2 venceu!')}</h2>
     `;
 
-    // Exibe o overlay (ajuste o CSS para que ele não tampe o centro)[cite: 1]
     overlay.classList.add('show');
-    
-    // Aguarda 3 segundos para que os jogadores vejam a linha marcada[cite: 1]
-    setTimeout(resetGame, 3000);
+    setTimeout(resetGame, 4000); // 4 segundos para ver o destaque no tabuleiro[cite: 6]
 }
 
 function resetGame() {
@@ -133,7 +119,7 @@ function makeMove(i) {
     c.textContent = currentPlayer;
     c.classList.add(currentPlayer === 'X' ? 'x' : 'o');
     
-    playSound(soundMark); // Som de clique[cite: 1]
+    playSound(soundMark);
 
     if (checkWin()) return endGame('win');
     if (board.every(v => v)) return endGame('draw');
@@ -142,15 +128,13 @@ function makeMove(i) {
     updateTurn();
 }
 
-/* EVENTOS DE CLIQUE */
+/* EVENTOS E TECLADO[cite: 6] */
 cells.forEach(c => c.addEventListener('click', () => makeMove(+c.dataset.index)));
 
-/* TECLADO E ATALHOS */
 const map = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5, '7': 6, '8': 7, '9': 8 };
 let combo = new Set();
 
 document.addEventListener('keydown', e => {
-    // Jogada por teclado
     if (map[e.key] !== undefined) {
         const cell = document.querySelector(`.cell[data-index="${map[e.key]}"]`);
         if (cell) {
@@ -160,7 +144,6 @@ document.addEventListener('keydown', e => {
         }
     }
 
-    // Atalho especial (1+2+3)[cite: 1]
     if (['1', '2', '3'].includes(e.key)) {
         combo.add(e.key);
         if (combo.size === 3) {
@@ -173,7 +156,7 @@ document.addEventListener('keyup', e => {
     if (['1', '2', '3'].includes(e.key)) combo.delete(e.key);
 });
 
-/* SISTEMA DE INATIVIDADE (5 MINUTOS)[cite: 1] */
+/* INATIVIDADE[cite: 6] */
 const TEMPO_LIMITE = 5 * 60 * 1000; 
 let temporizador;
 
@@ -188,5 +171,4 @@ function reiniciarTemporizador() {
 
 document.addEventListener("click", reiniciarTemporizador);
 document.addEventListener("keydown", reiniciarTemporizador);
-
 reiniciarTemporizador();
