@@ -238,7 +238,6 @@ body::after {
   }
 }
 
-
 .vapor-sun {
     position: fixed;
     bottom: 20%;
@@ -312,6 +311,7 @@ body::after {
     vertical-align: middle;
     object-fit: contain;
     background: none;
+    box-shadow: none;
 }
 
 .no-break {
@@ -320,11 +320,14 @@ body::after {
     align-items: center;
     margin-top: 10px;
     font-weight: 900;
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     text-align: center;
-    color: var(--text-dark);
-    box-shadow: none;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    -webkit-text-stroke-width: 2.3px; /* Largura da borda */
+    -webkit-text-stroke-color: black; /* Cor da borda */
+    paint-order: stroke fill;
 }
 
 /* Opcional: Garante que a primeira imagem se comporte bem */
