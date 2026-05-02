@@ -29,7 +29,7 @@ const soundMark = new Audio('assets/sounds/markttt.ogg');
 const soundDraw = new Audio('assets/sounds/voiceNobody.ogg');
 const soundWinP1 = new Audio('assets/sounds/voiceP1.ogg');
 const soundWinP2 = new Audio('assets/sounds/voiceP2.ogg');
-const bgMusic = new Audio('assets_Music_track1.ogg');
+const bgMusic = new Audio('assets/sounds/assets_Music_track1.ogg');
 
 bgMusic.loop = true;
 bgMusic.volume = 0.2; // Volume reduzido para o fundo
