@@ -345,3 +345,22 @@ body::after {
     line-height: 1;
 }
 
+#mini-icon {
+    
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    border-radius: 0;
+}
+
+.no-break {
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Opcional: Garante que a primeira imagem se comporte bem */
+.app-button img {
+    vertical-align: middle;
+}
