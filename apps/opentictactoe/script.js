@@ -1,4 +1,4 @@
-/* SELETORES[cite: 6] */
+/* SELETORES DE ELEMENTOS[cite: 6] */
 const cells = document.querySelectorAll('.cell');
 const statusText = document.getElementById('status');
 const overlay = document.getElementById('overlay');
@@ -14,7 +14,7 @@ let board = Array(9).fill('');
 let currentPlayer = 'X';
 let playing = true;
 let scoreX = 0, scoreO = 0, scoreDraw = 0;
-let winningLine = []; 
+let winningLine = []; // Guarda os índices da vitória
 
 const wins = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontais
@@ -22,7 +22,7 @@ const wins = [
     [0, 4, 8], [2, 4, 6]             // Diagonais
 ];
 
-/* SONS[cite: 6] */
+/* CONFIGURAÇÃO DE ÁUDIO[cite: 6] */
 const soundMark = new Audio('assets/sounds/markttt.ogg');
 const soundDraw = new Audio('assets/sounds/voiceNobody.ogg');
 const soundWinP1 = new Audio('assets/sounds/voiceP1.ogg');
@@ -30,10 +30,11 @@ const soundWinP2 = new Audio('assets/sounds/voiceP2.ogg');
 const bgMusic = new Audio('assets/sounds/music.ogg');
 
 bgMusic.loop = true;
-bgMusic.volume = 0.4;
-soundMark.volume = 0.2;
-audio.play(bgMusic);
+bgMusic.volume = 0.2;
+soundMark.volume = 0.2; 
+playSound(bgMusic);
 
+// Iniciar música ao primeiro clique (obrigatório em navegadores)[cite: 6]
 document.addEventListener('click', () => {
     bgMusic.play().catch(() => {});
 }, { once: true });
@@ -43,17 +44,20 @@ function playSound(audio) {
     audio.play();
 }
 
-/* LÓGICA PRINCIPAL[cite: 6] */
+/* LÓGICA DO JOGO */
 function updateTurn() {
     p1.classList.toggle('active', currentPlayer === 'X');
     p2.classList.toggle('active', currentPlayer === 'O');
-    statusText.textContent = currentPlayer === 'X' ? 'Vez do Jogador 1' : 'Vez do Jogador 2';
+    statusText.textContent = currentPlayer === 'X'
+        ? 'Vez do Jogador 1'
+        : 'Vez do Jogador 2';
 }
 
-function checkWin() {
-    const winMatch = wins.find(w => w.every(i => board[i] === currentPlayer));
+function checkWin(player) {
+    // Procura uma combinação onde TODOS os índices no board possuem o marcador do player atual
+    const winMatch = wins.find(w => w.every(i => board[i] === player));
     if (winMatch) {
-        winningLine = winMatch; // Salva a linha que ganhou[cite: 6]
+        winningLine = winMatch; 
         return true;
     }
     return false;
@@ -61,7 +65,7 @@ function checkWin() {
 
 function highlightWinner() {
     winningLine.forEach(index => {
-        cells[index].classList.add('winner-highlight'); // Aplica o amarelo[cite: 6]
+        cells[index].classList.add('winner-highlight'); // Aplica o CSS[cite: 6]
     });
 }
 
@@ -72,7 +76,7 @@ function endGame(type) {
         playSound(soundDraw);
         scoreDraw++;
     } else {
-        highlightWinner(); // Destaca as casas no tabuleiro[cite: 6]
+        highlightWinner(); // Destaca a linha vencedora[cite: 6]
         if (currentPlayer === 'X') {
             playSound(soundWinP1);
             scoreX++;
@@ -86,16 +90,20 @@ function endGame(type) {
     scoreOEl.textContent = scoreO;
     scoreDrawEl.textContent = scoreDraw;
 
-    const img = type === 'draw' ? 'assets/Players/pc.png' : 
-                (currentPlayer === 'X' ? 'assets/Players/people1.png' : 'assets/Players/people2.png');
+    const img = type === 'draw'
+        ? 'assets/Players/pc.png'
+        : currentPlayer === 'X'
+            ? 'assets/Players/people1.png'
+            : 'assets/Players/people2.png';
 
     resultBox.innerHTML = `
         <img src="${img}">
-        <h2>${type === 'draw' ? 'Deu Velha!' : (currentPlayer === 'X' ? 'Jogador 1 venceu!' : 'Jogador 2 venceu!')}</h2>
+        <h2>${type === 'draw' ? 'Deu Velha!' :
+        (currentPlayer === 'X' ? 'Jogador 1 venceu!' : 'Jogador 2 venceu!')}</h2>
     `;
 
     overlay.classList.add('show');
-    setTimeout(resetGame, 4000); // 4 segundos para ver o destaque no tabuleiro[cite: 6]
+    setTimeout(resetGame, 3000); // 3 segundos para ver a linha marcada[cite: 6]
 }
 
 function resetGame() {
@@ -103,7 +111,7 @@ function resetGame() {
     winningLine = [];
     cells.forEach(c => { 
         c.textContent = ''; 
-        c.className = 'cell'; 
+        c.classList.remove('winner-highlight', 'x', 'o'); 
     });
     overlay.classList.remove('show');
     currentPlayer = 'X';
@@ -119,16 +127,16 @@ function makeMove(i) {
     c.textContent = currentPlayer;
     c.classList.add(currentPlayer === 'X' ? 'x' : 'o');
     
-    playSound(soundMark);
+    playSound(soundMark); // Som de marcação[cite: 6]
 
-    if (checkWin()) return endGame('win');
+    if (checkWin(currentPlayer)) return endGame('win');
     if (board.every(v => v)) return endGame('draw');
 
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     updateTurn();
 }
 
-/* EVENTOS E TECLADO[cite: 6] */
+/* EVENTOS E ATALHOS[cite: 6] */
 cells.forEach(c => c.addEventListener('click', () => makeMove(+c.dataset.index)));
 
 const map = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5, '7': 6, '8': 7, '9': 8 };
@@ -147,7 +155,7 @@ document.addEventListener('keydown', e => {
     if (['1', '2', '3'].includes(e.key)) {
         combo.add(e.key);
         if (combo.size === 3) {
-            window.location.href = 'https://juniorcriste.github.io/Painel-Interativo/';
+            window.location.href = 'https://juniorcriste.github.io/Painel-Interativo/'; // Link corrigido[cite: 6]
         }
     }
 });
@@ -156,7 +164,7 @@ document.addEventListener('keyup', e => {
     if (['1', '2', '3'].includes(e.key)) combo.delete(e.key);
 });
 
-/* INATIVIDADE[cite: 6] */
+/* SISTEMA DE INATIVIDADE[cite: 6] */
 const TEMPO_LIMITE = 5 * 60 * 1000; 
 let temporizador;
 
@@ -171,4 +179,5 @@ function reiniciarTemporizador() {
 
 document.addEventListener("click", reiniciarTemporizador);
 document.addEventListener("keydown", reiniciarTemporizador);
+
 reiniciarTemporizador();
