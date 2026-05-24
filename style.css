@@ -1,7 +1,10 @@
 :root {
-    --bg-creme: #eeeab0;
-    --retro-red: #e76f51;
-    --text-dark: #2d2d2d;
+    --bg-dark: #0a0a12;       /* Fundo ultra escuro cyberpunk */
+    --neon-cyan: #00f2fe;     /* Ciano elétrico */
+    --neon-pink: #ff007f;     /* Rosa/Magenta neon */
+    --neon-purple: #9d4edd;   /* Roxo moderno */
+    --text-light: #e0e0ff;    /* Texto claro com leve toque azulado */
+    --glass-bg: rgba(16, 16, 30, 0.65); /* Fundo dos blocos translúcido */
 }
 
 body {
@@ -10,83 +13,51 @@ body {
     margin-top: 25px;
     min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--bg-creme);
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 242, 254, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(255, 0, 127, 0.15) 0px, transparent 50%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    color: var(--text-dark);
+    color: var(--text-light);
 }
- 
+
+/* Fundo Dinâmico com Ondas Neon */
 .background-pattern {
     position: fixed;
     inset: 0;
     z-index: -1;
     display: flex;
     align-items: flex-end;
+    opacity: 0.4; /* Deixa as ondas sutis ao fundo */
 }
-.waves { width: 150%; height: 100%;}
+.waves { 
+    width: 150%; 
+    height: 60%;
+}
 
 .parallax > use {
-  animation: 
-    move-forever 20s cubic-bezier(.55,.5,.45,.5) infinite,
-    swell 7s ease-in-out infinite,
-    fade-cycle 30s linear infinite; 
+    animation: move-forever 20s cubic-bezier(.55,.5,.45,.5) infinite; 
 }
+.parallax { filter: blur(4px); zoom: 150%; }
 
-.parallax {filter: blur(5px); zoom: 150%;}
-
-.parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
-.parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
-.parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
-.parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 16s; }
-.parallax > use:nth-child(5) { animation-delay: -7s; animation-duration: 19s; }
-.parallax > use:nth-child(6) { animation-delay: -8s; animation-duration: 21s; }
-.parallax > use:nth-child(7) { animation-delay: -10s; animation-duration: 23s; }
-/* ... e assim por diante */
-
-@keyframes fade-cycle {
-  0%, 15% { opacity: 0; visibility: hidden; }     /* Invisível no começo */
-  25%, 75% { opacity: 0.5; visibility: visible; } /* Aparece e fica um tempo (ajuste 0.5 conforme desejar) */
-  85%, 100% { opacity: 0; visibility: hidden; }   /* Some no final */
-}
-
+/* Efeito de Chiado/Scanlines Digitais de Monitor Futurista */
 body::after {
-  content: "";
-  position: fixed;
-  top: -50%; left: -50%; /* Aumentamos a área para permitir o movimento */
-  width: 200%; height: 200%;
-  
-  /* Gradiente de scanlines + um gradiente de grão (noise) */
-  background: 
-    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 2px);
-  background-size: 100% 4px, 100% 3px;
-  
-  pointer-events: none;
-  z-index: -1;
-  /* Aplicamos a animação de chiado */
-  animation: noise-tv 10s infinite;
-  opacity: 0.3;
-}
-
-.glass-panel {
-    background: rgba(255, 255, 255, 0.05); /* Quase transparente */
-    backdrop-filter: blur(15px) saturate(150%); /* O segredo do vidro */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Borda fina para refletir luz */
-    border-radius: 20px;
-    box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.2); /* Brilho neon suave */
-    color: #fff;
-    padding: 20px;
-}
-
-.grid-floor {
-    background-image: 
-        linear-gradient(rgba(0, 255, 255, 0.3) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 255, 0.3) 1px, transparent 1px);
-    background-size: 50px 50px;
-    transform: perspective(500px) rotateX(60deg);
+    content: "";
+    position: fixed;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: 
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 2px);
+    background-size: 100% 4px, 100% 3px;
+    pointer-events: none;
+    z-index: 5;
+    animation: noise-tv 8s infinite linear;
+    opacity: 0.4;
 }
 
 .main-wrapper {
@@ -95,6 +66,7 @@ body::after {
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 2;
 }
 
 .dashboard {
@@ -115,6 +87,7 @@ body::after {
 
 .side-branding {
     flex: 0 0 280px; 
+    filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.4)); /* Brilho na logo principal */
 }
 
 .side-logo {
@@ -123,18 +96,18 @@ body::after {
     display: block;
 }
 
+/* Moldura de Letreiro/Notícias Neon */
 .news-section {
     flex: 0 1 835px; 
     height: 320px;
     position: relative;
-    border: 5px solid var(--text-dark);
-    border-radius: 20px;
+    border: 3px solid var(--neon-cyan);
+    border-radius: 16px;
     overflow: hidden;
     background: #000;
-    box-shadow: 10px 10px 0px rgba(0,0,0,0.05);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
 }
 
-/* O container agora segura os blocos absolutos */
 .slide-track { 
     position: relative;
     width: 100%;
@@ -143,10 +116,8 @@ body::after {
 
 .slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     opacity: 0; 
     transition: opacity 1.5s ease-in-out; 
     z-index: 0;
@@ -163,54 +134,26 @@ body::after {
     object-fit: cover; 
 }
 
-.app-button:active, .app-button.teclado-ativo {
-    transform: scale(0.95);
-    filter: brightness(1.3) contrast(1.1);
-    box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-}
-
 .slide-caption {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 0; left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 12px 25px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9) 30%);
+    color: #fff;
+    padding: 20px 25px;
     font-weight: 700;
     font-size: 1.1rem;
     box-sizing: border-box;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px var(--neon-cyan);
 }
 
-#slide-container {
-    position: relative;
-    width: 100%;
-    height: 400px; /* Ajuste conforme necessário */
-    overflow: hidden;
-}
-
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0; /* Começam invisíveis */
-    transition: opacity 1.5s ease-in-out; /* Transição suave de 1.5s */
-    z-index: 0;
-}
-
-.slide.active {
-    opacity: 1; /* Apenas o ativo fica visível */
-    z-index: 1;
-}
-
-
+/* Grid de Aplicativos Futurista */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
-    gap: 20px;
+    gap: 25px;
     padding: 0 20px;
     width: 100%;
 }
@@ -220,191 +163,175 @@ body::after {
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/* Os botões ganham visual cibernético translúcido com borda neon */
 .app-button img {
     width: 100%;
     max-width: 220px; 
     aspect-ratio: 1/1;
     object-fit: cover;
-    border-radius: 20px;
-    border: 5px solid var(--text-dark);
-    background: #fff;
-    box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+    border-radius: 16px;
+    border: 3px solid var(--neon-purple);
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
 }
 
-.app-button::after {
-    content: attr(data-label);
-    margin-top: 10px;
-    font-weight: 900;
-    font-size: 0.85rem;
+/* Títulos dos Apps com efeito Glow */
+.no-break {
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 12px;
+    font-weight: 700;
+    font-size: 1rem;
     text-transform: uppercase;
     text-align: center;
-    color: var(--text-dark);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px var(--neon-pink);
+    -webkit-text-stroke: none; /* Remove a borda preta antiga pesada */
 }
 
-.app-button:hover { transform: scale(1.05); }
-
-.modern-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: rgba(161, 235, 113, 0.5);
-    backdrop-filter: blur(10px);
-    padding: 10px 40px;
-    display: flex;
-    justify-content: space-between;
-    font-weight: 700;
-    font-size: 0.8rem;
-    border-top: 3px solid var(--text-dark);
-    box-sizing: border-box;
+/* Efeito de Hover (Passar o Mouse ou Foco) */
+.app-button:hover { 
+    transform: translateY(-5px) scale(1.03); 
 }
 
-@keyframes swell {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(10px); /* Ajuste aqui para ondas mais altas ou baixas */
-  }
+.app-button:hover img {
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+    filter: saturate(1.2);
 }
 
-.vapor-sun {
-    position: fixed;
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 300px;
-    background: linear-gradient(#ff71ce 20%, #fffb96 100%);
-    border-radius: 50%;
-    z-index: -2;
-    box-shadow: 0 0 50px rgba(255, 113, 206, 0.5);
+/* Clique Físico e Atalho do Teclado Ativo */
+.app-button:active, .app-button.teclado-ativo {
+    transform: scale(0.95);
+    filter: brightness(1.4);
 }
 
-@keyframes noise-tv {
-  0% { transform: translate(0,0); }
-  10% { transform: translate(-1%, -1%); }
-  20% { transform: translate(1%, 1%); }
-  30% { transform: translate(-2%, 0); }
-  40% { transform: translate(1%, -2%); }
-  50% { transform: translate(-1%, 1%); }
-  60% { transform: translate(2%, 1%); }
-  70% { transform: translate(-1%, -1%); }
-  80% { transform: translate(1%, 2%); }
-  90% { transform: translate(-2%, -1%); }
-  100% { transform: translate(0,0); }
+/* O SEU CHAMARIZ (Casado perfeitamente com a estética Neon) */
+.chamariz {
+    animation: bouncePopNeon 1.2s ease-in-out;
 }
 
+@keyframes bouncePopNeon {
+    0% { transform: scale(1); }
+    15% {
+        transform: scale(1.06) rotate(-1deg);
+        filter: brightness(1.3);
+    }
+    30% {
+        transform: scale(1.04) rotate(1deg);
+    }
+    45% { transform: scale(1.05); }
+    70% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+/* Relógio Digital de Alta Tecnologia */
 .glass-clock {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 15px;
+    background: rgba(10, 10, 20, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 12px;
     padding: 10px 20px;
     z-index: 1000;
-    text-align: center; /* Centraliza a data sobre o relógio */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
     pointer-events: none;
-    width: 95px;
+    width: 110px;
 }
 
 #txt-data {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    color: var(--text-dark);
-    opacity: 0.8;
-    margin-bottom: 2px;
-    letter-spacing: 1px;
+    color: var(--neon-pink);
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
 }
 
 #txt-relogio {
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
-    font-size: 1.5rem;
-    color: var(--text-dark);
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+    font-size: 1.4rem;
+    color: #fff;
+    text-shadow: 0 0 10px var(--neon-cyan);
     line-height: 1;
 }
 
-#mini-icon {
-    
-    width: 20px;
-    height: 20px;
+/* Rodapé Moderno e Minimalista */
+.modern-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(6, 6, 12, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 12px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+    border-top: 2px solid var(--neon-purple);
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+    color: rgba(224, 224, 255, 0.7);
+    letter-spacing: 0.5px;
+    z-index: 10;
+}
+
+.footer-center {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 5px rgba(0, 242, 254, 0.3);
+}
+
+/* Ícones auxiliares */
+#mini-icon, #mini-icon2 {
+    width: 18px;
+    height: 18px;
     border: none;
     border-radius: 0;
     vertical-align: middle;
     object-fit: contain;
     background: none;
     box-shadow: none;
-    margin-right: 3.5px;
+    margin-right: 4px;
+    filter: drop-shadow(0 0 3px #fff);
 }
 
 #mini-icon2 {
-    
     width: auto;
-    height: 15px;
-    border: none;
-    border-radius: 0;
-    vertical-align: middle;
-    object-fit: contain;
-    background: none;
-    box-shadow: none;
-    margin-right: 3.5px;
+    height: 14px;
 }
 
-.no-break {
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-    margin-top: 10px;
-    font-weight: 900;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    text-align: center;
-    color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    -webkit-text-stroke-width: 2.3px; /* Largura da borda */
-    -webkit-text-stroke-color: black; /* Cor da borda */
-    paint-order: stroke fill;
+/* Animações de Ambiente */
+@keyframes move-forever {
+    0% { transform: translate3d(-90px,0,0); }
+    100% { transform: translate3d(85px,0,0); }
 }
 
-/* Opcional: Garante que a primeira imagem se comporte bem */
-.app-button img {
-    vertical-align: middle;
-}
-
-/* Animação para chamar atenção (Efeito Chamariz) */
-.chamariz {
-    animation: bouncePop 1.2s ease-in-out;
-}
-
-@keyframes bouncePop {
-    0% {
-        transform: scale(1);
-    }
-    15% {
-        transform: scale(1.08) rotate(-2deg);
-        filter: brightness(1.2) contrast(1.1);
-    }
-    30% {
-        transform: scale(1.05) rotate(2deg);
-        filter: brightness(1.2) contrast(1.1);
-    }
-    45% {
-        transform: scale(1.07) rotate(-1deg);
-    }
-    70% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1);
-    }
+@keyframes noise-tv {
+    0% { transform: translate(0,0); }
+    10% { transform: translate(-0.5%, -0.5%); }
+    20% { transform: translate(0.5%, 0.5%); }
+    30% { transform: translate(-1%, 0); }
+    40% { transform: translate(0.5%, -1%); }
+    50% { transform: translate(-0.5%, 0.5%); }
+    60% { transform: translate(1%, 0.5%); }
+    70% { transform: translate(-0.5%, -0.5%); }
+    80% { transform: translate(0.5%, 1%); }
+    90% { transform: translate(-1%, -0.5%); }
+    100% { transform: translate(0,0); }
 }
