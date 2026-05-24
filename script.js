@@ -66,6 +66,38 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+
+// Configurações de Alternância Sequencial da Logo com Glitch
+const logoElement = document.getElementById('logo-sistema');
+const logosSequencia = [
+    'img/Painel Fialho.png',
+    'img/Painel Fialho-02.png',
+    'img/Painel Fialho-03.png'
+];
+let currentLogoIndex = 0;
+
+function alternarLogoComGlitch() {
+    if (!logoElement) return;
+
+    // 1. Aplica o efeito glitch na logo atual
+    logoElement.classList.add('logo-glitch');
+
+    // 2. No meio da distorção (150ms), altera o arquivo de imagem
+    setTimeout(() => {
+        currentLogoIndex = (currentLogoIndex + 1) % logosSequencia.length;
+        logoElement.src = logosSequencia[currentLogoIndex];
+    }, 150);
+
+    // 3. Remove o efeito de glitch para estabilizar a nova logo
+    setTimeout(() => {
+        logoElement.classList.remove('logo-glitch');
+    }, 300);
+}
+
+// Executa a alternância a cada 7 segundos
+setInterval(alternarLogoComGlitch, 7000);
+
+
 // Som de inicialização
 window.addEventListener('load', () => {
     soundLoaded.play().catch(() => console.log("Aguardando interação do usuário para iniciar áudios."));

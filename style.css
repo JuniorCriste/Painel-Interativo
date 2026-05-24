@@ -327,3 +327,8 @@ body::after {
     width: auto;
     height: 14px;
 }
+
+/* Efeito de Glitch exclusivo para a troca de logos */
+.logo-glitch {
+    animation: glitchAnim 0.3s linear infinite;
+}
