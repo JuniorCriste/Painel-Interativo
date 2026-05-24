@@ -15,6 +15,33 @@ if (totalSlides > 0) {
     setInterval(autoSlide, 5000);
 }
 
+
+// Efeito Chamariz Aleatório nos Botões do Grid
+function iniciarChamariz() {
+    const botoes = document.querySelectorAll('.app-button');
+    if (botoes.length === 0) return;
+
+    setInterval(() => {
+        // Sorteia um índice aleatório entre os botões disponíveis
+        const indiceAleatorio = Math.floor(Math.random() * botoes.length);
+        const botaoSorteado = botoes[indiceAleatorio];
+
+        // Garante que o botão não está executando a animação no momento
+        if (!botaoSorteado.classList.contains('chamariz')) {
+            botaoSorteado.classList.add('chamariz');
+
+            // Remove a classe após a animação terminar (1.2s do CSS = 1200ms)
+            setTimeout(() => {
+                botaoSorteado.classList.remove('chamariz');
+            }, 1200);
+        }
+    }, 7000); // Executa o sorteio a cada 7 segundos
+}
+
+// Inicia o efeito assim que a página carregar
+window.addEventListener('DOMContentLoaded', iniciarChamariz);
+
+
 // Sons do Painel
 const soundLoaded = new Audio('sounds/loaded.mp3');
 const soundButton = new Audio('sounds/button.mp3');

@@ -380,3 +380,31 @@ body::after {
 .app-button img {
     vertical-align: middle;
 }
+
+/* Animação para chamar atenção (Efeito Chamariz) */
+.chamariz {
+    animation: bouncePop 1.2s ease-in-out;
+}
+
+@keyframes bouncePop {
+    0% {
+        transform: scale(1);
+    }
+    15% {
+        transform: scale(1.08) rotate(-2deg);
+        filter: brightness(1.2) contrast(1.1);
+    }
+    30% {
+        transform: scale(1.05) rotate(2deg);
+        filter: brightness(1.2) contrast(1.1);
+    }
+    45% {
+        transform: scale(1.07) rotate(-1deg);
+    }
+    70% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
