@@ -72,9 +72,9 @@ body::after {
 
 .top-content {
     display: flex;
-    padding: 0 20px;
+    padding-left: 50px;
     gap: 30px;
-    width: 100%;
+    width: 95%;
     align-items: center;
     justify-content: space-between; 
 }
