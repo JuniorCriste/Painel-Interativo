@@ -1,10 +1,10 @@
 :root {
-    --bg-dark: #020204;       /* Preto absoluto de terminal */
-    --panel-bg: #07090e;      /* Fundo fosco dos blocos */
+    --bg-dark: #030306;       /* Preto profundo de terminal */
+    --panel-bg: #0b0d16;      /* Fundo fosco dos blocos */
     --terminal-green: #00ff66; /* Verde Matrix elétrico */
-    --terminal-amber: #ffb000; /* Âmbar clássico de monitores antigos */
-    --terminal-cyan: #00e5ff;  /* Ciano de comandos digitais */
-    --text-light: #d1f7e4;    /* Texto claro com tom esverdeado */
+    --terminal-amber: #ffb000; /* Âmbar clássico */
+    --terminal-cyan: #00e5ff;  /* Ciano de comandos */
+    --text-light: #e2fbe9;    /* Texto claro nítido */
 }
 
 body {
@@ -12,7 +12,6 @@ body {
     margin: 0;
     margin-top: 25px;
     min-height: 100vh;
-    /* Fonte estilo código/terminal */
     font-family: 'Courier New', Courier, monospace; 
     background-color: var(--bg-dark);
     display: flex;
@@ -24,51 +23,37 @@ body {
     position: relative;
 }
 
-/* Fundo Fixo estilo Brilho de Monitor de Fósforo Verde */
+/* Fundo Fixo com Brilho de Monitor de Fósforo e Scanlines Atrás de Tudo */
 .background-pattern {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: -1; /* Garante que fica no fundo absoluto */
     background-image: 
-        radial-gradient(circle at center, rgba(0, 255, 102, 0.08) 0%, transparent 70%),
-        radial-gradient(circle at bottom left, rgba(0, 229, 255, 0.1) 0%, transparent 40%);
-    display: flex;
-    align-items: flex-end;
+        radial-gradient(circle at center, rgba(0, 255, 102, 0.05) 0%, transparent 75%),
+        radial-gradient(circle at bottom left, rgba(0, 229, 255, 0.08) 0%, transparent 45%);
     pointer-events: none;
 }
 
-.waves { 
-    width: 100%; 
-    height: 80px;
-    opacity: 0.15;
-    /* Força as ondas a ficarem em tons de verde terminal */
-    filter: hue-rotate(120deg) saturate(1.5);
-}
-
-.parallax > use {
-    animation: move-forever 20s cubic-bezier(.55,.5,.45,.5) infinite; 
-}
-.parallax { filter: blur(3px); }
-
-/* Scanlines CRT bem marcadas (Efeito Monitor Antigo) */
+/* Efeito CRT/Scanlines movido para trás do conteúdo para não atrapalhar os slides */
 body::after {
     content: "";
     position: fixed;
     inset: 0;
-    background: linear-gradient(
-        rgba(18, 16, 16, 0) 50%, 
-        rgba(0, 0, 0, 0.35) 50%
-    ), repeating-linear-gradient(
+    background: repeating-linear-gradient(
         0deg, 
-        rgba(0, 255, 102, 0.02) 0px, 
-        rgba(0, 255, 102, 0.02) 1px, 
+        rgba(0, 0, 0, 0.3) 0px, 
+        rgba(0, 0, 0, 0.3) 1px, 
         transparent 1px, 
         transparent 3px
     );
-    background-size: 100% 4px, 100% 3px;
     pointer-events: none;
-    z-index: 5;
-    opacity: 0.8;
+    z-index: -1; /* MUDANÇA CRUCIAL: Agora fica atrás, dando nitidez total à frente */
+    opacity: 0.6;
+}
+
+/* Esconde permanentemente o bloco antigo de ondas que gerava a faixa colorida */
+.waves { 
+    display: none !important;
 }
 
 .main-wrapper {
@@ -96,13 +81,13 @@ body::after {
     justify-content: space-between; 
 }
 
-/* Logo com efeito de brilho verde fosforescente */
+/* Logo Escola */
 .side-branding {
     flex: 0 0 280px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    filter: drop-shadow(0 0 15px rgba(0, 255, 102, 0.5)) grayscale(0.3); 
+    filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.4)); 
 }
 
 .side-logo {
@@ -111,16 +96,16 @@ body::after {
     display: block;
 }
 
-/* Moldura do Slide imitando um Terminal de Linha de Comando */
+/* Moldura do Slide Impecável e Limpa */
 .news-section {
     flex: 0 1 835px; 
     height: 320px;
     position: relative;
     border: 2px solid var(--terminal-green);
-    border-radius: 8px; /* Cantos menos arredondados, estilo terminal */
+    border-radius: 8px;
     overflow: hidden;
     background: #000;
-    box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
 }
 
 .slide-track { 
@@ -143,18 +128,18 @@ body::after {
     z-index: 1;
 }
 
+/* Imagens totalmente limpas e sem filtros escuros na frente */
 .slide img { 
     width: 100%; 
     height: 100%; 
     object-fit: cover;
-    filter: sepia(0.2) hue-rotate(60deg) brightness(0.9); /* Dá um tom digital às fotos */
 }
 
 .slide-caption {
     position: absolute;
     bottom: 0; left: 0;
     width: 100%;
-    background: rgba(0, 5, 2, 0.85);
+    background: rgba(0, 0, 0, 0.85); /* Fundo sólido escuro para dar contraste ao texto */
     border-top: 1px solid var(--terminal-green);
     color: var(--terminal-green);
     padding: 15px 25px;
@@ -162,8 +147,8 @@ body::after {
     font-size: 1rem;
     box-sizing: border-box;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 0 5px var(--terminal-green);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 4px var(--terminal-green);
 }
 
 /* Grid de Aplicativos */
@@ -184,7 +169,7 @@ body::after {
     transition: transform 0.2s ease;
 }
 
-/* Caixas dos botões com bordas estilo linhas de código */
+/* Botões limpos e nítidos */
 .app-button img {
     width: 100%;
     max-width: 220px; 
@@ -193,26 +178,26 @@ body::after {
     border-radius: 8px;
     border: 2px solid rgba(0, 255, 102, 0.4);
     background-color: var(--panel-bg);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
     transition: all 0.2s ease;
 }
 
-/* Nomes dos Apps no estilo código de sistema [root@fialho] */
+/* Títulos dos Apps */
 .no-break {
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
     margin-top: 12px;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     text-align: center;
     color: var(--terminal-cyan);
     letter-spacing: 0.5px;
-    text-shadow: 0 0 6px rgba(0, 229, 255, 0.6);
+    text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
 }
 
-/* Interações - Hover e Foco */
+/* Interações */
 .app-button:hover { 
     transform: translateY(-4px); 
 }
@@ -220,32 +205,26 @@ body::after {
 .app-button:hover img {
     border-color: var(--terminal-cyan);
     box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
-    filter: brightness(1.1);
 }
 
 .app-button:active, .app-button.teclado-ativo {
     transform: scale(0.96);
 }
 
-/* Efeito Chamariz Adaptado (Pisca em Âmbar de Alerta) */
+/* Chamariz sutil (Pisca a borda em Âmbar sem distorcer) */
 .chamariz {
     animation: bouncePopTerminal 1.2s ease-in-out;
 }
 
 @keyframes bouncePopTerminal {
     0% { transform: scale(1); }
-    15% {
-        transform: scale(1.04);
-        filter: brightness(1.2);
-    }
-    30% {
-        border-color: var(--terminal-amber);
-    }
+    15% { transform: scale(1.04); }
+    30% { border-color: var(--terminal-amber); }
     70% { transform: scale(1); }
     100% { transform: scale(1); }
 }
 
-/* Relógio de Console Computacional */
+/* Relógio Digital Terminal */
 .glass-clock {
     position: fixed;
     top: 20px;
@@ -278,19 +257,19 @@ body::after {
     line-height: 1.1;
 }
 
-/* Rodapé do Sistema */
+/* Rodapé Limpo */
 .modern-footer {
     position: fixed;
     bottom: 0;
     width: 100%;
     background: #000;
-    padding: 10px 40px;
+    padding: 12px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
     font-size: 0.75rem;
-    border-top: 2px solid rgba(0, 255, 102, 0.3);
+    border-top: 2px solid rgba(0, 255, 102, 0.2);
     box-sizing: border-box;
     color: rgba(0, 255, 102, 0.5);
     z-index: 10;
@@ -298,10 +277,10 @@ body::after {
 
 .footer-center {
     color: var(--terminal-green);
-    text-shadow: 0 0 4px rgba(0, 255, 102, 0.3);
+    text-shadow: 0 0 4px rgba(0, 255, 102, 0.2);
 }
 
-/* Ícones auxiliares */
+/* Ícones do rodapé */
 #mini-icon, #mini-icon2 {
     width: 16px;
     height: 16px;
@@ -312,17 +291,10 @@ body::after {
     background: none;
     box-shadow: none;
     margin-right: 4px;
-    /* Torna os ícones levemente esverdeados para combinar com o terminal */
     filter: sepia(1) hue-rotate(70deg) saturate(3);
 }
 
 #mini-icon2 {
     width: auto;
     height: 14px;
-}
-
-/* Movimento sutil das ondas de fundo */
-@keyframes move-forever {
-    0% { transform: translate3d(-90px,0,0); }
-    100% { transform: translate3d(85px,0,0); }
 }
