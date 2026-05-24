@@ -5,7 +5,7 @@
 }
 
 body {
-    zoom: 80%;
+    transform: scale(0.9);
     margin: 0;
     margin-top: 25px;
     min-height: 100vh;
@@ -134,9 +134,40 @@ body::after {
     box-shadow: 10px 10px 0px rgba(0,0,0,0.05);
 }
 
-.slide-track { display: flex; height: 100%; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);}
-.slide { min-width: 100%; height: 100%; position: relative; }
-.slide img { width: 100%; height: 100%; object-fit: cover; }
+/* O container agora segura os blocos absolutos */
+.slide-track { 
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; 
+    transition: opacity 1.5s ease-in-out; 
+    z-index: 0;
+}
+
+.slide.active {
+    opacity: 1; 
+    z-index: 1;
+}
+
+.slide img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.app-button:active, .app-button.teclado-ativo {
+    transform: scale(0.95);
+    filter: brightness(1.3) contrast(1.1);
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
 
 .slide-caption {
     position: absolute;
