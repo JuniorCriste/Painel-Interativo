@@ -81,7 +81,7 @@ body::after {
 
 /* Logo Escola: REMOVIDO TOTALMENTE O BLUR ATRÁS DA LOGO */
 .side-branding {
-    flex: 0 0 280px; 
+    flex: 0 0 320px; 
     display: flex;
     justify-content: center;
     align-items: center;
