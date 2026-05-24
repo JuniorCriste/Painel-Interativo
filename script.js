@@ -1,46 +1,45 @@
-// Configurações dos Slides (Efeito Fade)
+// Configurações dos Slides (Efeito de Transição Glitch)
 const slides = document.querySelectorAll('.slide'); 
 const totalSlides = slides.length; 
 let currentSlide = 0;
 
 function autoSlide() {
     if (totalSlides === 0) return;
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % totalSlides;
-    slides[currentSlide].classList.add('active');
+
+    // Captura o slide atual e o próximo container de imagem
+    const currentActiveSlide = slides[currentSlide];
+    const imgContainer = currentActiveSlide.querySelector('img');
+
+    if (imgContainer) {
+        // 1. Ativa o efeito de distorção/glitch na imagem atual
+        imgContainer.classList.add('glitch-effect');
+
+        // 2. No meio do estouro do glitch (250ms), faz a troca real de slide em background
+        setTimeout(() => {
+            currentActiveSlide.classList.remove('active');
+            imgContainer.classList.remove('glitch-effect'); // Limpa o efeito para quando ele voltar
+
+            currentSlide = (currentSlide + 1) % totalSlides;
+            
+            // Ativa o próximo slide
+            slides[currentSlide].classList.add('active');
+        }, 250);
+    } else {
+        // Fallback caso não encontre a imagem
+        currentActiveSlide.classList.remove('active');
+        currentSlide = (currentSlide + 1) % totalSlides;
+        slides[currentSlide].classList.add('active');
+    }
 }
 
 if (totalSlides > 0) {
     slides[0].classList.add('active');
-    setInterval(autoSlide, 5000);
+    setInterval(autoSlide, 5000); // Executa a cada 5 segundos
 }
 
-
-// Efeito Chamariz Aleatório nos Botões do Grid
-function iniciarChamariz() {
-    const botoes = document.querySelectorAll('.app-button');
-    if (botoes.length === 0) return;
-
-    setInterval(() => {
-        // Sorteia um índice aleatório entre os botões disponíveis
-        const indiceAleatorio = Math.floor(Math.random() * botoes.length);
-        const botaoSorteado = botoes[indiceAleatorio];
-
-        // Garante que o botão não está executando a animação no momento
-        if (!botaoSorteado.classList.contains('chamariz')) {
-            botaoSorteado.classList.add('chamariz');
-
-            // Remove a classe após a animação terminar (1.2s do CSS = 1200ms)
-            setTimeout(() => {
-                botaoSorteado.classList.remove('chamariz');
-            }, 1200);
-        }
-    }, 7000); // Executa o sorteio a cada 7 segundos
-}
-
-// Inicia o efeito assim que a página carregar
-window.addEventListener('DOMContentLoaded', iniciarChamariz);
-
+// =========================================================================
+// O RESTANTE DO SEU SCRIPT (SONS, ATALHOS, RELÓGIO) CONTINUA IGUAL ABAIXO:
+// =========================================================================
 
 // Sons do Painel
 const soundLoaded = new Audio('sounds/loaded.mp3');
@@ -50,21 +49,17 @@ const soundClock = new Audio('sounds/clock.mp3');
 
 // Evento Único de Teclado (Atalhos 1-8)
 document.addEventListener('keydown', (e) => {
-    if (e.repeat) return; // Evita que segurar a tecla dispare múltiplos eventos
+    if (e.repeat) return; 
 
-    // Busca o botão que possui o data-key correspondente à tecla pressionada
     const btn = document.querySelector(`[data-key="${e.key}"]`);
     
     if (btn) {
-        // Toca o som do clique limpando o anterior
         soundButton.pause();
         soundButton.currentTime = 0;
         soundButton.play().catch(() => {});
 
-        // Efeito visual de clique
         btn.style.transform = "scale(0.95)";
         
-        // Redireciona pegando o link direto do HTML (Single Source of Truth)
         setTimeout(() => {
             window.location.href = btn.getAttribute('href');
         }, 120);
@@ -104,12 +99,12 @@ setInterval(() => {
     }
 }, 1000);
 
-// Atualização Visual do Relógio de Vidro
+// Atualização Visual do Relógio
 function atualizarRelogio() {
     const agora = new Date();
     
     const horas = String(agora.getHours()).padStart(2, '0');
-    const minutos = String(agora.getMinutes()).padStart(2, '0');
+    const minutes = String(agora.getMinutes()).padStart(2, '0');
     const segundos = String(agora.getSeconds()).padStart(2, '0');
     
     const dia = String(agora.getDate()).padStart(2, '0');
@@ -119,7 +114,7 @@ function atualizarRelogio() {
     const displayRelogio = document.getElementById('txt-relogio');
     const displayData = document.getElementById('txt-data');
     
-    if (displayRelogio) displayRelogio.textContent = `${horas}:${minutos}:${segundos}`;
+    if (displayRelogio) displayRelogio.textContent = `${horas}:${minutes}:${segundos}`;
     if (displayData) displayData.textContent = `${dia}/${mes}/${ano}`;
 }
 

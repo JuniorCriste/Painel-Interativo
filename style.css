@@ -2,7 +2,7 @@
     --bg-dark: #030306;       /* Preto profundo de terminal */
     --panel-bg: #0b0d16;      /* Fundo fosco dos blocos */
     --terminal-green: #00ff66; /* Verde Matrix elétrico */
-    --terminal-amber: #ffb000; /* Âmbar clássico */
+    --terminal-purple: #9d4edd; /* Roxo Cyberpunk (Substituindo o laranja/âmbar) */
     --terminal-cyan: #00e5ff;  /* Ciano de comandos */
     --text-light: #e2fbe9;    /* Texto claro nítido */
 }
@@ -23,18 +23,17 @@ body {
     position: relative;
 }
 
-/* Fundo Fixo com Brilho de Monitor de Fósforo e Scanlines Atrás de Tudo */
+/* Fundo Fixo com Brilho de Fósforo e Scanlines Atrás */
 .background-pattern {
     position: fixed;
     inset: 0;
-    z-index: -1; /* Garante que fica no fundo absoluto */
+    z-index: -1; 
     background-image: 
         radial-gradient(circle at center, rgba(0, 255, 102, 0.05) 0%, transparent 75%),
-        radial-gradient(circle at bottom left, rgba(0, 229, 255, 0.08) 0%, transparent 45%);
+        radial-gradient(circle at bottom left, rgba(157, 78, 221, 0.08) 0%, transparent 45%);
     pointer-events: none;
 }
 
-/* Efeito CRT/Scanlines movido para trás do conteúdo para não atrapalhar os slides */
 body::after {
     content: "";
     position: fixed;
@@ -47,11 +46,10 @@ body::after {
         transparent 3px
     );
     pointer-events: none;
-    z-index: -1; /* MUDANÇA CRUCIAL: Agora fica atrás, dando nitidez total à frente */
+    z-index: -1; 
     opacity: 0.6;
 }
 
-/* Esconde permanentemente o bloco antigo de ondas que gerava a faixa colorida */
 .waves { 
     display: none !important;
 }
@@ -81,13 +79,13 @@ body::after {
     justify-content: space-between; 
 }
 
-/* Logo Escola */
+/* Logo Escola: REMOVIDO TOTALMENTE O BLUR ATRÁS DA LOGO */
 .side-branding {
     flex: 0 0 280px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.4)); 
+    filter: none; /* Filtros e blurs removidos conforme solicitado */
 }
 
 .side-logo {
@@ -96,7 +94,7 @@ body::after {
     display: block;
 }
 
-/* Moldura do Slide Impecável e Limpa */
+/* Moldura do Slide preparada para o Glitch */
 .news-section {
     flex: 0 1 835px; 
     height: 320px;
@@ -119,27 +117,59 @@ body::after {
     top: 0; left: 0;
     width: 100%; height: 100%;
     opacity: 0; 
-    transition: opacity 1s ease-in-out; 
     z-index: 0;
 }
 
+/* Estado ativo imediato (sem o fade-in demorado) */
 .slide.active {
     opacity: 1; 
     z-index: 1;
 }
 
-/* Imagens totalmente limpas e sem filtros escuros na frente */
 .slide img { 
     width: 100%; 
     height: 100%; 
     object-fit: cover;
 }
 
+/* Efeito Glitch de Transição (Aplicado via JS no momento da troca) */
+.glitch-effect {
+    animation: glitchAnim 0.25s linear infinite;
+}
+
+@keyframes glitchAnim {
+    0% {
+        transform: translate(0);
+        filter: hue-rotate(0deg) contrast(1);
+    }
+    20% {
+        transform: translate(-3px, 2px) skewX(2deg);
+        filter: hue-rotate(90deg) brightness(1.2);
+    }
+    40% {
+        transform: translate(3px, -1px) scaleY(1.05);
+        clip-path: inset(10% 0 40% 0);
+    }
+    60% {
+        transform: translate(-2px, -2px);
+        filter: contrast(1.5) saturate(1.5);
+        clip-path: inset(60% 0 5% 0);
+    }
+    80% {
+        transform: translate(2px, 3px) skewX(-3deg);
+        clip-path: inset(30% 0 20% 0);
+    }
+    100% {
+        transform: translate(0);
+        filter: hue-rotate(0deg) contrast(1);
+    }
+}
+
 .slide-caption {
     position: absolute;
     bottom: 0; left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.85); /* Fundo sólido escuro para dar contraste ao texto */
+    background: rgba(0, 0, 0, 0.85); 
     border-top: 1px solid var(--terminal-green);
     color: var(--terminal-green);
     padding: 15px 25px;
@@ -149,6 +179,7 @@ body::after {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-shadow: 0 0 4px var(--terminal-green);
+    z-index: 5; /* Mantém a legenda fixa e legível durante o glitch da imagem */
 }
 
 /* Grid de Aplicativos */
@@ -169,7 +200,6 @@ body::after {
     transition: transform 0.2s ease;
 }
 
-/* Botões limpos e nítidos */
 .app-button img {
     width: 100%;
     max-width: 220px; 
@@ -182,7 +212,6 @@ body::after {
     transition: all 0.2s ease;
 }
 
-/* Títulos dos Apps */
 .no-break {
     white-space: nowrap;
     display: inline-flex;
@@ -211,7 +240,7 @@ body::after {
     transform: scale(0.96);
 }
 
-/* Chamariz sutil (Pisca a borda em Âmbar sem distorcer) */
+/* Chamariz piscando no Roxo Cyberpunk */
 .chamariz {
     animation: bouncePopTerminal 1.2s ease-in-out;
 }
@@ -219,23 +248,23 @@ body::after {
 @keyframes bouncePopTerminal {
     0% { transform: scale(1); }
     15% { transform: scale(1.04); }
-    30% { border-color: var(--terminal-amber); }
+    30% { border-color: var(--terminal-purple); }
     70% { transform: scale(1); }
     100% { transform: scale(1); }
 }
 
-/* Relógio Digital Terminal */
+/* Relógio Digital ROXO CYBERPUNK (Substituindo o Laranja) */
 .glass-clock {
     position: fixed;
     top: 20px;
     right: 20px;
     background: #000;
-    border: 2px solid var(--terminal-amber);
+    border: 2px solid var(--terminal-purple); /* Borda Roxa */
     border-radius: 6px;
     padding: 8px 16px;
     z-index: 1000;
     text-align: center;
-    box-shadow: 0 0 12px rgba(255, 176, 0, 0.2);
+    box-shadow: 0 0 12px rgba(157, 78, 221, 0.3); /* Sombra Roxa */
     pointer-events: none;
     width: 125px;
 }
@@ -243,21 +272,21 @@ body::after {
 #txt-data {
     font-weight: bold;
     font-size: 0.75rem;
-    color: var(--terminal-amber);
+    color: var(--terminal-purple); /* Texto Data Roxo */
     letter-spacing: 1px;
     margin-bottom: 2px;
-    text-shadow: 0 0 4px var(--terminal-amber);
+    text-shadow: 0 0 4px var(--terminal-purple);
 }
 
 #txt-relogio {
     font-weight: bold;
     font-size: 1.25rem;
     color: #fff;
-    text-shadow: 0 0 8px var(--terminal-amber);
+    text-shadow: 0 0 8px var(--terminal-purple); /* Glow das horas Roxo */
     line-height: 1.1;
 }
 
-/* Rodapé Limpo */
+/* Rodapé */
 .modern-footer {
     position: fixed;
     bottom: 0;
@@ -280,7 +309,7 @@ body::after {
     text-shadow: 0 0 4px rgba(0, 255, 102, 0.2);
 }
 
-/* Ícones do rodapé */
+/* Ícones */
 #mini-icon, #mini-icon2 {
     width: 16px;
     height: 16px;
