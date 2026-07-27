@@ -6,26 +6,22 @@ let currentSlide = 0;
 function autoSlide() {
     if (totalSlides === 0) return;
 
-    // Captura o slide atual e o próximo container de imagem
     const currentActiveSlide = slides[currentSlide];
     const imgContainer = currentActiveSlide.querySelector('img');
 
     if (imgContainer) {
-        // 1. Ativa o efeito de distorção/glitch na imagem atual
+        // 1. Ativa o efeito glitch na imagem
         imgContainer.classList.add('glitch-effect');
 
-        // 2. No meio do estouro do glitch (250ms), faz a troca real de slide em background
+        // 2. Realiza a troca no meio da transição
         setTimeout(() => {
             currentActiveSlide.classList.remove('active');
-            imgContainer.classList.remove('glitch-effect'); // Limpa o efeito para quando ele voltar
+            imgContainer.classList.remove('glitch-effect');
 
             currentSlide = (currentSlide + 1) % totalSlides;
-            
-            // Ativa o próximo slide
             slides[currentSlide].classList.add('active');
         }, 250);
     } else {
-        // Fallback caso não encontre a imagem
         currentActiveSlide.classList.remove('active');
         currentSlide = (currentSlide + 1) % totalSlides;
         slides[currentSlide].classList.add('active');
@@ -34,12 +30,8 @@ function autoSlide() {
 
 if (totalSlides > 0) {
     slides[0].classList.add('active');
-    setInterval(autoSlide, 5000); // Executa a cada 5 segundos
+    setInterval(autoSlide, 5000);
 }
-
-// =========================================================================
-// O RESTANTE DO SEU SCRIPT (SONS, ATALHOS, RELÓGIO) CONTINUA IGUAL ABAIXO:
-// =========================================================================
 
 // Sons do Painel
 const soundLoaded = new Audio('sounds/loaded.mp3');
@@ -47,7 +39,7 @@ const soundButton = new Audio('sounds/button.mp3');
 const soundAlert = new Audio('sounds/alert.mp3');
 const soundClock = new Audio('sounds/clock.mp3');
 
-// Evento Único de Teclado (Atalhos 1-8)
+// Evento de Teclado (Atalhos 1-8)
 document.addEventListener('keydown', (e) => {
     if (e.repeat) return; 
 
@@ -66,8 +58,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-
-// Configurações de Alternância Sequencial da Logo com Glitch
+// Alternância da Logo com Glitch
 const logoElement = document.getElementById('logo-sistema');
 const logosSequencia = [
     'img/Painel Fialho.png',
@@ -79,34 +70,29 @@ let currentLogoIndex = 0;
 function alternarLogoComGlitch() {
     if (!logoElement) return;
 
-    // 1. Aplica o efeito glitch na logo atual
     logoElement.classList.add('logo-glitch');
 
-    // 2. No meio da distorção (150ms), altera o arquivo de imagem
     setTimeout(() => {
         currentLogoIndex = (currentLogoIndex + 1) % logosSequencia.length;
         logoElement.src = logosSequencia[currentLogoIndex];
     }, 150);
 
-    // 3. Remove o efeito de glitch para estabilizar a nova logo
     setTimeout(() => {
         logoElement.classList.remove('logo-glitch');
     }, 300);
 }
 
-// Executa a alternância a cada 7 segundos
 setInterval(alternarLogoComGlitch, 7000);
-
 
 // Som de inicialização
 window.addEventListener('load', () => {
-    soundLoaded.play().catch(() => console.log("Aguardando interação do usuário para iniciar áudios."));
+    soundLoaded.play().catch(() => console.log("Aguardando interação do usuário para áudio."));
 });
 
 // Alerta periódico (A cada 5 minutos)
 setInterval(() => {
     soundAlert.currentTime = 0;
-    soundAlert.play().catch(e => {});
+    soundAlert.play().catch(() => {});
 }, 300000);
 
 // Narração da Hora Cheia
@@ -120,7 +106,7 @@ function narrarHora() {
     window.speechSynthesis.speak(mensagem);
 }
 
-// Verificação do Relógio e Narração
+// Verificação do Relógio para Narração
 setInterval(() => {
     const agora = new Date();
     if (agora.getMinutes() === 0 && agora.getSeconds() === 0) {
