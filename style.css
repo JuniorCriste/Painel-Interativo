@@ -22,7 +22,7 @@ body {
     overflow-x: hidden;
     color: var(--text-light);
     position: relative;
-    padding-bottom: 60px; /* Espaço para o footer fixo */
+    padding-bottom: 50px;
 }
 
 /* Fundo Fixo */
@@ -52,7 +52,6 @@ body::after {
     opacity: 0.6;
 }
 
-/* Wrapper Principal ocupando 100% da largura */
 .main-wrapper {
     width: 100%;
     display: flex;
@@ -66,36 +65,37 @@ body::after {
     width: 100%;
 }
 
-/* Seção Superior: Logo + Slides ocupando 100% da largura */
+/* Seção Superior: Logo + Slides com MAIOR ALTURA */
 .top-content {
     display: flex;
     width: 100%;
     align-items: stretch;
     justify-content: flex-start;
+    height: 420px; /* Aumentado a altura para dar destaque ao topo */
 }
 
 .side-branding {
-    flex: 0 0 280px; /* Largura fixa da logo */
+    flex: 0 0 350px; /* Largura expandida proporcionalmente */
     background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
     border-right: 2px solid var(--terminal-green);
     border-bottom: 2px solid var(--terminal-green);
-    padding: 10px;
+    padding: 15px;
 }
 
 .side-logo {
     max-width: 100%;
-    max-height: 250px;
+    max-height: 100%;
     height: auto;
     object-fit: contain;
 }
 
-/* Slide Ocupa todo o restante da tela */
+/* Slide Ocupa todo o restante da largura */
 .news-section {
-    flex: 1; /* Pega todo espaço restante */
-    height: 300px;
+    flex: 1;
+    height: 100%;
     position: relative;
     border-bottom: 2px solid var(--terminal-green);
     overflow: hidden;
@@ -136,20 +136,20 @@ body::after {
     background: rgba(0, 0, 0, 0.85); 
     border-top: 1px solid var(--terminal-green);
     color: var(--terminal-green);
-    padding: 12px 20px;
+    padding: 14px 24px;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-shadow: 0 0 4px var(--terminal-green);
     z-index: 5;
 }
 
-/* Grid de Botões - 100% de largura, 4 por linha no desktop, sem vazios */
+/* Grid de Botões - 8 Botões lado a lado em telas grandes */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 0; /* Sem espaços vazios entre os botões */
+    grid-template-columns: repeat(8, 1fr); /* Todos os 8 botões lado a lado */
+    gap: 0; /* Sem espaço vazio */
     width: 100%;
 }
 
@@ -157,7 +157,7 @@ body::after {
     display: block;
     position: relative;
     width: 100%;
-    aspect-ratio: 1 / 1; /* Mantém os botões quadrados */
+    aspect-ratio: 1 / 1;
     overflow: hidden;
     text-decoration: none;
     border: 1px solid rgba(0, 255, 102, 0.2);
@@ -172,29 +172,28 @@ body::after {
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* Ícone da Tecla (Número) sobreposto com meia opacidade */
+/* Tecla do número sobreposta com meia opacidade */
 .key-badge {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 35%; /* Tamanho relativo ao botão */
+    width: 40%;
     height: auto;
-    max-width: 80px;
+    max-width: 70px;
     opacity: 0.5; /* Meia opacidade */
     pointer-events: none;
     transition: opacity 0.2s ease, transform 0.2s ease;
-    filter: drop-shadow(0 0 8px #000);
+    filter: drop-shadow(0 0 6px #000);
 }
 
-/* Interações Hover/Active */
 .app-button:hover .btn-art {
-    transform: scale(1.03);
+    transform: scale(1.04);
     filter: brightness(1.1);
 }
 
 .app-button:hover .key-badge {
-    opacity: 0.85; /* Aumenta a opacidade no hover */
+    opacity: 0.9;
     transform: translate(-50%, -50%) scale(1.1);
 }
 
@@ -202,7 +201,7 @@ body::after {
     transform: scale(0.98);
 }
 
-/* Glitch da Imagem */
+/* Glitch */
 .glitch-effect {
     animation: glitchAnim 0.25s linear infinite;
 }
@@ -220,7 +219,7 @@ body::after {
     animation: glitchAnim 0.3s linear infinite;
 }
 
-/* Relógio Digital ROXO CYBERPUNK */
+/* Relógio Digital */
 .glass-clock {
     position: fixed;
     top: 15px;
@@ -288,26 +287,43 @@ body::after {
     height: 14px;
 }
 
-/* RESPONSIVIDADE PARA SMARTPHONES: 1 botão por vez */
+/* RESPONSIVIDADE INTERMEDIÁRIA (Tablets / Notebooks menores) */
+@media (max-width: 1199px) {
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr); /* 4 colunas em telas médias */
+    }
+    
+    .top-content {
+        height: 320px;
+    }
+    
+    .side-branding {
+        flex: 0 0 260px;
+    }
+}
+
+/* RESPONSIVIDADE PARA SMARTPHONES (1 botão por vez) */
 @media (max-width: 768px) {
     .top-content {
         flex-direction: column;
+        height: auto;
     }
 
     .side-branding {
         flex: none;
         width: 100%;
+        height: 180px;
         border-right: none;
         border-bottom: 2px solid var(--terminal-green);
     }
 
     .news-section {
         width: 100%;
-        height: 220px;
+        height: 240px;
     }
 
     .grid-container {
-        grid-template-columns: 1fr; /* 1 coluna: cada botão ocupa 100% por vez */
+        grid-template-columns: 1fr; /* 1 por vez no mobile */
     }
 
     .key-badge {

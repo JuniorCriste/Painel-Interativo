@@ -10,10 +10,8 @@ function autoSlide() {
     const imgContainer = currentActiveSlide.querySelector('img');
 
     if (imgContainer) {
-        // 1. Ativa o efeito glitch na imagem
         imgContainer.classList.add('glitch-effect');
 
-        // 2. Realiza a troca no meio da transição
         setTimeout(() => {
             currentActiveSlide.classList.remove('active');
             imgContainer.classList.remove('glitch-effect');
@@ -106,7 +104,7 @@ function narrarHora() {
     window.speechSynthesis.speak(mensagem);
 }
 
-// Verificação do Relógio para Narração
+// Verificação do Relógio
 setInterval(() => {
     const agora = new Date();
     if (agora.getMinutes() === 0 && agora.getSeconds() === 0) {
