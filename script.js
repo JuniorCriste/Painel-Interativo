@@ -46,8 +46,8 @@ document.addEventListener('keydown', (e) => {
 const logoElement = document.getElementById('logo-sistema');
 const logosSequencia = [
     'img/Painel Fialho.png',
-    'img/Painel Fialho-02.png',
-    'img/Painel Fialho-03.png'
+    'img/Painel Fialho.png',
+    'img/Painel Fialho.png'
 ];
 let currentLogoIndex = 0;
 
