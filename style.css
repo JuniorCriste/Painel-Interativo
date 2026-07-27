@@ -74,25 +74,20 @@ body::after {
 }
 
 /* ==========================================================================
-   TOPO: LOGO + SLIDES (100% LARGURA SOMADOS, ALTURA EXPANDIDA)
+   TOPO: SLIDES OCUPANDO 100% (TELAS GRANDES)
    ========================================================================== */
 .top-content {
     display: flex;
     width: 100%;
-    flex: 1; /* Preenche a maior parte da tela verticalmente */
+    flex: 1; /* Preenche o espaço vertical restante */
     min-height: 0;
     align-items: stretch;
     background: #000;
 }
 
+/* Oculta a logo lateral em telas grandes */
 .side-branding {
-    flex: 0 0 300px; /* Largura fixa para a logo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(11, 13, 22, 0.8);
-    border-right: 2px solid rgba(0, 255, 102, 0.3);
-    padding: 15px;
+    display: none; 
 }
 
 .side-logo {
@@ -103,7 +98,7 @@ body::after {
 }
 
 .news-section {
-    flex: 1; /* Ocupa 100% do resto da tela */
+    flex: 1; /* Ocupa 100% do topo em telas grandes */
     position: relative;
     overflow: hidden;
     background: #000;
@@ -157,9 +152,9 @@ body::after {
    ========================================================================== */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(8, 1fr); /* 8 Botões em linha */
+    grid-template-columns: repeat(8, 1fr);
     width: 100%;
-    gap: 0; /* Sem espaços em branco */
+    gap: 0;
     padding: 0;
     margin: 0;
     background: #000;
@@ -195,7 +190,7 @@ body::after {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.4); /* Meia opacidade */
+    background: rgba(0, 0, 0, 0.4); 
     transition: background 0.2s ease;
 }
 
@@ -288,7 +283,7 @@ body::after {
 }
 
 /* ==========================================================================
-   RESPONSIVIDADE (SMARTPHONE: 1 BOTÃO APÓS O OUTRO)
+   RESPONSIVIDADE (SMARTPHONE)
    ========================================================================== */
 @media (max-width: 768px) {
     body {
@@ -305,12 +300,18 @@ body::after {
         height: auto;
     }
 
+    /* Exibe a logo apenas em telas menores */
     .side-branding {
+        display: flex;
         flex: none;
         width: 100%;
-        height: 120px;
+        height: 100px;
+        background: rgba(11, 13, 22, 0.8);
         border-right: none;
         border-bottom: 2px solid rgba(0, 255, 102, 0.3);
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
     }
 
     .news-section {
@@ -318,7 +319,6 @@ body::after {
         height: 250px;
     }
 
-    /* 1 por vez no Mobile */
     .grid-container {
         grid-template-columns: repeat(1, 1fr);
     }
