@@ -1,10 +1,13 @@
+/* ==========================================================================
+   VARIAVEIS E REGRAS GERAIS
+   ========================================================================== */
 :root {
-    --bg-dark: #030306;
-    --panel-bg: #0b0d16;
-    --terminal-green: #00ff66;
-    --terminal-purple: #9d4edd;
-    --terminal-cyan: #00e5ff;
-    --text-light: #e2fbe9;
+    --bg-dark: #030306;         
+    --panel-bg: #0b0d16;        
+    --terminal-green: #00ff66;   
+    --terminal-purple: #9d4edd;  
+    --terminal-cyan: #00e5ff;    
+    --text-light: #e2fbe9;      
 }
 
 * {
@@ -14,18 +17,18 @@
 }
 
 body {
-    min-height: 100vh;
-    font-family: 'Courier New', Courier, monospace;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif; 
     background-color: var(--bg-dark);
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    overflow: hidden;
     color: var(--text-light);
     position: relative;
-    padding-bottom: 50px;
 }
 
-/* Fundo Fixo */
+/* Fundo Fixo Cyberpunk */
 .background-pattern {
     position: fixed;
     inset: 0;
@@ -52,8 +55,12 @@ body::after {
     opacity: 0.6;
 }
 
+/* ==========================================================================
+   ESTRUTURA PRINCIPAL
+   ========================================================================== */
 .main-wrapper {
     width: 100%;
+    height: calc(100vh - 45px); /* Desconta a altura do rodapé */
     display: flex;
     flex-direction: column;
     z-index: 2;
@@ -62,45 +69,44 @@ body::after {
 .dashboard {
     display: flex;
     flex-direction: column;
+    height: 100%;
     width: 100%;
 }
 
-/* Seção Superior: Logo + Slides com MAIOR ALTURA */
+/* ==========================================================================
+   TOPO: LOGO + SLIDES (100% LARGURA SOMADOS, ALTURA EXPANDIDA)
+   ========================================================================== */
 .top-content {
     display: flex;
     width: 100%;
+    flex: 1; /* Preenche a maior parte da tela verticalmente */
+    min-height: 0;
     align-items: stretch;
-    justify-content: flex-start;
-    height: 420px; /* Aumentado a altura para dar destaque ao topo */
+    background: #000;
 }
 
 .side-branding {
-    flex: 0 0 350px; /* Largura expandida proporcionalmente */
-    background: #000;
+    flex: 0 0 300px; /* Largura fixa para a logo */
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 2px solid var(--terminal-green);
-    border-bottom: 2px solid var(--terminal-green);
+    background: rgba(11, 13, 22, 0.8);
+    border-right: 2px solid rgba(0, 255, 102, 0.3);
     padding: 15px;
 }
 
 .side-logo {
     max-width: 100%;
     max-height: 100%;
-    height: auto;
     object-fit: contain;
+    display: block;
 }
 
-/* Slide Ocupa todo o restante da largura */
 .news-section {
-    flex: 1;
-    height: 100%;
+    flex: 1; /* Ocupa 100% do resto da tela */
     position: relative;
-    border-bottom: 2px solid var(--terminal-green);
     overflow: hidden;
     background: #000;
-    box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
 }
 
 .slide-track { 
@@ -114,8 +120,8 @@ body::after {
     top: 0; left: 0;
     width: 100%; height: 100%;
     opacity: 0; 
-    z-index: 0;
     transition: opacity 0.3s ease;
+    z-index: 0;
 }
 
 .slide.active {
@@ -136,98 +142,93 @@ body::after {
     background: rgba(0, 0, 0, 0.85); 
     border-top: 1px solid var(--terminal-green);
     color: var(--terminal-green);
-    padding: 14px 24px;
+    padding: 12px 20px;
     font-weight: bold;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+    box-sizing: border-box;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-shadow: 0 0 4px var(--terminal-green);
     z-index: 5;
 }
 
-/* Grid de Botões - 8 Botões lado a lado em telas grandes */
+/* ==========================================================================
+   BOTÕES: 8 LADO A LADO, 100% LARGURA, SEM ESPAÇOS VAZIOS
+   ========================================================================== */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(8, 1fr); /* Todos os 8 botões lado a lado */
-    gap: 0; /* Sem espaço vazio */
+    grid-template-columns: repeat(8, 1fr); /* 8 Botões em linha */
     width: 100%;
+    gap: 0; /* Sem espaços em branco */
+    padding: 0;
+    margin: 0;
+    background: #000;
+    border-top: 2px solid var(--terminal-green);
 }
 
 .app-button {
-    display: block;
+    display: flex;
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
-    overflow: hidden;
     text-decoration: none;
-    border: 1px solid rgba(0, 255, 102, 0.2);
-    background-color: var(--panel-bg);
+    overflow: hidden;
+    border-right: 1px solid rgba(0, 255, 102, 0.2);
+    box-sizing: border-box;
 }
 
-.btn-art {
+.app-button:last-child {
+    border-right: none;
+}
+
+.app-button img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* Tecla do número sobreposta com meia opacidade */
+/* Número de ação sobreposto com meia opacidade */
 .key-badge {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    height: auto;
-    max-width: 70px;
-    opacity: 0.5; /* Meia opacidade */
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    filter: drop-shadow(0 0 6px #000);
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4); /* Meia opacidade */
+    transition: background 0.2s ease;
 }
 
-.app-button:hover .btn-art {
-    transform: scale(1.04);
-    filter: brightness(1.1);
+.key-badge img {
+    width: 45%;
+    height: 45%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px var(--terminal-cyan));
+}
+
+.app-button:hover img {
+    transform: scale(1.08);
 }
 
 .app-button:hover .key-badge {
-    opacity: 0.9;
-    transform: translate(-50%, -50%) scale(1.1);
+    background: rgba(0, 229, 255, 0.25);
 }
 
-.app-button:active {
-    transform: scale(0.98);
+.app-button:active, .app-button.teclado-ativo {
+    transform: scale(0.95);
 }
 
-/* Glitch */
-.glitch-effect {
-    animation: glitchAnim 0.25s linear infinite;
-}
-
-@keyframes glitchAnim {
-    0% { transform: translate(0); filter: hue-rotate(0deg) contrast(1); }
-    20% { transform: translate(-3px, 2px) skewX(2deg); filter: hue-rotate(90deg) brightness(1.2); }
-    40% { transform: translate(3px, -1px) scaleY(1.05); clip-path: inset(10% 0 40% 0); }
-    60% { transform: translate(-2px, -2px); filter: contrast(1.5) saturate(1.5); clip-path: inset(60% 0 5% 0); }
-    80% { transform: translate(2px, 3px) skewX(-3deg); clip-path: inset(30% 0 20% 0); }
-    100% { transform: translate(0); filter: hue-rotate(0deg) contrast(1); }
-}
-
-.logo-glitch {
-    animation: glitchAnim 0.3s linear infinite;
-}
-
-/* Relógio Digital */
+/* ==========================================================================
+   RELÓGIO E RODAPÉ
+   ========================================================================== */
 .glass-clock {
     position: fixed;
     top: 15px;
     right: 15px;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.85);
     border: 2px solid var(--terminal-purple);
     border-radius: 6px;
-    padding: 6px 14px;
+    padding: 6px 12px;
     z-index: 1000;
     text-align: center;
     box-shadow: 0 0 12px rgba(157, 78, 221, 0.4);
@@ -236,11 +237,10 @@ body::after {
 
 #txt-data {
     font-weight: bold;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--terminal-purple);
     letter-spacing: 1px;
     margin-bottom: 2px;
-    text-shadow: 0 0 4px var(--terminal-purple);
 }
 
 #txt-relogio {
@@ -251,26 +251,27 @@ body::after {
     line-height: 1.1;
 }
 
-/* Rodapé */
 .modern-footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    height: 45px;
     background: #000;
-    padding: 10px 20px;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
     font-size: 0.85rem;
-    border-top: 2px solid rgba(0, 255, 102, 0.2);
-    color: rgba(0, 255, 102, 0.6);
+    border-top: 2px solid rgba(0, 255, 102, 0.3);
+    box-sizing: border-box;
+    color: rgba(0, 255, 102, 0.7);
     z-index: 10;
 }
 
 .footer-center {
     color: var(--terminal-green);
-    text-shadow: 0 0 4px rgba(0, 255, 102, 0.2);
+    text-shadow: 0 0 4px rgba(0, 255, 102, 0.3);
 }
 
 #mini-icon, #mini-icon2 {
@@ -278,7 +279,6 @@ body::after {
     height: 16px;
     vertical-align: middle;
     object-fit: contain;
-    margin-right: 4px;
     filter: sepia(1) hue-rotate(70deg) saturate(3);
 }
 
@@ -287,23 +287,19 @@ body::after {
     height: 14px;
 }
 
-/* RESPONSIVIDADE INTERMEDIÁRIA (Tablets / Notebooks menores) */
-@media (max-width: 1199px) {
-    .grid-container {
-        grid-template-columns: repeat(4, 1fr); /* 4 colunas em telas médias */
-    }
-    
-    .top-content {
-        height: 320px;
-    }
-    
-    .side-branding {
-        flex: 0 0 260px;
-    }
-}
-
-/* RESPONSIVIDADE PARA SMARTPHONES (1 botão por vez) */
+/* ==========================================================================
+   RESPONSIVIDADE (SMARTPHONE: 1 BOTÃO APÓS O OUTRO)
+   ========================================================================== */
 @media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .main-wrapper {
+        height: auto;
+        padding-bottom: 50px;
+    }
+
     .top-content {
         flex-direction: column;
         height: auto;
@@ -312,35 +308,29 @@ body::after {
     .side-branding {
         flex: none;
         width: 100%;
-        height: 180px;
+        height: 120px;
         border-right: none;
-        border-bottom: 2px solid var(--terminal-green);
+        border-bottom: 2px solid rgba(0, 255, 102, 0.3);
     }
 
     .news-section {
         width: 100%;
-        height: 240px;
+        height: 250px;
     }
 
+    /* 1 por vez no Mobile */
     .grid-container {
-        grid-template-columns: 1fr; /* 1 por vez no mobile */
+        grid-template-columns: repeat(1, 1fr);
     }
 
-    .key-badge {
-        width: 25%;
+    .app-button {
+        aspect-ratio: 16 / 6;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 255, 102, 0.2);
     }
 
-    .glass-clock {
-        top: 10px;
-        right: 10px;
-        padding: 4px 8px;
-    }
-
-    .modern-footer {
-        flex-direction: column;
-        gap: 5px;
-        text-align: center;
-        padding: 8px;
-        font-size: 0.75rem;
+    .key-badge img {
+        width: auto;
+        height: 60%;
     }
 }
