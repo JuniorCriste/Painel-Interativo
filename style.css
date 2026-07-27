@@ -1,31 +1,30 @@
 :root {
-    --bg-dark: #030306;
-    --panel-bg: #0b0d16;
-    --terminal-green: #00ff66;
-    --terminal-purple: #9d4edd;
-    --terminal-cyan: #00e5ff;
-    --text-light: #e2fbe9;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    --bg-dark: #030306;       /* Preto profundo de terminal */
+    --panel-bg: #0b0d16;      /* Fundo fosco dos blocos */
+    --terminal-green: #00ff66; /* Verde Matrix elétrico */
+    --terminal-purple: #9d4edd; /* Roxo Cyberpunk (Substituindo o laranja/âmbar) */
+    --terminal-cyan: #00e5ff;  /* Ciano de comandos */
+    --text-light: #e2fbe9;    /* Texto claro nítido */
 }
 
 body {
-    min-height: 100vh;
-    font-family: 'Courier New', Courier, monospace;
+    zoom: 90%;
+    margin: 0;
+    height: 100vh;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace; 
     background-color: var(--bg-dark);
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
     color: var(--text-light);
     position: relative;
-    padding-bottom: 50px;
+    padding-bottom: 50px; /* Espaço para o rodapé fixo */
 }
 
-/* Fundo Fixo */
+/* Fundo Fixo com Brilho de Fósforo e Scanlines Atrás */
 .background-pattern {
     position: fixed;
     inset: 0;
@@ -52,52 +51,63 @@ body::after {
     opacity: 0.6;
 }
 
+.waves { 
+    display: none !important;
+}
+
 .main-wrapper {
-    width: 100%;
+    width: 95%;
+    max-width: 1200px; 
+    height: calc(100vh - 50px);
     display: flex;
     flex-direction: column;
+    align-items: center;
     z-index: 2;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
 }
 
 .dashboard {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     width: 100%;
 }
 
-/* Seção Superior: Logo + Slides com MAIOR ALTURA */
 .top-content {
     display: flex;
-    width: 100%;
-    align-items: stretch;
-    justify-content: flex-start;
-    height: 420px; /* Aumentado a altura para dar destaque ao topo */
+    padding-left: 50px;
+    padding-bottom: 10px;
+    gap: 30px;
+    width: 95%;
+    align-items: center;
+    justify-content: space-between; 
 }
 
+/* Logo Escola: REMOVIDO TOTALMENTE O BLUR ATRÁS DA LOGO */
 .side-branding {
-    flex: 0 0 350px; /* Largura expandida proporcionalmente */
-    background: #000;
+    flex: 0 0 320px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 2px solid var(--terminal-green);
-    border-bottom: 2px solid var(--terminal-green);
-    padding: 15px;
+    filter: none; /* Filtros e blurs removidos conforme solicitado */
 }
 
 .side-logo {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
     height: auto;
-    object-fit: contain;
+    display: block;
 }
 
-/* Slide Ocupa todo o restante da largura */
+/* Moldura do Slide preparada para o Glitch */
 .news-section {
-    flex: 1;
-    height: 100%;
+    flex: 0 1 835px; 
+    height: 320px;
     position: relative;
-    border-bottom: 2px solid var(--terminal-green);
+    border: 2px solid var(--terminal-green);
+    border-radius: 8px;
     overflow: hidden;
     background: #000;
     box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
@@ -115,9 +125,9 @@ body::after {
     width: 100%; height: 100%;
     opacity: 0; 
     z-index: 0;
-    transition: opacity 0.3s ease;
 }
 
+/* Estado ativo imediato (sem o fade-in demorado) */
 .slide.active {
     opacity: 1; 
     z-index: 1;
@@ -129,6 +139,39 @@ body::after {
     object-fit: cover;
 }
 
+/* Efeito Glitch de Transição (Aplicado via JS no momento da troca) */
+.glitch-effect {
+    animation: glitchAnim 0.25s linear infinite;
+}
+
+@keyframes glitchAnim {
+    0% {
+        transform: translate(0);
+        filter: hue-rotate(0deg) contrast(1);
+    }
+    20% {
+        transform: translate(-3px, 2px) skewX(2deg);
+        filter: hue-rotate(90deg) brightness(1.2);
+    }
+    40% {
+        transform: translate(3px, -1px) scaleY(1.05);
+        clip-path: inset(10% 0 40% 0);
+    }
+    60% {
+        transform: translate(-2px, -2px);
+        filter: contrast(1.5) saturate(1.5);
+        clip-path: inset(60% 0 5% 0);
+    }
+    80% {
+        transform: translate(2px, 3px) skewX(-3deg);
+        clip-path: inset(30% 0 20% 0);
+    }
+    100% {
+        transform: translate(0);
+        filter: hue-rotate(0deg) contrast(1);
+    }
+}
+
 .slide-caption {
     position: absolute;
     bottom: 0; left: 0;
@@ -136,108 +179,108 @@ body::after {
     background: rgba(0, 0, 0, 0.85); 
     border-top: 1px solid var(--terminal-green);
     color: var(--terminal-green);
-    padding: 14px 24px;
+    padding: 15px 25px;
     font-weight: bold;
     font-size: 1.25rem;
+    box-sizing: border-box;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-shadow: 0 0 4px var(--terminal-green);
-    z-index: 5;
+    z-index: 5; /* Mantém a legenda fixa e legível durante o glitch da imagem */
 }
 
-/* Grid de Botões - 8 Botões lado a lado em telas grandes */
+/* Grid de Aplicativos - Posicionado na parte inferior, acima do rodapé */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(8, 1fr); /* Todos os 8 botões lado a lado */
-    gap: 0; /* Sem espaço vazio */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 25px;
+    padding: 0 20px;
     width: 100%;
+    margin-top: auto; /* Empurra os botões para a parte inferior */
 }
 
 .app-button {
-    display: block;
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-decoration: none;
-    border: 1px solid rgba(0, 255, 102, 0.2);
-    background-color: var(--panel-bg);
+    position: relative;
+    transition: transform 0.2s ease;
 }
 
-.btn-art {
+.app-button img {
     width: 100%;
-    height: 100%;
+    max-width: 220px; 
+    aspect-ratio: 1/1;
     object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease, filter 0.3s ease;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 255, 102, 0.4);
+    background-color: var(--panel-bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    transition: all 0.2s ease;
 }
 
-/* Tecla do número sobreposta com meia opacidade */
-.key-badge {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    height: auto;
-    max-width: 70px;
-    opacity: 0.5; /* Meia opacidade */
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    filter: drop-shadow(0 0 6px #000);
+.no-break {
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--terminal-cyan);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
 }
 
-.app-button:hover .btn-art {
-    transform: scale(1.04);
-    filter: brightness(1.1);
+/* Interações */
+.app-button:hover { 
+    transform: translateY(-4px); 
 }
 
-.app-button:hover .key-badge {
-    opacity: 0.9;
-    transform: translate(-50%, -50%) scale(1.1);
+.app-button:hover img {
+    border-color: var(--terminal-cyan);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
 }
 
-.app-button:active {
-    transform: scale(0.98);
+.app-button:active, .app-button.teclado-ativo {
+    transform: scale(0.96);
 }
 
-/* Glitch */
-.glitch-effect {
-    animation: glitchAnim 0.25s linear infinite;
+/* Chamariz piscando no Roxo Cyberpunk */
+.chamariz {
+    animation: bouncePopTerminal 1.2s ease-in-out;
 }
 
-@keyframes glitchAnim {
-    0% { transform: translate(0); filter: hue-rotate(0deg) contrast(1); }
-    20% { transform: translate(-3px, 2px) skewX(2deg); filter: hue-rotate(90deg) brightness(1.2); }
-    40% { transform: translate(3px, -1px) scaleY(1.05); clip-path: inset(10% 0 40% 0); }
-    60% { transform: translate(-2px, -2px); filter: contrast(1.5) saturate(1.5); clip-path: inset(60% 0 5% 0); }
-    80% { transform: translate(2px, 3px) skewX(-3deg); clip-path: inset(30% 0 20% 0); }
-    100% { transform: translate(0); filter: hue-rotate(0deg) contrast(1); }
+@keyframes bouncePopTerminal {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.04); }
+    30% { border-color: var(--terminal-purple); }
+    70% { transform: scale(1); }
+    100% { transform: scale(1); }
 }
 
-.logo-glitch {
-    animation: glitchAnim 0.3s linear infinite;
-}
-
-/* Relógio Digital */
+/* Relógio Digital ROXO CYBERPUNK (Substituindo o Laranja) */
 .glass-clock {
     position: fixed;
-    top: 15px;
-    right: 15px;
-    background: rgba(0, 0, 0, 0.9);
-    border: 2px solid var(--terminal-purple);
+    top: 20px;
+    right: 20px;
+    background: #000;
+    border: 2px solid var(--terminal-purple); /* Borda Roxa */
     border-radius: 6px;
-    padding: 6px 14px;
+    padding: 8px 16px;
     z-index: 1000;
     text-align: center;
-    box-shadow: 0 0 12px rgba(157, 78, 221, 0.4);
+    box-shadow: 0 0 12px rgba(157, 78, 221, 0.3); /* Sombra Roxa */
     pointer-events: none;
+    width: 125px;
 }
 
 #txt-data {
     font-weight: bold;
     font-size: 0.75rem;
-    color: var(--terminal-purple);
+    color: var(--terminal-purple); /* Texto Data Roxo */
     letter-spacing: 1px;
     margin-bottom: 2px;
     text-shadow: 0 0 4px var(--terminal-purple);
@@ -245,9 +288,9 @@ body::after {
 
 #txt-relogio {
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: #fff;
-    text-shadow: 0 0 8px var(--terminal-purple);
+    text-shadow: 0 0 8px var(--terminal-purple); /* Glow das horas Roxo */
     line-height: 1.1;
 }
 
@@ -257,14 +300,15 @@ body::after {
     bottom: 0;
     width: 100%;
     background: #000;
-    padding: 10px 20px;
+    padding: 12px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    font-size: 0.85rem;
+    font-size: 0.90rem;
     border-top: 2px solid rgba(0, 255, 102, 0.2);
-    color: rgba(0, 255, 102, 0.6);
+    box-sizing: border-box;
+    color: rgba(0, 255, 102, 0.5);
     z-index: 10;
 }
 
@@ -273,11 +317,16 @@ body::after {
     text-shadow: 0 0 4px rgba(0, 255, 102, 0.2);
 }
 
+/* Ícones */
 #mini-icon, #mini-icon2 {
     width: 16px;
     height: 16px;
+    border: none;
+    border-radius: 0;
     vertical-align: middle;
     object-fit: contain;
+    background: none;
+    box-shadow: none;
     margin-right: 4px;
     filter: sepia(1) hue-rotate(70deg) saturate(3);
 }
@@ -287,60 +336,7 @@ body::after {
     height: 14px;
 }
 
-/* RESPONSIVIDADE INTERMEDIÁRIA (Tablets / Notebooks menores) */
-@media (max-width: 1199px) {
-    .grid-container {
-        grid-template-columns: repeat(4, 1fr); /* 4 colunas em telas médias */
-    }
-    
-    .top-content {
-        height: 320px;
-    }
-    
-    .side-branding {
-        flex: 0 0 260px;
-    }
-}
-
-/* RESPONSIVIDADE PARA SMARTPHONES (1 botão por vez) */
-@media (max-width: 768px) {
-    .top-content {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .side-branding {
-        flex: none;
-        width: 100%;
-        height: 180px;
-        border-right: none;
-        border-bottom: 2px solid var(--terminal-green);
-    }
-
-    .news-section {
-        width: 100%;
-        height: 240px;
-    }
-
-    .grid-container {
-        grid-template-columns: 1fr; /* 1 por vez no mobile */
-    }
-
-    .key-badge {
-        width: 25%;
-    }
-
-    .glass-clock {
-        top: 10px;
-        right: 10px;
-        padding: 4px 8px;
-    }
-
-    .modern-footer {
-        flex-direction: column;
-        gap: 5px;
-        text-align: center;
-        padding: 8px;
-        font-size: 0.75rem;
-    }
+/* Efeito de Glitch exclusivo para a troca de logos */
+.logo-glitch {
+    animation: glitchAnim 0.3s linear infinite;
 }
