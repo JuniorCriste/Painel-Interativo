@@ -1,4 +1,4 @@
-// Configurações dos Slides (Efeito de Transição Glitch)
+// Transição Suave de Slides
 const slides = document.querySelectorAll('.slide'); 
 const totalSlides = slides.length; 
 let currentSlide = 0;
@@ -6,24 +6,9 @@ let currentSlide = 0;
 function autoSlide() {
     if (totalSlides === 0) return;
 
-    const currentActiveSlide = slides[currentSlide];
-    const imgContainer = currentActiveSlide.querySelector('img');
-
-    if (imgContainer) {
-        imgContainer.classList.add('glitch-effect');
-
-        setTimeout(() => {
-            currentActiveSlide.classList.remove('active');
-            imgContainer.classList.remove('glitch-effect');
-
-            currentSlide = (currentSlide + 1) % totalSlides;
-            slides[currentSlide].classList.add('active');
-        }, 250);
-    } else {
-        currentActiveSlide.classList.remove('active');
-        currentSlide = (currentSlide + 1) % totalSlides;
-        slides[currentSlide].classList.add('active');
-    }
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % totalSlides;
+    slides[currentSlide].classList.add('active');
 }
 
 if (totalSlides > 0) {
@@ -48,15 +33,16 @@ document.addEventListener('keydown', (e) => {
         soundButton.currentTime = 0;
         soundButton.play().catch(() => {});
 
-        btn.style.transform = "scale(0.95)";
+        btn.classList.add('teclado-ativo');
         
         setTimeout(() => {
+            btn.classList.remove('teclado-ativo');
             window.location.href = btn.getAttribute('href');
         }, 120);
     }
 });
 
-// Alternância da Logo com Glitch
+// Alternância Estável da Logo (Sem piscadas/glitch)
 const logoElement = document.getElementById('logo-sistema');
 const logosSequencia = [
     'img/Painel Fialho.png',
@@ -65,22 +51,14 @@ const logosSequencia = [
 ];
 let currentLogoIndex = 0;
 
-function alternarLogoComGlitch() {
+function alternarLogoSuave() {
     if (!logoElement) return;
 
-    logoElement.classList.add('logo-glitch');
-
-    setTimeout(() => {
-        currentLogoIndex = (currentLogoIndex + 1) % logosSequencia.length;
-        logoElement.src = logosSequencia[currentLogoIndex];
-    }, 150);
-
-    setTimeout(() => {
-        logoElement.classList.remove('logo-glitch');
-    }, 300);
+    currentLogoIndex = (currentLogoIndex + 1) % logosSequencia.length;
+    logoElement.src = logosSequencia[currentLogoIndex];
 }
 
-setInterval(alternarLogoComGlitch, 7000);
+setInterval(alternarLogoSuave, 7000);
 
 // Som de inicialização
 window.addEventListener('load', () => {
