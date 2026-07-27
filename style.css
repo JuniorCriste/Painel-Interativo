@@ -299,13 +299,13 @@ body {
     }
 
     .app-button {
-        aspect-ratio: 16 / 6;
+        aspect-ratio: 1 / 1; /* Mantém proporção perfeitamente quadrada (largura = altura) */
         border-right: none;
         border-bottom: 1px solid var(--border-color);
     }
 
     .key-badge img {
         width: auto;
-        height: 50%;
+        height: 40%;
     }
 }
