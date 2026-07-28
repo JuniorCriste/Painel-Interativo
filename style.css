@@ -290,7 +290,7 @@ body {
     }
 
     .side-logo {
-        max-height: 60vh; /* Logo configurado para ocupar 60% da altura da tela */
+        max-height: 20vh; /* Logo configurado para ocupar 60% da altura da tela */
         width: auto;
     }
 
