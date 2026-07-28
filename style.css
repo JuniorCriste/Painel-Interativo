@@ -247,16 +247,16 @@ body {
 }
 
 #mini-icon, #mini-icon2 {
-    width: 16px;
-    height: 16px;
+    width: 40px;
+    height: 40px;
     vertical-align: middle;
     object-fit: contain;
-    opacity: 0.8;
+    opacity: 0.6;
 }
 
 #mini-icon2 {
     width: auto;
-    height: 14px;
+    height: 20px;
 }
 
 /* ==========================================================================
