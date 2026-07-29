@@ -71,15 +71,16 @@ setInterval(() => {
     soundAlert.play().catch(() => {});
 }, 300000);
 
-// Narração da Hora Cheia
-function narrarHora() {
+// Reprodução do Áudio de Hora Pre-gravado
+function reproduzirAudioHora() {
     const agora = new Date();
-    const horas = agora.getHours();
-    const mensagem = new SpeechSynthesisUtterance(`Agora são ${horas} horas.`);
-    mensagem.lang = 'pt-BR';
-    mensagem.rate = 1; 
-    mensagem.volume = 1; 
-    window.speechSynthesis.speak(mensagem);
+    const horas24 = agora.getHours();
+    
+    // Converte de formato 24h para 12h (0h e 12h viram 12; 1h e 13h viram 1, etc.)
+    const horaFormatada = (horas24 % 12) === 0 ? 12 : (horas24 % 12);
+    
+    const audioHora = new Audio(`sounds/hora/${horaFormatada}.ogg`);
+    audioHora.play().catch(() => console.log(`Erro ao reproduzir o arquivo sounds/hora/${horaFormatada}.ogg`));
 }
 
 // Verificação do Relógio
@@ -88,8 +89,8 @@ setInterval(() => {
     if (agora.getMinutes() === 0 && agora.getSeconds() === 0) {
         soundClock.currentTime = 0;
         soundClock.play().then(() => {
-            setTimeout(narrarHora, 1500); 
-        }).catch(() => narrarHora());
+            setTimeout(reproduzirAudioHora, 1500); 
+        }).catch(() => reproduzirAudioHora());
     }
 }, 1000);
 
