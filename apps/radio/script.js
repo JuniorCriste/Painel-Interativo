@@ -67,8 +67,6 @@ const curiosidades = {
     "Alemão do Forró": "Alemão do Forró é um cantor, compositor e instrumentista brasileiro nascido em Linhares, Espírito Santo, conhecido como o 'Rei do Forró Capixaba'. Com voz grave e marcante, consolidou carreira solo, acumulando sucessos nacionais."
 };
 
-// ... Fim do acervo
-
 let queue = [];
 const audio = document.getElementById('audio-element');
 const title = document.getElementById('track-title');
@@ -97,7 +95,6 @@ function loadQueue() {
         queue = JSON.parse(saved);
     }
     
-    // Se o cache estiver vazio ou corrompido, gera uma nova fila
     if (!queue || queue.length === 0) {
         queue = shuffleArray([...playlist]);
         saveQueue();
@@ -105,18 +102,13 @@ function loadQueue() {
 }
 
 function loadNextTrack() {
-    // Se acabou a fila, recria uma nova do zero
     if (queue.length === 0) {
         queue = shuffleArray([...playlist]);
     }
 
-    // Remove a primeira música da fila (shift)
     const track = queue.shift();
-    
-    // Salva a fila atualizada (sem a música que vai tocar agora)
     saveQueue();
     
-    // Atualiza os elementos da página
     title.innerText = track.title;
     artist.innerText = track.artist;
     cover.src = track.cover;
@@ -148,22 +140,22 @@ let messageTimer = null;
 
 function checkAndNavigate() {
     const MAX_CHANGES = 5;
-    const LOCK_TIME_SECONDS = 200; // 200 segundos de bloqueio
+    const LOCK_TIME_SECONDS = 200; // 200 segundos de tempo de bloqueio
 
     const now = Date.now();
     let changeCount = parseInt(localStorage.getItem('radio_change_count') || '0', 10);
     let lastTime = parseInt(localStorage.getItem('radio_last_change_time') || '0', 10);
 
-    // Se o tempo de bloqueio (200s) já tiver passado desde a última gravação, zera o contador
+    // Se já se passaram 200 segundos ou mais desde o último registro de hora, zera a contagem
     if (lastTime > 0 && (now - lastTime) >= LOCK_TIME_SECONDS * 1000) {
         changeCount = 0;
         localStorage.setItem('radio_change_count', '0');
         localStorage.removeItem('radio_last_change_time');
+        lastTime = 0;
     }
 
-    // Se já atingiu o limite de 5 trocas
+    // Se a contagem já tiver atingido 5 trocas
     if (changeCount >= MAX_CHANGES) {
-        // Se ainda não tinha registrado o horário de bloqueio, registra agora
         if (!lastTime) {
             lastTime = now;
             localStorage.setItem('radio_last_change_time', lastTime.toString());
@@ -173,21 +165,22 @@ function checkAndNavigate() {
         const remainingSeconds = LOCK_TIME_SECONDS - elapsedSeconds;
 
         if (remainingSeconds > 0) {
-            // Exibe mensagem de erro na tela durante 10 segundos
+            // Exibe a mensagem de aviso por 10 segundos e bloqueia a navegação
             showLockMessage(remainingSeconds);
-            return; // Impede a navegação
+            return;
         } else {
-            // Tempo esgotado: zera o contador e permite a navegação
+            // Se o tempo passou, zera as variáveis
             changeCount = 0;
+            localStorage.setItem('radio_change_count', '0');
             localStorage.removeItem('radio_last_change_time');
         }
     }
 
-    // Soma 1 ao contador
+    // Soma 1 no contador
     changeCount += 1;
     localStorage.setItem('radio_change_count', changeCount.toString());
 
-    // Se acabou de atingir 5 trocas, grava a hora do bloqueio
+    // Se atingiu o limite de 5 trocas nesta ação, grava o horário atual
     if (changeCount >= MAX_CHANGES) {
         localStorage.setItem('radio_last_change_time', Date.now().toString());
     }
@@ -208,10 +201,9 @@ function showLockMessage(seconds) {
     msgElement.innerText = `Você já atingiu o limite de troca de música nos últimos minutos, aguarde ${seconds} segundos`;
     msgElement.style.display = 'block';
 
-    // Limpa temporizador anterior, se houver
     if (messageTimer) clearTimeout(messageTimer);
 
-    // Esconde a mensagem após 10 segundos
+    // Oculta a mensagem após 10 segundos
     messageTimer = setTimeout(() => {
         msgElement.style.display = 'none';
     }, 10000);
@@ -227,3 +219,9 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => {
     pressedKeys.delete(e.key);
 });
+
+// Inicialização
+window.onload = () => {
+    loadQueue();
+    loadNextTrack();
+};

@@ -114,19 +114,19 @@ body, html {
     letter-spacing: 2px;
 }
 
-/* Estilo do aviso de bloqueio de troca de música */
+/* Caixa de aviso de limite de troca de música */
 #lock-message {
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #ff3333;
+    background-color: #e63946;
     color: #ffffff;
-    padding: 15px 25px;
-    border-radius: 8px;
-    font-weight: bold;
+    padding: 16px 28px;
+    border-radius: 12px;
+    font-weight: 600;
     font-size: 0.95rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     z-index: 9999;
     text-align: center;
     display: none;
