@@ -113,3 +113,22 @@ body, html {
     display: block;
     letter-spacing: 2px;
 }
+
+/* Estilo do aviso de bloqueio de troca de música */
+#lock-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff3333;
+    color: #ffffff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    text-align: center;
+    display: none;
+    max-width: 90%;
+}

@@ -141,23 +141,89 @@ function toggleRadio() {
 
 audio.onended = loadNextTrack;
 
-// --- LÓGICA DE ATALHO (1 + 2 + 3) ---
+// --- LÓGICA DE ATALHO (1 + 2 + 3) COM BLOQUEIO DE TROCA ---
 
 const pressedKeys = new Set();
+let messageTimer = null;
+
+function checkAndNavigate() {
+    const MAX_CHANGES = 5;
+    const LOCK_TIME_SECONDS = 200; // 200 segundos de bloqueio
+
+    const now = Date.now();
+    let changeCount = parseInt(localStorage.getItem('radio_change_count') || '0', 10);
+    let lastTime = parseInt(localStorage.getItem('radio_last_change_time') || '0', 10);
+
+    // Se o tempo de bloqueio (200s) já tiver passado desde a última gravação, zera o contador
+    if (lastTime > 0 && (now - lastTime) >= LOCK_TIME_SECONDS * 1000) {
+        changeCount = 0;
+        localStorage.setItem('radio_change_count', '0');
+        localStorage.removeItem('radio_last_change_time');
+    }
+
+    // Se já atingiu o limite de 5 trocas
+    if (changeCount >= MAX_CHANGES) {
+        // Se ainda não tinha registrado o horário de bloqueio, registra agora
+        if (!lastTime) {
+            lastTime = now;
+            localStorage.setItem('radio_last_change_time', lastTime.toString());
+        }
+
+        const elapsedSeconds = Math.floor((now - lastTime) / 1000);
+        const remainingSeconds = LOCK_TIME_SECONDS - elapsedSeconds;
+
+        if (remainingSeconds > 0) {
+            // Exibe mensagem de erro na tela durante 10 segundos
+            showLockMessage(remainingSeconds);
+            return; // Impede a navegação
+        } else {
+            // Tempo esgotado: zera o contador e permite a navegação
+            changeCount = 0;
+            localStorage.removeItem('radio_last_change_time');
+        }
+    }
+
+    // Soma 1 ao contador
+    changeCount += 1;
+    localStorage.setItem('radio_change_count', changeCount.toString());
+
+    // Se acabou de atingir 5 trocas, grava a hora do bloqueio
+    if (changeCount >= MAX_CHANGES) {
+        localStorage.setItem('radio_last_change_time', Date.now().toString());
+    }
+
+    // Redireciona para o painel
+    window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
+}
+
+function showLockMessage(seconds) {
+    let msgElement = document.getElementById('lock-message');
+    
+    if (!msgElement) {
+        msgElement = document.createElement('div');
+        msgElement.id = 'lock-message';
+        document.body.appendChild(msgElement);
+    }
+
+    msgElement.innerText = `Você já atingiu o limite de troca de música nos últimos minutos, aguarde ${seconds} segundos`;
+    msgElement.style.display = 'block';
+
+    // Limpa temporizador anterior, se houver
+    if (messageTimer) clearTimeout(messageTimer);
+
+    // Esconde a mensagem após 10 segundos
+    messageTimer = setTimeout(() => {
+        msgElement.style.display = 'none';
+    }, 10000);
+}
 
 window.addEventListener('keydown', (e) => {
     pressedKeys.add(e.key);
     if (pressedKeys.has('1') && pressedKeys.has('2') && pressedKeys.has('3')) {
-        window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
+        checkAndNavigate();
     }
 });
 
 window.addEventListener('keyup', (e) => {
     pressedKeys.delete(e.key);
 });
-
-// Inicialização corrigida
-window.onload = () => {
-    loadQueue();
-    loadNextTrack();
-};
