@@ -45,7 +45,8 @@ const playlist = [
     { title: "Lembranças", artist: "Forró Raiz", src: "audio/raiz/lembrancas.mp3", cover: "img/raiz1.png" },
     { title: "Saudade Grande", artist: "Forró Raiz", src: "audio/raiz/saudadegrande.mp3", cover: "img/raiz1.png" },
     { title: "Anjo", artist: "Forró Raiz", src: "audio/raiz/anjo.mp3", cover: "img/raiz1.png" },    
-    { title: "Sai Dessa Coração", artist: "Alemão do Forró", src: "audio/alemao/saidessacoracao.mp3", cover: "img/alemao1.png" }    
+    { title: "Sai Dessa Coração", artist: "Alemão do Forró", src: "audio/alemao/saidessacoracao.mp3", cover: "img/alemao1.png" },    
+    { title: "Sai Dessa Coração", artist: "Alemão do Forró", src: "audio/alemao/ficaamor.mp3", cover: "img/alemao2.png" }    
 ];
 
 const curiosidades = {
