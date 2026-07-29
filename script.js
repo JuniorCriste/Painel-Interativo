@@ -20,7 +20,6 @@ if (totalSlides > 0) {
 const soundLoaded = new Audio('sounds/loaded.mp3');
 const soundButton = new Audio('sounds/button.mp3');
 const soundAlert = new Audio('sounds/alert.mp3');
-const soundClock = new Audio('sounds/clock.mp3');
 
 // Evento de Teclado (Atalhos 1-8)
 document.addEventListener('keydown', (e) => {
@@ -87,10 +86,7 @@ function reproduzirAudioHora() {
 setInterval(() => {
     const agora = new Date();
     if (agora.getMinutes() === 0 && agora.getSeconds() === 0) {
-        soundClock.currentTime = 0;
-        soundClock.play().then(() => {
-            setTimeout(reproduzirAudioHora, 1500); 
-        }).catch(() => reproduzirAudioHora());
+        reproduzirAudioHora();
     }
 }, 1000);
 
