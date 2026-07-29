@@ -45,10 +45,16 @@ const playlist = [
     { title: "Lembranças", artist: "Forró Raiz", src: "audio/raiz/lembrancas.mp3", cover: "img/raiz1.png" },
     { title: "Saudade Grande", artist: "Forró Raiz", src: "audio/raiz/saudadegrande.mp3", cover: "img/raiz1.png" },
     { title: "Anjo", artist: "Forró Raiz", src: "audio/raiz/anjo.mp3", cover: "img/raiz1.png" },    
+    { title: "Peito Aberto", artist: "Budah", src: "audio/budah/peitoaberto.mp3", cover: "img/budah1.png" },  
+    { title: "Fiorino", artist: "Gabriel Gava", src: "audio/gabrielgava/fiorino.mp3", cover: "img/gg1.png" },  
+    { title: "Você", artist: "Dead Fish", src: "audio/deadfish/voce.mp3", cover: "img/df1.png" },  
+    { title: "Deus Caprichou", artist: "Daniel Caon", src: "audio/danielcaon/deuscaprichou.mp3", cover: "img/dc1.png" },  
+    { title: "Então Deixa", artist: "Nick Cruz", src: "audio/nickcruz/entaodeixa.mp3", cover: "img/nc2.png" },  
+    { title: "Até de Manhã", artist: "Nick Cruz", src: "audio/nickcruz/atedemanha.mp3", cover: "img/nc1.png" },  
     { title: "Sou Igualzinho a Você", artist: "Elias Wagner", src: "audio/eliaswagner/souigualzinhoavoce.mp3", cover: "img/ew1.png" },  
     { title: "A Dor Um Dia Vai Passar", artist: "Elias Wagner", src: "audio/eliaswagner/adorumdiavaipassar.mp3", cover: "img/ew1.png" },   
     { title: "Sai Dessa Coração", artist: "Alemão do Forró", src: "audio/alemao/saidessacoracao.mp3", cover: "img/alemao1.png" },    
-    { title: "Sai Dessa Coração", artist: "Alemão do Forró", src: "audio/alemao/ficaamor.mp3", cover: "img/alemao2.png" }    
+    { title: "Fica Amor", artist: "Alemão do Forró", src: "audio/alemao/ficaamor.mp3", cover: "img/alemao2.png" }    
 ];
 
 const curiosidades = {
