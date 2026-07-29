@@ -17,7 +17,7 @@ const playlist = [
     { title: "Pro Diabo os Conselhos de Vocês", artist: "Paulo Sérgio", src: "audio/paulosergio/paraodiaboosconselhos.mp3", cover: "img/paulosergio.png" },
     { title: "Selvageria", artist: "Rastaclone", src: "audio/rastaclone/selvageria.mp3", cover: "img/rastaclone.png" },
     { title: "Perfume de Flor", artist: "Rastaclone", src: "audio/rastaclone/perfumedeflor.mp3", cover: "img/rastaclone.png" },
-    { title: "Além do Horizonte", artist: "Roberto Carlos", src: "audio/robertocarlos/alemdohorizonte.mp3", cover: "img/rc1.png" },
+    { title: "Além do Horizonte", artist: "Roberto Carlos", src: "audio/robertocarlos/essecarasoueu.mp3", cover: "img/rc5.png" },
     { title: "Parei na Contra Mão", artist: "Roberto Carlos", src: "audio/robertocarlos/contramao.mp3", cover: "img/rc2.png" },
     { title: "Splish Splash", artist: "Roberto Carlos", src: "audio/robertocarlos/splishsplash.mp3", cover: "img/rc2.png" },
     { title: "A Namoradinha do Amigo Meu", artist: "Roberto Carlos", src: "audio/robertocarlos/namoradinha.mp3", cover: "img/rc3.png" },
