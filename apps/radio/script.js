@@ -74,7 +74,13 @@ const curiosidades = {
     "Cidade do Reggae": "A Banda Cidade do Reggae, de Vila Velha, foi fundada em outubro de 2012 com objetivo de levar mensagens positivas através do reggae com composições marcantes e envolventes.",
     "Manimal": "Manimal é uma banda da cidade de Vitória. Formada em 1986, seu repertório musical é um misto de rock, congo, ticumbi, entre outros gêneros musicais, resultando assim em um ritmo musical conhecido por 'Movimento rockongo'.",
     "Forró Raiz": "O Forró Raiz surgiu em outubro de 1999, na região de Vitória. Itaúnas, terra natal do vocalista Rafael Boca, é uma das inspirações do grupo. ",
-    "Alemão do Forró": "Alemão do Forró é um cantor, compositor e instrumentista brasileiro nascido em Linhares, Espírito Santo, conhecido como o 'Rei do Forró Capixaba'. Com voz grave e marcante, consolidou carreira solo, acumulando sucessos nacionais."
+    "Alemão do Forró": "Alemão do Forró é um cantor, compositor e instrumentista brasileiro nascido em Linhares, Espírito Santo, conhecido como o 'Rei do Forró Capixaba'. Com voz grave e marcante, consolidou carreira solo, acumulando sucessos nacionais.", 
+    "Budah": "Budah é uma cantora, rapper e compositora capixaba que começou a carreira participando de batalhas de rap no Espírito Santo. Sua trajetória é marcada por superação e serve de inspiração para outras mulheres que buscam espaço no cenário.", 
+    "Elias Wagner": "Elias Wagner nasceu no interior de Rio Bananal e é um exemplo de superação. Após a paralisia infantil, tornou-se cadeirante e hoje é um dos maiores nomes do sertanejo e do brega capixaba.", 
+    "Gabriel Gava": "Gabriel Gava é um cantor brasileiro de sertanejo universitário nascido em Boa Esperança, Espírito Santo, que alcançou fama nacional em 2012 com o hit Fiorino.", 
+    "Nick Cruz": "Nick Cruz é um cantor e compositor pop brasileiro natural de Serra, Espírito Santo, que ganhou projeção nacional como o primeiro homem trans a participar de um reality show musical na TV aberta (Estrela da Casa).", 
+    "Daniel Caon": "Daniel Caon nasceu em Linhares, no estado do Espírito Santo. Famoso por suas músicas de sertanejo e participação em reality show.", 
+    "Dead Fish": "Dead Fish é uma famosa banda brasileira de hardcore melódico formada em Vitória, no Espírito Santo, em 1991. O grupo é conhecido por sua energia ao vivo, letras diretas e forte posicionamento político progressista." 
 };
 
 let queue = [];
