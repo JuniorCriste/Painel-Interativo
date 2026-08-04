@@ -241,3 +241,65 @@ window.onload = () => {
     loadQueue();
     loadNextTrack();
 };
+
+
+
+// --- REPRODUÇÃO DO ÁUDIO DE HORA PRE-GRAVADO (ESTILO RÁDIO COM FADE) ---
+
+function reproduzirAudioHora() {
+    const agora = new Date();
+    const horas24 = agora.getHours();
+    
+    // Converte de formato 24h para 12h
+    const horaFormatada = (horas24 % 12) === 0 ? 12 : (horas24 % 12);
+    
+    const audioHora = new Audio(`audio/hora/${horaFormatada}.ogg`);
+    const volumeOriginal = audio.volume;
+    const volumeBaixo = volumeOriginal * 0.2; // Volume durante a vinheta (20%)
+
+    // Função interna para transição suave de volume (Fade-in / Fade-out)
+    function transicionarVolume(audioElement, volumeAlvo, duracaoMs = 500) {
+        const volumeInicial = audioElement.volume;
+        const diferenca = volumeAlvo - volumeInicial;
+        const passos = 20;
+        const intervaloMs = duracaoMs / passos;
+        let passoAtual = 0;
+
+        const timer = setInterval(() => {
+            passoAtual++;
+            audioElement.volume = Math.max(0, Math.min(1, volumeInicial + (diferenca * (passoAtual / passos))));
+            
+            if (passoAtual >= passos) {
+                clearInterval(timer);
+            }
+        }, intervaloMs);
+    }
+
+    // 1. Quando o áudio da hora começar, faz fade-out suave na música principal
+    audioHora.onplay = () => {
+        transicionarVolume(audio, volumeBaixo, 400); // 0.4s de transição para descer
+    };
+
+    // 2. Quando terminar, faz fade-in suave de volta ao volume original
+    audioHora.onended = () => {
+        transicionarVolume(audio, volumeOriginal, 600); // 0.6s de transição para subir
+    };
+
+    // Garantia de segurança contra falhas no áudio da hora
+    audioHora.onerror = () => {
+        audio.volume = volumeOriginal;
+        console.log(`Erro ao reproduzir o arquivo audio/hora/${horaFormatada}.ogg`);
+    };
+
+    audioHora.play().catch(() => {
+        audio.volume = volumeOriginal;
+    });
+}
+
+// Verificação do Relógio a cada segundo
+setInterval(() => {
+    const agora = new Date();
+    if (agora.getMinutes() === 0 && agora.getSeconds() === 0) {
+        reproduzirAudioHora();
+    }
+}, 1000);
