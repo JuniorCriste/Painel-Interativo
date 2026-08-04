@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rádio 100% Capixaba!</title>
+    <!-- Logo no Favicon -->
+    <link rel="icon" href="img/radiocapixaba.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +15,13 @@
     <div class="main-wrapper">
         <div class="player-container">
             <span class="status-badge" id="radio-status">● AO VIVO</span>
-            <img src="placeholder.jpg" id="album-cover" class="album-art" alt="Capa do Álbum">
+            
+            <!-- Container com Capa e Logo alternando via Fade -->
+            <div class="album-wrapper">
+                <img src="placeholder.jpg" id="album-cover" class="album-art active" alt="Capa do Álbum">
+                <img src="img/radiocapixaba.png" id="radio-logo" class="album-art" alt="Logo Rádio Capixaba">
+            </div>
+
             <h1 id="track-title">Sintonizando...</h1>
             <p id="track-artist">Aguarde</p>
             
@@ -26,9 +34,15 @@
             <audio id="audio-element" preload="auto"></audio>
         </div>
 
+
         <p class="footer-instruction">
             Pressione as teclas <strong>1 + 2 + 3</strong> juntas para retornar ao <strong>Painel José Teixeira Fialho</strong>
         </p>
+
+
+        <footer class="footer-credits">
+            Rádio 100% Capixaba - v 1.5 - Junior Criste - 2026 (<a href="https://github.com/JuniorCriste" target="_blank" rel="noopener noreferrer">github.com/JuniorCriste</a>)
+        </footer>
     </div>
 
     <script src="script.js"></script>

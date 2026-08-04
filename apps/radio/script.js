@@ -303,3 +303,19 @@ setInterval(() => {
         reproduzirAudioHora();
     }
 }, 1000);
+
+// --- LÓGICA DE ALTERNÂNCIA (FADE) ENTRE CAPA E LOGO ---
+
+function alternarCapaELogo() {
+    const albumCoverImg = document.getElementById('album-cover');
+    const radioLogoImg = document.getElementById('radio-logo');
+
+    if (!albumCoverImg || !radioLogoImg) return;
+
+    // Alterna a classe 'active' para criar o efeito fade
+    albumCoverImg.classList.toggle('active');
+    radioLogoImg.classList.toggle('active');
+}
+
+// Alterna a cada 10 segundos (10000ms)
+setInterval(alternarCapaELogo, 10000);
