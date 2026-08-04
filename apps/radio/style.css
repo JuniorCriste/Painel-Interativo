@@ -217,7 +217,11 @@ body, html {
 }
 
 #lock-message {
+    position: fixed; /* Tira o elemento do fluxo da página */
     top: 20px;
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza perfeitamente na horizontal */
+    
     background-color: #e63946;
     color: #ffffff;
     padding: 16px 28px;
@@ -228,4 +232,6 @@ body, html {
     z-index: 9999;
     display: none;
     max-width: 90%;
-    }
+    text-align: center;
+    transition: opacity 0.3s ease-in-out;
+}
