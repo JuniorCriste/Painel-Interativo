@@ -74,7 +74,7 @@ O projeto segue uma identidade visual limpa e organizada, com ícones personaliz
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **Junior Criste**.  
+Desenvolvido por **Junior Criste**.  - v3.0 - 2026
 <br/>
 <a href="http://br.linkedin.com/in/juniorcriste">
    <img src="img/linkedIn.png" alt="LinkedIn" width="20" vertical-align="middle"></a>&ensp;<a href="https://informaticode.com.br/">
