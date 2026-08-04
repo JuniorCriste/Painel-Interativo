@@ -253,7 +253,7 @@ function reproduzirAudioHora() {
     // Converte de formato 24h para 12h
     const horaFormatada = (horas24 % 12) === 0 ? 12 : (horas24 % 12);
     
-    const audioHora = new Audio(`audio/hora/${horaFormatada}.ogg`);
+    const audioHora = new Audio(`sounds/hora/${horaFormatada}.ogg`);
     const volumeOriginal = audio.volume;
     const volumeBaixo = volumeOriginal * 0.2; // Volume durante a vinheta (20%)
 
@@ -288,7 +288,7 @@ function reproduzirAudioHora() {
     // Garantia de segurança contra falhas no áudio da hora
     audioHora.onerror = () => {
         audio.volume = volumeOriginal;
-        console.log(`Erro ao reproduzir o arquivo audio/hora/${horaFormatada}.ogg`);
+        console.log(`Erro ao reproduzir o arquivo sounds/hora/${horaFormatada}.ogg`);
     };
 
     audioHora.play().catch(() => {
