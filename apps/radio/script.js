@@ -191,20 +191,7 @@ function toggleRadio() {
 
 audio.onended = loadNextTrack;
 
-// --- LÓGICA DE ATALHO (1 + 2 + 3) ---
 
-const pressedKeys = new Set();
-
-window.addEventListener('keydown', (e) => {
-    pressedKeys.add(e.key);
-    if (pressedKeys.has('1') && pressedKeys.has('2') && pressedKeys.has('3')) {
-        window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
-    }
-});
-
-window.addEventListener('keyup', (e) => {
-    pressedKeys.delete(e.key);
-});
 
 // Inicialização Correta: Carrega o cache mantendo o progresso e consome apenas 1 faixa
 window.onload = () => {
