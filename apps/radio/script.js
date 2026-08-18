@@ -10,15 +10,24 @@ const playlist = [
     { title: "Dança de Cowboy", artist: "Dallas Company", src: "audio/dallascompany/dancadecowboy.mp3", cover: "img/dallas.png" },
     { title: "Além do Mar", artist: "Macucos", src: "audio/macucos/alemdomar.mp3", cover: "img/macucos.png" },
     { title: "Haverá", artist: "Macucos", src: "audio/macucos/havera.mp3", cover: "img/macucos.png" },
-    { title: "Depende de Nós", artist: "Moxuara", src: "audio/moxuara/dependedenos.mp3", cover: "img/moxuara.png" },
-    { title: "Os Meninos da Baía de Vitória", artist: "Moxuara", src: "audio/moxuara/dependedenos.mp3", cover: "img/moxuara.png" },
+    //{ title: "Depende de Nós", artist: "Moxuara", src: "audio/moxuara/dependedenos.mp3", cover: "img/moxuara.png" },
+    //{ title: "Os Meninos da Baía de Vitória", artist: "Moxuara", src: "audio/moxuara/dependedenos.mp3", cover: "img/moxuara.png" },
     { title: "Quero Ver Você Feliz", artist: "Paulo Sérgio", src: "audio/paulosergio/querovervcfeliz.mp3", cover: "img/paulosergio.png" },
     { title: "Não Creio em Mais Nada", artist: "Paulo Sérgio", src: "audio/paulosergio/naocreioemmaisnada.mp3", cover: "img/paulosergio.png" },
     { title: "Pro Diabo os Conselhos de Vocês", artist: "Paulo Sérgio", src: "audio/paulosergio/paraodiaboosconselhos.mp3", cover: "img/paulosergio.png" },
+    { title: "Minhas Qualidades, Meus Defeitos", artist: "Paulo Sérgio", src: "audio/paulosergio/qualidadesdefeitos.mp3", cover: "img/paulosergio.png" },
+    { title: "Última Canção", artist: "Paulo Sérgio", src: "audio/paulosergio/ultimacancao.mp3", cover: "img/paulosergio.png" },
+    { title: "Você Vai Me Perder", artist: "Paulo Sérgio", src: "audio/paulosergio/vcvaimeperder.mp3", cover: "img/paulosergio2.png" },
+    { title: "Eu Te Amo, Eu Te Venero", artist: "Paulo Sérgio", src: "audio/paulosergio/euteamoeutevenero.mp3", cover: "img/paulosergio2.png" },
     { title: "Selvageria", artist: "Rastaclone", src: "audio/rastaclone/selvageria.mp3", cover: "img/rastaclone.png" },
     { title: "Perfume de Flor", artist: "Rastaclone", src: "audio/rastaclone/perfumedeflor.mp3", cover: "img/rastaclone.png" },
+    { title: "Sereia", artist: "Rastaclone", src: "audio/rastaclone/sereia.mp3", cover: "img/rastaclone2.png" },
+    { title: "Forte", artist: "Rastaclone", src: "audio/rastaclone/forte.mp3", cover: "img/rastaclone3.png" },
     { title: "Esse Cara Sou Eu", artist: "Roberto Carlos", src: "audio/robertocarlos/essecarasoueu.mp3", cover: "img/rc5.png" },
     { title: "Jesus Cristo", artist: "Roberto Carlos", src: "audio/robertocarlos/jesuscristo.mp3", cover: "img/rc4.png" },
+    { title: "Chegastes", artist: "Roberto Carlos", src: "audio/robertocarlos/chegastes.mp3", cover: "img/rc7.png" },
+    { title: "Amigo", artist: "Roberto Carlos", src: "audio/robertocarlos/amigo.mp3", cover: "img/rc6.png" },
+    { title: "Como é Grande Meu Amor Por Você", artist: "Roberto Carlos", src: "audio/robertocarlos/comoegrande.mp3", cover: "img/rc8.png" },
     { title: "Parei na Contra Mão", artist: "Roberto Carlos", src: "audio/robertocarlos/contramao.mp3", cover: "img/rc2.png" },
     { title: "Splish Splash", artist: "Roberto Carlos", src: "audio/robertocarlos/splishsplash.mp3", cover: "img/rc2.png" },
     { title: "A Namoradinha do Amigo Meu", artist: "Roberto Carlos", src: "audio/robertocarlos/namoradinha.mp3", cover: "img/rc3.png" },
@@ -36,6 +45,9 @@ const playlist = [
     { title: "Sonhos (Versão)", artist: "Trio Chapahall's", src: "audio/chapahalls/sonhos.mp3", cover: "img/chapahalls2.png" },
     { title: "Ritmo Quente", artist: "Trio Chapahall's", src: "audio/chapahalls/ritmoquente.mp3", cover: "img/chapahalls2.png" },
     { title: "A Deriva", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/aderiva.mp3", cover: "img/cidadedoreggae1.png" },
+    { title: "Feito Um Carrossel", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/feitoumcarrossel.mp3", cover: "img/cidadedoreggae1.png" },
+    { title: "A Fé", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/afe.mp3", cover: "img/cidadedoreggae2.png" },
+    { title: "Amor de Verão", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/amordeverao.mp3", cover: "img/cidadedoreggae2.png" },
     { title: "Te Vejo na Jamaíca (Part. Janaína Pereira)", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/tevejonajamaica.mp3", cover: "img/cidadedoreggae1.png" },
     { title: "Na Puxada de Rede", artist: "Manimal", src: "audio/manimal/napuxadaderede.mp3", cover: "img/manimal1.png" },
     { title: "Promessa", artist: "Manimal", src: "audio/manimal/promessa.mp3", cover: "img/manimal1.png" },
@@ -44,7 +56,6 @@ const playlist = [
     { title: "Deixa Chover", artist: "Forró Raiz", src: "audio/raiz/deixachover.mp3", cover: "img/raiz1.png" },
     { title: "Lembranças", artist: "Forró Raiz", src: "audio/raiz/lembrancas.mp3", cover: "img/raiz1.png" },
     { title: "Saudade Grande", artist: "Forró Raiz", src: "audio/raiz/saudadegrande.mp3", cover: "img/raiz1.png" },
-    { title: "Anjo", artist: "Forró Raiz", src: "audio/raiz/anjo.mp3", cover: "img/raiz1.png" },    
     { title: "Peito Aberto", artist: "Budah", src: "audio/budah/peitoaberto.mp3", cover: "img/budah1.png" },  
     { title: "Fiorino", artist: "Gabriel Gava", src: "audio/gabrielgava/fiorino.mp3", cover: "img/gg1.png" },  
     { title: "Você", artist: "Dead Fish", src: "audio/deadfish/voce.mp3", cover: "img/df1.png" },  
@@ -54,7 +65,12 @@ const playlist = [
     { title: "Sou Igualzinho a Você", artist: "Elias Wagner", src: "audio/eliaswagner/souigualzinhoavoce.mp3", cover: "img/ew1.png" },  
     { title: "A Dor Um Dia Vai Passar", artist: "Elias Wagner", src: "audio/eliaswagner/adorumdiavaipassar.mp3", cover: "img/ew1.png" },   
     { title: "Sai Dessa Coração", artist: "Alemão do Forró", src: "audio/alemao/saidessacoracao.mp3", cover: "img/alemao1.png" },    
-    { title: "Fica Amor", artist: "Alemão do Forró", src: "audio/alemao/ficaamor.mp3", cover: "img/alemao2.png" }    
+    { title: "Fica Amor", artist: "Alemão do Forró", src: "audio/alemao/ficaamor.mp3", cover: "img/alemao2.png" },
+    { title: "Tudo Que Você Fizer", artist: "SalvAÇÃO", src: "audio/salvacao/tudoquevcfizer.mp3", cover: "img/salvacao1.png" },    
+    { title: "Carametade", artist: "SalvAÇÃO", src: "audio/salvacao/carametade.mp3", cover: "img/salvacao2.png" },    
+    { title: "Como Vai Você", artist: "SalvAÇÃO", src: "audio/salvacao/comovaivc.mp3", cover: "img/salvacao2.png" },    
+    { title: "Os Dias", artist: "SalvAÇÃO", src: "audio/salvacao/osdias.mp3", cover: "img/salvacao2.png" },    
+    { title: "Pode Crer", artist: "SalvAÇÃO", src: "audio/salvacao/podecrer.mp3", cover: "img/salvacao2.png" }    
 ];
 
 const curiosidades = {
@@ -73,17 +89,21 @@ const curiosidades = {
     "Trio Chapahall's": "A banda Trio Chapahalls foi fundada na cidade de São Mateus, no Norte do Espírito Santo. Surgiu no final dos anos 90, unindo o talento de músicos que já circulavam pela cena regional.",
     "Cidade do Reggae": "A Banda Cidade do Reggae, de Vila Velha, foi fundada em outubro de 2012 com objetivo de levar mensagens positivas através do reggae com composições marcantes e envolventes.",
     "Manimal": "Manimal é uma banda da cidade de Vitória. Formada em 1986, seu repertório musical é um misto de rock, congo, ticumbi, entre outros gêneros musicais, resultando assim em um ritmo musical conhecido por 'Movimento rockongo'.",
-    "Forró Raiz": "O Forró Raiz surgiu em outubro de 1999, na região de Vitória. Itaúnas, terra natal do vocalista Rafael Boca, é uma das inspirações do grupo. ",
+    "Forró Raiz": "O Forró Raiz surgiu em outubro de 1999, na região de Vitória. Itaúnas, terra natal do vocalista Rafael Boca, é uma das inspirações do grupo.",
     "Alemão do Forró": "Alemão do Forró é um cantor, compositor e instrumentista brasileiro nascido em Linhares, Espírito Santo, conhecido como o 'Rei do Forró Capixaba'. Com voz grave e marcante, consolidou carreira solo, acumulando sucessos nacionais.", 
     "Budah": "Budah é uma cantora, rapper e compositora capixaba que começou a carreira participando de batalhas de rap no Espírito Santo. Sua trajetória é marcada por superação e serve de inspiração para outras mulheres que buscam espaço no cenário.", 
     "Elias Wagner": "Elias Wagner nasceu no interior de Rio Bananal e é um exemplo de superação. Após a paralisia infantil, tornou-se cadeirante e hoje é um dos maiores nomes do sertanejo e do brega capixaba.", 
     "Gabriel Gava": "Gabriel Gava é um cantor brasileiro de sertanejo universitário nascido em Boa Esperança, Espírito Santo, que alcançou fama nacional em 2012 com o hit Fiorino.", 
     "Nick Cruz": "Nick Cruz é um cantor e compositor pop brasileiro natural de Serra, Espírito Santo, que ganhou projeção nacional como o primeiro homem trans a participar de um reality show musical na TV aberta (Estrela da Casa).", 
     "Daniel Caon": "Daniel Caon nasceu em Linhares, no estado do Espírito Santo. Famoso por suas músicas de sertanejo e participação em reality show.", 
-    "Dead Fish": "Dead Fish é uma famosa banda brasileira de hardcore melódico formada em Vitória, no Espírito Santo, em 1991. O grupo é conhecido por sua energia ao vivo, letras diretas e forte posicionamento político progressista." 
+    "Dead Fish": "Dead Fish é uma famosa banda brasileira de hardcore melódico formada em Vitória, no Espírito Santo, em 1991. O grupo é conhecido por sua energia ao vivo, letras diretas e forte posicionamento político progressista.", 
+    "SalvAÇÃO": "A banda SalvAÇÃO, originária de Vila Velha (ES), é uma das pioneiras do reggae capixaba. Com mais de 30 anos de trajetória, construiu sua história levando mensagens de paz, amor, consciência e respeito à natureza." 
 };
 
+// --- FIM DO ACERVO ---
+
 let queue = [];
+
 const audio = document.getElementById('audio-element');
 const title = document.getElementById('track-title');
 const artist = document.getElementById('track-artist');
@@ -91,7 +111,7 @@ const info = document.getElementById('artist-info');
 const cover = document.getElementById('album-cover');
 const bgOverlay = document.getElementById('bg-overlay');
 
-// --- LÓGICA DA RÁDIO COM CACHE ---
+// --- LÓGICA DA RÁDIO COM CACHE PERSISTENTE (VERSÃO 1.6 - CORREÇÃO DE REMOÇÃO DA FILA) ---
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -102,29 +122,51 @@ function shuffleArray(array) {
 }
 
 function saveQueue() {
-    localStorage.setItem('radio_queue', JSON.stringify(queue));
+    localStorage.setItem('radio_queue_v16', JSON.stringify(queue));
 }
 
 function loadQueue() {
-    const saved = localStorage.getItem('radio_queue');
-    if (saved) {
-        queue = JSON.parse(saved);
+    const savedQueueRaw = localStorage.getItem('radio_queue_v16');
+    
+    if (savedQueueRaw) {
+        try {
+            const parsedQueue = JSON.parse(savedQueueRaw);
+            // Se for um array válido e menor ou igual ao tamanho total (garantindo que respeita o progresso atual)
+            if (Array.isArray(parsedQueue) && parsedQueue.length > 0 && parsedQueue.length <= playlist.length) {
+                queue = parsedQueue;
+                console.log(`✅ Fila carregada do cache! Restam exatamente ${queue.length} faixas neste ciclo.`);
+                return true;
+            }
+        } catch (e) {
+            console.error("Erro ao ler o cache.");
+        }
     }
     
-    if (!queue || queue.length === 0) {
-        queue = shuffleArray([...playlist]);
-        saveQueue();
-    }
+    // Se não houver cache válido, gera uma nova fila completa
+    console.warn("🔄 Nenhuma fila válida encontrada. Gerando novo sorteio completo.");
+    queue = shuffleArray([...playlist]);
+    saveQueue();
+    return false;
 }
 
 function loadNextTrack() {
+    // Se a fila esvaziou, gera um novo ciclo completo
     if (queue.length === 0) {
         queue = shuffleArray([...playlist]);
+        console.warn("🔄 A fila acabou! Um novo ciclo completo de todas as faixas foi gerado.");
     }
 
+    // Retira a próxima música da fila oficial
     const track = queue.shift();
+    
+    // Salva imediatamente no localStorage o array atualizado com a faixa removida
     saveQueue();
     
+    // --- MAPEAMENTO DO SORTEIO NO CONSOLE ---
+    console.log(`🎲 [Sorteio Rádio Capixaba v1.6] Tocando agora: "${track.title}" - ${track.artist} | Faixas restantes no ciclo: ${queue.length}`);
+    console.table(queue.map((t, index) => ({ Ordem: index + 1, Artista: t.artist, Música: t.title })));
+    
+    // Atualiza os elementos da página
     title.innerText = track.title;
     artist.innerText = track.artist;
     cover.src = track.cover;
@@ -140,7 +182,7 @@ function loadNextTrack() {
 function toggleRadio() {
     if (audio.paused) {
         audio.play();
-        document.getElementById('main-button').innerText = "OUVINDO AGORA";
+        document.getElementById('main-button').innerText = "OUVINDO AO VIVO";
     } else {
         audio.pause();
         document.getElementById('main-button').innerText = "RETOMAR RÁDIO";
@@ -148,6 +190,116 @@ function toggleRadio() {
 }
 
 audio.onended = loadNextTrack;
+
+// --- LÓGICA DE ATALHO (1 + 2 + 3) ---
+
+const pressedKeys = new Set();
+
+window.addEventListener('keydown', (e) => {
+    pressedKeys.add(e.key);
+    if (pressedKeys.has('1') && pressedKeys.has('2') && pressedKeys.has('3')) {
+        window.location.href = "https://juniorcriste.github.io/Painel-Interativo/";
+    }
+});
+
+window.addEventListener('keyup', (e) => {
+    pressedKeys.delete(e.key);
+});
+
+// Inicialização Correta: Carrega o cache mantendo o progresso e consome apenas 1 faixa
+window.onload = () => {
+    loadQueue();
+    loadNextTrack();
+};
+
+window.addEventListener('message', (event) => {
+    if (event.data === 'play_radio') {
+        if (audio && audio.paused) {
+            audio.play().catch(err => console.log("Erro no autoplay:", err));
+        }
+    }
+    if (event.data === 'stop_radio') {
+        if (audio && !audio.paused) {
+            audio.pause();
+        }
+    }
+});
+
+// --- REPRODUÇÃO DO ÁUDIO DE HORA PRE-GRAVADO (ESTILO RÁDIO COM FADE) ---
+
+function reproduzirAudioHora() {
+    const agora = new Date();
+    const horas24 = agora.getHours();
+    
+    // Converte de formato 24h para 12h
+    const horaFormatada = (horas24 % 12) === 0 ? 12 : (horas24 % 12);
+    
+    const audioHora = new Audio(`audio/hora/${horaFormatada}.ogg`);
+    const volumeOriginal = audio.volume;
+    const volumeBaixo = volumeOriginal * 0.2; // Volume durante a vinheta (20%)
+
+    // Função interna para transição suave de volume (Fade-in / Fade-out)
+    function transicionarVolume(audioElement, volumeAlvo, duracaoMs = 500) {
+        const volumeInicial = audioElement.volume;
+        const diferenca = volumeAlvo - volumeInicial;
+        const passos = 20;
+        const intervaloMs = duracaoMs / passos;
+        let passoAtual = 0;
+
+        const timer = setInterval(() => {
+            passoAtual++;
+            audioElement.volume = Math.max(0, Math.min(1, volumeInicial + (diferenca * (passoAtual / passos))));
+            
+            if (passoAtual >= passos) {
+                clearInterval(timer);
+            }
+        }, intervaloMs);
+    }
+
+    // 1. Quando o áudio da hora começar, faz fade-out suave na música principal
+    audioHora.onplay = () => {
+        transicionarVolume(audio, volumeBaixo, 400); // 0.4s de transição para descer
+    };
+
+    // 2. Quando terminar, faz fade-in suave de volta ao volume original
+    audioHora.onended = () => {
+        transicionarVolume(audio, volumeOriginal, 600); // 0.6s de transição para subir
+    };
+
+    // Garantia de segurança contra falhas no áudio da hora
+    audioHora.onerror = () => {
+        audio.volume = volumeOriginal;
+        console.log(`Erro ao reproduzir o arquivo audio/hora/${horaFormatada}.ogg`);
+    };
+
+    audioHora.play().catch(() => {
+        audio.volume = volumeOriginal;
+    });
+}
+
+// Verificação do Relógio a cada segundo
+setInterval(() => {
+    const agora = new Date();
+    if (agora.getMinutes() === 0 && agora.getSeconds() === 0) {
+        reproduzirAudioHora();
+    }
+}, 1000);
+
+// --- LÓGICA DE ALTERNÂNCIA (FADE) ENTRE CAPA E LOGO ---
+
+function alternarCapaELogo() {
+    const albumCoverImg = document.getElementById('album-cover');
+    const radioLogoImg = document.getElementById('radio-logo');
+
+    if (!albumCoverImg || !radioLogoImg) return;
+
+    // Alterna a classe 'active' para criar o efeito fade
+    albumCoverImg.classList.toggle('active');
+    radioLogoImg.classList.toggle('active');
+}
+
+// Alterna a cada 10 segundos (10000ms)
+setInterval(alternarCapaELogo, 10000);
 
 // --- LÓGICA DE ATALHO (1 + 2 + 3) COM BLOQUEIO DE TROCA ---
 
@@ -231,91 +383,3 @@ window.addEventListener('keydown', (e) => {
         checkAndNavigate();
     }
 });
-
-window.addEventListener('keyup', (e) => {
-    pressedKeys.delete(e.key);
-});
-
-// Inicialização
-window.onload = () => {
-    loadQueue();
-    loadNextTrack();
-};
-
-
-
-// --- REPRODUÇÃO DO ÁUDIO DE HORA PRE-GRAVADO (ESTILO RÁDIO COM FADE) ---
-
-function reproduzirAudioHora() {
-    const agora = new Date();
-    const horas24 = agora.getHours();
-    
-    // Converte de formato 24h para 12h
-    const horaFormatada = (horas24 % 12) === 0 ? 12 : (horas24 % 12);
-    
-    const audioHora = new Audio(`audio/hora/${horaFormatada}.ogg`);
-    const volumeOriginal = audio.volume;
-    const volumeBaixo = volumeOriginal * 0.2; // Volume durante a vinheta (20%)
-
-    // Função interna para transição suave de volume (Fade-in / Fade-out)
-    function transicionarVolume(audioElement, volumeAlvo, duracaoMs = 500) {
-        const volumeInicial = audioElement.volume;
-        const diferenca = volumeAlvo - volumeInicial;
-        const passos = 20;
-        const intervaloMs = duracaoMs / passos;
-        let passoAtual = 0;
-
-        const timer = setInterval(() => {
-            passoAtual++;
-            audioElement.volume = Math.max(0, Math.min(1, volumeInicial + (diferenca * (passoAtual / passos))));
-            
-            if (passoAtual >= passos) {
-                clearInterval(timer);
-            }
-        }, intervaloMs);
-    }
-
-    // 1. Quando o áudio da hora começar, faz fade-out suave na música principal
-    audioHora.onplay = () => {
-        transicionarVolume(audio, volumeBaixo, 400); // 0.4s de transição para descer
-    };
-
-    // 2. Quando terminar, faz fade-in suave de volta ao volume original
-    audioHora.onended = () => {
-        transicionarVolume(audio, volumeOriginal, 600); // 0.6s de transição para subir
-    };
-
-    // Garantia de segurança contra falhas no áudio da hora
-    audioHora.onerror = () => {
-        audio.volume = volumeOriginal;
-        console.log(`Erro ao reproduzir o arquivo audio/hora/${horaFormatada}.ogg`);
-    };
-
-    audioHora.play().catch(() => {
-        audio.volume = volumeOriginal;
-    });
-}
-
-// Verificação do Relógio a cada segundo
-setInterval(() => {
-    const agora = new Date();
-    if (agora.getMinutes() === 0 && agora.getSeconds() === 0) {
-        reproduzirAudioHora();
-    }
-}, 1000);
-
-// --- LÓGICA DE ALTERNÂNCIA (FADE) ENTRE CAPA E LOGO ---
-
-function alternarCapaELogo() {
-    const albumCoverImg = document.getElementById('album-cover');
-    const radioLogoImg = document.getElementById('radio-logo');
-
-    if (!albumCoverImg || !radioLogoImg) return;
-
-    // Alterna a classe 'active' para criar o efeito fade
-    albumCoverImg.classList.toggle('active');
-    radioLogoImg.classList.toggle('active');
-}
-
-// Alterna a cada 10 segundos (10000ms)
-setInterval(alternarCapaELogo, 10000);
