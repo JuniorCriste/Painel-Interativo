@@ -359,7 +359,7 @@ function checkAndNavigate() {
 
 function showLockMessage(seconds) {
     let msgElement = document.getElementById('lock-message');
-    
+
     if (!msgElement) {
         msgElement = document.createElement('div');
         msgElement.id = 'lock-message';
