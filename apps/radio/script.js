@@ -1,4 +1,10 @@
 const playlist = [
+    { title: "Vinheta", artist: "Rádio 100% Capixaba!", src: "audio/vinhetas/camaradavinheta.mp3", cover: "img/vinheta1.png" },
+    { title: "Vinheta", artist: "Rádio 100% Capixaba!", src: "audio/vinhetas/tremvinheta.mp3", cover: "img/vinheta2.png" },
+    { title: "Vinheta", artist: "Rádio 100% Capixaba!", src: "audio/vinhetas/simboravinheta.mp3", cover: "img/vinheta3.png" },
+    { title: "Vinheta", artist: "Rádio 100% Capixaba!", src: "audio/vinhetas/camaradavinheta.mp3", cover: "img/vinheta1.png" },
+    { title: "Vinheta", artist: "Rádio 100% Capixaba!", src: "audio/vinhetas/tremvinheta.mp3", cover: "img/vinheta2.png" },
+    { title: "Vinheta", artist: "Rádio 100% Capixaba!", src: "audio/vinhetas/simboravinheta.mp3", cover: "img/vinheta3.png" },
     { title: "Camarada", artist: "Casaca", src: "audio/casaca/camarada.mp3", cover: "img/casaca1.png" },
     { title: "O Menino Que Sobe a Ladeira (Part. Rapadura)", artist: "Casaca", src: "audio/casaca/meninoladeira.mp3", cover: "img/casaca3.png" },
     { title: "Anjo Samile", artist: "Casaca", src: "audio/casaca/anjosamile.mp3", cover: "img/casaca2.png" },
@@ -74,6 +80,7 @@ const playlist = [
 ];
 
 const curiosidades = {
+    "Rádio 100% Capixaba!": "Web Rádio focada na cena musical do Espírito Santo. O projeto compila sucessos de ícones nacionais e regionais capixabas, oferecendo aos ouvintes curiosidades culturais e históricas sobre cada artista.",
     "Roberto Carlos": "Roberto Carlos Braga (Cachoeiro de Itapemirim, 19 de abril de 1941) é um cantor e compositor brasileiro. Figura-chave da Jovem Guarda, é o artista de maior êxito comercial da história da música brasileira, sendo chamado de 'Rei'.",
     "Supercombo": "A Supercombo é uma banda de rock alternativo formada em 2007 em Vitória (ES), radicada em São Paulo, conhecida por letras que abordam dilemas cotidianos e dramas da juventude.",
     "Casaca": "A Banda Casaca é um grupo capixaba de pop-rock e reggae formado em 1999 em Vila Velha, reconhecido por fundir ritmos locais como o congo com influências pop.",
