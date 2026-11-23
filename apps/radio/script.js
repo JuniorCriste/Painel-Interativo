@@ -8,6 +8,8 @@ const playlist = [
     { title: "Camarada", artist: "Casaca", src: "audio/casaca/camarada.mp3", cover: "img/casaca1.png" },
     { title: "O Menino Que Sobe a Ladeira (Part. Rapadura)", artist: "Casaca", src: "audio/casaca/meninoladeira.mp3", cover: "img/casaca3.png" },
     { title: "Anjo Samile", artist: "Casaca", src: "audio/casaca/anjosamile.mp3", cover: "img/casaca2.png" },
+    { title: "Da Da Da", artist: "Casaca", src: "audio/casaca/dadada.mp3", cover: "img/casaca2.png" },
+    { title: "Celebração", artist: "Casaca", src: "audio/casaca/celebracao.mp3", cover: "img/casaca4.png" },
     { title: "Noite Fria", artist: "Casaca", src: "audio/casaca/noitefria.mp3", cover: "img/casaca2.png" },
     { title: "Garças de Jacarenema", artist: "Casaca", src: "audio/casaca/garcas.mp3", cover: "img/casaca1.png" },
     { title: "Clima de Rodeio", artist: "Dallas Company", src: "audio/dallascompany/climaderodeio.mp3", cover: "img/dallas.png" },
@@ -16,8 +18,8 @@ const playlist = [
     { title: "Dança de Cowboy", artist: "Dallas Company", src: "audio/dallascompany/dancadecowboy.mp3", cover: "img/dallas.png" },
     { title: "Além do Mar", artist: "Macucos", src: "audio/macucos/alemdomar.mp3", cover: "img/macucos.png" },
     { title: "Haverá", artist: "Macucos", src: "audio/macucos/havera.mp3", cover: "img/macucos.png" },
-    //{ title: "Depende de Nós", artist: "Moxuara", src: "audio/moxuara/dependedenos.mp3", cover: "img/moxuara.png" },
-    //{ title: "Os Meninos da Baía de Vitória", artist: "Moxuara", src: "audio/moxuara/dependedenos.mp3", cover: "img/moxuara.png" },
+    { title: "Depende de Nós", artist: "Moxuara", src: "audio/moxuara/dependedenos.mp3", cover: "img/moxuara.png" },
+    { title: "Os Meninos da Baía de Vitória", artist: "Moxuara", src: "audio/moxuara/dependedenos.mp3", cover: "img/moxuara.png" },
     { title: "Quero Ver Você Feliz", artist: "Paulo Sérgio", src: "audio/paulosergio/querovervcfeliz.mp3", cover: "img/paulosergio.png" },
     { title: "Não Creio em Mais Nada", artist: "Paulo Sérgio", src: "audio/paulosergio/naocreioemmaisnada.mp3", cover: "img/paulosergio.png" },
     { title: "Pro Diabo os Conselhos de Vocês", artist: "Paulo Sérgio", src: "audio/paulosergio/paraodiaboosconselhos.mp3", cover: "img/paulosergio.png" },
@@ -29,6 +31,8 @@ const playlist = [
     { title: "Perfume de Flor", artist: "Rastaclone", src: "audio/rastaclone/perfumedeflor.mp3", cover: "img/rastaclone.png" },
     { title: "Sereia", artist: "Rastaclone", src: "audio/rastaclone/sereia.mp3", cover: "img/rastaclone2.png" },
     { title: "Forte", artist: "Rastaclone", src: "audio/rastaclone/forte.mp3", cover: "img/rastaclone3.png" },
+    { title: "Não me Entrego", artist: "Rastaclone", src: "audio/rastaclone/naomeentrego.mp3", cover: "img/rastaclone.png" },
+    { title: "Não Vão Me Parar", artist: "Rastaclone", src: "audio/rastaclone/naovaomeparar.mp3", cover: "img/rastaclone2.png" },
     { title: "Esse Cara Sou Eu", artist: "Roberto Carlos", src: "audio/robertocarlos/essecarasoueu.mp3", cover: "img/rc5.png" },
     { title: "Jesus Cristo", artist: "Roberto Carlos", src: "audio/robertocarlos/jesuscristo.mp3", cover: "img/rc4.png" },
     { title: "Chegastes", artist: "Roberto Carlos", src: "audio/robertocarlos/chegastes.mp3", cover: "img/rc7.png" },
@@ -37,9 +41,15 @@ const playlist = [
     { title: "Parei na Contra Mão", artist: "Roberto Carlos", src: "audio/robertocarlos/contramao.mp3", cover: "img/rc2.png" },
     { title: "Splish Splash", artist: "Roberto Carlos", src: "audio/robertocarlos/splishsplash.mp3", cover: "img/rc2.png" },
     { title: "A Namoradinha do Amigo Meu", artist: "Roberto Carlos", src: "audio/robertocarlos/namoradinha.mp3", cover: "img/rc3.png" },
+    { title: "É Proibido Fumar", artist: "Roberto Carlos", src: "audio/robertocarlos/eproibidofumar.mp3", cover: "img/rc9.png" },
+    { title: "O Calhambeque", artist: "Roberto Carlos", src: "audio/robertocarlos/ocalhambeque.mp3", cover: "img/rc9.png" },
+    { title: "É Proibido Fumar", artist: "Roberto Carlos", src: "audio/robertocarlos/eproibidofumar.mp3", cover: "img/rc9.png" },
+    { title: "O Baile da Fazenda", artist: "Roberto Carlos", src: "audio/robertocarlos/obailedafazenda.mp3", cover: "img/rc10.png" },
     { title: "Bloco na Rua", artist: "Sérgio Sampaio", src: "audio/sergiosampaio/bloconarua.mp3", cover: "img/sergiosampaio.png" },
     { title: "Viajei de Trem", artist: "Sérgio Sampaio", src: "audio/sergiosampaio/viajeidetrem.mp3", cover: "img/sergiosampaio.png" },
     { title: "A Cor É Rosa", artist: "Silva", src: "audio/silva/acorerosa.mp3", cover: "img/silva.png" },
+    { title: "Duas da Tarde", artist: "Silva", src: "audio/silva/duasdatarde.mp3", cover: "img/silva2.png" },
+    { title: "Brisa", artist: "Silva", src: "audio/silva/brisa.mp3", cover: "img/silva2.png" },
     { title: "Amianto", artist: "Supercombo", src: "audio/supercombo/amianto.mp3", cover: "img/supercombo1.png" },
     { title: "Piloto Automático", artist: "Supercombo", src: "audio/supercombo/pilotoautomatico.mp3", cover: "img/supercombo1.png" },
     { title: "Beijo Matador", artist: "Forró Bemtivi", src: "audio/bemtivi/beijomatador.mp3", cover: "img/bemtivi1.png" },
@@ -50,6 +60,9 @@ const playlist = [
     { title: "Castigo (Versão)", artist: "Trio Chapahall's", src: "audio/chapahalls/castigoversao.mp3", cover: "img/chapahalls1.png" },
     { title: "Sonhos (Versão)", artist: "Trio Chapahall's", src: "audio/chapahalls/sonhos.mp3", cover: "img/chapahalls2.png" },
     { title: "Ritmo Quente", artist: "Trio Chapahall's", src: "audio/chapahalls/ritmoquente.mp3", cover: "img/chapahalls2.png" },
+    { title: "Primavera", artist: "Trio Chapahall's", src: "audio/chapahalls/primavera.mp3", cover: "img/chapahalls2.png" },   
+    { title: "Preciso de Você", artist: "Trio Chapahall's", src: "audio/chapahalls/precisodevoce.mp3", cover: "img/chapahalls2.png" },   
+    { title: "Te amar Sempre Assim", artist: "Trio Chapahall's", src: "audio/chapahalls/teamarsempreassim.mp3", cover: "img/chapahalls2.png" },   
     { title: "A Deriva", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/aderiva.mp3", cover: "img/cidadedoreggae1.png" },
     { title: "Feito Um Carrossel", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/feitoumcarrossel.mp3", cover: "img/cidadedoreggae1.png" },
     { title: "A Fé", artist: "Cidade do Reggae", src: "audio/cidadedoreggae/afe.mp3", cover: "img/cidadedoreggae2.png" },
@@ -65,7 +78,7 @@ const playlist = [
     { title: "Peito Aberto", artist: "Budah", src: "audio/budah/peitoaberto.mp3", cover: "img/budah1.png" },  
     { title: "Fiorino", artist: "Gabriel Gava", src: "audio/gabrielgava/fiorino.mp3", cover: "img/gg1.png" },  
     { title: "Você", artist: "Dead Fish", src: "audio/deadfish/voce.mp3", cover: "img/df1.png" },  
-    { title: "Deus Caprichou", artist: "Daniel Caon", src: "audio/danielcaon/deuscaprichou.mp3", cover: "img/dc1.png" },  
+//    { title: "Deus Caprichou", artist: "Daniel Caon", src: "audio/danielcaon/deuscaprichou.mp3", cover: "img/dc1.png" },  
     { title: "Então Deixa", artist: "Nick Cruz", src: "audio/nickcruz/entaodeixa.mp3", cover: "img/nc2.png" },  
     { title: "Até de Manhã", artist: "Nick Cruz", src: "audio/nickcruz/atedemanha.mp3", cover: "img/nc1.png" },  
     { title: "Sou Igualzinho a Você", artist: "Elias Wagner", src: "audio/eliaswagner/souigualzinhoavoce.mp3", cover: "img/ew1.png" },  
@@ -76,7 +89,20 @@ const playlist = [
     { title: "Carametade", artist: "SalvAÇÃO", src: "audio/salvacao/carametade.mp3", cover: "img/salvacao2.png" },    
     { title: "Como Vai Você", artist: "SalvAÇÃO", src: "audio/salvacao/comovaivc.mp3", cover: "img/salvacao2.png" },    
     { title: "Os Dias", artist: "SalvAÇÃO", src: "audio/salvacao/osdias.mp3", cover: "img/salvacao2.png" },    
-    { title: "Pode Crer", artist: "SalvAÇÃO", src: "audio/salvacao/podecrer.mp3", cover: "img/salvacao2.png" }    
+    { title: "Pode Crer", artist: "SalvAÇÃO", src: "audio/salvacao/podecrer.mp3", cover: "img/salvacao2.png" },   
+    { title: "Rinha de Magnata", artist: "Mukeka di Rato", src: "audio/mukekadirato/rinhademagnata.mp3", cover: "img/mukeka1.png" },      
+    { title: "Vencer na Vida", artist: "Mukeka di Rato", src: "audio/mukekadirato/vencernavida.mp3", cover: "img/mukeka1.png" },      
+    { title: "Você Não Me Conhece", artist: "Eloá Puri", src: "audio/eloapuri/vocenaomeconhece.mp3", cover: "img/eloapuri.png" },      
+    { title: "Gruta da Onça", artist: "Eloá Puri", src: "audio/eloapuri/grutadaonca.mp3", cover: "img/eloapuri.png" },      
+    { title: "Não é pecado", artist: "Eloá Puri", src: "audio/eloapuri/naoepecado.mp3", cover: "img/eloapuri.png" },      
+    { title: "Capa de Vinil", artist: "Gabriela Brown", src: "audio/gabrielabrown/capadevinil.mp3", cover: "img/gabrielabrown.png" },       
+    { title: "Capa de Vinil", artist: "Gabriela Brown", src: "audio/gabrielabrown/queima.mp3", cover: "img/gabrielabrown.png" },       
+    { title: "Capa de Vinil", artist: "Gabriela Brown", src: "audio/gabrielabrown/bonitoeoque.mp3", cover: "img/gabrielabrown.png" },      
+    { title: "Marear (Amanda Requião e JaySant)", artist: "Ada Koffi", src: "audio/adakoffi/marear.mp3", cover: "img/adakoffi.png" },      
+    { title: "Flor de Laranjeira", artist: "Ada Koffi", src: "audio/adakoffi/podecrer.mp3", cover: "img/adakoffi.png" },      
+    { title: "Pode Crer", artist: "Ada Koffi", src: "audio/adakoffi/osdias.mp3", cover: "img/adakoffi.png" },      
+    { title: "Vai não Vai", artist: "Sabrina Lemos", src: "audio/sabrinalemos/vainaovai.mp3", cover: "img/sabrinalemos.png" },   
+    { title: "Dor que me Invade ", artist: "Sabrina Lemos", src: "audio/sabrinalemos/dorquemeinvade.mp3", cover: "img/sabrinalemos.png" }
 ];
 
 const curiosidades = {
@@ -104,10 +130,16 @@ const curiosidades = {
     "Nick Cruz": "Nick Cruz é um cantor e compositor pop brasileiro natural de Serra, Espírito Santo, que ganhou projeção nacional como o primeiro homem trans a participar de um reality show musical na TV aberta (Estrela da Casa).", 
     "Daniel Caon": "Daniel Caon nasceu em Linhares, no estado do Espírito Santo. Famoso por suas músicas de sertanejo e participação em reality show.", 
     "Dead Fish": "Dead Fish é uma famosa banda brasileira de hardcore melódico formada em Vitória, no Espírito Santo, em 1991. O grupo é conhecido por sua energia ao vivo, letras diretas e forte posicionamento político progressista.", 
-    "SalvAÇÃO": "A banda SalvAÇÃO, originária de Vila Velha (ES), é uma das pioneiras do reggae capixaba. Com mais de 30 anos de trajetória, construiu sua história levando mensagens de paz, amor, consciência e respeito à natureza." 
+    "SalvAÇÃO": "A banda SalvAÇÃO, originária de Vila Velha (ES), é uma das pioneiras do reggae capixaba. Com mais de 30 anos de trajetória, construiu sua história levando mensagens de paz, amor, consciência e respeito à natureza.",
+    "Mukeka di Rato": "Mukeka di Rato é uma banda brasileira de punk/hardcore formada no início de 1995 em Vila Velha (ES). O grupo é conhecido pelo som rápido e pesado.",
+    "Eloá Puri": "Eloá Puri é uma cantora nascida na região do Caparaó. Sua música mistura sonoridades indígenas contemporâneas, MPB e elementos da natureza com temas de ancestralidade, território e resistência.",
+    "Gabriela Brown": "Gabriela Brown é uma cantora capixaba, mergulha na fusão de MPB, soul brasileiro, R&B contemporâneo e elementos latinos e modernos.",
+    "Ada Koffi": "Com uma sonoridade que transita pela MPB, R&B e Afrobeat, a artista lançou, em 2026, seu primeiro álbum, Mar de Dentro.",
+    "Sabrina Lemos": "Sabrina Lemos é uma cantora, compositora, arranjadora, produtora musical, atriz e apresentadora paulista radicada em Vitória, no Espírito Santo." 
 };
 
 // --- FIM DO ACERVO ---
+
 
 let queue = [];
 
