@@ -104,7 +104,7 @@ const playlist = [
     { title: "Vai não Vai", artist: "Sabrina Lemos", src: "audio/sabrinalemos/vainaovai.mp3", cover: "img/sabrinalemos.png" },   
     { title: "Dor que me Invade ", artist: "Sabrina Lemos", src: "audio/sabrinalemos/dorquemeinvade.mp3", cover: "img/sabrinalemos.png" }
 ];
-
+ 
 const curiosidades = {
     "Rádio 100% Capixaba!": "Web Rádio focada na cena musical do Espírito Santo. O projeto compila sucessos de ícones nacionais e regionais capixabas, oferecendo aos ouvintes curiosidades culturais e históricas sobre cada artista.",
     "Roberto Carlos": "Roberto Carlos Braga (Cachoeiro de Itapemirim, 19 de abril de 1941) é um cantor e compositor brasileiro. Figura-chave da Jovem Guarda, é o artista de maior êxito comercial da história da música brasileira, sendo chamado de 'Rei'.",
